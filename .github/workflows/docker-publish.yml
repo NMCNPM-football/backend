@@ -1,107 +1,108 @@
-name: Docker
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-on:
-  push:
-    branches: [ "dev" ]
-
-env:
-  # Use docker.io for Docker Hub if empty
-  REGISTRY: ghcr.io
-  # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
-  GKE_CLUSTER: NMCNPM-football-dev   # Add your cluster name here.
-  GKE_ZONE: asia-southeast1-a  # Add your cluster zone here.
-  DEPLOYMENT_NAME: backend
-
+#name: Docker
+#
+## This workflow uses actions that are not certified by GitHub.
+## They are provided by a third-party and are governed by
+## separate terms of service, privacy policy, and support
+## documentation.
+#
+#on:
+#  push:
+#    branches: [ "dev" ]
+#
+#env:
+#  # Use docker.io for Docker Hub if empty
+#  REGISTRY: ghcr.io
+#  # github.repository as <account>/<repo>
+#  IMAGE_NAME: ${{ github.repository }}
+#  GKE_CLUSTER: NMCNPM-football-dev   # Add your cluster name here.
+#  GKE_ZONE: asia-southeast1-a  # Add your cluster zone here.
+#  DEPLOYMENT_NAME: backend
+#
+#jobs:
+#  build:
+#    concurrency:
+#      group: ${{ github.head_ref }}-init
+#      cancel-in-progress: true
+#    runs-on: ubuntu-latest
+#    permissions:
+#      contents: read
+#      packages: write
+#
+#    steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@v4
+#
+#      - name: Log into registry ${{ env.REGISTRY }}
+#        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+#        with:
+#          registry: ${{ env.REGISTRY }}
+#          username: ${{ github.actor }}
+#          password: ${{ secrets.GITHUB_TOKEN }}
+#
+#      - name: /UAT/ Extract Docker metadata
+#        id: metadev
+#        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+#        if: github.ref == 'refs/heads/dev'
+#        with:
+#          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${{ github.ref_name }}
+#          tags: |
+#            latest
+#            ${{ github.sha }}
+#          labels: |
+#            maintainer=phanphatlqd2003@gmail.com
+#
+#      - name: /PROD/ Extract Docker metadata production
+#        id: metaprod
+#        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+#        if: github.ref == 'refs/heads/master'
+#        with:
+#          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${{ github.ref_name }}
+#          tags: |
+#            latest
+#            ${{ github.sha }}
+#          labels: |
+#            maintainer=phanphatlqd2003@gmail.com
+#
+#      - name: /UAT/ Build branch Dev and push Docker image
+#        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+#        if: github.ref == 'refs/heads/dev'
+#        with:
+#          context: .
+#          file: ./Dockerfile.uat
+#          push: true
+#          tags: ${{ steps.metadev.outputs.tags }}
+#          labels: ${{ steps.metadev.outputs.labels }}
+#
+#      - name: /PROD/ Build branch Master and push Docker image
+#        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+#        if: github.ref == 'refs/heads/master'
+#        with:
+#          context: .
+#          file: ./Dockerfile
+#          push: true
+#          tags: ${{ steps.metaprod.outputs.tags }}
+#          labels: ${{ steps.metaprod.outputs.labels }}
+#
+#      #- name: Setup gcloud CLI
+#      #  uses: google-github-actions/auth@v2
+#      #  with:
+#      #    credentials_json: ${{ secrets.GKE_SA_KEY }}
+#
+#      #- name: Get GKE credentials
+#      #  uses: google-github-actions/get-gke-credentials@v2
+#      #  with:
+#      #    cluster_name: ${{ env.GKE_CLUSTER }}
+#      #    location: ${{ env.GKE_ZONE }}
+#
+#      # Deploy the Docker image to the GKE cluster
+#      #- name: /UAT/ Deploy to Kubernetes
+#      #  if: github.ref == 'refs/heads/dev'
+#      #  run: |-
+#      #    kubectl delete pod -l app=${{env.DEPLOYMENT_NAME}} -n backend-svc
+#
+#      # Deploy the Docker image to the GKE cluster
+#      #- name: /PROD/ Deploy to Kubernetes
+#      #  if: github.ref == 'refs/heads/master'
+#      #  run: |-on:
 jobs:
-  build:
-    concurrency:
-      group: ${{ github.head_ref }}-init
-      cancel-in-progress: true
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Log into registry ${{ env.REGISTRY }}
-        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: /UAT/ Extract Docker metadata
-        id: metadev
-        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-        if: github.ref == 'refs/heads/dev'
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${{ github.ref_name }}
-          tags: |
-            latest
-            ${{ github.sha }}
-          labels: |
-            maintainer=hoang.nguyen@datasense.io
-
-      - name: /PROD/ Extract Docker metadata production
-        id: metaprod
-        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-        if: github.ref == 'refs/heads/master'
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${{ github.ref_name }}
-          tags: |
-            latest
-            ${{ github.sha }}
-          labels: |
-            maintainer=hoang.nguyen@datasense.io
-
-      - name: /UAT/ Build branch Dev and push Docker image
-        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
-        if: github.ref == 'refs/heads/dev'
-        with:
-          context: .
-          file: ./Dockerfile.uat
-          push: true
-          tags: ${{ steps.metadev.outputs.tags }}
-          labels: ${{ steps.metadev.outputs.labels }}
-
-      - name: /PROD/ Build branch Master and push Docker image
-        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
-        if: github.ref == 'refs/heads/master'
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ steps.metaprod.outputs.tags }}
-          labels: ${{ steps.metaprod.outputs.labels }}
-
-      #- name: Setup gcloud CLI
-      #  uses: google-github-actions/auth@v2
-      #  with:
-      #    credentials_json: ${{ secrets.GKE_SA_KEY }}
-
-      #- name: Get GKE credentials
-      #  uses: google-github-actions/get-gke-credentials@v2
-      #  with:
-      #    cluster_name: ${{ env.GKE_CLUSTER }}
-      #    location: ${{ env.GKE_ZONE }}
-
-      # Deploy the Docker image to the GKE cluster
-      #- name: /UAT/ Deploy to Kubernetes
-      #  if: github.ref == 'refs/heads/dev'
-      #  run: |-
-      #    kubectl delete pod -l app=${{env.DEPLOYMENT_NAME}} -n backend-svc
-
-      # Deploy the Docker image to the GKE cluster
-      #- name: /PROD/ Deploy to Kubernetes
-      #  if: github.ref == 'refs/heads/master'
-      #  run: |-
-      #    kubectl delete pod -l app=${{env.DEPLOYMENT_NAME}} -n backend-svc
+#      #    kubectl delete pod -l app=${{env.DEPLOYMENT_NAME}} -n backend-svc
