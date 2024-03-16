@@ -4,11 +4,13 @@ import (
 	"context"
 	"github.com/NMCNPM-football/backend/config"
 	"github.com/NMCNPM-football/backend/internal/must"
-	"google.golang.org/genproto/googleapis/cloud/bigquery/migration/v2"
+	"github.com/NMCNPM-football/backend/migration"
+	"github.com/allegro/bigcache/v3"
+	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/auth"
+	_ "google.golang.org/genproto/googleapis/cloud/bigquery/migration/v2"
 	"google.golang.org/grpc"
-	"net/http"
-
 	"log"
+	"net/http"
 	"time"
 )
 
@@ -30,6 +32,9 @@ func main() {
 		log.Fatalf("migration: %v", err)
 	}
 
+	//dao
+	middlewareAuth := NewMiddleware(cfg.AuthenticationPubSecretKey)
+
 	opt := []grpc.ServerOption{
 		//grpc
 		grpc.StreamInterceptor(auth.StreamServerInterceptor(middlewareAuth.AuthMiddleware)),
@@ -40,14 +45,21 @@ func main() {
 		middlewareAuth.AuthHttpServerMiddleware,
 	}
 
-	//userService := services.NewUserService(logger, cfg, userDao, companyDao, projectDao)
+	//userService := services.NewUserService(logger, cfg, userDao)
 	_, _ = bigcache.New(context.Background(), bigcache.DefaultConfig(10*time.Minute))
 
 	must.NewServer(
 		ctx,
 		cfg,
 		opt,
-		optHttpServer
-		)
+		optHttpServer,
+		services.NewUserService(
+			logger,
+			cfg,
+			userDao,
+			companyDao,
+			projectDao,
+		),
+	)
 
 }

@@ -2,7 +2,7 @@ package migration
 
 import (
 	"fmt"
-	"github.com/NMCNPM-football/backend/models"
+	"github.com/NMCNPM-football/backend/internal/models"
 	"github.com/pkg/errors"
 	"gorm.io/gorm"
 )
