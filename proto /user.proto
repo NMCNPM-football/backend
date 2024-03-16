@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  message Data {
+    string access_token = 1;
+    string refresh_token = 2;
+    string project_id = 3;
+  }
+  Data data = 1;
+}
+
+message RegisterRequest {
+  string name = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message RegisterWithTokenRequest {
+  string name = 1;
+  string email = 2;
+  string password = 3;
+  string token = 4;
+}
+
+message RegisterResponse {
+  message Data {
+    string project_id = 1;
+    string message = 2;
+  }
+  Data data = 1;
+}
+
+message EmailRequest {
+  string email = 1;
+}
+
+message GetProfileResponse {
+  message Data {
+    string name = 1;
+    string email = 2;
+    string phone = 3;
+    string address = 4;
+    string company_id = 5;
+    string position = 6;
+  }
+  Data data = 1;
+}
+
+message UpdateProfileRequest {
+  string name = 1;
+  string phone = 2;
+  string address = 3;
+}
+
+message DeactivateProfileRequest {
+  string email = 1;
+  string password = 2;
+}
+
