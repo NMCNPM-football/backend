@@ -1,11 +1,14 @@
 package models
 
+import "gorm.io/gorm"
+
 type Club struct {
 	Base
 	NameClub    string `gorm:"size:50"`
 	NameAward   string `gorm:"size:50"`
 	Shorthand   string `gorm:"size:50"`
 	NameStadium string `gorm:"size:50"`
+	DomainEmail string `gorm:"uniqueIndex:idx_domain_email;size:50;not null"`
 	Achievement string `gorm:"size:50"`
 	CreatedBy   string `gorm:"size:50"`
 	UpdatedBy   string `gorm:"size:50"`
@@ -27,4 +30,11 @@ type Player struct {
 	Achievement string `gorm:"size:50"`
 	CreatedBy   string `gorm:"size:50"`
 	UpdatedBy   string `gorm:"size:50"`
+}
+
+type ClubPlayer struct {
+	gorm.Model
+	ClubID   string `gorm:"size:50"`
+	PlayerID string `gorm:"size:50"`
+	Role     string `gorm:"size:50"`
 }

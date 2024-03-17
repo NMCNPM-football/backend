@@ -9,7 +9,6 @@ message LoginResponse {
   message Data {
     string access_token = 1;
     string refresh_token = 2;
-    string project_id = 3;
   }
   Data data = 1;
 }
@@ -45,7 +44,7 @@ message GetProfileResponse {
     string email = 2;
     string phone = 3;
     string address = 4;
-    string company_id = 5;
+    string club_id = 5;
     string position = 6;
   }
   Data data = 1;

@@ -25,7 +25,7 @@ func NewLogger(sentryDSN string, serviceName string) (*zap.Logger, *sentry.Clien
 		EnableBreadcrumbs: true,               // enable sending breadcrumbs to Sentry
 		BreadcrumbLevel:   zapcore.InfoLevel,  // at what level should we sent breadcrumbs to sentry
 		Tags: map[string]string{
-			"service": serviceName,
+			"services": serviceName,
 		},
 	}
 

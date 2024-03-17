@@ -3,7 +3,9 @@ package main
 import (
 	"context"
 	"github.com/NMCNPM-football/backend/config"
+	"github.com/NMCNPM-football/backend/internal/dao"
 	"github.com/NMCNPM-football/backend/internal/must"
+	"github.com/NMCNPM-football/backend/internal/services"
 	"github.com/NMCNPM-football/backend/migration"
 	"github.com/allegro/bigcache/v3"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/auth"
@@ -34,7 +36,8 @@ func main() {
 
 	//dao
 	middlewareAuth := NewMiddleware(cfg.AuthenticationPubSecretKey)
-
+	userDao := dao.NewUserDao(db)
+	clubDao := dao.NewClubDao(db)
 	opt := []grpc.ServerOption{
 		//grpc
 		grpc.StreamInterceptor(auth.StreamServerInterceptor(middlewareAuth.AuthMiddleware)),
@@ -57,8 +60,7 @@ func main() {
 			logger,
 			cfg,
 			userDao,
-			companyDao,
-			projectDao,
+			clubDao,
 		),
 	)
 

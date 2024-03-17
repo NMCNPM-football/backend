@@ -19,9 +19,9 @@ type User struct {
 }
 
 const (
-	CompanyOwner   = "Owner"
-	CompanyManager = "Manager"
-	CompanyMember  = "Member"
+	CLubOwner   = "Owner"
+	ClubManager = "Manager"
+	ClubMember  = "Member"
 )
 
 var (
@@ -33,14 +33,14 @@ var (
 )
 
 func (u *User) IsOwner() bool {
-	return u.Position == CompanyOwner
+	return u.Position == CLubOwner
 }
 
 func (u *User) CheckPermission(MethodName string) bool {
-	if u.Position == CompanyOwner {
+	if u.Position == CLubOwner {
 		return true
 	}
-	if u.Position == CompanyMember {
+	if u.Position == CLubOwner {
 		for _, v := range MemberPermission {
 			if v == MethodName {
 				return true

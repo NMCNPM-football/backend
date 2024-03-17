@@ -147,7 +147,7 @@ func RegisterGrpcServer(opt []grpc.ServerOption, grpcPort int, serviceServer ...
 	grpcServer := grpc.NewServer(
 		opt...,
 	)
-	// Attach the Greeter service to the server
+	// Attach the Greeter services to the server
 
 	for _, server := range serviceServer {
 		server.RegisterGrpcServer(grpcServer)
