@@ -62,7 +62,6 @@ func (e *UserServicePublic) Register(ctx context.Context, in *gen.RegisterReques
 	}
 
 	domainEmail := common.GetDomainEmail(in.Email)
-
 	club, err := e.clubDao.FindByDomain(domainEmail)
 	if err != nil {
 		return nil, must.HandlerError(err, e.logger)
@@ -78,11 +77,6 @@ func (e *UserServicePublic) Register(ctx context.Context, in *gen.RegisterReques
 
 	newClub := &models.Club{
 		DomainEmail: domainEmail,
-	}
-
-	newRandomString := common.RandomStringNumber(10)
-	if newRandomString == "" {
-		return nil, must.HandlerError(must.ErrInternalServerError, e.logger)
 	}
 
 	if club == nil {

@@ -57,6 +57,11 @@ func (u *UserDao) RegisterUserWithExistingClub(user *models.User, club *models.C
 		return err
 	}
 
+	if err := tx.Create(club).Error; err != nil {
+		tx.Rollback()
+		return err
+	}
+
 	user.ClubID = club.ID
 
 	if err := tx.Create(user).Error; err != nil {

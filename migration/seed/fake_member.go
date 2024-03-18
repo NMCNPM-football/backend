@@ -21,8 +21,8 @@ func createData(db *gorm.DB, valueStrings []string, valueArgs []interface{}) err
 }
 
 func FakeMember(db *gorm.DB) error {
-	valueStrings := []string{}
-	valueArgs := []interface{}{}
+	var valueStrings []string
+	var valueArgs []interface{}
 
 	for i := 1; i <= 2; i++ {
 		password := fmt.Sprintf("password%v", i)

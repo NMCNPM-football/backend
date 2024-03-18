@@ -29,14 +29,14 @@ func (u *ClubDao) FindByID(id string) (*models.Club, error) {
 }
 
 func (u *ClubDao) FindByDomain(domain string) (*models.Club, error) {
-	var company *models.Club
+	var club *models.Club
 
-	if err := u.db.Where("domain_email = ?", domain).First(&company).Error; err != nil {
+	if err := u.db.Where("domain_email = ?", domain).First(&club).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, nil
 		}
 
 		return nil, errors.Wrap(err, "u.db.Where.First")
 	}
-	return company, nil
+	return club, nil
 }
