@@ -118,38 +118,6 @@
           "UserServicePublic"
         ]
       }
-    },
-    "/register/token": {
-      "post": {
-        "operationId": "UserServicePublic_RegisterWithToken",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/RegisterResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RegisterWithTokenRequest"
-            }
-          }
-        ],
-        "tags": [
-          "UserServicePublic"
-        ]
-      }
     }
   },
   "definitions": {
@@ -208,27 +176,13 @@
     "RegisterResponseData": {
       "type": "object",
       "properties": {
-        "projectId": {
+        "clubId": {
+          "type": "string"
+        },
+        "clubName": {
           "type": "string"
         },
         "message": {
-          "type": "string"
-        }
-      }
-    },
-    "RegisterWithTokenRequest": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "token": {
           "type": "string"
         }
       }

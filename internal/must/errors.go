@@ -19,8 +19,10 @@ var (
 	ErrTokenExpired        = &Error{Code: codes.Unauthenticated, Message: "Token expired."}
 
 	//Users
-	ErrEmailExists  = &Error{Code: codes.AlreadyExists, Message: "Email already exists."}
-	ErrInvalidEmail = &Error{Code: codes.InvalidArgument, Message: "Must be business email."}
+	ErrEmailExists     = &Error{Code: codes.AlreadyExists, Message: "Email already exists."}
+	ErrInvalidEmail    = &Error{Code: codes.InvalidArgument, Message: "Must be business email."}
+	ErrInvalidPassword = &Error{Code: codes.InvalidArgument, Message: "Invalid password."}
+	ErrEmailNotExists  = &Error{Code: codes.NotFound, Message: "Email doesn't exist."}
 )
 
 type Error struct {

@@ -15,13 +15,6 @@ service UserServicePublic {
     };
   }
 
-  rpc RegisterWithToken(RegisterWithTokenRequest) returns (RegisterResponse) {
-    option (google.api.http) = {
-      post: "/register/token"
-      body: "*"
-    };
-  }
-
   //Login a user
   rpc Login(LoginRequest) returns (LoginResponse) {
     option (google.api.http) = {

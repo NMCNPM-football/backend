@@ -62,6 +62,12 @@ func main() {
 			userDao,
 			clubDao,
 		),
+		services.NewUserServicePublic(
+			logger,
+			cfg,
+			userDao,
+			clubDao,
+		),
 	)
 
 }

@@ -1,7 +1,5 @@
 package models
 
-import "gorm.io/gorm"
-
 type Club struct {
 	Base
 	NameClub    string `gorm:"size:50"`
@@ -33,7 +31,6 @@ type Player struct {
 }
 
 type ClubPlayer struct {
-	gorm.Model
 	ClubID   string `gorm:"size:50"`
 	PlayerID string `gorm:"size:50"`
 	Role     string `gorm:"size:50"`

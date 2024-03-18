@@ -15,9 +15,9 @@ func NewClubDao(db *gorm.DB) *ClubDao {
 }
 
 func (u *ClubDao) FindByID(id string) (*models.Club, error) {
-	var company *models.Club
+	var club *models.Club
 
-	if err := u.db.Where("id = ?", id).First(&company).Error; err != nil {
+	if err := u.db.Where("id = ?", id).First(&club).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, nil
 		}
@@ -25,7 +25,7 @@ func (u *ClubDao) FindByID(id string) (*models.Club, error) {
 		return nil, errors.Wrap(err, "u.db.Where.First")
 	}
 
-	return company, nil
+	return club, nil
 }
 
 func (u *ClubDao) FindByDomain(domain string) (*models.Club, error) {
