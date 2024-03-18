@@ -66,13 +66,12 @@ func (e *UserServicePublic) Register(ctx context.Context, in *gen.RegisterReques
 	if err != nil {
 		return nil, must.HandlerError(err, e.logger)
 	}
-
 	newUser := &models.User{
 		Name:            in.Name,
 		Email:           in.Email,
 		Password:        string(hashedPassword),
 		Position:        models.ClubMember,
-		IsVerifiedEmail: true,
+		IsVerifiedEmail: false,
 	}
 
 	newClub := &models.Club{
@@ -86,6 +85,7 @@ func (e *UserServicePublic) Register(ctx context.Context, in *gen.RegisterReques
 			return nil, must.HandlerError(err, e.logger)
 		}
 	} else {
+
 		err = e.userDao.RegisterUserWithExistingClub(newUser, club)
 		if err != nil {
 			return nil, must.HandlerError(err, e.logger)
@@ -97,7 +97,7 @@ func (e *UserServicePublic) Register(ctx context.Context, in *gen.RegisterReques
 		return nil, must.HandlerError(err, e.logger)
 	}
 
-	if registeredUser == nil {
+	if registeredUser != nil {
 		return nil, must.HandlerError(must.ErrInternalServerError, e.logger)
 	}
 

@@ -14,18 +14,14 @@ func (u *UserDao) RegisterUserWithNewClub(user *models.User, club *models.Club) 
 			tx.Rollback()
 		}
 	}()
-
 	if err := tx.Error; err != nil {
 		return err
 	}
-
 	if err := tx.Create(club).Error; err != nil {
 		tx.Rollback()
 		return err
 	}
-
 	user.ClubID = club.ID
-
 	if err := tx.Create(user).Error; err != nil {
 		if strings.Contains(err.Error(), "Duplicate key") {
 			err = tx.Unscoped().Model(&models.User{}).Where("email = ?", user.Email).Update("deleted_at", nil).Error
@@ -52,18 +48,10 @@ func (u *UserDao) RegisterUserWithExistingClub(user *models.User, club *models.C
 			tx.Rollback()
 		}
 	}()
-
 	if err := tx.Error; err != nil {
 		return err
 	}
-
-	if err := tx.Create(club).Error; err != nil {
-		tx.Rollback()
-		return err
-	}
-
 	user.ClubID = club.ID
-
 	if err := tx.Create(user).Error; err != nil {
 		if strings.Contains(err.Error(), "Duplicate key") {
 			err = tx.Unscoped().Model(&models.User{}).Where("email = ?", user.Email).Update("deleted_at", nil).Error
@@ -80,7 +68,6 @@ func (u *UserDao) RegisterUserWithExistingClub(user *models.User, club *models.C
 			return err
 		}
 	}
-
 	return tx.Commit().Error
 }
 
