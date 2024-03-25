@@ -71,6 +71,9 @@ func CreateNewWithClaims(data *serializers.UserInfo, secretKey string, expire, r
 	}
 
 	privateKey, _ := pem.Decode(key)
+	if privateKey == nil {
+		return "", "", errors.New("invalid PEM block in secret key")
+	}
 	k, err := x509.ParsePKCS1PrivateKey(privateKey.Bytes)
 	if err != nil {
 		return "", "", errors.Wrap(err, "ParsePKCS1PrivateKey")

@@ -4,6 +4,7 @@ import (
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/x509"
+	"encoding/base64"
 	"encoding/pem"
 	"fmt"
 	"github.com/stretchr/testify/suite"
@@ -34,6 +35,9 @@ func (suite *KeyGenerationSuite) TestKeyGeneration() {
 	}
 	privatePEM := pem.EncodeToMemory(privateKeyPEM)
 
+	// Base64 encode the private key
+	privatePEMBase64 := base64.StdEncoding.EncodeToString(privatePEM)
+
 	// Generate the public key from the private key
 	publicKey := &privateKey.PublicKey
 
@@ -47,13 +51,14 @@ func (suite *KeyGenerationSuite) TestKeyGeneration() {
 	}
 	publicPEM := pem.EncodeToMemory(publicKeyPEM)
 
+	// Base64 encode the public key
+	publicPEMBase64 := base64.StdEncoding.EncodeToString(publicPEM)
+
 	// Print the keys
-	fmt.Printf("Private Key: %s\n", privatePEM)
-	fmt.Printf("Public Key: %s\n", publicPEM)
+	fmt.Printf("Private Key: %s\n", privatePEMBase64)
+	fmt.Printf("Public Key: %s\n", publicPEMBase64)
 }
 
 func TestKeyGenerationSuite(t *testing.T) {
 	suite.Run(t, new(KeyGenerationSuite))
 }
-
-//go test -v ./create_key_test.go
