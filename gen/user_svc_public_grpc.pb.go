@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	UserServicePublic_Register_FullMethodName          = "/proto.UserServicePublic/Register"
+	UserServicePublic_VerifyEmail_FullMethodName       = "/proto.UserServicePublic/VerifyEmail"
 	UserServicePublic_Login_FullMethodName             = "/proto.UserServicePublic/Login"
 	UserServicePublic_DeactivateProfile_FullMethodName = "/proto.UserServicePublic/DeactivateProfile"
 )
@@ -30,6 +31,7 @@ const (
 type UserServicePublicClient interface {
 	// Register a new user
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
+	VerifyEmail(ctx context.Context, in *TokenRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
 	// Login a user
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	// Delete a user's profile
@@ -47,6 +49,15 @@ func NewUserServicePublicClient(cc grpc.ClientConnInterface) UserServicePublicCl
 func (c *userServicePublicClient) Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error) {
 	out := new(RegisterResponse)
 	err := c.cc.Invoke(ctx, UserServicePublic_Register_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServicePublicClient) VerifyEmail(ctx context.Context, in *TokenRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error) {
+	out := new(SuccessMessageResponse)
+	err := c.cc.Invoke(ctx, UserServicePublic_VerifyEmail_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -77,6 +88,7 @@ func (c *userServicePublicClient) DeactivateProfile(ctx context.Context, in *Dea
 type UserServicePublicServer interface {
 	// Register a new user
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
+	VerifyEmail(context.Context, *TokenRequest) (*SuccessMessageResponse, error)
 	// Login a user
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	// Delete a user's profile
@@ -89,6 +101,9 @@ type UnimplementedUserServicePublicServer struct {
 
 func (UnimplementedUserServicePublicServer) Register(context.Context, *RegisterRequest) (*RegisterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
+}
+func (UnimplementedUserServicePublicServer) VerifyEmail(context.Context, *TokenRequest) (*SuccessMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyEmail not implemented")
 }
 func (UnimplementedUserServicePublicServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
@@ -122,6 +137,24 @@ func _UserServicePublic_Register_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServicePublicServer).Register(ctx, req.(*RegisterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserServicePublic_VerifyEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServicePublicServer).VerifyEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserServicePublic_VerifyEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServicePublicServer).VerifyEmail(ctx, req.(*TokenRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -172,6 +205,10 @@ var UserServicePublic_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Register",
 			Handler:    _UserServicePublic_Register_Handler,
+		},
+		{
+			MethodName: "VerifyEmail",
+			Handler:    _UserServicePublic_VerifyEmail_Handler,
 		},
 		{
 			MethodName: "Login",

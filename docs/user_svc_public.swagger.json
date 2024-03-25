@@ -16,6 +16,38 @@
     "application/json"
   ],
   "paths": {
+    "/email/verify": {
+      "post": {
+        "operationId": "UserServicePublic_VerifyEmail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TokenRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserServicePublic"
+        ]
+      }
+    },
     "/login": {
       "post": {
         "summary": "Login a user",
@@ -199,6 +231,14 @@
       "type": "object",
       "properties": {
         "message": {
+          "type": "string"
+        }
+      }
+    },
+    "TokenRequest": {
+      "type": "object",
+      "properties": {
+        "token": {
           "type": "string"
         }
       }

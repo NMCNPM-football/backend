@@ -121,8 +121,8 @@ func (e *UserServicePublic) Login(ctx context.Context, in *gen.LoginRequest) (*g
 		Email: user.Email,
 	}
 
-	expire := time.Now().Add(2 * time.Hour)
-	refreshExpire := time.Now().Add(24 * time.Hour)
+	expire := time.Now().UTC().Add(2 * time.Hour)
+	refreshExpire := time.Now().UTC().Add(24 * time.Hour)
 	accessToken, refreshToken, err := must.CreateNewWithClaims(data, e.cfg.AuthenticationSecretKey, expire, refreshExpire)
 	if err != nil {
 		return nil, must.HandlerError(err, e.logger)
@@ -184,5 +184,50 @@ func (e *UserServicePublic) authenticatorByEmailPassword(email, password string)
 //}
 
 func (e *UserServicePublic) DeactivateProfile(ctx context.Context, in *gen.DeactivateProfileRequest) (*gen.SuccessMessageResponse, error) {
+	return nil, nil
+}
+
+//func (e *UserServicePublic) VerifyEmail(ctx context.Context, in *gen.TokenRequest) (*gen.SuccessMessageResponse, error) {
+//	userVerify, err := e.userDao.FindEmailVerifyByToken(in.Token)
+//	if err != nil {
+//		return nil, must.HandlerError(err, e.logger)
+//	}
+//
+//	if userVerify == nil {
+//		return nil, must.HandlerError(must.ErrInvalidToken, e.logger)
+//	}
+//
+//	if userVerify.ExpiredAt < time.Now().UTC().Unix() {
+//		return nil, must.HandlerError(must.ErrTokenExpired, e.logger)
+//	}
+//
+//	user, err := e.userDao.FindByEmail(userVerify.Email)
+//	if err != nil {
+//		return nil, must.HandlerError(err, e.logger)
+//	}
+//
+//	if user == nil {
+//		return nil, must.HandlerError(must.ErrEmailNotExists, e.logger)
+//	}
+//
+//	if user.IsVerifiedEmail {
+//		return nil, must.HandlerError(must.ErrEmailAlreadyVerified, e.logger)
+//	}
+//
+//	user.IsVerifiedEmail = true
+//
+//	err = e.userDao.VerifyEmail(userVerify)
+//	if err != nil {
+//		return nil, must.HandlerError(err, e.logger)
+//	}
+//
+//	return &gen.SuccessMessageResponse{
+//		Data: &gen.SuccessMessageResponseSuccessMessage{
+//			Message: "Verify email successfully",
+//		},
+//	}, nil
+//}
+
+func (e *UserServicePublic) VerifyEmail(ctx context.Context, in *gen.TokenRequest) (*gen.SuccessMessageResponse, error) {
 	return nil, nil
 }

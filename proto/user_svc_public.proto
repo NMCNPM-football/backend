@@ -15,6 +15,14 @@ service UserServicePublic {
     };
   }
 
+  rpc VerifyEmail(TokenRequest) returns (SuccessMessageResponse) {
+    option (google.api.http) = {
+      post: "/email/verify"
+      body: "*"
+    };
+  }
+
+
   //Login a user
   rpc Login(LoginRequest) returns (LoginResponse) {
     option (google.api.http) = {
