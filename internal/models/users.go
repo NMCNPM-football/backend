@@ -7,6 +7,7 @@ type User struct {
 	Name            string `gorm:"size:50"`
 	Email           string `gorm:"uniqueIndex:idx_email;size:50;not null"`
 	Phone           string `gorm:"size:50"`
+	Club            string `gorm:"size:50"`
 	Address         string `gorm:"size:200"`
 	Password        string `gorm:"size:100"`
 	ClubID          string `gorm:"size:50"`
