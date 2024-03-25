@@ -4,3 +4,6 @@ app.env
 cli
 main
 .github
+
+config/config.json
+cmd/app/create_key_test.go
