@@ -7,3 +7,4 @@ main
 
 config/config.json
 cmd/app/create_key_test.go
+database
