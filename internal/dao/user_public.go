@@ -133,9 +133,9 @@ func (u *UserDao) RegisterAsMember(user *models.User, club *models.Club) error {
 	return tx.Commit().Error
 }
 
-func (u *UserDao) FindUsersByDomain(domainEmail string) ([]*models.User, error) {
+func (u *UserDao) FindUsersByDomainAndSeason(domainEmail string, season string) ([]*models.User, error) {
 	var users []*models.User
-	err := u.db.Where("email LIKE ?", fmt.Sprintf("%%%s", domainEmail)).Find(&users).Error
+	err := u.db.Where("email LIKE ? AND sea_son = ?", fmt.Sprintf("%%%s", domainEmail), season).Find(&users).Error
 	if err != nil {
 		return nil, err
 	}

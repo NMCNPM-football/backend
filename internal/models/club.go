@@ -4,7 +4,7 @@ type Club struct {
 	Base
 	NameClub    string `gorm:"size:50"`
 	NameAward   string `gorm:"size:50"`
-	SeaSonID    string `gorm:"size:50"`
+	SeaSon      string `gorm:"size:50"`
 	Shorthand   string `gorm:"size:50"`
 	NameStadium string `gorm:"size:50"`
 	DomainEmail string `gorm:"size:50;not null"`

@@ -50,6 +50,64 @@ func (e *UserServicePublic) AuthFuncOverride(ctx context.Context, fullMethodName
 	return ctx, nil
 }
 
+//func (e *UserServicePublic) Register(ctx context.Context, in *gen.RegisterRequest) (*gen.RegisterResponse, error) {
+//	err := common.CheckMail(in.Email)
+//	if err != nil {
+//		return nil, must.HandlerError(must.ErrInvalidEmail, e.logger)
+//	}
+//
+//	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(in.Password), bcrypt.DefaultCost)
+//	if err != nil {
+//		return nil, must.HandlerError(err, e.logger)
+//	}
+//
+//	domainEmail := common.GetDomainEmail(in.Email)
+//	club, err := e.clubDao.FindByDomain(domainEmail)
+//	if err != nil {
+//		return nil, must.HandlerError(err, e.logger)
+//	}
+//	newUser := &models.User{
+//		Name:            in.Name,
+//		Email:           in.Email,
+//		Password:        string(hashedPassword),
+//		Position:        models.ClubMember,
+//		IsVerifiedEmail: false,
+//	}
+//
+//	usersWithSameDomain, err := e.userDao.FindUsersByDomain(domainEmail)
+//	if err != nil {
+//		return nil, must.HandlerError(err, e.logger)
+//	}
+//
+//	if len(usersWithSameDomain) == 0 {
+//		err = e.userDao.RegisterAsOwner(newUser, club)
+//		if err != nil {
+//			return nil, must.HandlerError(err, e.logger)
+//		}
+//	} else {
+//		err = e.userDao.RegisterAsMember(newUser, club)
+//		if err != nil {
+//			return nil, must.HandlerError(err, e.logger)
+//		}
+//	}
+//
+//	registeredUser, err := e.userDao.FindByEmail(newUser.Email)
+//	if err != nil {
+//		return nil, must.HandlerError(err, e.logger)
+//	}
+//
+//	if registeredUser != nil {
+//		return nil, must.HandlerError(must.ErrInternalServerError, e.logger)
+//	}
+//
+//	return &gen.RegisterResponse{
+//		Data: &gen.RegisterResponse_Data{
+//			ClubName: club.NameClub,
+//			Message:  "Register successfully",
+//		},
+//	}, nil
+//}
+
 func (e *UserServicePublic) Register(ctx context.Context, in *gen.RegisterRequest) (*gen.RegisterResponse, error) {
 	err := common.CheckMail(in.Email)
 	if err != nil {
@@ -62,7 +120,7 @@ func (e *UserServicePublic) Register(ctx context.Context, in *gen.RegisterReques
 	}
 
 	domainEmail := common.GetDomainEmail(in.Email)
-	club, err := e.clubDao.FindByDomain(domainEmail)
+	club, err := e.clubDao.FindByDomainAndSeason(domainEmail, in.Season)
 	if err != nil {
 		return nil, must.HandlerError(err, e.logger)
 	}
@@ -74,12 +132,12 @@ func (e *UserServicePublic) Register(ctx context.Context, in *gen.RegisterReques
 		IsVerifiedEmail: false,
 	}
 
-	usersWithSameDomain, err := e.userDao.FindUsersByDomain(domainEmail)
+	usersWithSameDomainAndSeason, err := e.userDao.FindUsersByDomainAndSeason(domainEmail, in.Season)
 	if err != nil {
 		return nil, must.HandlerError(err, e.logger)
 	}
 
-	if len(usersWithSameDomain) == 0 {
+	if len(usersWithSameDomainAndSeason) == 0 {
 		err = e.userDao.RegisterAsOwner(newUser, club)
 		if err != nil {
 			return nil, must.HandlerError(err, e.logger)

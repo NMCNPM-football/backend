@@ -194,6 +194,9 @@
         },
         "password": {
           "type": "string"
+        },
+        "season": {
+          "type": "string"
         }
       }
     },

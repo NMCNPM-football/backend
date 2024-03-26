@@ -396,6 +396,8 @@ func (m *RegisterRequest) validate(all bool) error {
 
 	// no validation rules for Password
 
+	// no validation rules for Season
+
 	if len(errors) > 0 {
 		return RegisterRequestMultiError(errors)
 	}

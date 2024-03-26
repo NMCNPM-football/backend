@@ -14,10 +14,10 @@ func NewClubDao(db *gorm.DB) *ClubDao {
 	return &ClubDao{db}
 }
 
-func (u *ClubDao) FindByID(id string) (*models.Club, error) {
+func (c *ClubDao) FindByID(id string) (*models.Club, error) {
 	var club *models.Club
 
-	if err := u.db.Where("id = ?", id).First(&club).Error; err != nil {
+	if err := c.db.Where("id = ?", id).First(&club).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, nil
 		}
@@ -28,15 +28,24 @@ func (u *ClubDao) FindByID(id string) (*models.Club, error) {
 	return club, nil
 }
 
-func (u *ClubDao) FindByDomain(domain string) (*models.Club, error) {
+func (c *ClubDao) FindByDomain(domain string) (*models.Club, error) {
 	var club *models.Club
 
-	if err := u.db.Where("domain_email = ?", domain).First(&club).Error; err != nil {
+	if err := c.db.Where("domain_email = ?", domain).First(&club).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, nil
 		}
 
 		return nil, errors.Wrap(err, "u.db.Where.First")
+	}
+	return club, nil
+}
+
+func (c *ClubDao) FindByDomainAndSeason(domainEmail string, season string) (*models.Club, error) {
+	var club *models.Club
+	err := c.db.Where("domain_email = ? AND sea_son = ?", domainEmail, season).First(&club).Error
+	if err != nil {
+		return nil, err
 	}
 	return club, nil
 }

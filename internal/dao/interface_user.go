@@ -15,5 +15,5 @@ type UserDaoInterface interface {
 	ListClubMembers(companyId string) ([]*models.User, error)
 	RegisterAsMember(user *models.User, club *models.Club) error
 	RegisterAsOwner(user *models.User, club *models.Club) error
-	FindUsersByDomain(domain string) ([]*models.User, error)
+	FindUsersByDomainAndSeason(domain string, season string) ([]*models.User, error)
 }

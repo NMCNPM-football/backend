@@ -21,6 +21,7 @@ message RegisterRequest {
   string name = 1;
   string email = 2;
   string password = 3;
+  string season = 4;
 }
 
 message RegisterWithTokenRequest {

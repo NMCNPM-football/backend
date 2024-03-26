@@ -13,6 +13,7 @@ type User struct {
 	ClubID          string `gorm:"size:50"`
 	Position        string `gorm:"size:50"`
 	IsVerifiedEmail bool   `gorm:"index:idx_is_verified_email, default:true"`
+	SeaSon          string `gorm:"size:50"`
 	CreatedBy       string `gorm:"size:50"`
 	UpdatedBy       string `gorm:"size:50"`
 	DeletedBy       string `gorm:"size:50"`
