@@ -12,53 +12,53 @@ SELECT * FROM sea_sons;
 
 
 -- 2021-22
-INSERT INTO `clubs` (`id`, `name_club`, `shorthand`,`domain_email`,`sea_son_id`,`created_at`) VALUES
-                                          (SHA1(UUID()),'Becamex Bình Dương', 'BDFC', 'bdfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW()),
-                                          (SHA1(UUID()),'Sài Gòn', 'SGFC', 'sgfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW()),
-                                          (SHA1(UUID()),'Đông Á Thanh Hóa', 'THFC', 'thfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW()),
-                                          (SHA1(UUID()),'Hà Nội', 'HNFC', 'hnfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW()),
-                                          (SHA1(UUID()),'Hải Phòng', 'HPFC', 'hpfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW()),
-                                          (SHA1(UUID()),'LPBank Hoàng Anh Gia Lai', 'LPBHA', 'lpbha.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW()),
-                                          (SHA1(UUID()),'Hồng Lĩnh Hà Tĩnh', 'HLHT', 'hlht.vn',(SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW()),
-                                          (SHA1(UUID()),'Thể Công - Viettel', 'TCVT', 'tcvt.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW()),
-                                          (SHA1(UUID()),'MerryLand Quy Nhơn Bình Định', 'MQBĐ', 'mqbd.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'),NOW()),
-                                          (SHA1(UUID()),'Sông Lam Nghệ An', 'SLNA', 'slna.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW()),
-                                          (SHA1(UUID()),'Thép Xanh Nam Định', 'TXND', 'txnd.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW()),
-                                          (SHA1(UUID()),'TP Hồ Chí Minh', 'HCMC', 'hcmc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW()),
-                                          (SHA1(UUID()),'SHB Đà Nẵng', 'SHBĐN', 'shbdn.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW());
+INSERT INTO `clubs` (`id`, `name_club`, `shorthand`,`domain_email`,`sea_son_id`,`created_at`,`created_by`) VALUES
+                                          (SHA1(UUID()),'Becamex Bình Dương', 'BDFC', 'bdfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW(), 'admin'),
+                                          (SHA1(UUID()),'Sài Gòn', 'SGFC', 'sgfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW(), 'admin'),
+                                          (SHA1(UUID()),'Đông Á Thanh Hóa', 'THFC', 'thfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW() , 'admin'),
+                                          (SHA1(UUID()),'Hà Nội', 'HNFC', 'hnfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW(), 'admin'),
+                                          (SHA1(UUID()),'Hải Phòng', 'HPFC', 'hpfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW(), 'admin'),
+                                          (SHA1(UUID()),'LPBank Hoàng Anh Gia Lai', 'LPBHA', 'lpbha.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW(), 'admin'),
+                                          (SHA1(UUID()),'Hồng Lĩnh Hà Tĩnh', 'HLHT', 'hlht.vn',(SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW(), 'admin'),
+                                          (SHA1(UUID()),'Thể Công - Viettel', 'TCVT', 'tcvt.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW(), 'admin'),
+                                          (SHA1(UUID()),'MerryLand Quy Nhơn Bình Định', 'MQBĐ', 'mqbd.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'Sông Lam Nghệ An', 'SLNA', 'slna.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW(), 'admin'),
+                                          (SHA1(UUID()),'Thép Xanh Nam Định', 'TXND', 'txnd.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW(), 'admin'),
+                                          (SHA1(UUID()),'TP Hồ Chí Minh', 'HCMC', 'hcmc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW(), 'admin'),
+                                          (SHA1(UUID()),'SHB Đà Nẵng', 'SHBĐN', 'shbdn.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022'), NOW(), 'admin');
 
 -- 2022-23
-INSERT INTO `clubs` (`id`, `name_club`, `shorthand`,`domain_email`,`sea_son_id`,`created_at`) VALUES
-                                          (SHA1(UUID()),'Becamex Bình Dương', 'BDFC', 'bdfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'), NOW()),
-                                          (SHA1(UUID()),'Công An Hà Nội', 'CAHN', 'cahn.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'), NOW()),
-                                          (SHA1(UUID()),'Đông Á Thanh Hóa', 'THFC', 'thfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW()),
-                                          (SHA1(UUID()),'Hà Nội', 'HNFC', 'hnfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW()),
-                                          (SHA1(UUID()),'Hải Phòng', 'HPFC', 'hpfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW()),
-                                          (SHA1(UUID()),'LPBank Hoàng Anh Gia Lai', 'LPBHA', 'lpbha.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW()),
-                                          (SHA1(UUID()),'Hồng Lĩnh Hà Tĩnh', 'HLHT', 'hlht.vn',(SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW()),
-                                          (SHA1(UUID()),'Khánh Hòa', 'KHFC', 'khfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW()),
-                                          (SHA1(UUID()),'Thể Công - Viettel', 'TCVT', 'tcvt.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW()),
-                                          (SHA1(UUID()),'MerryLand Quy Nhơn Bình Định', 'MQBĐ', 'mqbd.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW()),
-                                          (SHA1(UUID()),'Sông Lam Nghệ An', 'SLNA', 'slna.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW()),
-                                          (SHA1(UUID()),'Thép Xanh Nam Định', 'TXND', 'txnd.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW()),
-                                          (SHA1(UUID()),'TP Hồ Chí Minh', 'HCMC', 'hcmc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW()),
-                                          (SHA1(UUID()),'SHB Đà Nẵng', 'SHBĐN', 'shbdn.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW());
+INSERT INTO `clubs` (`id`, `name_club`, `shorthand`,`domain_email`,`sea_son_id`,`created_at`,`created_by`) VALUES
+                                          (SHA1(UUID()),'Becamex Bình Dương', 'BDFC', 'bdfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'), NOW(), 'admin'),
+                                          (SHA1(UUID()),'Công An Hà Nội', 'CAHN', 'cahn.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'), NOW(), 'admin'),
+                                          (SHA1(UUID()),'Đông Á Thanh Hóa', 'THFC', 'thfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'Hà Nội', 'HNFC', 'hnfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'Hải Phòng', 'HPFC', 'hpfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'LPBank Hoàng Anh Gia Lai', 'LPBHA', 'lpbha.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'Hồng Lĩnh Hà Tĩnh', 'HLHT', 'hlht.vn',(SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'Khánh Hòa', 'KHFC', 'khfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'Thể Công - Viettel', 'TCVT', 'tcvt.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'MerryLand Quy Nhơn Bình Định', 'MQBĐ', 'mqbd.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'Sông Lam Nghệ An', 'SLNA', 'slna.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'Thép Xanh Nam Định', 'TXND', 'txnd.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'TP Hồ Chí Minh', 'HCMC', 'hcmc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'SHB Đà Nẵng', 'SHBĐN', 'shbdn.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2022-2023'),NOW(), 'admin');
 -- 2023-24
-INSERT INTO `clubs` (`id`, `name_club`, `shorthand`,`domain_email`,`sea_son_id`,`created_at`) VALUES
-                                          (SHA1(UUID()),'Becamex Bình Dương', 'BDFC', 'bdfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW()),
-                                          (SHA1(UUID()),'Công An Hà Nội', 'CAHN', 'cahn.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW()),
-                                          (SHA1(UUID()),'Đông Á Thanh Hóa', 'THFC', 'thfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW()),
-                                          (SHA1(UUID()),'Hà Nội', 'HNFC', 'hnfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW()),
-                                          (SHA1(UUID()),'Hải Phòng', 'HPFC', 'hpfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW()),
-                                          (SHA1(UUID()),'LPBank Hoàng Anh Gia Lai', 'LPBHA', 'lpbha.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW()),
-                                          (SHA1(UUID()),'Hồng Lĩnh Hà Tĩnh', 'HLHT', 'hlht.vn',(SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW()),
-                                          (SHA1(UUID()),'Khánh Hòa', 'KHFC', 'khfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW()),
-                                          (SHA1(UUID()),'Thể Công - Viettel', 'TCVT', 'tcvt.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW()),
-                                          (SHA1(UUID()),'MerryLand Quy Nhơn Bình Định', 'MQBĐ', 'mqbd.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW()),
-                                          (SHA1(UUID()),'Sông Lam Nghệ An', 'SLNA', 'slna.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW()),
+INSERT INTO `clubs` (`id`, `name_club`, `shorthand`,`domain_email`,`sea_son_id`,`created_at`,`created_by`) VALUES
+                                          (SHA1(UUID()),'Becamex Bình Dương', 'BDFC', 'bdfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'Công An Hà Nội', 'CAHN', 'cahn.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'Đông Á Thanh Hóa', 'THFC', 'thfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'Hà Nội', 'HNFC', 'hnfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'Hải Phòng', 'HPFC', 'hpfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'LPBank Hoàng Anh Gia Lai', 'LPBHA', 'lpbha.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'Hồng Lĩnh Hà Tĩnh', 'HLHT', 'hlht.vn',(SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'Khánh Hòa', 'KHFC', 'khfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'Thể Công - Viettel', 'TCVT', 'tcvt.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'MerryLand Quy Nhơn Bình Định', 'MQBĐ', 'mqbd.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'Sông Lam Nghệ An', 'SLNA', 'slna.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW(), 'admin'),
                                           (SHA1(UUID()),'Thép Xanh Nam Định', 'TXND', 'txnd.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW()),
-                                          (SHA1(UUID()),'TP Hồ Chí Minh', 'HCMC', 'hcmc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW()),
-                                          (SHA1(UUID()),'Quảng Nam', 'QNFC', 'qnfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW());
+                                          (SHA1(UUID()),'TP Hồ Chí Minh', 'HCMC', 'hcmc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW(), 'admin'),
+                                          (SHA1(UUID()),'Quảng Nam', 'QNFC', 'qnfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW(), 'admin'),;
 
 # SELECT * FROM `clubs`
 # SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022';

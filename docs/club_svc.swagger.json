@@ -1,0 +1,199 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "club_svc.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ClubService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/club/club_id": {
+      "post": {
+        "operationId": "ClubService_UpdateClub",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ClubProfileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "data.nameClub",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "data.nameAward",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "data.shorthand",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "data.nameStadium",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "data.domainEmail",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "data.achievement",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "data.updateBy",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClubService"
+        ]
+      }
+    },
+    "/club_profile": {
+      "get": {
+        "summary": "Get a club's information",
+        "operationId": "ClubService_GetClubProfile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ClubProfileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "ClubService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ClubProfileRequestData": {
+      "type": "object",
+      "properties": {
+        "nameClub": {
+          "type": "string"
+        },
+        "nameAward": {
+          "type": "string"
+        },
+        "shorthand": {
+          "type": "string"
+        },
+        "nameStadium": {
+          "type": "string"
+        },
+        "domainEmail": {
+          "type": "string"
+        },
+        "achievement": {
+          "type": "string"
+        },
+        "updateBy": {
+          "type": "string"
+        }
+      }
+    },
+    "ClubProfileResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/ClubProfileResponseData"
+        }
+      }
+    },
+    "ClubProfileResponseData": {
+      "type": "object",
+      "properties": {
+        "nameClub": {
+          "type": "string"
+        },
+        "nameAward": {
+          "type": "string"
+        },
+        "shorthand": {
+          "type": "string"
+        },
+        "nameStadium": {
+          "type": "string"
+        },
+        "domainEmail": {
+          "type": "string"
+        },
+        "achievement": {
+          "type": "string"
+        },
+        "updateBy": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

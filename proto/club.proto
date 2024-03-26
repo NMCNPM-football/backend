@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+message ClubProfileResponse {
+  message Data {
+    string name_club = 1;
+    string name_award = 2;
+    string shorthand = 3;
+    string name_stadium = 4;
+    string domain_email = 5;
+    string achievement = 6;
+    string update_by = 8;
+  }
+  Data data = 1;
+}
+
+message ClubProfileRequest {
+  message Data {
+    string name_club = 1;
+    string name_award = 2;
+    string shorthand = 3;
+    string name_stadium = 4;
+    string domain_email = 5;
+    string achievement = 6;
+    string update_by = 8;
+  }
+  Data data = 1;
+}
