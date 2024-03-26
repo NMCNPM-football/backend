@@ -32,9 +32,8 @@ message RegisterWithTokenRequest {
 
 message RegisterResponse {
   message Data {
-    string club_id = 1;
-    string club_name = 2;
-    string message = 3;
+    string club_name = 1;
+    string message = 2;
   }
   Data data = 1;
 }

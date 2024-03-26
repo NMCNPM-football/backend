@@ -1287,8 +1287,6 @@ func (m *RegisterResponse_Data) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for ClubId
-
 	// no validation rules for ClubName
 
 	// no validation rules for Message

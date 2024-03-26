@@ -74,19 +74,18 @@ func (e *UserServicePublic) Register(ctx context.Context, in *gen.RegisterReques
 		IsVerifiedEmail: false,
 	}
 
-	newClub := &models.Club{
-		DomainEmail: domainEmail,
+	usersWithSameDomain, err := e.userDao.FindUsersByDomain(domainEmail)
+	if err != nil {
+		return nil, must.HandlerError(err, e.logger)
 	}
 
-	if club == nil {
-		newUser.Position = models.CLubOwner
-		err = e.userDao.RegisterUserWithNewClub(newUser, newClub)
+	if len(usersWithSameDomain) == 0 {
+		err = e.userDao.RegisterAsOwner(newUser, club)
 		if err != nil {
 			return nil, must.HandlerError(err, e.logger)
 		}
 	} else {
-
-		err = e.userDao.RegisterUserWithExistingClub(newUser, club)
+		err = e.userDao.RegisterAsMember(newUser, club)
 		if err != nil {
 			return nil, must.HandlerError(err, e.logger)
 		}
@@ -103,7 +102,6 @@ func (e *UserServicePublic) Register(ctx context.Context, in *gen.RegisterReques
 
 	return &gen.RegisterResponse{
 		Data: &gen.RegisterResponse_Data{
-			ClubId:   club.ID,
 			ClubName: club.NameClub,
 			Message:  "Register successfully",
 		},

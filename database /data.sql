@@ -1,4 +1,6 @@
+# CREATE DATABASE SE104;
 USE SE104;
+
 -- Create a table `sea_sons` with the following columns:
    INSERT INTO `sea_sons` (`sea_son_id`,`name`, `country`, `year`) VALUES
      (SHA1(UUID()), 'NightWolf', 'VietNam', '2021-2022'),
@@ -59,4 +61,4 @@ INSERT INTO `clubs` (`id`, `name_club`, `shorthand`,`domain_email`,`sea_son_id`,
                                           (SHA1(UUID()),'Quảng Nam', 'QNFC', 'qnfc.vn', (SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2023-2024'),NOW());
 
 # SELECT * FROM `clubs`
-SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-22';
+# SELECT `sea_son_id` FROM `sea_sons` WHERE `year` = '2021-2022';

@@ -208,9 +208,6 @@
     "RegisterResponseData": {
       "type": "object",
       "properties": {
-        "clubId": {
-          "type": "string"
-        },
         "clubName": {
           "type": "string"
         },
