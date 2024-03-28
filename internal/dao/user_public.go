@@ -2,7 +2,6 @@ package dao
 
 import (
 	"errors"
-	"fmt"
 	"github.com/NMCNPM-football/backend/internal/models"
 	"gorm.io/gorm"
 	"strings"
@@ -77,12 +76,9 @@ func (u *UserDao) RegisterAsOwner(user *models.User, club *models.Club) error {
 	if err := tx.Error; err != nil {
 		return err
 	}
-	if err := tx.Create(club).Error; err != nil {
-		tx.Rollback()
-		return err
-	}
 	user.ClubID = club.ID
 	user.Position = models.CLubOwner
+	user.Club = club.NameClub
 	if err := tx.Create(user).Error; err != nil {
 		if strings.Contains(err.Error(), "Duplicate key") {
 			err = tx.Unscoped().Model(&models.User{}).Where("email = ?", user.Email).Update("deleted_at", nil).Error
@@ -114,6 +110,7 @@ func (u *UserDao) RegisterAsMember(user *models.User, club *models.Club) error {
 	}
 	user.ClubID = club.ID
 	user.Position = models.ClubMember
+	user.Club = club.NameClub
 	if err := tx.Create(user).Error; err != nil {
 		if strings.Contains(err.Error(), "Duplicate key") {
 			err = tx.Unscoped().Model(&models.User{}).Where("email = ?", user.Email).Update("deleted_at", nil).Error
@@ -133,11 +130,12 @@ func (u *UserDao) RegisterAsMember(user *models.User, club *models.Club) error {
 	return tx.Commit().Error
 }
 
-func (u *UserDao) FindUsersByDomainAndSeason(domainEmail string, season string) ([]*models.User, error) {
+func (u *UserDao) FindUsersByClub(clubName string) ([]*models.User, error) {
 	var users []*models.User
-	err := u.db.Where("email LIKE ? AND sea_son = ?", fmt.Sprintf("%%%s", domainEmail), season).Find(&users).Error
+	err := u.db.Where("club = ?", clubName).Find(&users).Error
 	if err != nil {
 		return nil, err
 	}
+
 	return users, nil
 }

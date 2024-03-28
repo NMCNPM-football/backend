@@ -63,6 +63,7 @@ func (e *UserServicePublic) Register(ctx context.Context, in *gen.RegisterReques
 
 	domainEmail := common.GetDomainEmail(in.Email)
 	club, err := e.clubDao.FindByDomainAndSeason(domainEmail, in.Season)
+	//Truy van club theo domain va season
 	if err != nil {
 		return nil, must.HandlerError(err, e.logger)
 	}
@@ -73,18 +74,28 @@ func (e *UserServicePublic) Register(ctx context.Context, in *gen.RegisterReques
 		Position:        models.ClubMember,
 		IsVerifiedEmail: false,
 	}
-
-	usersWithSameDomainAndSeason, err := e.userDao.FindUsersByDomainAndSeason(domainEmail, in.Season)
+	clubName := club.NameClub
+	usersWithSameClubAndSeason, err := e.userDao.FindUsersByClub(clubName)
 	if err != nil {
 		return nil, must.HandlerError(err, e.logger)
 	}
+	// Check if there's already an owner for the domain and season
+	var isOwnerExists bool
+	for _, user := range usersWithSameClubAndSeason {
+		if user.Position == "Owner" {
+			isOwnerExists = true
+			break
+		}
+	}
 
-	if len(usersWithSameDomainAndSeason) == 0 {
+	if !isOwnerExists {
+		// If there's no owner, register the user as an owner
 		err = e.userDao.RegisterAsOwner(newUser, club)
 		if err != nil {
 			return nil, must.HandlerError(err, e.logger)
 		}
 	} else {
+		// If there's already an owner, register the user as a member
 		err = e.userDao.RegisterAsMember(newUser, club)
 		if err != nil {
 			return nil, must.HandlerError(err, e.logger)
