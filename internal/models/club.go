@@ -2,6 +2,7 @@ package models
 
 type Club struct {
 	Base
+	OwnerBy     string `gorm:"size:50"`
 	NameClub    string `gorm:"size:50"`
 	NameAward   string `gorm:"size:50"`
 	SeaSon      string `gorm:"size:50"`

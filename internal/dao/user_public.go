@@ -2,6 +2,7 @@ package dao
 
 import (
 	"errors"
+	"github.com/NMCNPM-football/backend/common"
 	"github.com/NMCNPM-football/backend/internal/models"
 	"gorm.io/gorm"
 	"strings"
@@ -94,6 +95,14 @@ func (u *UserDao) RegisterAsOwner(user *models.User, club *models.Club) error {
 			tx.Rollback()
 			return err
 		}
+	}
+	domainEmail := common.GetDomainEmail(user.Email)
+	if err := tx.Model(&models.Club{}).Where("sea_son = ? AND domain_email = ?", user.SeaSon, domainEmail).Updates(map[string]interface{}{
+		"OwnerBy":   user.Name,
+		"UpdatedAt": user.UpdatedAt,
+	}).Error; err != nil {
+		tx.Rollback()
+		return err
 	}
 	return tx.Commit().Error
 }

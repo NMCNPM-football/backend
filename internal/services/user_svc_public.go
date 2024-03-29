@@ -70,6 +70,7 @@ func (e *UserServicePublic) Register(ctx context.Context, in *gen.RegisterReques
 	newUser := &models.User{
 		Name:            in.Name,
 		Email:           in.Email,
+		SeaSon:          in.Season,
 		Password:        string(hashedPassword),
 		Position:        models.ClubMember,
 		IsVerifiedEmail: false,

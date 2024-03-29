@@ -2,10 +2,10 @@
 USE SE104;
 
 -- Create a table `sea_sons` with the following columns:
-   INSERT INTO `sea_sons` (`sea_son_id`,`name`, `country`, `year`) VALUES
-     (SHA1(UUID()), 'NightWolf', 'VietNam', '2021-2022'),
-     (SHA1(UUID()), 'NightWolf', 'VietNam', '2022-2023'),
-     (SHA1(UUID()), 'NightWolf', 'VietNam', '2023-2024');
+#    INSERT INTO `sea_sons` (`sea_son_id`,`name`, `country`, `year`) VALUES
+#      (SHA1(UUID()), 'NightWolf', 'VietNam', '2021-2022'),
+#      (SHA1(UUID()), 'NightWolf', 'VietNam', '2022-2023'),
+#      (SHA1(UUID()), 'NightWolf', 'VietNam', '2023-2024');
 
 SELECT * FROM sea_sons;
 -- Create a table `clubs` with the following columns:
