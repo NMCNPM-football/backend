@@ -14,12 +14,13 @@ type Club struct {
 }
 
 type Player struct {
-	Base
+	ID          string `gorm:"primary_key;size:100"`
 	ClubID      string `gorm:"size:50"`
-	SeaSonID    string `gorm:"size:50"`
+	ClubName    string `gorm:"size:50"`
+	SeaSon      string `gorm:"size:50"`
 	TypePlayer  string `gorm:"size:50"`
 	Name        string `gorm:"size:50"`
-	Age         string `gorm:"size:50"`
+	BirthDay    string `gorm:"size:50"`
 	Height      string `gorm:"size:50"`
 	Weight      string `gorm:"size:50"`
 	Position    string `gorm:"size:50"`
