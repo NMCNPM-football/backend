@@ -49,18 +49,11 @@ func local_request_ClubService_GetClubProfile_0(ctx context.Context, marshaler r
 
 }
 
-var (
-	filter_ClubService_UpdateClub_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
-
 func request_ClubService_UpdateClub_0(ctx context.Context, marshaler runtime.Marshaler, client ClubServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ClubProfileRequest
 	var metadata runtime.ServerMetadata
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ClubService_UpdateClub_0); err != nil {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -73,10 +66,7 @@ func local_request_ClubService_UpdateClub_0(ctx context.Context, marshaler runti
 	var protoReq ClubProfileRequest
 	var metadata runtime.ServerMetadata
 
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ClubService_UpdateClub_0); err != nil {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -99,7 +89,7 @@ func RegisterClubServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.ClubService/GetClubProfile", runtime.WithHTTPPathPattern("/club_profile"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.ClubService/GetClubProfile", runtime.WithHTTPPathPattern("/club-profile"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -116,7 +106,7 @@ func RegisterClubServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
-	mux.Handle("POST", pattern_ClubService_UpdateClub_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_ClubService_UpdateClub_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -124,7 +114,7 @@ func RegisterClubServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.ClubService/UpdateClub", runtime.WithHTTPPathPattern("/club/club_id"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.ClubService/UpdateClub", runtime.WithHTTPPathPattern("/club/update"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -188,7 +178,7 @@ func RegisterClubServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.ClubService/GetClubProfile", runtime.WithHTTPPathPattern("/club_profile"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.ClubService/GetClubProfile", runtime.WithHTTPPathPattern("/club-profile"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -204,13 +194,13 @@ func RegisterClubServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
-	mux.Handle("POST", pattern_ClubService_UpdateClub_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_ClubService_UpdateClub_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.ClubService/UpdateClub", runtime.WithHTTPPathPattern("/club/club_id"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.ClubService/UpdateClub", runtime.WithHTTPPathPattern("/club/update"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -230,9 +220,9 @@ func RegisterClubServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 }
 
 var (
-	pattern_ClubService_GetClubProfile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"club_profile"}, ""))
+	pattern_ClubService_GetClubProfile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"club-profile"}, ""))
 
-	pattern_ClubService_UpdateClub_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"club", "club_id"}, ""))
+	pattern_ClubService_UpdateClub_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"club", "update"}, ""))
 )
 
 var (

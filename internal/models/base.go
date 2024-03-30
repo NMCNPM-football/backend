@@ -9,7 +9,7 @@ import (
 type Base struct {
 	ID        string `gorm:"primary_key;size:100"`
 	CreatedAt time.Time
-	UpdatedAt time.Time
+	UpdatedAt time.Time      `gorm:"autoUpdateTime"`
 	DeletedAt gorm.DeletedAt `gorm:"index"`
 }
 

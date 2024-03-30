@@ -12,6 +12,8 @@ type Club struct {
 	Achievement string `gorm:"size:50"`
 	CreatedBy   string `gorm:"size:50"`
 	UpdatedBy   string `gorm:"size:50"`
+
+	//UpdateAt    time.Time `gorm:"autoUpdateTime"`
 }
 
 type Player struct {

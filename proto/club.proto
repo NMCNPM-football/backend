@@ -6,24 +6,22 @@ message ClubProfileResponse {
     string name_award = 2;
     string shorthand = 3;
     string name_stadium = 4;
-    string domain_email = 5;
-    string achievement = 6;
-    string update_by = 8;
-    string owner_by = 9;
-    string sea_son = 10;
+    string achievement = 5;
+    string update_by = 6;
+    string owner_by = 7;
+    string sea_son = 8;
+    string update_at = 9;
   }
   Data data = 1;
 }
 
 message ClubProfileRequest {
-  message Data {
     string name_club = 1;
     string name_award = 2;
-    string shorthand = 3;
-    string name_stadium = 4;
-    string domain_email = 5;
-    string achievement = 6;
-    string update_by = 8;
-  }
-  Data data = 1;
+    string name_stadium = 3;
+    string sea_son = 4;
+    string achievement = 5;
+    string owner_by = 6;
+    string update_by = 7;
+    string update_at = 8;
 }

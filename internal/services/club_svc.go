@@ -6,6 +6,8 @@ import (
 	"github.com/NMCNPM-football/backend/config"
 	"github.com/NMCNPM-football/backend/gen"
 	"github.com/NMCNPM-football/backend/internal/dao"
+	"github.com/NMCNPM-football/backend/internal/models"
+	"github.com/NMCNPM-football/backend/internal/must"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
@@ -34,7 +36,7 @@ func (e *ClubService) RegisterGrpcServer(s *grpc.Server) {
 }
 
 func (e *ClubService) RegisterHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	err := gen.RegisterUserServiceHandler(ctx, mux, conn)
+	err := gen.RegisterClubServiceHandler(ctx, mux, conn)
 	if err != nil {
 		return err
 	}
@@ -46,18 +48,17 @@ func (e *ClubService) GetClubProfile(ctx context.Context, request *gen.EmptyRequ
 	// Get the user from the context
 	user, err := e.userFromContext(ctx, e.userDao)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to get user from context: %w", err)
 	}
 
-	// Check if the user is the owner of the club
-	if !user.IsOwner() {
-		return nil, fmt.Errorf("user is not the owner of the club")
-	}
-
-	// Get the club profile from the database
-	club, err := e.clubDao.GetClubByName(user.Club, user.Name)
+	// Get the club from the context
+	club, err := e.clubDao.GetClubByID(user.ClubID)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to get club by ID: %w", err)
+	}
+	// Check if the user is the owner of the club
+	if user.Name != club.OwnerBy {
+		return nil, fmt.Errorf("user is not the owner of the club")
 	}
 
 	// Create the response
@@ -69,7 +70,6 @@ func (e *ClubService) GetClubProfile(ctx context.Context, request *gen.EmptyRequ
 			SeaSon:      club.SeaSon,
 			Shorthand:   club.Shorthand,
 			NameStadium: club.NameStadium,
-			DomainEmail: club.DomainEmail,
 			Achievement: club.Achievement,
 			UpdateBy:    club.UpdatedBy,
 		},
@@ -78,6 +78,45 @@ func (e *ClubService) GetClubProfile(ctx context.Context, request *gen.EmptyRequ
 	return response, nil
 }
 func (e *ClubService) UpdateClub(ctx context.Context, request *gen.ClubProfileRequest) (*gen.ClubProfileResponse, error) {
-	//TODO implement me
-	panic("implement me")
+	// Get the user from the context
+	user, err := e.userFromContext(ctx, e.userDao)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user from context: %w", err)
+	}
+
+	// Get the club from the context
+	club, err := e.clubDao.GetClubByID(user.ClubID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get club by ID: %w", err)
+	}
+	// Check if the user is the owner of the club
+	if user.Name != club.OwnerBy {
+		return nil, fmt.Errorf("user is not the owner of the club")
+	}
+	updateClub := &models.Club{
+		NameClub:    request.NameClub,
+		NameAward:   request.NameAward,
+		NameStadium: request.NameStadium,
+		SeaSon:      request.SeaSon,
+		Achievement: request.Achievement,
+		OwnerBy:     request.OwnerBy,
+		UpdatedBy:   user.Name,
+	}
+	err = e.clubDao.Update(updateClub, club.ID)
+	if err != nil {
+		return nil, must.HandlerError(err, e.logger)
+	}
+
+	return &gen.ClubProfileResponse{
+		Data: &gen.ClubProfileResponse_Data{
+			OwnerBy:     updateClub.OwnerBy,
+			NameClub:    updateClub.NameClub,
+			NameAward:   updateClub.NameAward,
+			SeaSon:      updateClub.SeaSon,
+			Shorthand:   updateClub.Shorthand,
+			NameStadium: updateClub.NameStadium,
+			Achievement: updateClub.Achievement,
+			UpdateBy:    updateClub.UpdatedBy,
+		},
+	}, nil
 }

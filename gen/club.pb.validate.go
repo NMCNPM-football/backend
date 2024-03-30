@@ -188,34 +188,21 @@ func (m *ClubProfileRequest) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetData()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ClubProfileRequestValidationError{
-					field:  "Data",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ClubProfileRequestValidationError{
-					field:  "Data",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetData()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ClubProfileRequestValidationError{
-				field:  "Data",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for NameClub
+
+	// no validation rules for NameAward
+
+	// no validation rules for NameStadium
+
+	// no validation rules for SeaSon
+
+	// no validation rules for Achievement
+
+	// no validation rules for OwnerBy
+
+	// no validation rules for UpdateBy
+
+	// no validation rules for UpdateAt
 
 	if len(errors) > 0 {
 		return ClubProfileRequestMultiError(errors)
@@ -327,8 +314,6 @@ func (m *ClubProfileResponse_Data) validate(all bool) error {
 
 	// no validation rules for NameStadium
 
-	// no validation rules for DomainEmail
-
 	// no validation rules for Achievement
 
 	// no validation rules for UpdateBy
@@ -336,6 +321,8 @@ func (m *ClubProfileResponse_Data) validate(all bool) error {
 	// no validation rules for OwnerBy
 
 	// no validation rules for SeaSon
+
+	// no validation rules for UpdateAt
 
 	if len(errors) > 0 {
 		return ClubProfileResponse_DataMultiError(errors)
@@ -416,119 +403,3 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ClubProfileResponse_DataValidationError{}
-
-// Validate checks the field values on ClubProfileRequest_Data with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ClubProfileRequest_Data) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on ClubProfileRequest_Data with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// ClubProfileRequest_DataMultiError, or nil if none found.
-func (m *ClubProfileRequest_Data) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *ClubProfileRequest_Data) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for NameClub
-
-	// no validation rules for NameAward
-
-	// no validation rules for Shorthand
-
-	// no validation rules for NameStadium
-
-	// no validation rules for DomainEmail
-
-	// no validation rules for Achievement
-
-	// no validation rules for UpdateBy
-
-	if len(errors) > 0 {
-		return ClubProfileRequest_DataMultiError(errors)
-	}
-
-	return nil
-}
-
-// ClubProfileRequest_DataMultiError is an error wrapping multiple validation
-// errors returned by ClubProfileRequest_Data.ValidateAll() if the designated
-// constraints aren't met.
-type ClubProfileRequest_DataMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ClubProfileRequest_DataMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ClubProfileRequest_DataMultiError) AllErrors() []error { return m }
-
-// ClubProfileRequest_DataValidationError is the validation error returned by
-// ClubProfileRequest_Data.Validate if the designated constraints aren't met.
-type ClubProfileRequest_DataValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ClubProfileRequest_DataValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ClubProfileRequest_DataValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ClubProfileRequest_DataValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ClubProfileRequest_DataValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ClubProfileRequest_DataValidationError) ErrorName() string {
-	return "ClubProfileRequest_DataValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e ClubProfileRequest_DataValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sClubProfileRequest_Data.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ClubProfileRequest_DataValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ClubProfileRequest_DataValidationError{}

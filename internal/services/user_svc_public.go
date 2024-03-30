@@ -131,7 +131,7 @@ func (e *UserServicePublic) Login(ctx context.Context, in *gen.LoginRequest) (*g
 		Email: user.Email,
 	}
 
-	expire := time.Now().UTC().Add(2 * time.Hour)
+	expire := time.Now().UTC().Add(1 * time.Hour)
 	refreshExpire := time.Now().UTC().Add(24 * time.Hour)
 	accessToken, refreshToken, err := must.CreateNewWithClaims(data, e.cfg.AuthenticationSecretKey, expire, refreshExpire)
 	if err != nil {

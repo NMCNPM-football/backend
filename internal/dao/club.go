@@ -50,10 +50,18 @@ func (c *ClubDao) FindByDomainAndSeason(domainEmail string, season string) (*mod
 	return club, nil
 }
 
-func (c *ClubDao) GetClubByName(nameClub string, name string) (*models.Club, error) {
+func (c *ClubDao) GetClubByID(clubID string) (*models.Club, error) {
 	var club models.Club
-	if err := c.db.Where("name_club = ? AND owner_by = ?", nameClub, name).First(&club).Error; err != nil {
+	if err := c.db.Where("id = ?", clubID).First(&club).Error; err != nil {
 		return nil, err
 	}
 	return &club, nil
+}
+
+func (c *ClubDao) Update(club *models.Club, clubID string) error {
+	if err := c.db.Where("id = ?", clubID).Updates(&club).Error; err != nil {
+		return errors.Wrap(err, "c.db.Model.Where.Updates")
+	}
+
+	return nil
 }

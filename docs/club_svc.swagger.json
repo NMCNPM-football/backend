@@ -16,73 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/club/club_id": {
-      "post": {
-        "operationId": "ClubService_UpdateClub",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/ClubProfileResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "data.nameClub",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "data.nameAward",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "data.shorthand",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "data.nameStadium",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "data.domainEmail",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "data.achievement",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "data.updateBy",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ClubService"
-        ]
-      }
-    },
-    "/club_profile": {
+    "/club-profile": {
       "get": {
         "summary": "Get a club's information",
         "operationId": "ClubService_GetClubProfile",
@@ -104,10 +38,42 @@
           "ClubService"
         ]
       }
+    },
+    "/club/update": {
+      "put": {
+        "operationId": "ClubService_UpdateClub",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ClubProfileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClubProfileRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClubService"
+        ]
+      }
     }
   },
   "definitions": {
-    "ClubProfileRequestData": {
+    "ClubProfileRequest": {
       "type": "object",
       "properties": {
         "nameClub": {
@@ -116,19 +82,22 @@
         "nameAward": {
           "type": "string"
         },
-        "shorthand": {
-          "type": "string"
-        },
         "nameStadium": {
           "type": "string"
         },
-        "domainEmail": {
+        "seaSon": {
           "type": "string"
         },
         "achievement": {
           "type": "string"
         },
+        "ownerBy": {
+          "type": "string"
+        },
         "updateBy": {
+          "type": "string"
+        },
+        "updateAt": {
           "type": "string"
         }
       }
@@ -156,9 +125,6 @@
         "nameStadium": {
           "type": "string"
         },
-        "domainEmail": {
-          "type": "string"
-        },
         "achievement": {
           "type": "string"
         },
@@ -169,6 +135,9 @@
           "type": "string"
         },
         "seaSon": {
+          "type": "string"
+        },
+        "updateAt": {
           "type": "string"
         }
       }

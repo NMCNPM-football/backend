@@ -40,7 +40,7 @@ func (u *User) CheckPermission(MethodName string) bool {
 	if u.Position == CLubOwner {
 		return true
 	}
-	if u.Position == CLubOwner {
+	if u.Position == ClubManager { // Changed from CLubOwner to ClubManager
 		for _, v := range MemberPermission {
 			if v == MethodName {
 				return true

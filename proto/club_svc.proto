@@ -6,21 +6,18 @@ import "message.proto";
 import "user.proto";
 import "club.proto";
 
-
-
-// Here is the overall greeting service definition where we define all our endpoints
 service ClubService {
-
-
   //Get a club's information
   rpc GetClubProfile (EmptyRequest) returns (ClubProfileResponse) {
     option (google.api.http) = {
-      get: "/club_profile"
+      get: "/club-profile"
     };
   }
+
   rpc UpdateClub (ClubProfileRequest) returns (ClubProfileResponse) {
     option (google.api.http) = {
-      post: "/club/club_id"
+      put: "/club/update"
+      body: "*"
     };
   }
 }
