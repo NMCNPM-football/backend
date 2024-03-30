@@ -9,6 +9,8 @@ message ClubProfileResponse {
     string domain_email = 5;
     string achievement = 6;
     string update_by = 8;
+    string owner_by = 9;
+    string sea_son = 10;
   }
   Data data = 1;
 }

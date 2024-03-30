@@ -333,6 +333,10 @@ func (m *ClubProfileResponse_Data) validate(all bool) error {
 
 	// no validation rules for UpdateBy
 
+	// no validation rules for OwnerBy
+
+	// no validation rules for SeaSon
+
 	if len(errors) > 0 {
 		return ClubProfileResponse_DataMultiError(errors)
 	}

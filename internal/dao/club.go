@@ -49,3 +49,11 @@ func (c *ClubDao) FindByDomainAndSeason(domainEmail string, season string) (*mod
 	}
 	return club, nil
 }
+
+func (c *ClubDao) GetClubByName(nameClub string, name string) (*models.Club, error) {
+	var club models.Club
+	if err := c.db.Where("name_club = ? AND owner_by = ?", nameClub, name).First(&club).Error; err != nil {
+		return nil, err
+	}
+	return &club, nil
+}

@@ -164,6 +164,12 @@
         },
         "updateBy": {
           "type": "string"
+        },
+        "ownerBy": {
+          "type": "string"
+        },
+        "seaSon": {
+          "type": "string"
         }
       }
     },
