@@ -20,4 +20,25 @@ service ClubService {
       body: "*"
     };
   }
+//  rpc GetAllClubProfile (ClubProfileListRequest) returns (ClubProfileListResponse) {
+//    option (google.api.http) = {
+//      get: "/club-profile/all"
+//    };
+//  }
+  rpc UpdatePlayer (PLayerProfileRequest) returns (PLayerProfileResponse) {
+    option (google.api.http) = {
+      put: "/player/update/{id}"
+      body: "*"
+    };
+  }
+  rpc GetPlayerProfile (PLayerRequest) returns (PLayerProfileResponse) {
+    option (google.api.http) = {
+      get: "/club/player-profile/{id}"
+    };
+  }
+  rpc GetAllPlayerProfile (PlayerProfileListRequest) returns (PLayerProfileResponse) {
+    option (google.api.http) = {
+      get: "/club/player-profile"
+    };
+  }
 }

@@ -39,6 +39,72 @@
         ]
       }
     },
+    "/club/player-profile": {
+      "get": {
+        "operationId": "ClubService_GetAllPlayerProfile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/PLayerProfileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "clubName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "seaSon",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClubService"
+        ]
+      }
+    },
+    "/club/player-profile/{id}": {
+      "get": {
+        "operationId": "ClubService_GetPlayerProfile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/PLayerProfileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClubService"
+        ]
+      }
+    },
     "/club/update": {
       "put": {
         "operationId": "ClubService_UpdateClub",
@@ -63,6 +129,80 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ClubProfileRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClubService"
+        ]
+      }
+    },
+    "/player/update/{id}": {
+      "put": {
+        "summary": "rpc GetAllClubProfile (ClubProfileListRequest) returns (ClubProfileListResponse) {\n   option (google.api.http) = {\n     get: \"/club-profile/all\"\n   };\n }",
+        "operationId": "ClubService_UpdatePlayer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/PLayerProfileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "clubName": {
+                  "type": "string"
+                },
+                "seaSon": {
+                  "type": "string"
+                },
+                "typePlayer": {
+                  "type": "string"
+                },
+                "height": {
+                  "type": "string"
+                },
+                "weight": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "string"
+                },
+                "nationality": {
+                  "type": "string"
+                },
+                "kit": {
+                  "type": "string"
+                },
+                "achievement": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "birthDay": {
+                  "type": "string"
+                }
+              }
             }
           }
         ],
@@ -107,6 +247,9 @@
       "properties": {
         "data": {
           "$ref": "#/definitions/ClubProfileResponseData"
+        },
+        "message": {
+          "type": "string"
         }
       }
     },
@@ -138,6 +281,55 @@
           "type": "string"
         },
         "updateAt": {
+          "type": "string"
+        }
+      }
+    },
+    "PLayerProfileResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/PLayerProfileResponseData"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "PLayerProfileResponseData": {
+      "type": "object",
+      "properties": {
+        "clubName": {
+          "type": "string"
+        },
+        "seaSon": {
+          "type": "string"
+        },
+        "typePlayer": {
+          "type": "string"
+        },
+        "height": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string"
+        },
+        "nationality": {
+          "type": "string"
+        },
+        "kit": {
+          "type": "string"
+        },
+        "achievement": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "birthDay": {
           "type": "string"
         }
       }

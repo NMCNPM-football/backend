@@ -12,7 +12,6 @@ type Club struct {
 	Achievement string `gorm:"size:50"`
 	CreatedBy   string `gorm:"size:50"`
 	UpdatedBy   string `gorm:"size:50"`
-
 	//UpdateAt    time.Time `gorm:"autoUpdateTime"`
 }
 
@@ -28,7 +27,6 @@ type Player struct {
 	Weight      string `gorm:"size:50"`
 	Position    string `gorm:"size:50"`
 	Nationality string `gorm:"size:50"`
-	Award       string `gorm:"size:50"`
 	Kit         string `gorm:"size:50"`
 	Achievement string `gorm:"size:50"`
 	CreatedBy   string `gorm:"size:50"`

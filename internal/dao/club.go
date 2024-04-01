@@ -58,8 +58,24 @@ func (c *ClubDao) GetClubByID(clubID string) (*models.Club, error) {
 	return &club, nil
 }
 
-func (c *ClubDao) Update(club *models.Club, clubID string) error {
+func (c *ClubDao) UpdateClub(club *models.Club, clubID string) error {
 	if err := c.db.Where("id = ?", clubID).Updates(&club).Error; err != nil {
+		return errors.Wrap(err, "c.db.Model.Where.Updates")
+	}
+
+	return nil
+}
+
+func (c *ClubDao) GetPLayerByID(playerID string) (*models.Player, error) {
+	var player models.Player
+	if err := c.db.Where("id = ?", playerID).First(&player).Error; err != nil {
+		return nil, err
+	}
+	return &player, nil
+}
+
+func (c *ClubDao) UpdatePlayer(player *models.Player, playerID string) error {
+	if err := c.db.Where("id = ?", playerID).Updates(&player).Error; err != nil {
 		return errors.Wrap(err, "c.db.Model.Where.Updates")
 	}
 

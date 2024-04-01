@@ -10,5 +10,7 @@ type ClubDaoInterface interface {
 	FindByDomain(domain string) (*models.Club, error)
 	FindByDomainAndSeason(domain string, season string) (*models.Club, error)
 	GetClubByID(clubID string) (*models.Club, error)
-	Update(club *models.Club, clubID string) error
+	GetPLayerByID(playerID string) (*models.Player, error)
+	UpdateClub(club *models.Club, clubID string) error
+	UpdatePlayer(player *models.Player, playerID string) error
 }

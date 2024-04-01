@@ -86,6 +86,8 @@ func (m *ClubProfileResponse) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for Message
+
 	if len(errors) > 0 {
 		return ClubProfileResponseMultiError(errors)
 	}
@@ -284,6 +286,853 @@ var _ interface {
 	ErrorName() string
 } = ClubProfileRequestValidationError{}
 
+// Validate checks the field values on PLayerProfileRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PLayerProfileRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PLayerProfileRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PLayerProfileRequestMultiError, or nil if none found.
+func (m *PLayerProfileRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PLayerProfileRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for ClubName
+
+	// no validation rules for SeaSon
+
+	// no validation rules for TypePlayer
+
+	// no validation rules for Height
+
+	// no validation rules for Weight
+
+	// no validation rules for Position
+
+	// no validation rules for Nationality
+
+	// no validation rules for Kit
+
+	// no validation rules for Achievement
+
+	// no validation rules for Name
+
+	// no validation rules for BirthDay
+
+	if len(errors) > 0 {
+		return PLayerProfileRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// PLayerProfileRequestMultiError is an error wrapping multiple validation
+// errors returned by PLayerProfileRequest.ValidateAll() if the designated
+// constraints aren't met.
+type PLayerProfileRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PLayerProfileRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PLayerProfileRequestMultiError) AllErrors() []error { return m }
+
+// PLayerProfileRequestValidationError is the validation error returned by
+// PLayerProfileRequest.Validate if the designated constraints aren't met.
+type PLayerProfileRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PLayerProfileRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PLayerProfileRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PLayerProfileRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PLayerProfileRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PLayerProfileRequestValidationError) ErrorName() string {
+	return "PLayerProfileRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PLayerProfileRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPLayerProfileRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PLayerProfileRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PLayerProfileRequestValidationError{}
+
+// Validate checks the field values on PLayerProfileResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PLayerProfileResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PLayerProfileResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PLayerProfileResponseMultiError, or nil if none found.
+func (m *PLayerProfileResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PLayerProfileResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetData()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PLayerProfileResponseValidationError{
+					field:  "Data",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PLayerProfileResponseValidationError{
+					field:  "Data",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetData()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PLayerProfileResponseValidationError{
+				field:  "Data",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Message
+
+	if len(errors) > 0 {
+		return PLayerProfileResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// PLayerProfileResponseMultiError is an error wrapping multiple validation
+// errors returned by PLayerProfileResponse.ValidateAll() if the designated
+// constraints aren't met.
+type PLayerProfileResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PLayerProfileResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PLayerProfileResponseMultiError) AllErrors() []error { return m }
+
+// PLayerProfileResponseValidationError is the validation error returned by
+// PLayerProfileResponse.Validate if the designated constraints aren't met.
+type PLayerProfileResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PLayerProfileResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PLayerProfileResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PLayerProfileResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PLayerProfileResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PLayerProfileResponseValidationError) ErrorName() string {
+	return "PLayerProfileResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PLayerProfileResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPLayerProfileResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PLayerProfileResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PLayerProfileResponseValidationError{}
+
+// Validate checks the field values on PlayerProfileListRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PlayerProfileListRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PlayerProfileListRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PlayerProfileListRequestMultiError, or nil if none found.
+func (m *PlayerProfileListRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PlayerProfileListRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ClubName
+
+	// no validation rules for SeaSon
+
+	if len(errors) > 0 {
+		return PlayerProfileListRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// PlayerProfileListRequestMultiError is an error wrapping multiple validation
+// errors returned by PlayerProfileListRequest.ValidateAll() if the designated
+// constraints aren't met.
+type PlayerProfileListRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PlayerProfileListRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PlayerProfileListRequestMultiError) AllErrors() []error { return m }
+
+// PlayerProfileListRequestValidationError is the validation error returned by
+// PlayerProfileListRequest.Validate if the designated constraints aren't met.
+type PlayerProfileListRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PlayerProfileListRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PlayerProfileListRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PlayerProfileListRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PlayerProfileListRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PlayerProfileListRequestValidationError) ErrorName() string {
+	return "PlayerProfileListRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PlayerProfileListRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPlayerProfileListRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PlayerProfileListRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PlayerProfileListRequestValidationError{}
+
+// Validate checks the field values on PlayerProfileListResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PlayerProfileListResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PlayerProfileListResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PlayerProfileListResponseMultiError, or nil if none found.
+func (m *PlayerProfileListResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PlayerProfileListResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetData() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, PlayerProfileListResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, PlayerProfileListResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return PlayerProfileListResponseValidationError{
+					field:  fmt.Sprintf("Data[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Message
+
+	if len(errors) > 0 {
+		return PlayerProfileListResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// PlayerProfileListResponseMultiError is an error wrapping multiple validation
+// errors returned by PlayerProfileListResponse.ValidateAll() if the
+// designated constraints aren't met.
+type PlayerProfileListResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PlayerProfileListResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PlayerProfileListResponseMultiError) AllErrors() []error { return m }
+
+// PlayerProfileListResponseValidationError is the validation error returned by
+// PlayerProfileListResponse.Validate if the designated constraints aren't met.
+type PlayerProfileListResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PlayerProfileListResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PlayerProfileListResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PlayerProfileListResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PlayerProfileListResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PlayerProfileListResponseValidationError) ErrorName() string {
+	return "PlayerProfileListResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PlayerProfileListResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPlayerProfileListResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PlayerProfileListResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PlayerProfileListResponseValidationError{}
+
+// Validate checks the field values on ClubProfileListRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ClubProfileListRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ClubProfileListRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ClubProfileListRequestMultiError, or nil if none found.
+func (m *ClubProfileListRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ClubProfileListRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for NameClub
+
+	if len(errors) > 0 {
+		return ClubProfileListRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ClubProfileListRequestMultiError is an error wrapping multiple validation
+// errors returned by ClubProfileListRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ClubProfileListRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ClubProfileListRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ClubProfileListRequestMultiError) AllErrors() []error { return m }
+
+// ClubProfileListRequestValidationError is the validation error returned by
+// ClubProfileListRequest.Validate if the designated constraints aren't met.
+type ClubProfileListRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ClubProfileListRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ClubProfileListRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ClubProfileListRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ClubProfileListRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ClubProfileListRequestValidationError) ErrorName() string {
+	return "ClubProfileListRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ClubProfileListRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sClubProfileListRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ClubProfileListRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ClubProfileListRequestValidationError{}
+
+// Validate checks the field values on ClubProfileListResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ClubProfileListResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ClubProfileListResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ClubProfileListResponseMultiError, or nil if none found.
+func (m *ClubProfileListResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ClubProfileListResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetData() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ClubProfileListResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ClubProfileListResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ClubProfileListResponseValidationError{
+					field:  fmt.Sprintf("Data[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Message
+
+	if len(errors) > 0 {
+		return ClubProfileListResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ClubProfileListResponseMultiError is an error wrapping multiple validation
+// errors returned by ClubProfileListResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ClubProfileListResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ClubProfileListResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ClubProfileListResponseMultiError) AllErrors() []error { return m }
+
+// ClubProfileListResponseValidationError is the validation error returned by
+// ClubProfileListResponse.Validate if the designated constraints aren't met.
+type ClubProfileListResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ClubProfileListResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ClubProfileListResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ClubProfileListResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ClubProfileListResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ClubProfileListResponseValidationError) ErrorName() string {
+	return "ClubProfileListResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ClubProfileListResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sClubProfileListResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ClubProfileListResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ClubProfileListResponseValidationError{}
+
+// Validate checks the field values on PLayerRequest with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *PLayerRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PLayerRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in PLayerRequestMultiError, or
+// nil if none found.
+func (m *PLayerRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PLayerRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return PLayerRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// PLayerRequestMultiError is an error wrapping multiple validation errors
+// returned by PLayerRequest.ValidateAll() if the designated constraints
+// aren't met.
+type PLayerRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PLayerRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PLayerRequestMultiError) AllErrors() []error { return m }
+
+// PLayerRequestValidationError is the validation error returned by
+// PLayerRequest.Validate if the designated constraints aren't met.
+type PLayerRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PLayerRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PLayerRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PLayerRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PLayerRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PLayerRequestValidationError) ErrorName() string { return "PLayerRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e PLayerRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPLayerRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PLayerRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PLayerRequestValidationError{}
+
 // Validate checks the field values on ClubProfileResponse_Data with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -403,3 +1252,127 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ClubProfileResponse_DataValidationError{}
+
+// Validate checks the field values on PLayerProfileResponse_Data with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PLayerProfileResponse_Data) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PLayerProfileResponse_Data with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PLayerProfileResponse_DataMultiError, or nil if none found.
+func (m *PLayerProfileResponse_Data) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PLayerProfileResponse_Data) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ClubName
+
+	// no validation rules for SeaSon
+
+	// no validation rules for TypePlayer
+
+	// no validation rules for Height
+
+	// no validation rules for Weight
+
+	// no validation rules for Position
+
+	// no validation rules for Nationality
+
+	// no validation rules for Kit
+
+	// no validation rules for Achievement
+
+	// no validation rules for Name
+
+	// no validation rules for BirthDay
+
+	if len(errors) > 0 {
+		return PLayerProfileResponse_DataMultiError(errors)
+	}
+
+	return nil
+}
+
+// PLayerProfileResponse_DataMultiError is an error wrapping multiple
+// validation errors returned by PLayerProfileResponse_Data.ValidateAll() if
+// the designated constraints aren't met.
+type PLayerProfileResponse_DataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PLayerProfileResponse_DataMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PLayerProfileResponse_DataMultiError) AllErrors() []error { return m }
+
+// PLayerProfileResponse_DataValidationError is the validation error returned
+// by PLayerProfileResponse_Data.Validate if the designated constraints aren't met.
+type PLayerProfileResponse_DataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PLayerProfileResponse_DataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PLayerProfileResponse_DataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PLayerProfileResponse_DataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PLayerProfileResponse_DataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PLayerProfileResponse_DataValidationError) ErrorName() string {
+	return "PLayerProfileResponse_DataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PLayerProfileResponse_DataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPLayerProfileResponse_Data.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PLayerProfileResponse_DataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PLayerProfileResponse_DataValidationError{}
