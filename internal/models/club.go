@@ -31,6 +31,7 @@ type Player struct {
 	Achievement string `gorm:"size:50"`
 	CreatedBy   string `gorm:"size:50"`
 	UpdatedBy   string `gorm:"size:50"`
+	Status      string `gorm:"size:50"`
 }
 
 type ClubPlayer struct {
