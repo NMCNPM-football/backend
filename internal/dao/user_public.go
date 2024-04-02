@@ -107,6 +107,37 @@ func (u *UserDao) RegisterAsOwner(user *models.User, club *models.Club) error {
 	return tx.Commit().Error
 }
 
+func (u *UserDao) RegisterAsAdmin(user *models.User) error {
+	tx := u.db.Begin()
+	defer func() {
+		if r := recover(); r != nil {
+			tx.Rollback()
+		}
+	}()
+	if err := tx.Error; err != nil {
+		return err
+	}
+	user.Position = "admin"
+
+	if err := tx.Create(user).Error; err != nil {
+		if strings.Contains(err.Error(), "Duplicate key") {
+			err = tx.Unscoped().Model(&models.User{}).Where("email = ?", user.Email).Update("deleted_at", nil).Error
+			if err != nil {
+				tx.Rollback()
+				return err
+			}
+			if err = u.db.Unscoped().Where("email = ?", user.Email).Updates(&user).Error; err != nil {
+				tx.Rollback()
+				return err
+			}
+		} else {
+			tx.Rollback()
+			return err
+		}
+	}
+	return tx.Commit().Error
+}
+
 func (u *UserDao) RegisterAsMember(user *models.User, club *models.Club) error {
 	tx := u.db.Begin()
 	defer func() {

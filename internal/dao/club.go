@@ -81,3 +81,27 @@ func (c *ClubDao) UpdatePlayer(player *models.Player, playerID string) error {
 
 	return nil
 }
+
+func (c *ClubDao) GetAllClubs() ([]*models.Club, error) {
+	var clubs []*models.Club
+	if err := c.db.Find(&clubs).Error; err != nil {
+		return nil, err
+	}
+	return clubs, nil
+}
+
+func (c *ClubDao) GetAllPlayersInClub(clubID string) ([]*models.Player, error) {
+	var players []*models.Player
+	if err := c.db.Where("club_id = ?", clubID).Find(&players).Error; err != nil {
+		return nil, err
+	}
+	return players, nil
+}
+
+func (c *ClubDao) DeletePlayer(playerID string) error {
+	if err := c.db.Where("id = ?", playerID).Delete(&models.Player{}).Error; err != nil {
+		return errors.Wrap(err, "c.db.Model.Where.Delete")
+	}
+
+	return nil
+}

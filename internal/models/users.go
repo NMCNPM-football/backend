@@ -22,6 +22,7 @@ const (
 	CLubOwner   = "Owner"
 	ClubManager = "Manager"
 	ClubMember  = "Member"
+	Admin       = "Admin"
 )
 
 var (

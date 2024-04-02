@@ -16,4 +16,5 @@ type UserDaoInterface interface {
 	RegisterAsMember(user *models.User, club *models.Club) error
 	RegisterAsOwner(user *models.User, club *models.Club) error
 	FindUsersByClub(clubName string) ([]*models.User, error)
+	RegisterAsAdmin(user *models.User) error
 }

@@ -39,14 +39,14 @@
         ]
       }
     },
-    "/club/player-profile": {
+    "/club-profile/all": {
       "get": {
-        "operationId": "ClubService_GetAllPlayerProfile",
+        "operationId": "ClubService_GetAllClubProfile",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/PLayerProfileResponse"
+              "$ref": "#/definitions/ClubProfileListResponse"
             }
           },
           "default": {
@@ -58,18 +58,34 @@
         },
         "parameters": [
           {
-            "name": "clubName",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "seaSon",
+            "name": "nameClub",
             "in": "query",
             "required": false,
             "type": "string"
           }
         ],
+        "tags": [
+          "ClubService"
+        ]
+      }
+    },
+    "/club/player-profile": {
+      "get": {
+        "operationId": "ClubService_GetAllPlayerProfile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/PlayerProfileListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
         "tags": [
           "ClubService"
         ]
@@ -137,9 +153,38 @@
         ]
       }
     },
+    "/delete/player/{id}": {
+      "delete": {
+        "operationId": "ClubService_DeletePlayer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClubService"
+        ]
+      }
+    },
     "/player/update/{id}": {
       "put": {
-        "summary": "rpc GetAllClubProfile (ClubProfileListRequest) returns (ClubProfileListResponse) {\n   option (google.api.http) = {\n     get: \"/club-profile/all\"\n   };\n }",
         "operationId": "ClubService_UpdatePlayer",
         "responses": {
           "200": {
@@ -213,6 +258,21 @@
     }
   },
   "definitions": {
+    "ClubProfileListResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ClubProfileResponseData"
+          }
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "ClubProfileRequest": {
       "type": "object",
       "properties": {
@@ -330,6 +390,37 @@
           "type": "string"
         },
         "birthDay": {
+          "type": "string"
+        }
+      }
+    },
+    "PlayerProfileListResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/PLayerProfileResponseData"
+          }
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "SuccessMessageResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/SuccessMessageResponsesuccess_message"
+        }
+      }
+    },
+    "SuccessMessageResponsesuccess_message": {
+      "type": "object",
+      "properties": {
+        "message": {
           "type": "string"
         }
       }

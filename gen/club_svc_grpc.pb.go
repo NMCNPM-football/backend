@@ -21,7 +21,9 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	ClubService_GetClubProfile_FullMethodName      = "/proto.ClubService/GetClubProfile"
 	ClubService_UpdateClub_FullMethodName          = "/proto.ClubService/UpdateClub"
+	ClubService_GetAllClubProfile_FullMethodName   = "/proto.ClubService/GetAllClubProfile"
 	ClubService_UpdatePlayer_FullMethodName        = "/proto.ClubService/UpdatePlayer"
+	ClubService_DeletePlayer_FullMethodName        = "/proto.ClubService/DeletePlayer"
 	ClubService_GetPlayerProfile_FullMethodName    = "/proto.ClubService/GetPlayerProfile"
 	ClubService_GetAllPlayerProfile_FullMethodName = "/proto.ClubService/GetAllPlayerProfile"
 )
@@ -33,14 +35,11 @@ type ClubServiceClient interface {
 	// Get a club's information
 	GetClubProfile(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*ClubProfileResponse, error)
 	UpdateClub(ctx context.Context, in *ClubProfileRequest, opts ...grpc.CallOption) (*ClubProfileResponse, error)
-	//	rpc GetAllClubProfile (ClubProfileListRequest) returns (ClubProfileListResponse) {
-	//	  option (google.api.http) = {
-	//	    get: "/club-profile/all"
-	//	  };
-	//	}
+	GetAllClubProfile(ctx context.Context, in *ClubProfileListRequest, opts ...grpc.CallOption) (*ClubProfileListResponse, error)
 	UpdatePlayer(ctx context.Context, in *PLayerProfileRequest, opts ...grpc.CallOption) (*PLayerProfileResponse, error)
+	DeletePlayer(ctx context.Context, in *PLayerRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
 	GetPlayerProfile(ctx context.Context, in *PLayerRequest, opts ...grpc.CallOption) (*PLayerProfileResponse, error)
-	GetAllPlayerProfile(ctx context.Context, in *PlayerProfileListRequest, opts ...grpc.CallOption) (*PLayerProfileResponse, error)
+	GetAllPlayerProfile(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*PlayerProfileListResponse, error)
 }
 
 type clubServiceClient struct {
@@ -69,9 +68,27 @@ func (c *clubServiceClient) UpdateClub(ctx context.Context, in *ClubProfileReque
 	return out, nil
 }
 
+func (c *clubServiceClient) GetAllClubProfile(ctx context.Context, in *ClubProfileListRequest, opts ...grpc.CallOption) (*ClubProfileListResponse, error) {
+	out := new(ClubProfileListResponse)
+	err := c.cc.Invoke(ctx, ClubService_GetAllClubProfile_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *clubServiceClient) UpdatePlayer(ctx context.Context, in *PLayerProfileRequest, opts ...grpc.CallOption) (*PLayerProfileResponse, error) {
 	out := new(PLayerProfileResponse)
 	err := c.cc.Invoke(ctx, ClubService_UpdatePlayer_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clubServiceClient) DeletePlayer(ctx context.Context, in *PLayerRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error) {
+	out := new(SuccessMessageResponse)
+	err := c.cc.Invoke(ctx, ClubService_DeletePlayer_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -87,8 +104,8 @@ func (c *clubServiceClient) GetPlayerProfile(ctx context.Context, in *PLayerRequ
 	return out, nil
 }
 
-func (c *clubServiceClient) GetAllPlayerProfile(ctx context.Context, in *PlayerProfileListRequest, opts ...grpc.CallOption) (*PLayerProfileResponse, error) {
-	out := new(PLayerProfileResponse)
+func (c *clubServiceClient) GetAllPlayerProfile(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*PlayerProfileListResponse, error) {
+	out := new(PlayerProfileListResponse)
 	err := c.cc.Invoke(ctx, ClubService_GetAllPlayerProfile_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -103,14 +120,11 @@ type ClubServiceServer interface {
 	// Get a club's information
 	GetClubProfile(context.Context, *EmptyRequest) (*ClubProfileResponse, error)
 	UpdateClub(context.Context, *ClubProfileRequest) (*ClubProfileResponse, error)
-	//	rpc GetAllClubProfile (ClubProfileListRequest) returns (ClubProfileListResponse) {
-	//	  option (google.api.http) = {
-	//	    get: "/club-profile/all"
-	//	  };
-	//	}
+	GetAllClubProfile(context.Context, *ClubProfileListRequest) (*ClubProfileListResponse, error)
 	UpdatePlayer(context.Context, *PLayerProfileRequest) (*PLayerProfileResponse, error)
+	DeletePlayer(context.Context, *PLayerRequest) (*SuccessMessageResponse, error)
 	GetPlayerProfile(context.Context, *PLayerRequest) (*PLayerProfileResponse, error)
-	GetAllPlayerProfile(context.Context, *PlayerProfileListRequest) (*PLayerProfileResponse, error)
+	GetAllPlayerProfile(context.Context, *EmptyRequest) (*PlayerProfileListResponse, error)
 }
 
 // UnimplementedClubServiceServer should be embedded to have forward compatible implementations.
@@ -123,13 +137,19 @@ func (UnimplementedClubServiceServer) GetClubProfile(context.Context, *EmptyRequ
 func (UnimplementedClubServiceServer) UpdateClub(context.Context, *ClubProfileRequest) (*ClubProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateClub not implemented")
 }
+func (UnimplementedClubServiceServer) GetAllClubProfile(context.Context, *ClubProfileListRequest) (*ClubProfileListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllClubProfile not implemented")
+}
 func (UnimplementedClubServiceServer) UpdatePlayer(context.Context, *PLayerProfileRequest) (*PLayerProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePlayer not implemented")
+}
+func (UnimplementedClubServiceServer) DeletePlayer(context.Context, *PLayerRequest) (*SuccessMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePlayer not implemented")
 }
 func (UnimplementedClubServiceServer) GetPlayerProfile(context.Context, *PLayerRequest) (*PLayerProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPlayerProfile not implemented")
 }
-func (UnimplementedClubServiceServer) GetAllPlayerProfile(context.Context, *PlayerProfileListRequest) (*PLayerProfileResponse, error) {
+func (UnimplementedClubServiceServer) GetAllPlayerProfile(context.Context, *EmptyRequest) (*PlayerProfileListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllPlayerProfile not implemented")
 }
 
@@ -180,6 +200,24 @@ func _ClubService_UpdateClub_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClubService_GetAllClubProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClubProfileListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClubServiceServer).GetAllClubProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClubService_GetAllClubProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClubServiceServer).GetAllClubProfile(ctx, req.(*ClubProfileListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ClubService_UpdatePlayer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PLayerProfileRequest)
 	if err := dec(in); err != nil {
@@ -194,6 +232,24 @@ func _ClubService_UpdatePlayer_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ClubServiceServer).UpdatePlayer(ctx, req.(*PLayerProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClubService_DeletePlayer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PLayerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClubServiceServer).DeletePlayer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClubService_DeletePlayer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClubServiceServer).DeletePlayer(ctx, req.(*PLayerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -217,7 +273,7 @@ func _ClubService_GetPlayerProfile_Handler(srv interface{}, ctx context.Context,
 }
 
 func _ClubService_GetAllPlayerProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PlayerProfileListRequest)
+	in := new(EmptyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -229,7 +285,7 @@ func _ClubService_GetAllPlayerProfile_Handler(srv interface{}, ctx context.Conte
 		FullMethod: ClubService_GetAllPlayerProfile_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClubServiceServer).GetAllPlayerProfile(ctx, req.(*PlayerProfileListRequest))
+		return srv.(ClubServiceServer).GetAllPlayerProfile(ctx, req.(*EmptyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -250,8 +306,16 @@ var ClubService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ClubService_UpdateClub_Handler,
 		},
 		{
+			MethodName: "GetAllClubProfile",
+			Handler:    _ClubService_GetAllClubProfile_Handler,
+		},
+		{
 			MethodName: "UpdatePlayer",
 			Handler:    _ClubService_UpdatePlayer_Handler,
+		},
+		{
+			MethodName: "DeletePlayer",
+			Handler:    _ClubService_DeletePlayer_Handler,
 		},
 		{
 			MethodName: "GetPlayerProfile",

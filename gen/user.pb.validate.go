@@ -608,34 +608,9 @@ func (m *RegisterResponse) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetData()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, RegisterResponseValidationError{
-					field:  "Data",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, RegisterResponseValidationError{
-					field:  "Data",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetData()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return RegisterResponseValidationError{
-				field:  "Data",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for ClubName
+
+	// no validation rules for Message
 
 	if len(errors) > 0 {
 		return RegisterResponseMultiError(errors)
@@ -1266,112 +1241,6 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = LoginResponse_DataValidationError{}
-
-// Validate checks the field values on RegisterResponse_Data with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *RegisterResponse_Data) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on RegisterResponse_Data with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// RegisterResponse_DataMultiError, or nil if none found.
-func (m *RegisterResponse_Data) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *RegisterResponse_Data) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for ClubName
-
-	// no validation rules for Message
-
-	if len(errors) > 0 {
-		return RegisterResponse_DataMultiError(errors)
-	}
-
-	return nil
-}
-
-// RegisterResponse_DataMultiError is an error wrapping multiple validation
-// errors returned by RegisterResponse_Data.ValidateAll() if the designated
-// constraints aren't met.
-type RegisterResponse_DataMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m RegisterResponse_DataMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m RegisterResponse_DataMultiError) AllErrors() []error { return m }
-
-// RegisterResponse_DataValidationError is the validation error returned by
-// RegisterResponse_Data.Validate if the designated constraints aren't met.
-type RegisterResponse_DataValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e RegisterResponse_DataValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e RegisterResponse_DataValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e RegisterResponse_DataValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e RegisterResponse_DataValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e RegisterResponse_DataValidationError) ErrorName() string {
-	return "RegisterResponse_DataValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e RegisterResponse_DataValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sRegisterResponse_Data.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = RegisterResponse_DataValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = RegisterResponse_DataValidationError{}
 
 // Validate checks the field values on GetProfileResponse_Data with the rules
 // defined in the proto definition for this message. If any rules are

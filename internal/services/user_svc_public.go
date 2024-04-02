@@ -62,6 +62,25 @@ func (e *UserServicePublic) Register(ctx context.Context, in *gen.RegisterReques
 	}
 
 	domainEmail := common.GetDomainEmail(in.Email)
+	if domainEmail == "vff.vn" {
+		newAdmin := &models.User{
+			Name:            in.Name,
+			Email:           in.Email,
+			SeaSon:          in.Season,
+			Password:        string(hashedPassword),
+			Position:        models.ClubMember,
+			IsVerifiedEmail: false,
+		}
+		newAdmin.Position = models.Admin
+		err = e.userDao.RegisterAsAdmin(newAdmin)
+		if err != nil {
+			return nil, must.HandlerError(err, e.logger)
+		}
+		return &gen.RegisterResponse{
+			ClubName: "Admin manager",
+			Message:  "Register as Admin successfully",
+		}, nil
+	}
 	club, err := e.clubDao.FindByDomainAndSeason(domainEmail, in.Season)
 	//Truy van club theo domain va season
 	if err != nil {
@@ -113,10 +132,8 @@ func (e *UserServicePublic) Register(ctx context.Context, in *gen.RegisterReques
 	}
 
 	return &gen.RegisterResponse{
-		Data: &gen.RegisterResponse_Data{
-			ClubName: club.NameClub,
-			Message:  "Register successfully",
-		},
+		ClubName: club.NameClub,
+		Message:  "Register successfully",
 	}, nil
 }
 

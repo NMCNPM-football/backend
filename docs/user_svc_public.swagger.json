@@ -203,14 +203,6 @@
     "RegisterResponse": {
       "type": "object",
       "properties": {
-        "data": {
-          "$ref": "#/definitions/RegisterResponseData"
-        }
-      }
-    },
-    "RegisterResponseData": {
-      "type": "object",
-      "properties": {
         "clubName": {
           "type": "string"
         },

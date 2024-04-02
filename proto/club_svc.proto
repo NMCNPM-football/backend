@@ -20,15 +20,20 @@ service ClubService {
       body: "*"
     };
   }
-//  rpc GetAllClubProfile (ClubProfileListRequest) returns (ClubProfileListResponse) {
-//    option (google.api.http) = {
-//      get: "/club-profile/all"
-//    };
-//  }
+  rpc GetAllClubProfile (ClubProfileListRequest) returns (ClubProfileListResponse) {
+    option (google.api.http) = {
+      get: "/club-profile/all"
+    };
+  }
   rpc UpdatePlayer (PLayerProfileRequest) returns (PLayerProfileResponse) {
     option (google.api.http) = {
       put: "/player/update/{id}"
       body: "*"
+    };
+  }
+  rpc DeletePlayer (PLayerRequest) returns (SuccessMessageResponse) {
+    option (google.api.http) = {
+      delete: "/delete/player/{id}"
     };
   }
   rpc GetPlayerProfile (PLayerRequest) returns (PLayerProfileResponse) {
@@ -36,9 +41,10 @@ service ClubService {
       get: "/club/player-profile/{id}"
     };
   }
-  rpc GetAllPlayerProfile (PlayerProfileListRequest) returns (PLayerProfileResponse) {
+  rpc GetAllPlayerProfile (EmptyRequest) returns (PlayerProfileListResponse) {
     option (google.api.http) = {
       get: "/club/player-profile"
     };
   }
+
 }
