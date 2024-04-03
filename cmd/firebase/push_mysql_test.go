@@ -70,8 +70,9 @@ func pushMySQLData() []models.User {
 		if err != nil {
 			log.Fatalf("Error in fetching data %s \n", err.Error())
 		}
+		list = append(list, newUserData)
 	}
-	list = append(list, newUserData)
+
 	return list
 }
 
