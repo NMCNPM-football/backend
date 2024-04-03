@@ -12,3 +12,4 @@ firebase.json
 database-debug.log
 firestore-debug.log
 ui-debug.log
+cmd/firebase/firebase1.json

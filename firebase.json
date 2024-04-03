@@ -10,5 +10,26 @@
       "enabled": true
     },
     "singleProjectMode": true
+  },
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/swagger/dist/index.html"
+      }
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "remoteconfig": {
+    "template": "remoteconfig.template.json"
   }
 }
