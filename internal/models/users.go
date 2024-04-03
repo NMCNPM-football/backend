@@ -1,6 +1,8 @@
 package models
 
-import "github.com/NMCNPM-football/backend/common"
+import (
+	"github.com/NMCNPM-football/backend/common"
+)
 
 type User struct {
 	Base
@@ -27,9 +29,9 @@ const (
 
 var (
 	MemberPermission = []string{
-		common.ServiceGetCompanyInfo,
-		common.ServiceListCompanyMembers,
-		common.ServiceListCompanyPlatforms,
+		common.ServiceGetClubInfo,
+		common.ServiceListClubPlayers,
+		common.ServiceListClubPlatforms,
 	}
 )
 

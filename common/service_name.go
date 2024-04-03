@@ -1,11 +1,11 @@
 package common
 
 // Company services
-const ServiceGetCompanyInfo = "GetCompanyInfo"
-const ServiceUpdateCompany = "UpdateCompany"
-const ServiceListCompanyMembers = "ListCompanyMembers"
+const ServiceGetClubInfo = "GetClubInfo"
+const ServiceUpdateClub = "UpdateClub"
+const ServiceListClubPlayers = "ListClubPlayers"
 const ServiceAddPlatform = "AddPlatform"
-const ServiceListCompanyPlatforms = "ListCompanyPlatforms"
+const ServiceListClubPlatforms = "ListClubPlatforms"
 
 // Project services
 const ServiceGetProject = "GetProject"

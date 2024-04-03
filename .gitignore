@@ -8,3 +8,7 @@ main
 config/config.json
 database
 .firebaserc
+firebase.json
+database-debug.log
+firestore-debug.log
+ui-debug.log
