@@ -7,3 +7,4 @@ main
 
 config/config.json
 database
+.firebaserc
