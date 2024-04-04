@@ -21,7 +21,7 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/swagger/dist/index.html"
+        "destination": "/index.html"
       }
     ]
   },
