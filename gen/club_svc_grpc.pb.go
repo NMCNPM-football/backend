@@ -35,7 +35,7 @@ type ClubServiceClient interface {
 	// Get a club's information
 	GetClubProfile(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*ClubProfileResponse, error)
 	UpdateClub(ctx context.Context, in *ClubProfileRequest, opts ...grpc.CallOption) (*ClubProfileResponse, error)
-	GetAllClubProfile(ctx context.Context, in *ClubProfileListRequest, opts ...grpc.CallOption) (*ClubProfileListResponse, error)
+	GetAllClubProfile(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*ClubProfileListResponse, error)
 	UpdatePlayer(ctx context.Context, in *PLayerProfileRequest, opts ...grpc.CallOption) (*PLayerProfileResponse, error)
 	DeletePlayer(ctx context.Context, in *PLayerRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
 	GetPlayerProfile(ctx context.Context, in *PLayerRequest, opts ...grpc.CallOption) (*PLayerProfileResponse, error)
@@ -68,7 +68,7 @@ func (c *clubServiceClient) UpdateClub(ctx context.Context, in *ClubProfileReque
 	return out, nil
 }
 
-func (c *clubServiceClient) GetAllClubProfile(ctx context.Context, in *ClubProfileListRequest, opts ...grpc.CallOption) (*ClubProfileListResponse, error) {
+func (c *clubServiceClient) GetAllClubProfile(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*ClubProfileListResponse, error) {
 	out := new(ClubProfileListResponse)
 	err := c.cc.Invoke(ctx, ClubService_GetAllClubProfile_FullMethodName, in, out, opts...)
 	if err != nil {
@@ -120,7 +120,7 @@ type ClubServiceServer interface {
 	// Get a club's information
 	GetClubProfile(context.Context, *EmptyRequest) (*ClubProfileResponse, error)
 	UpdateClub(context.Context, *ClubProfileRequest) (*ClubProfileResponse, error)
-	GetAllClubProfile(context.Context, *ClubProfileListRequest) (*ClubProfileListResponse, error)
+	GetAllClubProfile(context.Context, *EmptyRequest) (*ClubProfileListResponse, error)
 	UpdatePlayer(context.Context, *PLayerProfileRequest) (*PLayerProfileResponse, error)
 	DeletePlayer(context.Context, *PLayerRequest) (*SuccessMessageResponse, error)
 	GetPlayerProfile(context.Context, *PLayerRequest) (*PLayerProfileResponse, error)
@@ -137,7 +137,7 @@ func (UnimplementedClubServiceServer) GetClubProfile(context.Context, *EmptyRequ
 func (UnimplementedClubServiceServer) UpdateClub(context.Context, *ClubProfileRequest) (*ClubProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateClub not implemented")
 }
-func (UnimplementedClubServiceServer) GetAllClubProfile(context.Context, *ClubProfileListRequest) (*ClubProfileListResponse, error) {
+func (UnimplementedClubServiceServer) GetAllClubProfile(context.Context, *EmptyRequest) (*ClubProfileListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllClubProfile not implemented")
 }
 func (UnimplementedClubServiceServer) UpdatePlayer(context.Context, *PLayerProfileRequest) (*PLayerProfileResponse, error) {
@@ -201,7 +201,7 @@ func _ClubService_UpdateClub_Handler(srv interface{}, ctx context.Context, dec f
 }
 
 func _ClubService_GetAllClubProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ClubProfileListRequest)
+	in := new(EmptyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -213,7 +213,7 @@ func _ClubService_GetAllClubProfile_Handler(srv interface{}, ctx context.Context
 		FullMethod: ClubService_GetAllClubProfile_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClubServiceServer).GetAllClubProfile(ctx, req.(*ClubProfileListRequest))
+		return srv.(ClubServiceServer).GetAllClubProfile(ctx, req.(*EmptyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

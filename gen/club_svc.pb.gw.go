@@ -75,20 +75,9 @@ func local_request_ClubService_UpdateClub_0(ctx context.Context, marshaler runti
 
 }
 
-var (
-	filter_ClubService_GetAllClubProfile_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-)
-
 func request_ClubService_GetAllClubProfile_0(ctx context.Context, marshaler runtime.Marshaler, client ClubServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ClubProfileListRequest
+	var protoReq EmptyRequest
 	var metadata runtime.ServerMetadata
-
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ClubService_GetAllClubProfile_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
 
 	msg, err := client.GetAllClubProfile(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -96,15 +85,8 @@ func request_ClubService_GetAllClubProfile_0(ctx context.Context, marshaler runt
 }
 
 func local_request_ClubService_GetAllClubProfile_0(ctx context.Context, marshaler runtime.Marshaler, server ClubServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ClubProfileListRequest
+	var protoReq EmptyRequest
 	var metadata runtime.ServerMetadata
-
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_ClubService_GetAllClubProfile_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
 
 	msg, err := server.GetAllClubProfile(ctx, &protoReq)
 	return msg, metadata, err

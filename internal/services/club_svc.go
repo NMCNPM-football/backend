@@ -274,7 +274,7 @@ func (e *ClubService) GetPlayerProfile(ctx context.Context, request *gen.PLayerR
 
 }
 
-func (e *ClubService) GetAllClubProfile(ctx context.Context, request *gen.ClubProfileListRequest) (*gen.ClubProfileListResponse, error) {
+func (e *ClubService) GetAllClubProfile(ctx context.Context, request *gen.EmptyRequest) (*gen.ClubProfileListResponse, error) {
 	// Get the user from the context
 	user, err := e.userFromContext(ctx, e.userDao)
 	if err != nil {

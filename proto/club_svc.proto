@@ -20,7 +20,7 @@ service ClubService {
       body: "*"
     };
   }
-  rpc GetAllClubProfile (ClubProfileListRequest) returns (ClubProfileListResponse) {
+  rpc GetAllClubProfile (EmptyRequest) returns (ClubProfileListResponse) {
     option (google.api.http) = {
       get: "/club-profile/all"
     };

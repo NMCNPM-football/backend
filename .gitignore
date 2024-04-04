@@ -14,3 +14,4 @@ firestore-debug.log
 ui-debug.log
 cmd/firebase/firebase1.json
 .firebase
+node_modules

@@ -15,34 +15,30 @@ type Club struct {
 	//UpdateAt    time.Time `gorm:"autoUpdateTime"`
 }
 
-type Player struct {
-	ID          string `gorm:"primary_key;size:100"`
-	ClubID      string `gorm:"size:50"`
-	ClubName    string `gorm:"size:50"`
-	SeaSon      string `gorm:"size:50"`
-	TypePlayer  string `gorm:"size:50"`
-	Name        string `gorm:"size:50"`
-	BirthDay    string `gorm:"size:50"`
-	Height      string `gorm:"size:50"`
-	Weight      string `gorm:"size:50"`
-	Position    string `gorm:"size:50"`
-	Nationality string `gorm:"size:50"`
-	Kit         string `gorm:"size:50"`
-	Achievement string `gorm:"size:50"`
-	CreatedBy   string `gorm:"size:50"`
-	UpdatedBy   string `gorm:"size:50"`
-	Status      string `gorm:"size:50"`
-}
-
-type ClubPlayer struct {
-	ClubID   string `gorm:"size:50"`
-	PlayerID string `gorm:"size:50"`
-	Role     string `gorm:"size:50"`
-}
-
 type SeaSon struct {
 	SeaSonID string `gorm:"size:50;primaryKey"`
 	Name     string `gorm:"size:50"`
 	Country  string `gorm:"size:50"`
 	Year     string `gorm:"size:50"`
+}
+
+type Coach struct {
+	Base
+	Name          string `gorm:"size:50"`
+	BirthDay      string `gorm:"size:50"`
+	Country       string `gorm:"size:50"`
+	Award         string `gorm:"size:50"`
+	ClubID        string `gorm:"size:50"`
+	Role          string `gorm:"size:50"`
+	CertificateID string `gorm:"size:50"`
+}
+
+type Certificate struct {
+	CertificateID string `gorm:"size:50;primaryKey"`
+	Name          string `gorm:"size:50"`
+	Level         string `gorm:"size:50"`
+	DayReceived   string `gorm:"size:50"`
+	Duration      string `gorm:"size:50"`
+	IssuedBy      string `gorm:"size:50"`
+	Status        string `gorm:"size:50"`
 }

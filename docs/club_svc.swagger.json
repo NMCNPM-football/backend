@@ -56,14 +56,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "nameClub",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
         "tags": [
           "ClubService"
         ]
