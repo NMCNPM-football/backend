@@ -22,7 +22,7 @@ service ClubService {
   }
   rpc GetAllClubProfile (EmptyRequest) returns (ClubProfileListResponse) {
     option (google.api.http) = {
-      get: "/club-profile/all"
+      get: "/club/profile/all"
     };
   }
   rpc UpdatePlayer (PLayerProfileRequest) returns (PLayerProfileResponse) {
@@ -38,13 +38,29 @@ service ClubService {
   }
   rpc GetPlayerProfile (PLayerRequest) returns (PLayerProfileResponse) {
     option (google.api.http) = {
-      get: "/club/player-profile/{id}"
+      get: "/club/player/{id}"
     };
   }
   rpc GetAllPlayerProfile (EmptyRequest) returns (PlayerProfileListResponse) {
     option (google.api.http) = {
-      get: "/club/player-profile"
+      get: "/club/player/all"
+    };
+  }
+  rpc UpdateCoach (CoachProfileRequest) returns (SuccessMessageResponse) {
+    option (google.api.http) = {
+      put: "/coach/update/{id}"
+      body: "*"
+    };
+  }
+  rpc GetCoachProfile (CoachRequest) returns (CoachProfileResponse) {
+    option (google.api.http) = {
+      get: "/club/coach/{id}"
     };
   }
 
+  rpc GetListCoachProfile (CoachProfileListRequest) returns (CoachProfileListResponse) {
+    option (google.api.http) = {
+      get: "/club/coach/all"
+    };
+  }
 }

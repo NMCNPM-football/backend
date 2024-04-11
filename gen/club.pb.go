@@ -368,61 +368,6 @@ func (x *PLayerProfileResponse) GetMessage() string {
 	return ""
 }
 
-type PlayerProfileListRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	ClubName string `protobuf:"bytes,1,opt,name=club_name,json=clubName,proto3" json:"club_name,omitempty"`
-	SeaSon   string `protobuf:"bytes,2,opt,name=sea_son,json=seaSon,proto3" json:"sea_son,omitempty"`
-}
-
-func (x *PlayerProfileListRequest) Reset() {
-	*x = PlayerProfileListRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_club_proto_msgTypes[4]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *PlayerProfileListRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PlayerProfileListRequest) ProtoMessage() {}
-
-func (x *PlayerProfileListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_club_proto_msgTypes[4]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PlayerProfileListRequest.ProtoReflect.Descriptor instead.
-func (*PlayerProfileListRequest) Descriptor() ([]byte, []int) {
-	return file_club_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *PlayerProfileListRequest) GetClubName() string {
-	if x != nil {
-		return x.ClubName
-	}
-	return ""
-}
-
-func (x *PlayerProfileListRequest) GetSeaSon() string {
-	if x != nil {
-		return x.SeaSon
-	}
-	return ""
-}
-
 type PlayerProfileListResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -435,7 +380,7 @@ type PlayerProfileListResponse struct {
 func (x *PlayerProfileListResponse) Reset() {
 	*x = PlayerProfileListResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_club_proto_msgTypes[5]
+		mi := &file_club_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -448,7 +393,7 @@ func (x *PlayerProfileListResponse) String() string {
 func (*PlayerProfileListResponse) ProtoMessage() {}
 
 func (x *PlayerProfileListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_club_proto_msgTypes[5]
+	mi := &file_club_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -461,7 +406,7 @@ func (x *PlayerProfileListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlayerProfileListResponse.ProtoReflect.Descriptor instead.
 func (*PlayerProfileListResponse) Descriptor() ([]byte, []int) {
-	return file_club_proto_rawDescGZIP(), []int{5}
+	return file_club_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *PlayerProfileListResponse) GetData() []*PLayerProfileResponse_Data {
@@ -489,7 +434,7 @@ type ClubProfileListRequest struct {
 func (x *ClubProfileListRequest) Reset() {
 	*x = ClubProfileListRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_club_proto_msgTypes[6]
+		mi := &file_club_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -502,7 +447,7 @@ func (x *ClubProfileListRequest) String() string {
 func (*ClubProfileListRequest) ProtoMessage() {}
 
 func (x *ClubProfileListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_club_proto_msgTypes[6]
+	mi := &file_club_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -515,7 +460,7 @@ func (x *ClubProfileListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClubProfileListRequest.ProtoReflect.Descriptor instead.
 func (*ClubProfileListRequest) Descriptor() ([]byte, []int) {
-	return file_club_proto_rawDescGZIP(), []int{6}
+	return file_club_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ClubProfileListRequest) GetNameClub() string {
@@ -537,7 +482,7 @@ type ClubProfileListResponse struct {
 func (x *ClubProfileListResponse) Reset() {
 	*x = ClubProfileListResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_club_proto_msgTypes[7]
+		mi := &file_club_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -550,7 +495,7 @@ func (x *ClubProfileListResponse) String() string {
 func (*ClubProfileListResponse) ProtoMessage() {}
 
 func (x *ClubProfileListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_club_proto_msgTypes[7]
+	mi := &file_club_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -563,7 +508,7 @@ func (x *ClubProfileListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClubProfileListResponse.ProtoReflect.Descriptor instead.
 func (*ClubProfileListResponse) Descriptor() ([]byte, []int) {
-	return file_club_proto_rawDescGZIP(), []int{7}
+	return file_club_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ClubProfileListResponse) GetData() []*ClubProfileResponse_Data {
@@ -591,7 +536,7 @@ type PLayerRequest struct {
 func (x *PLayerRequest) Reset() {
 	*x = PLayerRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_club_proto_msgTypes[8]
+		mi := &file_club_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -604,7 +549,7 @@ func (x *PLayerRequest) String() string {
 func (*PLayerRequest) ProtoMessage() {}
 
 func (x *PLayerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_club_proto_msgTypes[8]
+	mi := &file_club_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -617,10 +562,317 @@ func (x *PLayerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PLayerRequest.ProtoReflect.Descriptor instead.
 func (*PLayerRequest) Descriptor() ([]byte, []int) {
-	return file_club_proto_rawDescGZIP(), []int{8}
+	return file_club_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *PLayerRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type CoachProfileRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id       string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name     string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	ClubName string `protobuf:"bytes,3,opt,name=club_name,json=clubName,proto3" json:"club_name,omitempty"`
+	Birthday string `protobuf:"bytes,4,opt,name=birthday,proto3" json:"birthday,omitempty"`
+	Country  string `protobuf:"bytes,5,opt,name=country,proto3" json:"country,omitempty"`
+	Award    string `protobuf:"bytes,6,opt,name=award,proto3" json:"award,omitempty"`
+	Role     string `protobuf:"bytes,7,opt,name=role,proto3" json:"role,omitempty"`
+	ClubId   string `protobuf:"bytes,8,opt,name=club_id,json=clubId,proto3" json:"club_id,omitempty"`
+}
+
+func (x *CoachProfileRequest) Reset() {
+	*x = CoachProfileRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_club_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CoachProfileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CoachProfileRequest) ProtoMessage() {}
+
+func (x *CoachProfileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_club_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CoachProfileRequest.ProtoReflect.Descriptor instead.
+func (*CoachProfileRequest) Descriptor() ([]byte, []int) {
+	return file_club_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *CoachProfileRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *CoachProfileRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CoachProfileRequest) GetClubName() string {
+	if x != nil {
+		return x.ClubName
+	}
+	return ""
+}
+
+func (x *CoachProfileRequest) GetBirthday() string {
+	if x != nil {
+		return x.Birthday
+	}
+	return ""
+}
+
+func (x *CoachProfileRequest) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *CoachProfileRequest) GetAward() string {
+	if x != nil {
+		return x.Award
+	}
+	return ""
+}
+
+func (x *CoachProfileRequest) GetRole() string {
+	if x != nil {
+		return x.Role
+	}
+	return ""
+}
+
+func (x *CoachProfileRequest) GetClubId() string {
+	if x != nil {
+		return x.ClubId
+	}
+	return ""
+}
+
+type CoachProfileResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Data    *CoachProfileResponse_Data `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Message string                     `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+}
+
+func (x *CoachProfileResponse) Reset() {
+	*x = CoachProfileResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_club_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CoachProfileResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CoachProfileResponse) ProtoMessage() {}
+
+func (x *CoachProfileResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_club_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CoachProfileResponse.ProtoReflect.Descriptor instead.
+func (*CoachProfileResponse) Descriptor() ([]byte, []int) {
+	return file_club_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *CoachProfileResponse) GetData() *CoachProfileResponse_Data {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *CoachProfileResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+type CoachProfileListRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ClubName string `protobuf:"bytes,1,opt,name=club_name,json=clubName,proto3" json:"club_name,omitempty"`
+}
+
+func (x *CoachProfileListRequest) Reset() {
+	*x = CoachProfileListRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_club_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CoachProfileListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CoachProfileListRequest) ProtoMessage() {}
+
+func (x *CoachProfileListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_club_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CoachProfileListRequest.ProtoReflect.Descriptor instead.
+func (*CoachProfileListRequest) Descriptor() ([]byte, []int) {
+	return file_club_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *CoachProfileListRequest) GetClubName() string {
+	if x != nil {
+		return x.ClubName
+	}
+	return ""
+}
+
+type CoachProfileListResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Data    []*CoachProfileResponse_Data `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Message string                       `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+}
+
+func (x *CoachProfileListResponse) Reset() {
+	*x = CoachProfileListResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_club_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CoachProfileListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CoachProfileListResponse) ProtoMessage() {}
+
+func (x *CoachProfileListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_club_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CoachProfileListResponse.ProtoReflect.Descriptor instead.
+func (*CoachProfileListResponse) Descriptor() ([]byte, []int) {
+	return file_club_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *CoachProfileListResponse) GetData() []*CoachProfileResponse_Data {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *CoachProfileListResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+type CoachRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *CoachRequest) Reset() {
+	*x = CoachRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_club_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CoachRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CoachRequest) ProtoMessage() {}
+
+func (x *CoachRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_club_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CoachRequest.ProtoReflect.Descriptor instead.
+func (*CoachRequest) Descriptor() ([]byte, []int) {
+	return file_club_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *CoachRequest) GetId() string {
 	if x != nil {
 		return x.Id
 	}
@@ -646,7 +898,7 @@ type ClubProfileResponse_Data struct {
 func (x *ClubProfileResponse_Data) Reset() {
 	*x = ClubProfileResponse_Data{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_club_proto_msgTypes[9]
+		mi := &file_club_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -659,7 +911,7 @@ func (x *ClubProfileResponse_Data) String() string {
 func (*ClubProfileResponse_Data) ProtoMessage() {}
 
 func (x *ClubProfileResponse_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_club_proto_msgTypes[9]
+	mi := &file_club_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -759,7 +1011,7 @@ type PLayerProfileResponse_Data struct {
 func (x *PLayerProfileResponse_Data) Reset() {
 	*x = PLayerProfileResponse_Data{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_club_proto_msgTypes[10]
+		mi := &file_club_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -772,7 +1024,7 @@ func (x *PLayerProfileResponse_Data) String() string {
 func (*PLayerProfileResponse_Data) ProtoMessage() {}
 
 func (x *PLayerProfileResponse_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_club_proto_msgTypes[10]
+	mi := &file_club_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -861,6 +1113,109 @@ func (x *PLayerProfileResponse_Data) GetName() string {
 func (x *PLayerProfileResponse_Data) GetBirthDay() string {
 	if x != nil {
 		return x.BirthDay
+	}
+	return ""
+}
+
+type CoachProfileResponse_Data struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id       string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name     string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	ClubName string `protobuf:"bytes,3,opt,name=club_name,json=clubName,proto3" json:"club_name,omitempty"`
+	Birthday string `protobuf:"bytes,4,opt,name=birthday,proto3" json:"birthday,omitempty"`
+	Country  string `protobuf:"bytes,5,opt,name=country,proto3" json:"country,omitempty"`
+	Award    string `protobuf:"bytes,6,opt,name=award,proto3" json:"award,omitempty"`
+	Role     string `protobuf:"bytes,7,opt,name=role,proto3" json:"role,omitempty"`
+	ClubId   string `protobuf:"bytes,8,opt,name=club_id,json=clubId,proto3" json:"club_id,omitempty"`
+}
+
+func (x *CoachProfileResponse_Data) Reset() {
+	*x = CoachProfileResponse_Data{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_club_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CoachProfileResponse_Data) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CoachProfileResponse_Data) ProtoMessage() {}
+
+func (x *CoachProfileResponse_Data) ProtoReflect() protoreflect.Message {
+	mi := &file_club_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CoachProfileResponse_Data.ProtoReflect.Descriptor instead.
+func (*CoachProfileResponse_Data) Descriptor() ([]byte, []int) {
+	return file_club_proto_rawDescGZIP(), []int{9, 0}
+}
+
+func (x *CoachProfileResponse_Data) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *CoachProfileResponse_Data) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CoachProfileResponse_Data) GetClubName() string {
+	if x != nil {
+		return x.ClubName
+	}
+	return ""
+}
+
+func (x *CoachProfileResponse_Data) GetBirthday() string {
+	if x != nil {
+		return x.Birthday
+	}
+	return ""
+}
+
+func (x *CoachProfileResponse_Data) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *CoachProfileResponse_Data) GetAward() string {
+	if x != nil {
+		return x.Award
+	}
+	return ""
+}
+
+func (x *CoachProfileResponse_Data) GetRole() string {
+	if x != nil {
+		return x.Role
+	}
+	return ""
+}
+
+func (x *CoachProfileResponse_Data) GetClubId() string {
+	if x != nil {
+		return x.ClubId
 	}
 	return ""
 }
@@ -955,34 +1310,72 @@ var file_club_proto_rawDesc = []byte{
 	0x65, 0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x0a, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x62, 0x69, 0x72, 0x74, 0x68,
 	0x5f, 0x64, 0x61, 0x79, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x62, 0x69, 0x72, 0x74,
-	0x68, 0x44, 0x61, 0x79, 0x22, 0x50, 0x0a, 0x18, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x50, 0x72,
-	0x6f, 0x66, 0x69, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x12, 0x1b, 0x0a, 0x09, 0x63, 0x6c, 0x75, 0x62, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x08, 0x63, 0x6c, 0x75, 0x62, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x17, 0x0a,
-	0x07, 0x73, 0x65, 0x61, 0x5f, 0x73, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
-	0x73, 0x65, 0x61, 0x53, 0x6f, 0x6e, 0x22, 0x66, 0x0a, 0x19, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72,
-	0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x12, 0x2f, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x03, 0x28,
-	0x0b, 0x32, 0x1b, 0x2e, 0x50, 0x4c, 0x61, 0x79, 0x65, 0x72, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c,
+	0x68, 0x44, 0x61, 0x79, 0x22, 0x66, 0x0a, 0x19, 0x50, 0x6c, 0x61, 0x79, 0x65, 0x72, 0x50, 0x72,
+	0x6f, 0x66, 0x69, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x2f, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32,
+	0x1b, 0x2e, 0x50, 0x4c, 0x61, 0x79, 0x65, 0x72, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x52, 0x04, 0x64, 0x61,
+	0x74, 0x61, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x35, 0x0a, 0x16,
+	0x43, 0x6c, 0x75, 0x62, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x6e, 0x61, 0x6d, 0x65, 0x5f, 0x63,
+	0x6c, 0x75, 0x62, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6e, 0x61, 0x6d, 0x65, 0x43,
+	0x6c, 0x75, 0x62, 0x22, 0x62, 0x0a, 0x17, 0x43, 0x6c, 0x75, 0x62, 0x50, 0x72, 0x6f, 0x66, 0x69,
+	0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2d,
+	0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x43,
+	0x6c, 0x75, 0x62, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x12, 0x18, 0x0a,
+	0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
+	0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x1f, 0x0a, 0x0d, 0x50, 0x4c, 0x61, 0x79, 0x65,
+	0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0xcf, 0x01, 0x0a, 0x13, 0x43, 0x6f, 0x61,
+	0x63, 0x68, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64,
+	0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
+	0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x63, 0x6c, 0x75, 0x62, 0x5f, 0x6e, 0x61, 0x6d,
+	0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x63, 0x6c, 0x75, 0x62, 0x4e, 0x61, 0x6d,
+	0x65, 0x12, 0x1a, 0x0a, 0x08, 0x62, 0x69, 0x72, 0x74, 0x68, 0x64, 0x61, 0x79, 0x18, 0x04, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x08, 0x62, 0x69, 0x72, 0x74, 0x68, 0x64, 0x61, 0x79, 0x12, 0x18, 0x0a,
+	0x07, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x72, 0x79, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
+	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x61, 0x77, 0x61, 0x72, 0x64,
+	0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x61, 0x77, 0x61, 0x72, 0x64, 0x12, 0x12, 0x0a,
+	0x04, 0x72, 0x6f, 0x6c, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x72, 0x6f, 0x6c,
+	0x65, 0x12, 0x17, 0x0a, 0x07, 0x63, 0x6c, 0x75, 0x62, 0x5f, 0x69, 0x64, 0x18, 0x08, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x06, 0x63, 0x6c, 0x75, 0x62, 0x49, 0x64, 0x22, 0xa3, 0x02, 0x0a, 0x14, 0x43,
+	0x6f, 0x61, 0x63, 0x68, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x2e, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x1a, 0x2e, 0x43, 0x6f, 0x61, 0x63, 0x68, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x52, 0x04, 0x64,
+	0x61, 0x74, 0x61, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x1a, 0xc0, 0x01,
+	0x0a, 0x04, 0x44, 0x61, 0x74, 0x61, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x63, 0x6c,
+	0x75, 0x62, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x63,
+	0x6c, 0x75, 0x62, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x62, 0x69, 0x72, 0x74, 0x68,
+	0x64, 0x61, 0x79, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x62, 0x69, 0x72, 0x74, 0x68,
+	0x64, 0x61, 0x79, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x72, 0x79, 0x18, 0x05,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x14, 0x0a,
+	0x05, 0x61, 0x77, 0x61, 0x72, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x61, 0x77,
+	0x61, 0x72, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x12, 0x17, 0x0a, 0x07, 0x63, 0x6c, 0x75, 0x62, 0x5f,
+	0x69, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x63, 0x6c, 0x75, 0x62, 0x49, 0x64,
+	0x22, 0x36, 0x0a, 0x17, 0x43, 0x6f, 0x61, 0x63, 0x68, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65,
+	0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x63,
+	0x6c, 0x75, 0x62, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
+	0x63, 0x6c, 0x75, 0x62, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x64, 0x0a, 0x18, 0x43, 0x6f, 0x61, 0x63,
+	0x68, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2e, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x43, 0x6f, 0x61, 0x63, 0x68, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c,
 	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x52, 0x04,
 	0x64, 0x61, 0x74, 0x61, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x35,
-	0x0a, 0x16, 0x43, 0x6c, 0x75, 0x62, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x4c, 0x69, 0x73,
-	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x6e, 0x61, 0x6d, 0x65,
-	0x5f, 0x63, 0x6c, 0x75, 0x62, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6e, 0x61, 0x6d,
-	0x65, 0x43, 0x6c, 0x75, 0x62, 0x22, 0x62, 0x0a, 0x17, 0x43, 0x6c, 0x75, 0x62, 0x50, 0x72, 0x6f,
-	0x66, 0x69, 0x6c, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x12, 0x2d, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19,
-	0x2e, 0x43, 0x6c, 0x75, 0x62, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x12,
-	0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x1f, 0x0a, 0x0d, 0x50, 0x4c, 0x61,
-	0x79, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x42, 0x35, 0x42, 0x09, 0x43, 0x6c,
-	0x75, 0x62, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x26, 0x67, 0x69, 0x74, 0x68, 0x75,
-	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x4e, 0x4d, 0x43, 0x4e, 0x50, 0x4d, 0x2d, 0x66, 0x6f, 0x6f,
-	0x74, 0x62, 0x61, 0x6c, 0x6c, 0x2f, 0x62, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x2f, 0x67, 0x65,
-	0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x1e,
+	0x0a, 0x0c, 0x43, 0x6f, 0x61, 0x63, 0x68, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e,
+	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x42, 0x35,
+	0x42, 0x09, 0x43, 0x6c, 0x75, 0x62, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x26, 0x67,
+	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x4e, 0x4d, 0x43, 0x4e, 0x50, 0x4d,
+	0x2d, 0x66, 0x6f, 0x6f, 0x74, 0x62, 0x61, 0x6c, 0x6c, 0x2f, 0x62, 0x61, 0x63, 0x6b, 0x65, 0x6e,
+	0x64, 0x2f, 0x67, 0x65, 0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -997,30 +1390,37 @@ func file_club_proto_rawDescGZIP() []byte {
 	return file_club_proto_rawDescData
 }
 
-var file_club_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_club_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_club_proto_goTypes = []interface{}{
 	(*ClubProfileResponse)(nil),        // 0: ClubProfileResponse
 	(*ClubProfileRequest)(nil),         // 1: ClubProfileRequest
 	(*PLayerProfileRequest)(nil),       // 2: PLayerProfileRequest
 	(*PLayerProfileResponse)(nil),      // 3: PLayerProfileResponse
-	(*PlayerProfileListRequest)(nil),   // 4: PlayerProfileListRequest
-	(*PlayerProfileListResponse)(nil),  // 5: PlayerProfileListResponse
-	(*ClubProfileListRequest)(nil),     // 6: ClubProfileListRequest
-	(*ClubProfileListResponse)(nil),    // 7: ClubProfileListResponse
-	(*PLayerRequest)(nil),              // 8: PLayerRequest
-	(*ClubProfileResponse_Data)(nil),   // 9: ClubProfileResponse.Data
-	(*PLayerProfileResponse_Data)(nil), // 10: PLayerProfileResponse.Data
+	(*PlayerProfileListResponse)(nil),  // 4: PlayerProfileListResponse
+	(*ClubProfileListRequest)(nil),     // 5: ClubProfileListRequest
+	(*ClubProfileListResponse)(nil),    // 6: ClubProfileListResponse
+	(*PLayerRequest)(nil),              // 7: PLayerRequest
+	(*CoachProfileRequest)(nil),        // 8: CoachProfileRequest
+	(*CoachProfileResponse)(nil),       // 9: CoachProfileResponse
+	(*CoachProfileListRequest)(nil),    // 10: CoachProfileListRequest
+	(*CoachProfileListResponse)(nil),   // 11: CoachProfileListResponse
+	(*CoachRequest)(nil),               // 12: CoachRequest
+	(*ClubProfileResponse_Data)(nil),   // 13: ClubProfileResponse.Data
+	(*PLayerProfileResponse_Data)(nil), // 14: PLayerProfileResponse.Data
+	(*CoachProfileResponse_Data)(nil),  // 15: CoachProfileResponse.Data
 }
 var file_club_proto_depIdxs = []int32{
-	9,  // 0: ClubProfileResponse.data:type_name -> ClubProfileResponse.Data
-	10, // 1: PLayerProfileResponse.data:type_name -> PLayerProfileResponse.Data
-	10, // 2: PlayerProfileListResponse.data:type_name -> PLayerProfileResponse.Data
-	9,  // 3: ClubProfileListResponse.data:type_name -> ClubProfileResponse.Data
-	4,  // [4:4] is the sub-list for method output_type
-	4,  // [4:4] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	13, // 0: ClubProfileResponse.data:type_name -> ClubProfileResponse.Data
+	14, // 1: PLayerProfileResponse.data:type_name -> PLayerProfileResponse.Data
+	14, // 2: PlayerProfileListResponse.data:type_name -> PLayerProfileResponse.Data
+	13, // 3: ClubProfileListResponse.data:type_name -> ClubProfileResponse.Data
+	15, // 4: CoachProfileResponse.data:type_name -> CoachProfileResponse.Data
+	15, // 5: CoachProfileListResponse.data:type_name -> CoachProfileResponse.Data
+	6,  // [6:6] is the sub-list for method output_type
+	6,  // [6:6] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_club_proto_init() }
@@ -1078,18 +1478,6 @@ func file_club_proto_init() {
 			}
 		}
 		file_club_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PlayerProfileListRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_club_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PlayerProfileListResponse); i {
 			case 0:
 				return &v.state
@@ -1101,7 +1489,7 @@ func file_club_proto_init() {
 				return nil
 			}
 		}
-		file_club_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+		file_club_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ClubProfileListRequest); i {
 			case 0:
 				return &v.state
@@ -1113,7 +1501,7 @@ func file_club_proto_init() {
 				return nil
 			}
 		}
-		file_club_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+		file_club_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ClubProfileListResponse); i {
 			case 0:
 				return &v.state
@@ -1125,7 +1513,7 @@ func file_club_proto_init() {
 				return nil
 			}
 		}
-		file_club_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+		file_club_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PLayerRequest); i {
 			case 0:
 				return &v.state
@@ -1137,8 +1525,20 @@ func file_club_proto_init() {
 				return nil
 			}
 		}
+		file_club_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CoachProfileRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 		file_club_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ClubProfileResponse_Data); i {
+			switch v := v.(*CoachProfileResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1150,7 +1550,67 @@ func file_club_proto_init() {
 			}
 		}
 		file_club_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CoachProfileListRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_club_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CoachProfileListResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_club_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CoachRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_club_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ClubProfileResponse_Data); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_club_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PLayerProfileResponse_Data); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_club_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CoachProfileResponse_Data); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1168,7 +1628,7 @@ func file_club_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_club_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

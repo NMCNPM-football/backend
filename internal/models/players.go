@@ -25,6 +25,17 @@ type ClubPlayer struct {
 	Role     string `gorm:"size:50"`
 }
 
+type PLayerStats struct {
+	ID          string `gorm:"primary_key;size:100"`
+	PlayerID    string `gorm:"size:50"`
+	Position    string `gorm:"size:50"`
+	PlayingTime string `gorm:"size:50"`
+	YellowCard  string `gorm:"size:50"`
+	RedCard     string `gorm:"size:50"`
+	Goals       string `gorm:"size:50"`
+	Assists     string `gorm:"size:50"`
+}
+
 type PlayerStatsGeneral struct {
 	ID          string `gorm:"primary_key;size:100"`
 	PlayerID    string `gorm:"size:50"`

@@ -347,3 +347,18 @@ func (e *ClubService) DeletePlayer(ctx context.Context, request *gen.PLayerReque
 		},
 	}, nil
 }
+
+func (e *ClubService) UpdateCoach(ctx context.Context, request *gen.CoachProfileRequest) (*gen.SuccessMessageResponse, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (e *ClubService) GetCoachProfile(ctx context.Context, request *gen.CoachRequest) (*gen.CoachProfileResponse, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (e *ClubService) GetListCoachProfile(ctx context.Context, request *gen.CoachProfileListRequest) (*gen.CoachProfileListResponse, error) {
+	//TODO implement me
+	panic("implement me")
+}

@@ -60,10 +60,6 @@ message PLayerProfileResponse {
   string message = 2;
 }
 
-message PlayerProfileListRequest {
-  string club_name = 1;
-  string sea_son= 2;
-}
 
 message PlayerProfileListResponse {
   repeated PLayerProfileResponse.Data data = 1;
@@ -80,5 +76,43 @@ message ClubProfileListResponse {
 }
 
 message PLayerRequest {
+  string id = 1;
+}
+
+message CoachProfileRequest {
+    string id = 1;
+    string name = 2;
+    string club_name = 3;
+    string birthday = 4;
+    string  country = 5;
+    string award = 6;
+    string role = 7;
+    string club_id = 8;
+}
+
+message CoachProfileResponse {
+  message Data {string id = 1;
+    string name = 2;
+    string club_name = 3;
+    string birthday = 4;
+    string  country = 5;
+    string award = 6;
+    string role = 7;
+    string club_id = 8;
+  }
+  Data data = 1;
+  string message = 2;
+}
+
+message CoachProfileListRequest {
+  string club_name = 1;
+}
+
+message CoachProfileListResponse {
+  repeated CoachProfileResponse.Data data = 1;
+  string message = 2;
+}
+
+message CoachRequest{
   string id = 1;
 }

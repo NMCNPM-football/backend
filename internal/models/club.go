@@ -25,6 +25,7 @@ type SeaSon struct {
 type Coach struct {
 	Base
 	Name          string `gorm:"size:50"`
+	NameClub      string `gorm:"size:50"`
 	BirthDay      string `gorm:"size:50"`
 	Country       string `gorm:"size:50"`
 	Award         string `gorm:"size:50"`

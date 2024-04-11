@@ -39,14 +39,14 @@
         ]
       }
     },
-    "/club-profile/all": {
+    "/club/coach/all": {
       "get": {
-        "operationId": "ClubService_GetAllClubProfile",
+        "operationId": "ClubService_GetListCoachProfile",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/ClubProfileListResponse"
+              "$ref": "#/definitions/CoachProfileListResponse"
             }
           },
           "default": {
@@ -56,12 +56,50 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "clubName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
         "tags": [
           "ClubService"
         ]
       }
     },
-    "/club/player-profile": {
+    "/club/coach/{id}": {
+      "get": {
+        "operationId": "ClubService_GetCoachProfile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/CoachProfileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClubService"
+        ]
+      }
+    },
+    "/club/player/all": {
       "get": {
         "operationId": "ClubService_GetAllPlayerProfile",
         "responses": {
@@ -83,7 +121,7 @@
         ]
       }
     },
-    "/club/player-profile/{id}": {
+    "/club/player/{id}": {
       "get": {
         "operationId": "ClubService_GetPlayerProfile",
         "responses": {
@@ -113,6 +151,28 @@
         ]
       }
     },
+    "/club/profile/all": {
+      "get": {
+        "operationId": "ClubService_GetAllClubProfile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ClubProfileListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "ClubService"
+        ]
+      }
+    },
     "/club/update": {
       "put": {
         "operationId": "ClubService_UpdateClub",
@@ -137,6 +197,67 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ClubProfileRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClubService"
+        ]
+      }
+    },
+    "/coach/update/{id}": {
+      "put": {
+        "operationId": "ClubService_UpdateCoach",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "clubName": {
+                  "type": "string"
+                },
+                "birthday": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "award": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "clubId": {
+                  "type": "string"
+                }
+              }
             }
           }
         ],
@@ -333,6 +454,61 @@
           "type": "string"
         },
         "updateAt": {
+          "type": "string"
+        }
+      }
+    },
+    "CoachProfileListResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/CoachProfileResponseData"
+          }
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "CoachProfileResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/CoachProfileResponseData"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "CoachProfileResponseData": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "clubName": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "award": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "clubId": {
           "type": "string"
         }
       }
