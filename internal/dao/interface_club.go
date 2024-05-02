@@ -16,4 +16,5 @@ type ClubDaoInterface interface {
 	GetAllClubs() ([]*models.Club, error)
 	GetAllPlayersInClub(clubID string) ([]*models.Player, error)
 	DeletePlayer(playerID string) error
+	CreatePlayer(player *models.Player) error
 }

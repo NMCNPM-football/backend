@@ -296,6 +296,38 @@
         ]
       }
     },
+    "/player": {
+      "post": {
+        "operationId": "ClubService_CreatePlayer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PLayerProfileRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClubService"
+        ]
+      }
+    },
     "/player/update/{id}": {
       "put": {
         "operationId": "ClubService_UpdatePlayer",
@@ -358,6 +390,9 @@
                   "type": "string"
                 },
                 "birthDay": {
+                  "type": "string"
+                },
+                "status": {
                   "type": "string"
                 }
               }
@@ -513,6 +548,50 @@
         }
       }
     },
+    "PLayerProfileRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "clubName": {
+          "type": "string"
+        },
+        "seaSon": {
+          "type": "string"
+        },
+        "typePlayer": {
+          "type": "string"
+        },
+        "height": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string"
+        },
+        "nationality": {
+          "type": "string"
+        },
+        "kit": {
+          "type": "string"
+        },
+        "achievement": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "birthDay": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
     "PLayerProfileResponse": {
       "type": "object",
       "properties": {
@@ -558,6 +637,9 @@
           "type": "string"
         },
         "birthDay": {
+          "type": "string"
+        },
+        "status": {
           "type": "string"
         }
       }

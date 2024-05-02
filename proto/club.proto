@@ -40,6 +40,7 @@ message PLayerProfileRequest {
   string achievement = 10;
   string name = 11;
   string birth_day = 12;
+  string status = 13;
 }
 
 message PLayerProfileResponse {
@@ -55,9 +56,14 @@ message PLayerProfileResponse {
     string achievement = 9;
     string name = 10;
     string birth_day = 11;
+    string status = 12;
   }
   Data data = 1;
   string message = 2;
+}
+
+message CreatePlayerRequest {
+  PLayerProfileRequest player = 1;
 }
 
 

@@ -8,6 +8,7 @@ import (
 	"github.com/NMCNPM-football/backend/internal/dao"
 	"github.com/NMCNPM-football/backend/internal/models"
 	"github.com/NMCNPM-football/backend/internal/must"
+	"github.com/google/uuid"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
@@ -25,6 +26,68 @@ type ClubService struct {
 	cfg     *config.Config
 	userDao dao.UserDaoInterface
 	clubDao dao.ClubDaoInterface
+}
+
+func NewClubService(logger *zap.Logger, cfg *config.Config, userDao dao.UserDaoInterface, clubDao dao.ClubDaoInterface) *ClubService {
+	return &ClubService{logger: logger, cfg: cfg, userDao: userDao, clubDao: clubDao}
+}
+
+func (e *ClubService) RegisterGrpcServer(s *grpc.Server) {
+	gen.RegisterClubServiceServer(s, e)
+}
+
+func (e *ClubService) RegisterHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	err := gen.RegisterClubServiceHandler(ctx, mux, conn)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (e *ClubService) CreatePlayer(ctx context.Context, request *gen.PLayerProfileRequest) (*gen.SuccessMessageResponse, error) {
+	// Extract the Player data from the request
+	user, err := e.userFromContext(ctx, e.userDao)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user from context: %w", err)
+	}
+
+	// Get the club from the context
+	club, err := e.clubDao.GetClubByID(user.ClubID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get club by ID: %w", err)
+	}
+
+	// Create a new Player model
+	newPlayer := &models.Player{
+		ID:          uuid.New().String(),
+		ClubName:    club.NameClub,
+		SeaSon:      club.SeaSon,
+		TypePlayer:  request.TypePlayer,
+		Name:        request.Name,
+		BirthDay:    request.BirthDay,
+		Height:      request.Height,
+		Weight:      request.Weight,
+		Position:    request.Position,
+		Nationality: request.Nationality,
+		Kit:         request.Kit,
+		Achievement: request.Achievement,
+		CreatedBy:   user.Name,
+		Status:      request.Status,
+	}
+
+	// Use the clubDao to insert the new Player into the database
+	err = e.clubDao.CreatePlayer(newPlayer)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create player: %w", err)
+	}
+
+	// If the insertion is successful, return a SuccessMessageResponse with a success message
+	return &gen.SuccessMessageResponse{
+		Data: &gen.SuccessMessageResponseSuccessMessage{
+			Message: "Player created successfully",
+		},
+	}, nil
 }
 
 func (e *ClubService) GetAllPlayerProfile(ctx context.Context, request *gen.EmptyRequest) (*gen.PlayerProfileListResponse, error) {
@@ -79,23 +142,6 @@ func (e *ClubService) GetAllPlayerProfile(ctx context.Context, request *gen.Empt
 
 	return response, nil
 
-}
-
-func NewClubService(logger *zap.Logger, cfg *config.Config, userDao dao.UserDaoInterface, clubDao dao.ClubDaoInterface) *ClubService {
-	return &ClubService{logger: logger, cfg: cfg, userDao: userDao, clubDao: clubDao}
-}
-
-func (e *ClubService) RegisterGrpcServer(s *grpc.Server) {
-	gen.RegisterClubServiceServer(s, e)
-}
-
-func (e *ClubService) RegisterHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	err := gen.RegisterClubServiceHandler(ctx, mux, conn)
-	if err != nil {
-		return err
-	}
-
-	return nil
 }
 
 func (e *ClubService) GetClubProfile(ctx context.Context, request *gen.EmptyRequest) (*gen.ClubProfileResponse, error) {

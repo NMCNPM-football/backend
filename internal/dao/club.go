@@ -105,3 +105,11 @@ func (c *ClubDao) DeletePlayer(playerID string) error {
 
 	return nil
 }
+
+func (c *ClubDao) CreatePlayer(player *models.Player) error {
+	if err := c.db.Create(&player).Error; err != nil {
+		return errors.Wrap(err, "c.db.Create")
+	}
+
+	return nil
+}

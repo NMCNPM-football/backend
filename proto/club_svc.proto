@@ -25,6 +25,12 @@ service ClubService {
       get: "/club/profile/all"
     };
   }
+  rpc CreatePlayer (PLayerProfileRequest) returns (SuccessMessageResponse) {
+    option (google.api.http) = {
+      post: "/player"
+      body: "*"
+    };
+  }
   rpc UpdatePlayer (PLayerProfileRequest) returns (PLayerProfileResponse) {
     option (google.api.http) = {
       put: "/player/update/{id}"
