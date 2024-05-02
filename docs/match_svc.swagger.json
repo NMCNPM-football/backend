@@ -1,0 +1,170 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "match_svc.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "MatchService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/match/calendar": {
+      "post": {
+        "operationId": "MatchService_CreateMatchCalendar",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/CreateMatchCalendarResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MatchCalendar"
+            }
+          }
+        ],
+        "tags": [
+          "MatchService"
+        ]
+      }
+    },
+    "/match/update_calendar": {
+      "put": {
+        "operationId": "MatchService_UpdateMatchCalendar",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMatchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MatchCalendar"
+            }
+          }
+        ],
+        "tags": [
+          "MatchService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CreateMatchCalendarResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "MatchCalendar": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "clubOneName": {
+          "type": "string"
+        },
+        "clubTwoName": {
+          "type": "string"
+        },
+        "matchDate": {
+          "type": "string"
+        },
+        "matchRound": {
+          "type": "string"
+        }
+      }
+    },
+    "SuccessMatchResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/SuccessMatchResponseData"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "SuccessMatchResponseData": {
+      "type": "object",
+      "properties": {
+        "clubOneName": {
+          "type": "string"
+        },
+        "clubTwoName": {
+          "type": "string"
+        },
+        "matchDate": {
+          "type": "string"
+        },
+        "matchRound": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

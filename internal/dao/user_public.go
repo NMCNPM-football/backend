@@ -117,7 +117,7 @@ func (u *UserDao) RegisterAsAdmin(user *models.User) error {
 	if err := tx.Error; err != nil {
 		return err
 	}
-	user.Position = "admin"
+	user.Position = models.Admin
 
 	if err := tx.Create(user).Error; err != nil {
 		if strings.Contains(err.Error(), "Duplicate key") {

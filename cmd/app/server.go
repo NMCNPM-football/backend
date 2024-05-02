@@ -38,6 +38,8 @@ func main() {
 	middlewareAuth := NewMiddleware(cfg.AuthenticationPubSecretKey)
 	userDao := dao.NewUserDao(db)
 	clubDao := dao.NewClubDao(db)
+	matchDao := dao.NewMatchDao(db)
+
 	opt := []grpc.ServerOption{
 		//grpc
 		grpc.StreamInterceptor(auth.StreamServerInterceptor(middlewareAuth.AuthMiddleware)),
@@ -73,6 +75,13 @@ func main() {
 			cfg,
 			userDao,
 			clubDao,
+		),
+		services.NewMatchService(
+			logger,
+			cfg,
+			userDao,
+			clubDao,
+			matchDao,
 		),
 	)
 

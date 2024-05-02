@@ -39,3 +39,22 @@ type Progress struct {
 	MatchID string `gorm:"size:50"`
 	ProgressDetails
 }
+
+type MatchCalendar struct {
+	Base
+	ClubOneName string `gorm:"size:50"`
+	ClubTwoName string `gorm:"size:50"`
+	MatchDate   string `gorm:"size:50"`
+	MatchRound  string `gorm:"size:50"`
+	MatchTurn   string `gorm:"size:50"`
+}
+
+type GoalType struct {
+	Base
+	GoalTypeName string `gorm:"size:50"`
+}
+
+type CardType struct {
+	Base
+	CardTypeName string `gorm:"size:50"`
+}

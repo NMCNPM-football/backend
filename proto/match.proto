@@ -1,0 +1,26 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+message MatchCalendar {
+  string id = 1;
+  string club_one_name = 2;
+  string club_two_name = 3;
+  string match_date = 4;
+  string match_round = 5;
+}
+
+
+message CreateMatchCalendarResponse {
+  string id = 1;
+}
+
+message SuccessMatchResponse {
+  message Data {
+    string club_one_name = 1;
+    string club_two_name = 2;
+    string match_date = 3;
+    string match_round = 4;
+  }
+  Data data = 1;
+  string message = 2;
+}

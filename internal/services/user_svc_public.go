@@ -68,7 +68,7 @@ func (e *UserServicePublic) Register(ctx context.Context, in *gen.RegisterReques
 			Email:           in.Email,
 			SeaSon:          in.Season,
 			Password:        string(hashedPassword),
-			Position:        models.ClubMember,
+			Position:        models.Admin,
 			IsVerifiedEmail: false,
 		}
 		newAdmin.Position = models.Admin
