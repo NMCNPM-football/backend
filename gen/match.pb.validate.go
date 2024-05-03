@@ -67,6 +67,10 @@ func (m *MatchCalendar) validate(all bool) error {
 
 	// no validation rules for MatchRound
 
+	// no validation rules for MatchTurn
+
+	// no validation rules for MatchStatus
+
 	if len(errors) > 0 {
 		return MatchCalendarMultiError(errors)
 	}
@@ -145,22 +149,22 @@ var _ interface {
 	ErrorName() string
 } = MatchCalendarValidationError{}
 
-// Validate checks the field values on CreateMatchCalendarResponse with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on MatchCalendarRequest with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *CreateMatchCalendarResponse) Validate() error {
+func (m *MatchCalendarRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on CreateMatchCalendarResponse with the
-// rules defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on MatchCalendarRequest with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// CreateMatchCalendarResponseMultiError, or nil if none found.
-func (m *CreateMatchCalendarResponse) ValidateAll() error {
+// MatchCalendarRequestMultiError, or nil if none found.
+func (m *MatchCalendarRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *CreateMatchCalendarResponse) validate(all bool) error {
+func (m *MatchCalendarRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -170,19 +174,19 @@ func (m *CreateMatchCalendarResponse) validate(all bool) error {
 	// no validation rules for Id
 
 	if len(errors) > 0 {
-		return CreateMatchCalendarResponseMultiError(errors)
+		return MatchCalendarRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// CreateMatchCalendarResponseMultiError is an error wrapping multiple
-// validation errors returned by CreateMatchCalendarResponse.ValidateAll() if
-// the designated constraints aren't met.
-type CreateMatchCalendarResponseMultiError []error
+// MatchCalendarRequestMultiError is an error wrapping multiple validation
+// errors returned by MatchCalendarRequest.ValidateAll() if the designated
+// constraints aren't met.
+type MatchCalendarRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m CreateMatchCalendarResponseMultiError) Error() string {
+func (m MatchCalendarRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -191,12 +195,11 @@ func (m CreateMatchCalendarResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m CreateMatchCalendarResponseMultiError) AllErrors() []error { return m }
+func (m MatchCalendarRequestMultiError) AllErrors() []error { return m }
 
-// CreateMatchCalendarResponseValidationError is the validation error returned
-// by CreateMatchCalendarResponse.Validate if the designated constraints
-// aren't met.
-type CreateMatchCalendarResponseValidationError struct {
+// MatchCalendarRequestValidationError is the validation error returned by
+// MatchCalendarRequest.Validate if the designated constraints aren't met.
+type MatchCalendarRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -204,24 +207,24 @@ type CreateMatchCalendarResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e CreateMatchCalendarResponseValidationError) Field() string { return e.field }
+func (e MatchCalendarRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e CreateMatchCalendarResponseValidationError) Reason() string { return e.reason }
+func (e MatchCalendarRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e CreateMatchCalendarResponseValidationError) Cause() error { return e.cause }
+func (e MatchCalendarRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e CreateMatchCalendarResponseValidationError) Key() bool { return e.key }
+func (e MatchCalendarRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e CreateMatchCalendarResponseValidationError) ErrorName() string {
-	return "CreateMatchCalendarResponseValidationError"
+func (e MatchCalendarRequestValidationError) ErrorName() string {
+	return "MatchCalendarRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e CreateMatchCalendarResponseValidationError) Error() string {
+func (e MatchCalendarRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -233,14 +236,14 @@ func (e CreateMatchCalendarResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCreateMatchCalendarResponse.%s: %s%s",
+		"invalid %sMatchCalendarRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = CreateMatchCalendarResponseValidationError{}
+var _ error = MatchCalendarRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -248,24 +251,126 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = CreateMatchCalendarResponseValidationError{}
+} = MatchCalendarRequestValidationError{}
 
-// Validate checks the field values on SuccessMatchResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *SuccessMatchResponse) Validate() error {
+// Validate checks the field values on StatusRequest with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *StatusRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SuccessMatchResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// SuccessMatchResponseMultiError, or nil if none found.
-func (m *SuccessMatchResponse) ValidateAll() error {
+// ValidateAll checks the field values on StatusRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in StatusRequestMultiError, or
+// nil if none found.
+func (m *StatusRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SuccessMatchResponse) validate(all bool) error {
+func (m *StatusRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Status
+
+	if len(errors) > 0 {
+		return StatusRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// StatusRequestMultiError is an error wrapping multiple validation errors
+// returned by StatusRequest.ValidateAll() if the designated constraints
+// aren't met.
+type StatusRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m StatusRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m StatusRequestMultiError) AllErrors() []error { return m }
+
+// StatusRequestValidationError is the validation error returned by
+// StatusRequest.Validate if the designated constraints aren't met.
+type StatusRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e StatusRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e StatusRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e StatusRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e StatusRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e StatusRequestValidationError) ErrorName() string { return "StatusRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e StatusRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sStatusRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = StatusRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = StatusRequestValidationError{}
+
+// Validate checks the field values on MatchCalendarResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MatchCalendarResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MatchCalendarResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MatchCalendarResponseMultiError, or nil if none found.
+func (m *MatchCalendarResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MatchCalendarResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -276,7 +381,7 @@ func (m *SuccessMatchResponse) validate(all bool) error {
 		switch v := interface{}(m.GetData()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SuccessMatchResponseValidationError{
+				errors = append(errors, MatchCalendarResponseValidationError{
 					field:  "Data",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -284,7 +389,7 @@ func (m *SuccessMatchResponse) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, SuccessMatchResponseValidationError{
+				errors = append(errors, MatchCalendarResponseValidationError{
 					field:  "Data",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -293,7 +398,7 @@ func (m *SuccessMatchResponse) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetData()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return SuccessMatchResponseValidationError{
+			return MatchCalendarResponseValidationError{
 				field:  "Data",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -304,19 +409,19 @@ func (m *SuccessMatchResponse) validate(all bool) error {
 	// no validation rules for Message
 
 	if len(errors) > 0 {
-		return SuccessMatchResponseMultiError(errors)
+		return MatchCalendarResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// SuccessMatchResponseMultiError is an error wrapping multiple validation
-// errors returned by SuccessMatchResponse.ValidateAll() if the designated
+// MatchCalendarResponseMultiError is an error wrapping multiple validation
+// errors returned by MatchCalendarResponse.ValidateAll() if the designated
 // constraints aren't met.
-type SuccessMatchResponseMultiError []error
+type MatchCalendarResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SuccessMatchResponseMultiError) Error() string {
+func (m MatchCalendarResponseMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -325,11 +430,11 @@ func (m SuccessMatchResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SuccessMatchResponseMultiError) AllErrors() []error { return m }
+func (m MatchCalendarResponseMultiError) AllErrors() []error { return m }
 
-// SuccessMatchResponseValidationError is the validation error returned by
-// SuccessMatchResponse.Validate if the designated constraints aren't met.
-type SuccessMatchResponseValidationError struct {
+// MatchCalendarResponseValidationError is the validation error returned by
+// MatchCalendarResponse.Validate if the designated constraints aren't met.
+type MatchCalendarResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -337,24 +442,24 @@ type SuccessMatchResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e SuccessMatchResponseValidationError) Field() string { return e.field }
+func (e MatchCalendarResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SuccessMatchResponseValidationError) Reason() string { return e.reason }
+func (e MatchCalendarResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SuccessMatchResponseValidationError) Cause() error { return e.cause }
+func (e MatchCalendarResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SuccessMatchResponseValidationError) Key() bool { return e.key }
+func (e MatchCalendarResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SuccessMatchResponseValidationError) ErrorName() string {
-	return "SuccessMatchResponseValidationError"
+func (e MatchCalendarResponseValidationError) ErrorName() string {
+	return "MatchCalendarResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e SuccessMatchResponseValidationError) Error() string {
+func (e MatchCalendarResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -366,14 +471,14 @@ func (e SuccessMatchResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSuccessMatchResponse.%s: %s%s",
+		"invalid %sMatchCalendarResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SuccessMatchResponseValidationError{}
+var _ error = MatchCalendarResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -381,24 +486,162 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SuccessMatchResponseValidationError{}
+} = MatchCalendarResponseValidationError{}
 
-// Validate checks the field values on SuccessMatchResponse_Data with the rules
+// Validate checks the field values on MatchCalendarListResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *SuccessMatchResponse_Data) Validate() error {
+func (m *MatchCalendarListResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SuccessMatchResponse_Data with the
+// ValidateAll checks the field values on MatchCalendarListResponse with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// SuccessMatchResponse_DataMultiError, or nil if none found.
-func (m *SuccessMatchResponse_Data) ValidateAll() error {
+// MatchCalendarListResponseMultiError, or nil if none found.
+func (m *MatchCalendarListResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SuccessMatchResponse_Data) validate(all bool) error {
+func (m *MatchCalendarListResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetData() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MatchCalendarListResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MatchCalendarListResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MatchCalendarListResponseValidationError{
+					field:  fmt.Sprintf("Data[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Message
+
+	if len(errors) > 0 {
+		return MatchCalendarListResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// MatchCalendarListResponseMultiError is an error wrapping multiple validation
+// errors returned by MatchCalendarListResponse.ValidateAll() if the
+// designated constraints aren't met.
+type MatchCalendarListResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MatchCalendarListResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MatchCalendarListResponseMultiError) AllErrors() []error { return m }
+
+// MatchCalendarListResponseValidationError is the validation error returned by
+// MatchCalendarListResponse.Validate if the designated constraints aren't met.
+type MatchCalendarListResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MatchCalendarListResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MatchCalendarListResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MatchCalendarListResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MatchCalendarListResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MatchCalendarListResponseValidationError) ErrorName() string {
+	return "MatchCalendarListResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e MatchCalendarListResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMatchCalendarListResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MatchCalendarListResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MatchCalendarListResponseValidationError{}
+
+// Validate checks the field values on MatchCalendarResponse_Data with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *MatchCalendarResponse_Data) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on MatchCalendarResponse_Data with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// MatchCalendarResponse_DataMultiError, or nil if none found.
+func (m *MatchCalendarResponse_Data) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *MatchCalendarResponse_Data) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -413,20 +656,24 @@ func (m *SuccessMatchResponse_Data) validate(all bool) error {
 
 	// no validation rules for MatchRound
 
+	// no validation rules for MatchTurn
+
+	// no validation rules for MatchStatus
+
 	if len(errors) > 0 {
-		return SuccessMatchResponse_DataMultiError(errors)
+		return MatchCalendarResponse_DataMultiError(errors)
 	}
 
 	return nil
 }
 
-// SuccessMatchResponse_DataMultiError is an error wrapping multiple validation
-// errors returned by SuccessMatchResponse_Data.ValidateAll() if the
-// designated constraints aren't met.
-type SuccessMatchResponse_DataMultiError []error
+// MatchCalendarResponse_DataMultiError is an error wrapping multiple
+// validation errors returned by MatchCalendarResponse_Data.ValidateAll() if
+// the designated constraints aren't met.
+type MatchCalendarResponse_DataMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SuccessMatchResponse_DataMultiError) Error() string {
+func (m MatchCalendarResponse_DataMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -435,11 +682,11 @@ func (m SuccessMatchResponse_DataMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SuccessMatchResponse_DataMultiError) AllErrors() []error { return m }
+func (m MatchCalendarResponse_DataMultiError) AllErrors() []error { return m }
 
-// SuccessMatchResponse_DataValidationError is the validation error returned by
-// SuccessMatchResponse_Data.Validate if the designated constraints aren't met.
-type SuccessMatchResponse_DataValidationError struct {
+// MatchCalendarResponse_DataValidationError is the validation error returned
+// by MatchCalendarResponse_Data.Validate if the designated constraints aren't met.
+type MatchCalendarResponse_DataValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -447,24 +694,24 @@ type SuccessMatchResponse_DataValidationError struct {
 }
 
 // Field function returns field value.
-func (e SuccessMatchResponse_DataValidationError) Field() string { return e.field }
+func (e MatchCalendarResponse_DataValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SuccessMatchResponse_DataValidationError) Reason() string { return e.reason }
+func (e MatchCalendarResponse_DataValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SuccessMatchResponse_DataValidationError) Cause() error { return e.cause }
+func (e MatchCalendarResponse_DataValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SuccessMatchResponse_DataValidationError) Key() bool { return e.key }
+func (e MatchCalendarResponse_DataValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SuccessMatchResponse_DataValidationError) ErrorName() string {
-	return "SuccessMatchResponse_DataValidationError"
+func (e MatchCalendarResponse_DataValidationError) ErrorName() string {
+	return "MatchCalendarResponse_DataValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e SuccessMatchResponse_DataValidationError) Error() string {
+func (e MatchCalendarResponse_DataValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -476,14 +723,14 @@ func (e SuccessMatchResponse_DataValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSuccessMatchResponse_Data.%s: %s%s",
+		"invalid %sMatchCalendarResponse_Data.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SuccessMatchResponse_DataValidationError{}
+var _ error = MatchCalendarResponse_DataValidationError{}
 
 var _ interface {
 	Field() string
@@ -491,4 +738,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SuccessMatchResponse_DataValidationError{}
+} = MatchCalendarResponse_DataValidationError{}

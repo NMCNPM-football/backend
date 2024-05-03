@@ -22,17 +22,32 @@ func (m *MatchDao) CreateMatchCalendar(calendar *models.MatchCalendar) error {
 }
 
 func (m *MatchDao) GetMatchCalendarByID(id string) (*models.MatchCalendar, error) {
-	var calendar models.MatchCalendar
-	if err := m.db.First(&calendar, id).Error; err != nil {
-		return nil, errors.Wrap(err, "c.db.First")
+	var matchCalendars *models.MatchCalendar
+	if err := m.db.Where("id = ?", id).Find(&matchCalendars).Error; err != nil {
+		return nil, err
 	}
-	return &calendar, nil
+	return matchCalendars, nil
 }
 
-func (m *ClubDao) UpdateMatchCalendar(match *models.MatchCalendar, matchID string) error {
+func (m *MatchDao) UpdateMatchCalendar(match *models.MatchCalendar, matchID string) error {
 	if err := m.db.Where("id = ?", matchID).Updates(&match).Error; err != nil {
 		return errors.Wrap(err, "c.db.Model.Where.Updates")
 	}
 
 	return nil
+}
+func (m *MatchDao) GetAllMatchCalendars() ([]*models.MatchCalendar, error) {
+	var matchCalendars []*models.MatchCalendar
+	if err := m.db.Find(&matchCalendars).Error; err != nil {
+		return nil, err
+	}
+	return matchCalendars, nil
+}
+
+func (m *MatchDao) GetAllMatchCalendarsWithStatus(status string) ([]*models.MatchCalendar, error) {
+	var matchCalendars []*models.MatchCalendar
+	if err := m.db.Where("status = ?", status).Find(&matchCalendars).Error; err != nil {
+		return nil, err
+	}
+	return matchCalendars, nil
 }

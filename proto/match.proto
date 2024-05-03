@@ -7,20 +7,34 @@ message MatchCalendar {
   string club_two_name = 3;
   string match_date = 4;
   string match_round = 5;
+  string match_turn = 6;
+  string match_status = 7;
 }
 
 
-message CreateMatchCalendarResponse {
+message MatchCalendarRequest {
   string id = 1;
 }
 
-message SuccessMatchResponse {
+message StatusRequest {
+  string status = 1;
+}
+
+message MatchCalendarResponse {
   message Data {
     string club_one_name = 1;
     string club_two_name = 2;
     string match_date = 3;
     string match_round = 4;
+    string match_turn = 5;
+    string match_status = 6;
   }
   Data data = 1;
   string message = 2;
 }
+
+message MatchCalendarListResponse {
+  repeated MatchCalendarResponse.Data data = 1;
+  string message = 2;
+}
+

@@ -43,3 +43,18 @@ type Certificate struct {
 	IssuedBy      string `gorm:"size:50"`
 	Status        string `gorm:"size:50"`
 }
+
+type Summary struct {
+	Base
+	TeamName       string `gorm:"size:50"`
+	MatchesPlayed  int
+	MatchesWon     int
+	MatchesDrawn   int
+	MatchesLost    int
+	GoalsScored    int
+	GoalsConceded  int
+	YellowCards    int
+	RedCards       int
+	GoalDifference int
+	Points         int
+}

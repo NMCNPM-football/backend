@@ -47,6 +47,7 @@ type MatchCalendar struct {
 	MatchDate   string `gorm:"size:50"`
 	MatchRound  string `gorm:"size:50"`
 	MatchTurn   string `gorm:"size:50"`
+	Status      string `gorm:"size:50;default:'no'"`
 }
 
 type GoalType struct {

@@ -1,12 +1,12 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "match_svc.proto",
+    "title": "match_svc_public.proto",
     "version": "version not set"
   },
   "tags": [
     {
-      "name": "MatchService"
+      "name": "MatchServicePublic"
     }
   ],
   "consumes": [
@@ -16,14 +16,14 @@
     "application/json"
   ],
   "paths": {
-    "/match/calendar": {
-      "post": {
-        "operationId": "MatchService_CreateMatchCalendar",
+    "/match/calendar/all": {
+      "get": {
+        "operationId": "MatchServicePublic_GetAllMatchCalendar",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/MatchCalendarRequest"
+              "$ref": "#/definitions/MatchCalendarListResponse"
             }
           },
           "default": {
@@ -33,24 +33,14 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MatchCalendar"
-            }
-          }
-        ],
         "tags": [
-          "MatchService"
+          "MatchServicePublic"
         ]
       }
     },
-    "/match/update_calendar": {
-      "put": {
-        "operationId": "MatchService_UpdateMatchCalendar",
+    "/match/calendar/{id}": {
+      "get": {
+        "operationId": "MatchServicePublic_GetMatchCalendarById",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -67,51 +57,60 @@
         },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "name": "id",
+            "in": "path",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/MatchCalendar"
-            }
+            "type": "string"
           }
         ],
         "tags": [
-          "MatchService"
+          "MatchServicePublic"
+        ]
+      }
+    },
+    "/match/calendar/{status}": {
+      "get": {
+        "operationId": "MatchServicePublic_GetAllMatchCalendarsWithStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/MatchCalendarListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "status",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MatchServicePublic"
         ]
       }
     }
   },
   "definitions": {
-    "MatchCalendar": {
+    "MatchCalendarListResponse": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string"
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/MatchCalendarResponseData"
+          }
         },
-        "clubOneName": {
-          "type": "string"
-        },
-        "clubTwoName": {
-          "type": "string"
-        },
-        "matchDate": {
-          "type": "string"
-        },
-        "matchRound": {
-          "type": "string"
-        },
-        "matchTurn": {
-          "type": "string"
-        },
-        "matchStatus": {
-          "type": "string"
-        }
-      }
-    },
-    "MatchCalendarRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
+        "message": {
           "type": "string"
         }
       }

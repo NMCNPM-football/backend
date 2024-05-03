@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package proto;
+import "google/api/annotations.proto";
+import "message.proto";
+import "match.proto";
+
+service MatchServicePublic {
+    rpc GetAllMatchCalendarsWithStatus (StatusRequest) returns (MatchCalendarListResponse) {
+      option (google.api.http) = {
+        get: "/match/calendar/{status}"
+      };
+    }
+
+    rpc GetAllMatchCalendar (EmptyRequest) returns (MatchCalendarListResponse) {
+      option (google.api.http) = {
+        get: "/match/calendar/all"
+      };
+    }
+
+    rpc GetMatchCalendarById (MatchCalendarRequest) returns (MatchCalendarResponse) {
+      option (google.api.http) = {
+        get: "/match/calendar/{id}"
+      };
+    }
+
+}

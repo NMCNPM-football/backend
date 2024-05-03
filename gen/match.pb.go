@@ -31,6 +31,8 @@ type MatchCalendar struct {
 	ClubTwoName string `protobuf:"bytes,3,opt,name=club_two_name,json=clubTwoName,proto3" json:"club_two_name,omitempty"`
 	MatchDate   string `protobuf:"bytes,4,opt,name=match_date,json=matchDate,proto3" json:"match_date,omitempty"`
 	MatchRound  string `protobuf:"bytes,5,opt,name=match_round,json=matchRound,proto3" json:"match_round,omitempty"`
+	MatchTurn   string `protobuf:"bytes,6,opt,name=match_turn,json=matchTurn,proto3" json:"match_turn,omitempty"`
+	MatchStatus string `protobuf:"bytes,7,opt,name=match_status,json=matchStatus,proto3" json:"match_status,omitempty"`
 }
 
 func (x *MatchCalendar) Reset() {
@@ -100,7 +102,21 @@ func (x *MatchCalendar) GetMatchRound() string {
 	return ""
 }
 
-type CreateMatchCalendarResponse struct {
+func (x *MatchCalendar) GetMatchTurn() string {
+	if x != nil {
+		return x.MatchTurn
+	}
+	return ""
+}
+
+func (x *MatchCalendar) GetMatchStatus() string {
+	if x != nil {
+		return x.MatchStatus
+	}
+	return ""
+}
+
+type MatchCalendarRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -108,8 +124,8 @@ type CreateMatchCalendarResponse struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 }
 
-func (x *CreateMatchCalendarResponse) Reset() {
-	*x = CreateMatchCalendarResponse{}
+func (x *MatchCalendarRequest) Reset() {
+	*x = MatchCalendarRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_match_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -117,13 +133,13 @@ func (x *CreateMatchCalendarResponse) Reset() {
 	}
 }
 
-func (x *CreateMatchCalendarResponse) String() string {
+func (x *MatchCalendarRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateMatchCalendarResponse) ProtoMessage() {}
+func (*MatchCalendarRequest) ProtoMessage() {}
 
-func (x *CreateMatchCalendarResponse) ProtoReflect() protoreflect.Message {
+func (x *MatchCalendarRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_match_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -135,29 +151,28 @@ func (x *CreateMatchCalendarResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateMatchCalendarResponse.ProtoReflect.Descriptor instead.
-func (*CreateMatchCalendarResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use MatchCalendarRequest.ProtoReflect.Descriptor instead.
+func (*MatchCalendarRequest) Descriptor() ([]byte, []int) {
 	return file_match_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CreateMatchCalendarResponse) GetId() string {
+func (x *MatchCalendarRequest) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-type SuccessMatchResponse struct {
+type StatusRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Data    *SuccessMatchResponse_Data `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Message string                     `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Status string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 }
 
-func (x *SuccessMatchResponse) Reset() {
-	*x = SuccessMatchResponse{}
+func (x *StatusRequest) Reset() {
+	*x = StatusRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_match_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -165,13 +180,13 @@ func (x *SuccessMatchResponse) Reset() {
 	}
 }
 
-func (x *SuccessMatchResponse) String() string {
+func (x *StatusRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SuccessMatchResponse) ProtoMessage() {}
+func (*StatusRequest) ProtoMessage() {}
 
-func (x *SuccessMatchResponse) ProtoReflect() protoreflect.Message {
+func (x *StatusRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_match_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -183,38 +198,29 @@ func (x *SuccessMatchResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SuccessMatchResponse.ProtoReflect.Descriptor instead.
-func (*SuccessMatchResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use StatusRequest.ProtoReflect.Descriptor instead.
+func (*StatusRequest) Descriptor() ([]byte, []int) {
 	return file_match_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *SuccessMatchResponse) GetData() *SuccessMatchResponse_Data {
+func (x *StatusRequest) GetStatus() string {
 	if x != nil {
-		return x.Data
-	}
-	return nil
-}
-
-func (x *SuccessMatchResponse) GetMessage() string {
-	if x != nil {
-		return x.Message
+		return x.Status
 	}
 	return ""
 }
 
-type SuccessMatchResponse_Data struct {
+type MatchCalendarResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ClubOneName string `protobuf:"bytes,1,opt,name=club_one_name,json=clubOneName,proto3" json:"club_one_name,omitempty"`
-	ClubTwoName string `protobuf:"bytes,2,opt,name=club_two_name,json=clubTwoName,proto3" json:"club_two_name,omitempty"`
-	MatchDate   string `protobuf:"bytes,3,opt,name=match_date,json=matchDate,proto3" json:"match_date,omitempty"`
-	MatchRound  string `protobuf:"bytes,4,opt,name=match_round,json=matchRound,proto3" json:"match_round,omitempty"`
+	Data    *MatchCalendarResponse_Data `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Message string                      `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 }
 
-func (x *SuccessMatchResponse_Data) Reset() {
-	*x = SuccessMatchResponse_Data{}
+func (x *MatchCalendarResponse) Reset() {
+	*x = MatchCalendarResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_match_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -222,13 +228,13 @@ func (x *SuccessMatchResponse_Data) Reset() {
 	}
 }
 
-func (x *SuccessMatchResponse_Data) String() string {
+func (x *MatchCalendarResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SuccessMatchResponse_Data) ProtoMessage() {}
+func (*MatchCalendarResponse) ProtoMessage() {}
 
-func (x *SuccessMatchResponse_Data) ProtoReflect() protoreflect.Message {
+func (x *MatchCalendarResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_match_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -240,35 +246,163 @@ func (x *SuccessMatchResponse_Data) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SuccessMatchResponse_Data.ProtoReflect.Descriptor instead.
-func (*SuccessMatchResponse_Data) Descriptor() ([]byte, []int) {
-	return file_match_proto_rawDescGZIP(), []int{2, 0}
+// Deprecated: Use MatchCalendarResponse.ProtoReflect.Descriptor instead.
+func (*MatchCalendarResponse) Descriptor() ([]byte, []int) {
+	return file_match_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *SuccessMatchResponse_Data) GetClubOneName() string {
+func (x *MatchCalendarResponse) GetData() *MatchCalendarResponse_Data {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *MatchCalendarResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+type MatchCalendarListResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Data    []*MatchCalendarResponse_Data `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Message string                        `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+}
+
+func (x *MatchCalendarListResponse) Reset() {
+	*x = MatchCalendarListResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_match_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MatchCalendarListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MatchCalendarListResponse) ProtoMessage() {}
+
+func (x *MatchCalendarListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_match_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MatchCalendarListResponse.ProtoReflect.Descriptor instead.
+func (*MatchCalendarListResponse) Descriptor() ([]byte, []int) {
+	return file_match_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *MatchCalendarListResponse) GetData() []*MatchCalendarResponse_Data {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *MatchCalendarListResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+type MatchCalendarResponse_Data struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ClubOneName string `protobuf:"bytes,1,opt,name=club_one_name,json=clubOneName,proto3" json:"club_one_name,omitempty"`
+	ClubTwoName string `protobuf:"bytes,2,opt,name=club_two_name,json=clubTwoName,proto3" json:"club_two_name,omitempty"`
+	MatchDate   string `protobuf:"bytes,3,opt,name=match_date,json=matchDate,proto3" json:"match_date,omitempty"`
+	MatchRound  string `protobuf:"bytes,4,opt,name=match_round,json=matchRound,proto3" json:"match_round,omitempty"`
+	MatchTurn   string `protobuf:"bytes,5,opt,name=match_turn,json=matchTurn,proto3" json:"match_turn,omitempty"`
+	MatchStatus string `protobuf:"bytes,6,opt,name=match_status,json=matchStatus,proto3" json:"match_status,omitempty"`
+}
+
+func (x *MatchCalendarResponse_Data) Reset() {
+	*x = MatchCalendarResponse_Data{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_match_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MatchCalendarResponse_Data) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MatchCalendarResponse_Data) ProtoMessage() {}
+
+func (x *MatchCalendarResponse_Data) ProtoReflect() protoreflect.Message {
+	mi := &file_match_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MatchCalendarResponse_Data.ProtoReflect.Descriptor instead.
+func (*MatchCalendarResponse_Data) Descriptor() ([]byte, []int) {
+	return file_match_proto_rawDescGZIP(), []int{3, 0}
+}
+
+func (x *MatchCalendarResponse_Data) GetClubOneName() string {
 	if x != nil {
 		return x.ClubOneName
 	}
 	return ""
 }
 
-func (x *SuccessMatchResponse_Data) GetClubTwoName() string {
+func (x *MatchCalendarResponse_Data) GetClubTwoName() string {
 	if x != nil {
 		return x.ClubTwoName
 	}
 	return ""
 }
 
-func (x *SuccessMatchResponse_Data) GetMatchDate() string {
+func (x *MatchCalendarResponse_Data) GetMatchDate() string {
 	if x != nil {
 		return x.MatchDate
 	}
 	return ""
 }
 
-func (x *SuccessMatchResponse_Data) GetMatchRound() string {
+func (x *MatchCalendarResponse_Data) GetMatchRound() string {
 	if x != nil {
 		return x.MatchRound
+	}
+	return ""
+}
+
+func (x *MatchCalendarResponse_Data) GetMatchTurn() string {
+	if x != nil {
+		return x.MatchTurn
+	}
+	return ""
+}
+
+func (x *MatchCalendarResponse_Data) GetMatchStatus() string {
+	if x != nil {
+		return x.MatchStatus
 	}
 	return ""
 }
@@ -278,7 +412,7 @@ var File_match_proto protoreflect.FileDescriptor
 var file_match_proto_rawDesc = []byte{
 	0x0a, 0x0b, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1b, 0x67,
 	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x65,
-	0x6d, 0x70, 0x74, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xa7, 0x01, 0x0a, 0x0d, 0x4d,
+	0x6d, 0x70, 0x74, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xe9, 0x01, 0x0a, 0x0d, 0x4d,
 	0x61, 0x74, 0x63, 0x68, 0x43, 0x61, 0x6c, 0x65, 0x6e, 0x64, 0x61, 0x72, 0x12, 0x0e, 0x0a, 0x02,
 	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x22, 0x0a, 0x0d,
 	0x63, 0x6c, 0x75, 0x62, 0x5f, 0x6f, 0x6e, 0x65, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20,
@@ -289,25 +423,42 @@ var file_match_proto_rawDesc = []byte{
 	0x74, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x44,
 	0x61, 0x74, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x5f, 0x72, 0x6f, 0x75,
 	0x6e, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x52,
-	0x6f, 0x75, 0x6e, 0x64, 0x22, 0x2d, 0x0a, 0x1b, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d, 0x61,
-	0x74, 0x63, 0x68, 0x43, 0x61, 0x6c, 0x65, 0x6e, 0x64, 0x61, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x02, 0x69, 0x64, 0x22, 0xf1, 0x01, 0x0a, 0x14, 0x53, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x4d,
-	0x61, 0x74, 0x63, 0x68, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2e, 0x0a, 0x04,
-	0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x53, 0x75, 0x63,
-	0x63, 0x65, 0x73, 0x73, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x12, 0x18, 0x0a, 0x07,
-	0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d,
-	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x1a, 0x8e, 0x01, 0x0a, 0x04, 0x44, 0x61, 0x74, 0x61, 0x12,
-	0x22, 0x0a, 0x0d, 0x63, 0x6c, 0x75, 0x62, 0x5f, 0x6f, 0x6e, 0x65, 0x5f, 0x6e, 0x61, 0x6d, 0x65,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63, 0x6c, 0x75, 0x62, 0x4f, 0x6e, 0x65, 0x4e,
-	0x61, 0x6d, 0x65, 0x12, 0x22, 0x0a, 0x0d, 0x63, 0x6c, 0x75, 0x62, 0x5f, 0x74, 0x77, 0x6f, 0x5f,
-	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63, 0x6c, 0x75, 0x62,
-	0x54, 0x77, 0x6f, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x6d, 0x61, 0x74, 0x63, 0x68,
-	0x5f, 0x64, 0x61, 0x74, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x6d, 0x61, 0x74,
-	0x63, 0x68, 0x44, 0x61, 0x74, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x5f,
-	0x72, 0x6f, 0x75, 0x6e, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x6d, 0x61, 0x74,
-	0x63, 0x68, 0x52, 0x6f, 0x75, 0x6e, 0x64, 0x42, 0x36, 0x42, 0x0a, 0x4d, 0x61, 0x74, 0x63, 0x68,
+	0x6f, 0x75, 0x6e, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x5f, 0x74, 0x75,
+	0x72, 0x6e, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x54,
+	0x75, 0x72, 0x6e, 0x12, 0x21, 0x0a, 0x0c, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x5f, 0x73, 0x74, 0x61,
+	0x74, 0x75, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x6d, 0x61, 0x74, 0x63, 0x68,
+	0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0x26, 0x0a, 0x14, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x43,
+	0x61, 0x6c, 0x65, 0x6e, 0x64, 0x61, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e,
+	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x27,
+	0x0a, 0x0d, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
+	0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0xb5, 0x02, 0x0a, 0x15, 0x4d, 0x61, 0x74, 0x63,
+	0x68, 0x43, 0x61, 0x6c, 0x65, 0x6e, 0x64, 0x61, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x2f, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x1b, 0x2e, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x43, 0x61, 0x6c, 0x65, 0x6e, 0x64, 0x61, 0x72, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x52, 0x04, 0x64, 0x61,
+	0x74, 0x61, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x1a, 0xd0, 0x01, 0x0a,
+	0x04, 0x44, 0x61, 0x74, 0x61, 0x12, 0x22, 0x0a, 0x0d, 0x63, 0x6c, 0x75, 0x62, 0x5f, 0x6f, 0x6e,
+	0x65, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63, 0x6c,
+	0x75, 0x62, 0x4f, 0x6e, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x22, 0x0a, 0x0d, 0x63, 0x6c, 0x75,
+	0x62, 0x5f, 0x74, 0x77, 0x6f, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x0b, 0x63, 0x6c, 0x75, 0x62, 0x54, 0x77, 0x6f, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1d, 0x0a,
+	0x0a, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x5f, 0x64, 0x61, 0x74, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x09, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x44, 0x61, 0x74, 0x65, 0x12, 0x1f, 0x0a, 0x0b,
+	0x6d, 0x61, 0x74, 0x63, 0x68, 0x5f, 0x72, 0x6f, 0x75, 0x6e, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x0a, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x52, 0x6f, 0x75, 0x6e, 0x64, 0x12, 0x1d, 0x0a,
+	0x0a, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x5f, 0x74, 0x75, 0x72, 0x6e, 0x18, 0x05, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x09, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x54, 0x75, 0x72, 0x6e, 0x12, 0x21, 0x0a, 0x0c,
+	0x6d, 0x61, 0x74, 0x63, 0x68, 0x5f, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x06, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x0b, 0x6d, 0x61, 0x74, 0x63, 0x68, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22,
+	0x66, 0x0a, 0x19, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x43, 0x61, 0x6c, 0x65, 0x6e, 0x64, 0x61, 0x72,
+	0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2f, 0x0a, 0x04,
+	0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x4d, 0x61, 0x74,
+	0x63, 0x68, 0x43, 0x61, 0x6c, 0x65, 0x6e, 0x64, 0x61, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x12, 0x18, 0x0a,
+	0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
+	0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x42, 0x36, 0x42, 0x0a, 0x4d, 0x61, 0x74, 0x63, 0x68,
 	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x26, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
 	0x63, 0x6f, 0x6d, 0x2f, 0x4e, 0x4d, 0x43, 0x4e, 0x50, 0x4d, 0x2d, 0x66, 0x6f, 0x6f, 0x74, 0x62,
 	0x61, 0x6c, 0x6c, 0x2f, 0x62, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x2f, 0x67, 0x65, 0x6e, 0x62,
@@ -326,20 +477,23 @@ func file_match_proto_rawDescGZIP() []byte {
 	return file_match_proto_rawDescData
 }
 
-var file_match_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_match_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_match_proto_goTypes = []interface{}{
-	(*MatchCalendar)(nil),               // 0: MatchCalendar
-	(*CreateMatchCalendarResponse)(nil), // 1: CreateMatchCalendarResponse
-	(*SuccessMatchResponse)(nil),        // 2: SuccessMatchResponse
-	(*SuccessMatchResponse_Data)(nil),   // 3: SuccessMatchResponse.Data
+	(*MatchCalendar)(nil),              // 0: MatchCalendar
+	(*MatchCalendarRequest)(nil),       // 1: MatchCalendarRequest
+	(*StatusRequest)(nil),              // 2: StatusRequest
+	(*MatchCalendarResponse)(nil),      // 3: MatchCalendarResponse
+	(*MatchCalendarListResponse)(nil),  // 4: MatchCalendarListResponse
+	(*MatchCalendarResponse_Data)(nil), // 5: MatchCalendarResponse.Data
 }
 var file_match_proto_depIdxs = []int32{
-	3, // 0: SuccessMatchResponse.data:type_name -> SuccessMatchResponse.Data
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	5, // 0: MatchCalendarResponse.data:type_name -> MatchCalendarResponse.Data
+	5, // 1: MatchCalendarListResponse.data:type_name -> MatchCalendarResponse.Data
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_match_proto_init() }
@@ -361,7 +515,7 @@ func file_match_proto_init() {
 			}
 		}
 		file_match_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateMatchCalendarResponse); i {
+			switch v := v.(*MatchCalendarRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -373,7 +527,7 @@ func file_match_proto_init() {
 			}
 		}
 		file_match_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SuccessMatchResponse); i {
+			switch v := v.(*StatusRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -385,7 +539,31 @@ func file_match_proto_init() {
 			}
 		}
 		file_match_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SuccessMatchResponse_Data); i {
+			switch v := v.(*MatchCalendarResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_match_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MatchCalendarListResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_match_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MatchCalendarResponse_Data); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -403,7 +581,7 @@ func file_match_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_match_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

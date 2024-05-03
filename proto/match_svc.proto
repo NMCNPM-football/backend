@@ -6,21 +6,17 @@ import "message.proto";
 import "match.proto";
 
 service MatchService {
-  rpc CreateMatchCalendar (MatchCalendar) returns (CreateMatchCalendarResponse) {
+  rpc CreateMatchCalendar (MatchCalendar) returns (MatchCalendarRequest) {
     option (google.api.http) = {
       post: "/match/calendar"
       body: "*"
     };
   }
-  rpc UpdateMatchCalendar (MatchCalendar) returns (SuccessMatchResponse) {
+
+  rpc UpdateMatchCalendar (MatchCalendar) returns (MatchCalendarResponse) {
     option (google.api.http) = {
       put: "/match/update_calendar"
       body: "*"
     };
   }
-//  rpc GetMatchCalendar (MatchCalendar) returns (SuccessMatchResponse) {
-//    option (google.api.http) = {
-//      get: "/match/calendar/{id}"
-//    };
-//  }
 }

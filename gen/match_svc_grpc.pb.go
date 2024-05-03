@@ -27,8 +27,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MatchServiceClient interface {
-	CreateMatchCalendar(ctx context.Context, in *MatchCalendar, opts ...grpc.CallOption) (*CreateMatchCalendarResponse, error)
-	UpdateMatchCalendar(ctx context.Context, in *MatchCalendar, opts ...grpc.CallOption) (*SuccessMatchResponse, error)
+	CreateMatchCalendar(ctx context.Context, in *MatchCalendar, opts ...grpc.CallOption) (*MatchCalendarRequest, error)
+	UpdateMatchCalendar(ctx context.Context, in *MatchCalendar, opts ...grpc.CallOption) (*MatchCalendarResponse, error)
 }
 
 type matchServiceClient struct {
@@ -39,8 +39,8 @@ func NewMatchServiceClient(cc grpc.ClientConnInterface) MatchServiceClient {
 	return &matchServiceClient{cc}
 }
 
-func (c *matchServiceClient) CreateMatchCalendar(ctx context.Context, in *MatchCalendar, opts ...grpc.CallOption) (*CreateMatchCalendarResponse, error) {
-	out := new(CreateMatchCalendarResponse)
+func (c *matchServiceClient) CreateMatchCalendar(ctx context.Context, in *MatchCalendar, opts ...grpc.CallOption) (*MatchCalendarRequest, error) {
+	out := new(MatchCalendarRequest)
 	err := c.cc.Invoke(ctx, MatchService_CreateMatchCalendar_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -48,8 +48,8 @@ func (c *matchServiceClient) CreateMatchCalendar(ctx context.Context, in *MatchC
 	return out, nil
 }
 
-func (c *matchServiceClient) UpdateMatchCalendar(ctx context.Context, in *MatchCalendar, opts ...grpc.CallOption) (*SuccessMatchResponse, error) {
-	out := new(SuccessMatchResponse)
+func (c *matchServiceClient) UpdateMatchCalendar(ctx context.Context, in *MatchCalendar, opts ...grpc.CallOption) (*MatchCalendarResponse, error) {
+	out := new(MatchCalendarResponse)
 	err := c.cc.Invoke(ctx, MatchService_UpdateMatchCalendar_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -61,18 +61,18 @@ func (c *matchServiceClient) UpdateMatchCalendar(ctx context.Context, in *MatchC
 // All implementations should embed UnimplementedMatchServiceServer
 // for forward compatibility
 type MatchServiceServer interface {
-	CreateMatchCalendar(context.Context, *MatchCalendar) (*CreateMatchCalendarResponse, error)
-	UpdateMatchCalendar(context.Context, *MatchCalendar) (*SuccessMatchResponse, error)
+	CreateMatchCalendar(context.Context, *MatchCalendar) (*MatchCalendarRequest, error)
+	UpdateMatchCalendar(context.Context, *MatchCalendar) (*MatchCalendarResponse, error)
 }
 
 // UnimplementedMatchServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedMatchServiceServer struct {
 }
 
-func (UnimplementedMatchServiceServer) CreateMatchCalendar(context.Context, *MatchCalendar) (*CreateMatchCalendarResponse, error) {
+func (UnimplementedMatchServiceServer) CreateMatchCalendar(context.Context, *MatchCalendar) (*MatchCalendarRequest, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateMatchCalendar not implemented")
 }
-func (UnimplementedMatchServiceServer) UpdateMatchCalendar(context.Context, *MatchCalendar) (*SuccessMatchResponse, error) {
+func (UnimplementedMatchServiceServer) UpdateMatchCalendar(context.Context, *MatchCalendar) (*MatchCalendarResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateMatchCalendar not implemented")
 }
 

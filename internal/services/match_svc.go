@@ -45,7 +45,7 @@ func (e *MatchService) RegisterHandler(ctx context.Context, mux *runtime.ServeMu
 	return nil
 }
 
-func (e *MatchService) CreateMatchCalendar(ctx context.Context, request *gen.MatchCalendar) (*gen.CreateMatchCalendarResponse, error) {
+func (e *MatchService) CreateMatchCalendar(ctx context.Context, request *gen.MatchCalendar) (*gen.MatchCalendarRequest, error) {
 	// Extract the MatchCalendar data from the request
 	user, err := e.userFromContext(ctx, e.userDao)
 	if err != nil {
@@ -71,12 +71,12 @@ func (e *MatchService) CreateMatchCalendar(ctx context.Context, request *gen.Mat
 	}
 
 	// If the insertion is successful, return a CreateMatchCalendarResponse with the ID of the new MatchCalendar
-	return &gen.CreateMatchCalendarResponse{
+	return &gen.MatchCalendarRequest{
 		Id: newMatchCalendar.ID,
 	}, nil
 }
 
-func (e *MatchService) UpdateMatchCalendar(ctx context.Context, request *gen.MatchCalendar) (*gen.SuccessMatchResponse, error) {
+func (e *MatchService) UpdateMatchCalendar(ctx context.Context, request *gen.MatchCalendar) (*gen.MatchCalendarResponse, error) {
 	user, err := e.userFromContext(ctx, e.userDao)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get user from context: %w", err)
@@ -99,8 +99,8 @@ func (e *MatchService) UpdateMatchCalendar(ctx context.Context, request *gen.Mat
 		return nil, must.HandlerError(err, e.logger)
 	}
 
-	return &gen.SuccessMatchResponse{
-		Data: &gen.SuccessMatchResponse_Data{
+	return &gen.MatchCalendarResponse{
+		Data: &gen.MatchCalendarResponse_Data{
 			ClubOneName: updateMatchCalendar.ClubOneName,
 			ClubTwoName: updateMatchCalendar.ClubTwoName,
 			MatchDate:   updateMatchCalendar.MatchDate,
