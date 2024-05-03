@@ -28,4 +28,11 @@ service UserService {
       body: "*"
     };
   }
+
+  rpc Logout (LogoutRequest) returns (LogoutResponse) {
+    option (google.api.http) = {
+      get: "/logout"
+    };
+  }
+
 }

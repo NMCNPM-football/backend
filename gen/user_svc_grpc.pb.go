@@ -22,6 +22,7 @@ const (
 	UserService_RefreshToken_FullMethodName  = "/proto.UserService/RefreshToken"
 	UserService_GetProfile_FullMethodName    = "/proto.UserService/GetProfile"
 	UserService_UpdateProfile_FullMethodName = "/proto.UserService/UpdateProfile"
+	UserService_Logout_FullMethodName        = "/proto.UserService/Logout"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -34,6 +35,7 @@ type UserServiceClient interface {
 	GetProfile(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*GetProfileResponse, error)
 	// Update a user's profile
 	UpdateProfile(ctx context.Context, in *UpdateProfileRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
+	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
 }
 
 type userServiceClient struct {
@@ -71,6 +73,15 @@ func (c *userServiceClient) UpdateProfile(ctx context.Context, in *UpdateProfile
 	return out, nil
 }
 
+func (c *userServiceClient) Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error) {
+	out := new(LogoutResponse)
+	err := c.cc.Invoke(ctx, UserService_Logout_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations should embed UnimplementedUserServiceServer
 // for forward compatibility
@@ -81,6 +92,7 @@ type UserServiceServer interface {
 	GetProfile(context.Context, *EmptyRequest) (*GetProfileResponse, error)
 	// Update a user's profile
 	UpdateProfile(context.Context, *UpdateProfileRequest) (*SuccessMessageResponse, error)
+	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 }
 
 // UnimplementedUserServiceServer should be embedded to have forward compatible implementations.
@@ -95,6 +107,9 @@ func (UnimplementedUserServiceServer) GetProfile(context.Context, *EmptyRequest)
 }
 func (UnimplementedUserServiceServer) UpdateProfile(context.Context, *UpdateProfileRequest) (*SuccessMessageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateProfile not implemented")
+}
+func (UnimplementedUserServiceServer) Logout(context.Context, *LogoutRequest) (*LogoutResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Logout not implemented")
 }
 
 // UnsafeUserServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -162,6 +177,24 @@ func _UserService_UpdateProfile_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_Logout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LogoutRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).Logout(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_Logout_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).Logout(ctx, req.(*LogoutRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -180,6 +213,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateProfile",
 			Handler:    _UserService_UpdateProfile_Handler,
+		},
+		{
+			MethodName: "Logout",
+			Handler:    _UserService_Logout_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

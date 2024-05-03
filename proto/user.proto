@@ -56,7 +56,6 @@ message UpdateProfileRequest {
   string name = 1;
   string phone = 2;
   string address = 3;
-  string position = 4;
 }
 
 message DeactivateProfileRequest {
@@ -64,3 +63,10 @@ message DeactivateProfileRequest {
   string password = 2;
 }
 
+message LogoutRequest {
+  string token = 1;
+}
+
+message LogoutResponse {
+  string message = 1;
+}

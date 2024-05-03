@@ -28,6 +28,11 @@ type UserService struct {
 	clubDao dao.ClubDaoInterface
 }
 
+func (e *UserService) Logout(ctx context.Context, request *gen.LogoutRequest) (*gen.LogoutResponse, error) {
+	//TODO implement me
+	return nil, nil
+}
+
 func NewUserService(logger *zap.Logger, cfg *config.Config, userDao dao.UserDaoInterface, clubDao dao.ClubDaoInterface) *UserService {
 	return &UserService{logger: logger, cfg: cfg, userDao: userDao, clubDao: clubDao}
 }
@@ -89,12 +94,11 @@ func (e *UserService) GetProfile(ctx context.Context, in *gen.EmptyRequest) (*ge
 
 	return &gen.GetProfileResponse{
 		Data: &gen.GetProfileResponse_Data{
-			Email:    user.Email,
-			Name:     user.Name,
-			Phone:    user.Phone,
-			Address:  user.Address,
-			ClubId:   user.ClubID,
-			Position: user.Position,
+			Email:   user.Email,
+			Name:    user.Name,
+			Phone:   user.Phone,
+			Address: user.Address,
+			ClubId:  user.ClubID,
 		},
 	}, nil
 }
@@ -106,11 +110,10 @@ func (e *UserService) UpdateProfile(ctx context.Context, in *gen.UpdateProfileRe
 	}
 
 	newUser := &models.User{
-		Email:    user.Email,
-		Name:     in.Name,
-		Phone:    in.Phone,
-		Address:  in.Address,
-		Position: in.Position,
+		Email:   user.Email,
+		Name:    in.Name,
+		Phone:   in.Phone,
+		Address: in.Address,
 	}
 
 	err = e.userDao.Update(newUser)

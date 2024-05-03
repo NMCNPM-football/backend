@@ -8,8 +8,11 @@ import (
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/metadata"
+	_ "google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	"net/http"
+	"strings"
 )
 
 var (
@@ -92,4 +95,25 @@ func handleRoutingError(ctx context.Context, mux *runtime.ServeMux, marshaler ru
 	}
 
 	runtime.DefaultHTTPErrorHandler(ctx, mux, marshaler, w, r, err)
+}
+
+func ExtractTokenFromContext(ctx context.Context) (string, error) {
+	// The actual implementation depends on how you're passing the token.
+	// This is just a simple example that assumes the token is passed as a bearer token in the Authorization header.
+	md, ok := metadata.FromIncomingContext(ctx)
+	if !ok {
+		return "", errors.New("no metadata in context")
+	}
+
+	authorization := md["authorization"]
+	if len(authorization) < 1 {
+		return "", errors.New("no authorization header")
+	}
+
+	parts := strings.Split(authorization[0], " ")
+	if len(parts) < 2 || parts[0] != "Bearer" {
+		return "", errors.New("invalid authorization header")
+	}
+
+	return parts[1], nil
 }

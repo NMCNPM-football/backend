@@ -16,6 +16,36 @@
     "application/json"
   ],
   "paths": {
+    "/logout": {
+      "get": {
+        "operationId": "UserService_Logout",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/LogoutResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
     "/profile": {
       "get": {
         "summary": "Get a user's profile",
@@ -145,6 +175,14 @@
         }
       }
     },
+    "LogoutResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "SuccessMessageResponse": {
       "type": "object",
       "properties": {
@@ -171,9 +209,6 @@
           "type": "string"
         },
         "address": {
-          "type": "string"
-        },
-        "position": {
           "type": "string"
         }
       }
