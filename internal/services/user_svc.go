@@ -106,10 +106,11 @@ func (e *UserService) UpdateProfile(ctx context.Context, in *gen.UpdateProfileRe
 	}
 
 	newUser := &models.User{
-		Email:   user.Email,
-		Name:    in.Name,
-		Phone:   in.Phone,
-		Address: in.Address,
+		Email:    user.Email,
+		Name:     in.Name,
+		Phone:    in.Phone,
+		Address:  in.Address,
+		Position: in.Position,
 	}
 
 	err = e.userDao.Update(newUser)

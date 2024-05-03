@@ -950,6 +950,8 @@ func (m *UpdateProfileRequest) validate(all bool) error {
 
 	// no validation rules for Address
 
+	// no validation rules for Position
+
 	if len(errors) > 0 {
 		return UpdateProfileRequestMultiError(errors)
 	}
