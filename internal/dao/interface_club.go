@@ -5,7 +5,7 @@ import (
 )
 
 type ClubDaoInterface interface {
-	FindByID(id string) (*models.Club, error)
+	FindClubByID(id string) (*models.Club, error)
 	//  FindAllClub(id string) (*models.ClubPlayer, error)
 	FindByDomain(domain string) (*models.Club, error)
 	FindByDomainAndSeason(domain string, season string) (*models.Club, error)
@@ -17,4 +17,5 @@ type ClubDaoInterface interface {
 	GetAllPlayersInClub(clubID string) ([]*models.Player, error)
 	DeletePlayer(playerID string) error
 	CreatePlayer(player *models.Player) error
+	FindClubByNameAndSeaSon(name string, season string) (*models.Club, error)
 }

@@ -65,9 +65,12 @@ func (e *MatchServicePublic) GetAllMatchCalendar(ctx context.Context, request *g
 		response.Data = append(response.Data, &gen.MatchCalendarResponse_Data{
 			ClubOneName: match.ClubOneName,
 			ClubTwoName: match.ClubTwoName,
-			MatchDate:   match.MatchDate,
+			IntendTime:  match.IntendTime,
+			RealTime:    match.RealTime,
 			MatchRound:  match.MatchRound,
-			MatchStatus: match.Status,
+			MatchStatus: match.MatchStatus,
+			Stadium:     match.Stadium,
+			Season:      match.SeaSon,
 		})
 	}
 	matchCount := len(matches)
@@ -90,9 +93,12 @@ func (e *MatchServicePublic) GetAllMatchCalendarsWithStatus(ctx context.Context,
 		response.Data = append(response.Data, &gen.MatchCalendarResponse_Data{
 			ClubOneName: matchCalendar.ClubOneName,
 			ClubTwoName: matchCalendar.ClubTwoName,
-			MatchDate:   matchCalendar.MatchDate,
+			IntendTime:  matchCalendar.IntendTime,
+			RealTime:    matchCalendar.RealTime,
 			MatchRound:  matchCalendar.MatchRound,
-			MatchStatus: matchCalendar.Status,
+			MatchStatus: matchCalendar.MatchStatus,
+			Stadium:     matchCalendar.Stadium,
+			Season:      matchCalendar.SeaSon,
 		})
 	}
 	matchCount := len(matchCalendars)
@@ -112,9 +118,12 @@ func (e *MatchServicePublic) GetMatchCalendarById(ctx context.Context, request *
 		Data: &gen.MatchCalendarResponse_Data{
 			ClubOneName: matchCalendar.ClubOneName,
 			ClubTwoName: matchCalendar.ClubTwoName,
-			MatchDate:   matchCalendar.MatchDate,
+			IntendTime:  matchCalendar.IntendTime,
+			RealTime:    matchCalendar.RealTime,
 			MatchRound:  matchCalendar.MatchRound,
-			MatchStatus: matchCalendar.Status,
+			MatchStatus: matchCalendar.MatchStatus,
+			Stadium:     matchCalendar.Stadium,
+			Season:      matchCalendar.SeaSon,
 		},
 		Message: "Match calendar fetched successfully",
 	}

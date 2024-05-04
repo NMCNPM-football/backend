@@ -8,7 +8,7 @@ import "match.proto";
 service MatchService {
   rpc CreateMatchCalendar (MatchCalendar) returns (MatchCalendarRequest) {
     option (google.api.http) = {
-      post: "/match/calendar"
+      post: "/match/calendar/{season}"
       body: "*"
     };
   }

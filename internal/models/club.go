@@ -8,6 +8,7 @@ type Club struct {
 	SeaSon      string `gorm:"size:50"`
 	Shorthand   string `gorm:"size:50"`
 	NameStadium string `gorm:"size:50"`
+	Stadium     string `gorm:"size:50"`
 	DomainEmail string `gorm:"size:50;not null"`
 	Achievement string `gorm:"size:50"`
 	CreatedBy   string `gorm:"size:50"`
@@ -57,4 +58,13 @@ type Summary struct {
 	RedCards       int
 	GoalDifference int
 	Points         int
+}
+
+type Stadium struct {
+	Base
+	ClubID         string `gorm:"size:50;foreignKey"`
+	StadiumName    string `gorm:"size:50"`
+	StadiumAddress string `gorm:"size:50"`
+	SeasonID       string `gorm:"size:50"`
+	Club           Club   `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
 }

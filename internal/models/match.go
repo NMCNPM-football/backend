@@ -42,12 +42,17 @@ type Progress struct {
 
 type MatchCalendar struct {
 	Base
-	ClubOneName string `gorm:"size:50"`
-	ClubTwoName string `gorm:"size:50"`
-	MatchDate   string `gorm:"size:50"`
+	ClubOneName string `gorm:"size:50"` //Home club name
+	ClubTwoName string `gorm:"size:50"` //Away club name
+	IntendTime  string `gorm:"size:50"`
+	RealTime    string `gorm:"size:50"`
+	Stadium     string `gorm:"size:50"`
 	MatchRound  string `gorm:"size:50"`
 	MatchTurn   string `gorm:"size:50"`
-	Status      string `gorm:"size:50;default:'no'"`
+	IdClubOne   string `gorm:"size:50"`
+	IdClubTwo   string `gorm:"size:50"`
+	MatchStatus string `gorm:"size:50;default:'no'"`
+	SeaSon      string `gorm:"size:50"`
 }
 
 type GoalType struct {

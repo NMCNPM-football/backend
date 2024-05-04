@@ -135,13 +135,22 @@
         "clubTwoName": {
           "type": "string"
         },
-        "matchDate": {
+        "intendTime": {
+          "type": "string"
+        },
+        "realTime": {
           "type": "string"
         },
         "matchRound": {
           "type": "string"
         },
         "matchTurn": {
+          "type": "string"
+        },
+        "stadium": {
+          "type": "string"
+        },
+        "season": {
           "type": "string"
         },
         "matchStatus": {

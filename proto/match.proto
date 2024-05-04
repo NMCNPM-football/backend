@@ -5,10 +5,15 @@ message MatchCalendar {
   string id = 1;
   string club_one_name = 2;
   string club_two_name = 3;
-  string match_date = 4;
-  string match_round = 5;
-  string match_turn = 6;
-  string match_status = 7;
+  string intend_time = 4;
+  string real_time = 5;
+  string match_round = 6;
+  string match_turn = 7;
+  string id_club_one = 8;
+  string id_club_two = 9;
+  string season = 10;
+  string stadium = 11;
+  string match_status = 12;
 }
 
 
@@ -24,10 +29,13 @@ message MatchCalendarResponse {
   message Data {
     string club_one_name = 1;
     string club_two_name = 2;
-    string match_date = 3;
-    string match_round = 4;
-    string match_turn = 5;
-    string match_status = 6;
+    string intend_time = 3;
+    string real_time = 4;
+    string match_round = 5;
+    string match_turn = 6;
+    string stadium = 7;
+    string season = 8;
+    string match_status = 9;
   }
   Data data = 1;
   string message = 2;

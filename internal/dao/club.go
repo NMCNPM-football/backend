@@ -14,7 +14,7 @@ func NewClubDao(db *gorm.DB) *ClubDao {
 	return &ClubDao{db}
 }
 
-func (m *ClubDao) FindByID(id string) (*models.Club, error) {
+func (m *ClubDao) FindClubByID(id string) (*models.Club, error) {
 	var club *models.Club
 
 	if err := m.db.Where("id = ?", id).First(&club).Error; err != nil {
@@ -112,4 +112,18 @@ func (m *ClubDao) CreatePlayer(player *models.Player) error {
 	}
 
 	return nil
+}
+
+func (m *ClubDao) FindClubByNameAndSeaSon(name string, season string) (*models.Club, error) {
+	var club *models.Club
+
+	if err := m.db.Where("name_club = ? AND sea_son = ?", name, season).First(&club).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
+
+		return nil, errors.Wrap(err, "u.db.Where.First")
+	}
+
+	return club, nil
 }

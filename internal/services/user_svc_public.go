@@ -182,7 +182,7 @@ func (e *UserServicePublic) authenticatorByEmailPassword(email, password string)
 //		return nil, must.HandlerError(err, e.logger)
 //	}
 //
-//	company, err := e.companyDao.FindByID(user.CompanyID)
+//	company, err := e.companyDao.FindClubByID(user.CompanyID)
 //	if err != nil {
 //		return nil, must.HandlerError(err, e.logger)
 //	}

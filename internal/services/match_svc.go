@@ -54,17 +54,31 @@ func (e *MatchService) CreateMatchCalendar(ctx context.Context, request *gen.Mat
 	if user.Position != "Admin" {
 		return nil, fmt.Errorf("access denied: user is not an admin")
 	}
-
+	season := request.Season
+	clubOne := request.ClubOneName
+	clubTwo := request.ClubTwoName
+	clubOneInfo, err := e.clubDao.FindClubByNameAndSeaSon(clubOne, season)
+	if err != nil || clubOneInfo == nil {
+		return nil, fmt.Errorf("failed to get club one info: %w", err)
+	}
+	clubTwoInfo, err := e.clubDao.FindClubByNameAndSeaSon(clubTwo, season)
+	if err != nil || clubTwoInfo == nil {
+		return nil, fmt.Errorf("failed to get club two info: %w", err)
+	}
 	// Create a new MatchCalendar model
 	newMatchCalendar := &models.MatchCalendar{
+		SeaSon:      request.Season,
 		ClubOneName: request.ClubOneName,
 		ClubTwoName: request.ClubTwoName,
-		MatchDate:   request.MatchDate,
+		IdClubOne:   clubOneInfo.ID,
+		IdClubTwo:   clubTwoInfo.ID,
+		IntendTime:  request.IntendTime,
+		Stadium:     clubOneInfo.Stadium,
+		RealTime:    "",
 		MatchRound:  request.MatchRound,
 	}
 
 	// Use the matchDao to insert the new MatchCalendar into the database
-
 	err = e.matchDao.CreateMatchCalendar(newMatchCalendar)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create match calendar: %w", err)
@@ -91,7 +105,9 @@ func (e *MatchService) UpdateMatchCalendar(ctx context.Context, request *gen.Mat
 	updateMatchCalendar := &models.MatchCalendar{
 		ClubOneName: request.ClubOneName,
 		ClubTwoName: request.ClubTwoName,
-		MatchDate:   request.MatchDate,
+		IntendTime:  request.IntendTime,
+		Stadium:     request.Stadium,
+		RealTime:    request.RealTime,
 		MatchRound:  request.MatchRound,
 	}
 	err = e.matchDao.UpdateMatchCalendar(updateMatchCalendar, match.ID)
@@ -103,7 +119,9 @@ func (e *MatchService) UpdateMatchCalendar(ctx context.Context, request *gen.Mat
 		Data: &gen.MatchCalendarResponse_Data{
 			ClubOneName: updateMatchCalendar.ClubOneName,
 			ClubTwoName: updateMatchCalendar.ClubTwoName,
-			MatchDate:   updateMatchCalendar.MatchDate,
+			IntendTime:  updateMatchCalendar.IntendTime,
+			Stadium:     updateMatchCalendar.Stadium,
+			RealTime:    updateMatchCalendar.RealTime,
 			MatchRound:  updateMatchCalendar.MatchRound,
 		},
 		Message: "Match calendar updated successfully",

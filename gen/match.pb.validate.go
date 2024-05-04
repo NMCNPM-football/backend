@@ -63,11 +63,21 @@ func (m *MatchCalendar) validate(all bool) error {
 
 	// no validation rules for ClubTwoName
 
-	// no validation rules for MatchDate
+	// no validation rules for IntendTime
+
+	// no validation rules for RealTime
 
 	// no validation rules for MatchRound
 
 	// no validation rules for MatchTurn
+
+	// no validation rules for IdClubOne
+
+	// no validation rules for IdClubTwo
+
+	// no validation rules for Season
+
+	// no validation rules for Stadium
 
 	// no validation rules for MatchStatus
 
@@ -652,11 +662,17 @@ func (m *MatchCalendarResponse_Data) validate(all bool) error {
 
 	// no validation rules for ClubTwoName
 
-	// no validation rules for MatchDate
+	// no validation rules for IntendTime
+
+	// no validation rules for RealTime
 
 	// no validation rules for MatchRound
 
 	// no validation rules for MatchTurn
+
+	// no validation rules for Stadium
+
+	// no validation rules for Season
 
 	// no validation rules for MatchStatus
 
