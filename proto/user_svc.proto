@@ -35,4 +35,16 @@ service UserService {
     };
   }
 
+  rpc GetUsers (EmptyRequest) returns (GetUsersResponse) {
+    option (google.api.http) = {
+      get: "/users/all"
+    };
+  }
+
+  rpc GetUserById (GetUserByIdRequest) returns (GetProfileResponse) {
+    option (google.api.http) = {
+      get: "/users/{id}"
+    };
+  }
+
 }

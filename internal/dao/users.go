@@ -93,3 +93,11 @@ func (u *UserDao) UnDeleteByEmail(user *models.User) error {
 
 	return nil
 }
+
+func (u *UserDao) GetAllUsers() ([]*models.User, error) {
+	var users []*models.User
+	if err := u.db.Find(&users).Error; err != nil {
+		return nil, err
+	}
+	return users, nil
+}

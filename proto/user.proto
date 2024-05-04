@@ -46,8 +46,8 @@ message GetProfileResponse {
     string email = 2;
     string phone = 3;
     string address = 4;
-    string club_id = 5;
-    string position = 6;
+    string position = 5;
+    string club_name = 6;
   }
   Data data = 1;
 }
@@ -70,3 +70,20 @@ message LogoutRequest {
 message LogoutResponse {
   string message = 1;
 }
+
+message GetUsersResponse{
+  message Data {
+    string name = 1;
+    string email = 2;
+    string phone = 3;
+    string address = 4;
+    string position = 5;
+    string club_name = 6;
+  }
+  repeated Data data = 1;
+}
+
+message GetUserByIdRequest {
+  string id = 1;
+}
+

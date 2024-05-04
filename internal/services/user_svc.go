@@ -2,6 +2,7 @@ package services
 
 import (
 	"context"
+	"fmt"
 	"github.com/NMCNPM-football/backend/config"
 	"github.com/NMCNPM-football/backend/gen"
 	"github.com/NMCNPM-football/backend/internal/dao"
@@ -26,6 +27,69 @@ type UserService struct {
 	cfg     *config.Config
 	userDao dao.UserDaoInterface
 	clubDao dao.ClubDaoInterface
+}
+
+func (e *UserService) GetUserById(ctx context.Context, request *gen.GetUserByIdRequest) (*gen.GetProfileResponse, error) {
+	user, err := e.userFromContext(ctx, e.userDao)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user from context: %w", err)
+	}
+	if user.Position != "Admin" {
+		return nil, fmt.Errorf("access denied: user is not an admin")
+	}
+
+	user, err = e.userDao.FindByID(request.Id)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user: %w", err)
+	}
+	// Convert the user into the format required by the response
+	responseData := &gen.GetProfileResponse_Data{
+		Name:     user.Name,
+		Email:    user.Email,
+		Phone:    user.Phone,
+		Address:  user.Address,
+		ClubName: user.Club,
+		Position: user.Position,
+	}
+
+	// Return the response
+	return &gen.GetProfileResponse{
+		Data: responseData,
+	}, nil
+}
+
+func (e *UserService) GetUsers(ctx context.Context, request *gen.EmptyRequest) (*gen.GetUsersResponse, error) {
+	user, err := e.userFromContext(ctx, e.userDao)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user from context: %w", err)
+	}
+	if user.Position != "Admin" {
+		return nil, fmt.Errorf("access denied: user is not an admin")
+	}
+	users, err := e.userDao.GetAllUsers()
+	if err != nil {
+		return nil, fmt.Errorf("failed to get users: %w", err)
+	}
+
+	// Initialize a slice to hold the response data
+	var responseData []*gen.GetUsersResponse_Data
+
+	// Loop through the users and convert them into the format required by the response
+	for _, user := range users {
+		responseData = append(responseData, &gen.GetUsersResponse_Data{
+			Name:     user.Name,
+			Email:    user.Email,
+			Phone:    user.Phone,
+			Address:  user.Address,
+			ClubName: user.Club,
+			Position: user.Position,
+		})
+	}
+
+	// Return the response
+	return &gen.GetUsersResponse{
+		Data: responseData,
+	}, nil
 }
 
 func (e *UserService) Logout(ctx context.Context, request *gen.LogoutRequest) (*gen.LogoutResponse, error) {
@@ -94,11 +158,11 @@ func (e *UserService) GetProfile(ctx context.Context, in *gen.EmptyRequest) (*ge
 
 	return &gen.GetProfileResponse{
 		Data: &gen.GetProfileResponse_Data{
-			Email:   user.Email,
-			Name:    user.Name,
-			Phone:   user.Phone,
-			Address: user.Address,
-			ClubId:  user.ClubID,
+			Email:    user.Email,
+			Name:     user.Name,
+			Phone:    user.Phone,
+			Address:  user.Address,
+			ClubName: user.Club,
 		},
 	}, nil
 }
