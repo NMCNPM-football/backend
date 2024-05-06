@@ -101,3 +101,11 @@ func (u *UserDao) GetAllUsers() ([]*models.User, error) {
 	}
 	return users, nil
 }
+
+func (u *UserDao) UpdatePosition(position *models.User, ID string) error {
+	if err := u.db.Where("id = ?", ID).Updates(&position).Error; err != nil {
+		return errors.Wrap(err, "c.db.Model.Where.Updates")
+	}
+
+	return nil
+}

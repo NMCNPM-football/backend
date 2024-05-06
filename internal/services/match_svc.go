@@ -46,7 +46,7 @@ func (e *MatchService) RegisterHandler(ctx context.Context, mux *runtime.ServeMu
 }
 
 func (e *MatchService) CreateMatchCalendar(ctx context.Context, request *gen.MatchCalendar) (*gen.MatchCalendarRequest, error) {
-	// Extract the MatchCalendar data from the request
+	// Extract the Matches data from the request
 	user, err := e.userFromContext(ctx, e.userDao)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get user from context: %w", err)
@@ -65,8 +65,8 @@ func (e *MatchService) CreateMatchCalendar(ctx context.Context, request *gen.Mat
 	if err != nil || clubTwoInfo == nil {
 		return nil, fmt.Errorf("failed to get club two info: %w", err)
 	}
-	// Create a new MatchCalendar model
-	newMatchCalendar := &models.MatchCalendar{
+	// Create a new Matches model
+	newMatchCalendar := &models.Matches{
 		SeaSon:      request.Season,
 		ClubOneName: request.ClubOneName,
 		ClubTwoName: request.ClubTwoName,
@@ -78,13 +78,13 @@ func (e *MatchService) CreateMatchCalendar(ctx context.Context, request *gen.Mat
 		MatchRound:  request.MatchRound,
 	}
 
-	// Use the matchDao to insert the new MatchCalendar into the database
+	// Use the matchDao to insert the new Matches into the database
 	err = e.matchDao.CreateMatchCalendar(newMatchCalendar)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create match calendar: %w", err)
 	}
 
-	// If the insertion is successful, return a CreateMatchCalendarResponse with the ID of the new MatchCalendar
+	// If the insertion is successful, return a CreateMatchCalendarResponse with the ID of the new Matches
 	return &gen.MatchCalendarRequest{
 		Id: newMatchCalendar.ID,
 	}, nil
@@ -102,7 +102,7 @@ func (e *MatchService) UpdateMatchCalendar(ctx context.Context, request *gen.Mat
 	if err != nil {
 		return nil, must.HandlerError(err, e.logger)
 	}
-	updateMatchCalendar := &models.MatchCalendar{
+	updateMatchCalendar := &models.Matches{
 		ClubOneName: request.ClubOneName,
 		ClubTwoName: request.ClubTwoName,
 		IntendTime:  request.IntendTime,

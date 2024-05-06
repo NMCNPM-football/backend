@@ -191,3 +191,32 @@ func (e *UserService) UpdateProfile(ctx context.Context, in *gen.UpdateProfileRe
 		},
 	}, nil
 }
+
+func (e *UserService) UpdatePosition(ctx context.Context, in *gen.UpdatePositionRequest) (*gen.SuccessMessageResponse, error) {
+	user, err := e.userFromContext(ctx, e.userDao)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user from context: %w", err)
+	}
+	if user.Position != "Admin" {
+		return nil, fmt.Errorf("access denied: user is not an admin")
+	}
+
+	customer, err := e.userDao.FindByID(in.Id)
+	if err != nil {
+		return nil, must.HandlerError(err, e.logger)
+	}
+	updateCustomer := &models.User{
+		Position: in.Position,
+	}
+
+	err = e.userDao.UpdatePosition(updateCustomer, customer.ID)
+	if err != nil {
+		return nil, must.HandlerError(err, e.logger)
+	}
+
+	return &gen.SuccessMessageResponse{
+		Data: &gen.SuccessMessageResponseSuccessMessage{
+			Message: "Update successfully",
+		},
+	}, nil
+}

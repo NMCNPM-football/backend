@@ -58,6 +58,11 @@ message UpdateProfileRequest {
   string address = 3;
 }
 
+message UpdatePositionRequest{
+  string position = 1;
+  string id = 2;
+}
+
 message DeactivateProfileRequest {
   string email = 1;
   string password = 2;

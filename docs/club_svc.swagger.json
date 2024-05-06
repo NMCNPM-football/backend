@@ -403,6 +403,38 @@
           "ClubService"
         ]
       }
+    },
+    "/stadium": {
+      "post": {
+        "operationId": "ClubService_CreateStadium",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StadiumProfileRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClubService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -655,6 +687,29 @@
           }
         },
         "message": {
+          "type": "string"
+        }
+      }
+    },
+    "StadiumProfileRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "stadiumName": {
+          "type": "string"
+        },
+        "capacity": {
+          "type": "string"
+        },
+        "stadiumAddress": {
+          "type": "string"
+        },
+        "clubId": {
+          "type": "string"
+        },
+        "seaSon": {
           "type": "string"
         }
       }

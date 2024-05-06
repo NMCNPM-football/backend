@@ -30,6 +30,7 @@ const (
 	ClubService_UpdateCoach_FullMethodName         = "/proto.ClubService/UpdateCoach"
 	ClubService_GetCoachProfile_FullMethodName     = "/proto.ClubService/GetCoachProfile"
 	ClubService_GetListCoachProfile_FullMethodName = "/proto.ClubService/GetListCoachProfile"
+	ClubService_CreateStadium_FullMethodName       = "/proto.ClubService/CreateStadium"
 )
 
 // ClubServiceClient is the client API for ClubService service.
@@ -48,6 +49,7 @@ type ClubServiceClient interface {
 	UpdateCoach(ctx context.Context, in *CoachProfileRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
 	GetCoachProfile(ctx context.Context, in *CoachRequest, opts ...grpc.CallOption) (*CoachProfileResponse, error)
 	GetListCoachProfile(ctx context.Context, in *CoachProfileListRequest, opts ...grpc.CallOption) (*CoachProfileListResponse, error)
+	CreateStadium(ctx context.Context, in *StadiumProfileRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
 }
 
 type clubServiceClient struct {
@@ -157,6 +159,15 @@ func (c *clubServiceClient) GetListCoachProfile(ctx context.Context, in *CoachPr
 	return out, nil
 }
 
+func (c *clubServiceClient) CreateStadium(ctx context.Context, in *StadiumProfileRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error) {
+	out := new(SuccessMessageResponse)
+	err := c.cc.Invoke(ctx, ClubService_CreateStadium_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ClubServiceServer is the server API for ClubService service.
 // All implementations should embed UnimplementedClubServiceServer
 // for forward compatibility
@@ -173,6 +184,7 @@ type ClubServiceServer interface {
 	UpdateCoach(context.Context, *CoachProfileRequest) (*SuccessMessageResponse, error)
 	GetCoachProfile(context.Context, *CoachRequest) (*CoachProfileResponse, error)
 	GetListCoachProfile(context.Context, *CoachProfileListRequest) (*CoachProfileListResponse, error)
+	CreateStadium(context.Context, *StadiumProfileRequest) (*SuccessMessageResponse, error)
 }
 
 // UnimplementedClubServiceServer should be embedded to have forward compatible implementations.
@@ -211,6 +223,9 @@ func (UnimplementedClubServiceServer) GetCoachProfile(context.Context, *CoachReq
 }
 func (UnimplementedClubServiceServer) GetListCoachProfile(context.Context, *CoachProfileListRequest) (*CoachProfileListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetListCoachProfile not implemented")
+}
+func (UnimplementedClubServiceServer) CreateStadium(context.Context, *StadiumProfileRequest) (*SuccessMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateStadium not implemented")
 }
 
 // UnsafeClubServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -422,6 +437,24 @@ func _ClubService_GetListCoachProfile_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClubService_CreateStadium_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StadiumProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClubServiceServer).CreateStadium(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClubService_CreateStadium_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClubServiceServer).CreateStadium(ctx, req.(*StadiumProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ClubService_ServiceDesc is the grpc.ServiceDesc for ClubService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -472,6 +505,10 @@ var ClubService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetListCoachProfile",
 			Handler:    _ClubService_GetListCoachProfile_Handler,
+		},
+		{
+			MethodName: "CreateStadium",
+			Handler:    _ClubService_CreateStadium_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

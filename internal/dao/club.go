@@ -127,3 +127,11 @@ func (m *ClubDao) FindClubByNameAndSeaSon(name string, season string) (*models.C
 
 	return club, nil
 }
+
+func (m *ClubDao) CreateStadium(stadium *models.Stadium) error {
+	if err := m.db.Create(&stadium).Error; err != nil {
+		return errors.Wrap(err, "c.db.Create")
+	}
+
+	return nil
+}

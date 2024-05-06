@@ -46,5 +46,10 @@ service UserService {
       get: "/users/{id}"
     };
   }
-
+  rpc UpdatePosition (UpdatePositionRequest) returns (SuccessMessageResponse) {
+    option (google.api.http) = {
+      put: "/position/{id}"
+      body: "*"
+    };
+  }
 }

@@ -13,7 +13,7 @@ func Migration(db *gorm.DB) error {
 		&models.Club{},
 		&models.SeaSon{},
 		&models.Player{},
-		&models.MatchCalendar{},
+		&models.Matches{},
 		&models.Stadium{},
 	); err != nil {
 		return errors.Wrap(err, "db.AutoMigrate")

@@ -934,6 +934,93 @@ func (x *CoachRequest) GetId() string {
 	return ""
 }
 
+type StadiumProfileRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id             string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	StadiumName    string `protobuf:"bytes,2,opt,name=stadium_name,json=stadiumName,proto3" json:"stadium_name,omitempty"`
+	Capacity       string `protobuf:"bytes,3,opt,name=capacity,proto3" json:"capacity,omitempty"`
+	StadiumAddress string `protobuf:"bytes,4,opt,name=stadium_address,json=stadiumAddress,proto3" json:"stadium_address,omitempty"`
+	ClubId         string `protobuf:"bytes,5,opt,name=club_id,json=clubId,proto3" json:"club_id,omitempty"`
+	SeaSon         string `protobuf:"bytes,6,opt,name=sea_son,json=seaSon,proto3" json:"sea_son,omitempty"`
+}
+
+func (x *StadiumProfileRequest) Reset() {
+	*x = StadiumProfileRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_club_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *StadiumProfileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StadiumProfileRequest) ProtoMessage() {}
+
+func (x *StadiumProfileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_club_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StadiumProfileRequest.ProtoReflect.Descriptor instead.
+func (*StadiumProfileRequest) Descriptor() ([]byte, []int) {
+	return file_club_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *StadiumProfileRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *StadiumProfileRequest) GetStadiumName() string {
+	if x != nil {
+		return x.StadiumName
+	}
+	return ""
+}
+
+func (x *StadiumProfileRequest) GetCapacity() string {
+	if x != nil {
+		return x.Capacity
+	}
+	return ""
+}
+
+func (x *StadiumProfileRequest) GetStadiumAddress() string {
+	if x != nil {
+		return x.StadiumAddress
+	}
+	return ""
+}
+
+func (x *StadiumProfileRequest) GetClubId() string {
+	if x != nil {
+		return x.ClubId
+	}
+	return ""
+}
+
+func (x *StadiumProfileRequest) GetSeaSon() string {
+	if x != nil {
+		return x.SeaSon
+	}
+	return ""
+}
+
 type ClubProfileResponse_Data struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -953,7 +1040,7 @@ type ClubProfileResponse_Data struct {
 func (x *ClubProfileResponse_Data) Reset() {
 	*x = ClubProfileResponse_Data{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_club_proto_msgTypes[14]
+		mi := &file_club_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -966,7 +1053,7 @@ func (x *ClubProfileResponse_Data) String() string {
 func (*ClubProfileResponse_Data) ProtoMessage() {}
 
 func (x *ClubProfileResponse_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_club_proto_msgTypes[14]
+	mi := &file_club_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1067,7 +1154,7 @@ type PLayerProfileResponse_Data struct {
 func (x *PLayerProfileResponse_Data) Reset() {
 	*x = PLayerProfileResponse_Data{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_club_proto_msgTypes[15]
+		mi := &file_club_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1080,7 +1167,7 @@ func (x *PLayerProfileResponse_Data) String() string {
 func (*PLayerProfileResponse_Data) ProtoMessage() {}
 
 func (x *PLayerProfileResponse_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_club_proto_msgTypes[15]
+	mi := &file_club_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1198,7 +1285,7 @@ type CoachProfileResponse_Data struct {
 func (x *CoachProfileResponse_Data) Reset() {
 	*x = CoachProfileResponse_Data{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_club_proto_msgTypes[16]
+		mi := &file_club_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1211,7 +1298,7 @@ func (x *CoachProfileResponse_Data) String() string {
 func (*CoachProfileResponse_Data) ProtoMessage() {}
 
 func (x *CoachProfileResponse_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_club_proto_msgTypes[16]
+	mi := &file_club_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1442,11 +1529,23 @@ var file_club_proto_rawDesc = []byte{
 	0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73,
 	0x73, 0x61, 0x67, 0x65, 0x22, 0x1e, 0x0a, 0x0c, 0x43, 0x6f, 0x61, 0x63, 0x68, 0x52, 0x65, 0x71,
 	0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x02, 0x69, 0x64, 0x42, 0x35, 0x42, 0x09, 0x43, 0x6c, 0x75, 0x62, 0x50, 0x72, 0x6f, 0x74,
-	0x6f, 0x50, 0x01, 0x5a, 0x26, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f,
-	0x4e, 0x4d, 0x43, 0x4e, 0x50, 0x4d, 0x2d, 0x66, 0x6f, 0x6f, 0x74, 0x62, 0x61, 0x6c, 0x6c, 0x2f,
-	0x62, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x2f, 0x67, 0x65, 0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x52, 0x02, 0x69, 0x64, 0x22, 0xc1, 0x01, 0x0a, 0x15, 0x53, 0x74, 0x61, 0x64, 0x69, 0x75, 0x6d,
+	0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e,
+	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x21,
+	0x0a, 0x0c, 0x73, 0x74, 0x61, 0x64, 0x69, 0x75, 0x6d, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x73, 0x74, 0x61, 0x64, 0x69, 0x75, 0x6d, 0x4e, 0x61, 0x6d,
+	0x65, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x61, 0x70, 0x61, 0x63, 0x69, 0x74, 0x79, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x08, 0x63, 0x61, 0x70, 0x61, 0x63, 0x69, 0x74, 0x79, 0x12, 0x27, 0x0a,
+	0x0f, 0x73, 0x74, 0x61, 0x64, 0x69, 0x75, 0x6d, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x73, 0x74, 0x61, 0x64, 0x69, 0x75, 0x6d, 0x41,
+	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x17, 0x0a, 0x07, 0x63, 0x6c, 0x75, 0x62, 0x5f, 0x69,
+	0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x63, 0x6c, 0x75, 0x62, 0x49, 0x64, 0x12,
+	0x17, 0x0a, 0x07, 0x73, 0x65, 0x61, 0x5f, 0x73, 0x6f, 0x6e, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x06, 0x73, 0x65, 0x61, 0x53, 0x6f, 0x6e, 0x42, 0x35, 0x42, 0x09, 0x43, 0x6c, 0x75, 0x62,
+	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x26, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
+	0x63, 0x6f, 0x6d, 0x2f, 0x4e, 0x4d, 0x43, 0x4e, 0x50, 0x4d, 0x2d, 0x66, 0x6f, 0x6f, 0x74, 0x62,
+	0x61, 0x6c, 0x6c, 0x2f, 0x62, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x2f, 0x67, 0x65, 0x6e, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1461,7 +1560,7 @@ func file_club_proto_rawDescGZIP() []byte {
 	return file_club_proto_rawDescData
 }
 
-var file_club_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_club_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_club_proto_goTypes = []interface{}{
 	(*ClubProfileResponse)(nil),        // 0: ClubProfileResponse
 	(*ClubProfileRequest)(nil),         // 1: ClubProfileRequest
@@ -1477,18 +1576,19 @@ var file_club_proto_goTypes = []interface{}{
 	(*CoachProfileListRequest)(nil),    // 11: CoachProfileListRequest
 	(*CoachProfileListResponse)(nil),   // 12: CoachProfileListResponse
 	(*CoachRequest)(nil),               // 13: CoachRequest
-	(*ClubProfileResponse_Data)(nil),   // 14: ClubProfileResponse.Data
-	(*PLayerProfileResponse_Data)(nil), // 15: PLayerProfileResponse.Data
-	(*CoachProfileResponse_Data)(nil),  // 16: CoachProfileResponse.Data
+	(*StadiumProfileRequest)(nil),      // 14: StadiumProfileRequest
+	(*ClubProfileResponse_Data)(nil),   // 15: ClubProfileResponse.Data
+	(*PLayerProfileResponse_Data)(nil), // 16: PLayerProfileResponse.Data
+	(*CoachProfileResponse_Data)(nil),  // 17: CoachProfileResponse.Data
 }
 var file_club_proto_depIdxs = []int32{
-	14, // 0: ClubProfileResponse.data:type_name -> ClubProfileResponse.Data
-	15, // 1: PLayerProfileResponse.data:type_name -> PLayerProfileResponse.Data
+	15, // 0: ClubProfileResponse.data:type_name -> ClubProfileResponse.Data
+	16, // 1: PLayerProfileResponse.data:type_name -> PLayerProfileResponse.Data
 	2,  // 2: CreatePlayerRequest.player:type_name -> PLayerProfileRequest
-	15, // 3: PlayerProfileListResponse.data:type_name -> PLayerProfileResponse.Data
-	14, // 4: ClubProfileListResponse.data:type_name -> ClubProfileResponse.Data
-	16, // 5: CoachProfileResponse.data:type_name -> CoachProfileResponse.Data
-	16, // 6: CoachProfileListResponse.data:type_name -> CoachProfileResponse.Data
+	16, // 3: PlayerProfileListResponse.data:type_name -> PLayerProfileResponse.Data
+	15, // 4: ClubProfileListResponse.data:type_name -> ClubProfileResponse.Data
+	17, // 5: CoachProfileResponse.data:type_name -> CoachProfileResponse.Data
+	17, // 6: CoachProfileListResponse.data:type_name -> CoachProfileResponse.Data
 	7,  // [7:7] is the sub-list for method output_type
 	7,  // [7:7] is the sub-list for method input_type
 	7,  // [7:7] is the sub-list for extension type_name
@@ -1671,7 +1771,7 @@ func file_club_proto_init() {
 			}
 		}
 		file_club_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ClubProfileResponse_Data); i {
+			switch v := v.(*StadiumProfileRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1683,7 +1783,7 @@ func file_club_proto_init() {
 			}
 		}
 		file_club_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PLayerProfileResponse_Data); i {
+			switch v := v.(*ClubProfileResponse_Data); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1695,6 +1795,18 @@ func file_club_proto_init() {
 			}
 		}
 		file_club_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PLayerProfileResponse_Data); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_club_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CoachProfileResponse_Data); i {
 			case 0:
 				return &v.state
@@ -1713,7 +1825,7 @@ func file_club_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_club_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   17,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

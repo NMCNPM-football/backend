@@ -69,4 +69,10 @@ service ClubService {
       get: "/club/coach/all"
     };
   }
+  rpc CreateStadium (StadiumProfileRequest) returns (SuccessMessageResponse) {
+    option (google.api.http) = {
+      post: "/stadium"
+      body: "*"
+    };
+  }
 }

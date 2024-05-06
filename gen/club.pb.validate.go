@@ -1754,6 +1754,120 @@ var _ interface {
 	ErrorName() string
 } = CoachRequestValidationError{}
 
+// Validate checks the field values on StadiumProfileRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *StadiumProfileRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on StadiumProfileRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// StadiumProfileRequestMultiError, or nil if none found.
+func (m *StadiumProfileRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *StadiumProfileRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for StadiumName
+
+	// no validation rules for Capacity
+
+	// no validation rules for StadiumAddress
+
+	// no validation rules for ClubId
+
+	// no validation rules for SeaSon
+
+	if len(errors) > 0 {
+		return StadiumProfileRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// StadiumProfileRequestMultiError is an error wrapping multiple validation
+// errors returned by StadiumProfileRequest.ValidateAll() if the designated
+// constraints aren't met.
+type StadiumProfileRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m StadiumProfileRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m StadiumProfileRequestMultiError) AllErrors() []error { return m }
+
+// StadiumProfileRequestValidationError is the validation error returned by
+// StadiumProfileRequest.Validate if the designated constraints aren't met.
+type StadiumProfileRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e StadiumProfileRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e StadiumProfileRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e StadiumProfileRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e StadiumProfileRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e StadiumProfileRequestValidationError) ErrorName() string {
+	return "StadiumProfileRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e StadiumProfileRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sStadiumProfileRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = StadiumProfileRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = StadiumProfileRequestValidationError{}
+
 // Validate checks the field values on ClubProfileResponse_Data with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

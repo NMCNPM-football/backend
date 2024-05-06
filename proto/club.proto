@@ -122,3 +122,12 @@ message CoachProfileListResponse {
 message CoachRequest{
   string id = 1;
 }
+
+message StadiumProfileRequest{
+    string id = 1;
+    string stadium_name = 2;
+    string capacity = 3;
+    string stadium_address = 4;
+    string club_id = 5;
+    string sea_son = 6;
+}

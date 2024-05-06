@@ -18,4 +18,5 @@ type UserDaoInterface interface {
 	FindUsersByClub(clubName string) ([]*models.User, error)
 	RegisterAsAdmin(user *models.User) error
 	GetAllUsers() ([]*models.User, error)
+	UpdatePosition(position *models.User, ID string) error
 }

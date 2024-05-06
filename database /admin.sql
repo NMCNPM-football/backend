@@ -3,7 +3,7 @@ USE SE104;
 INSERT INTO `users` (`id`, `name`, `email`, `password` ,`is_verified_email`) VALUES
 (SHA1(UUID()), 'admin', 'admin@gmail.com','admin','1');
 
-INSERT INTO match_calendars
+INSERT INTO matches
 (`id`, `sea_son`, `club_one_name`, `id_club_one`, `club_two_name`, `id_club_two`, `intend_time`, `real_time`, `match_round`, `match_turn`, `stadium`)
 VALUES
     (

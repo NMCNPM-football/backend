@@ -1,16 +1,5 @@
 package models
 
-type Matches struct {
-	ID        string `gorm:"primary_key;size:100"`
-	Date      string `gorm:"size:50"`
-	SeaSonID  string `gorm:"size:50"`
-	Turn      string `gorm:"size:50"`
-	HomeTeam  string `gorm:"size:50"`
-	AwayTeam  string `gorm:"size:50"`
-	MatchDate string `gorm:"size:50"`
-	Location  string `gorm:"size:50"`
-}
-
 type Results struct {
 	MatchID      string `gorm:"primary_key;size:100"`
 	HomeTeamGoal int    `gorm:"size:50"`
@@ -40,7 +29,7 @@ type Progress struct {
 	ProgressDetails
 }
 
-type MatchCalendar struct {
+type Matches struct {
 	Base
 	ClubOneName string `gorm:"size:50"` //Home club name
 	ClubTwoName string `gorm:"size:50"` //Away club name

@@ -19,12 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	UserService_RefreshToken_FullMethodName  = "/proto.UserService/RefreshToken"
-	UserService_GetProfile_FullMethodName    = "/proto.UserService/GetProfile"
-	UserService_UpdateProfile_FullMethodName = "/proto.UserService/UpdateProfile"
-	UserService_Logout_FullMethodName        = "/proto.UserService/Logout"
-	UserService_GetUsers_FullMethodName      = "/proto.UserService/GetUsers"
-	UserService_GetUserById_FullMethodName   = "/proto.UserService/GetUserById"
+	UserService_RefreshToken_FullMethodName   = "/proto.UserService/RefreshToken"
+	UserService_GetProfile_FullMethodName     = "/proto.UserService/GetProfile"
+	UserService_UpdateProfile_FullMethodName  = "/proto.UserService/UpdateProfile"
+	UserService_Logout_FullMethodName         = "/proto.UserService/Logout"
+	UserService_GetUsers_FullMethodName       = "/proto.UserService/GetUsers"
+	UserService_GetUserById_FullMethodName    = "/proto.UserService/GetUserById"
+	UserService_UpdatePosition_FullMethodName = "/proto.UserService/UpdatePosition"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -40,6 +41,7 @@ type UserServiceClient interface {
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
 	GetUsers(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*GetUsersResponse, error)
 	GetUserById(ctx context.Context, in *GetUserByIdRequest, opts ...grpc.CallOption) (*GetProfileResponse, error)
+	UpdatePosition(ctx context.Context, in *UpdatePositionRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
 }
 
 type userServiceClient struct {
@@ -104,6 +106,15 @@ func (c *userServiceClient) GetUserById(ctx context.Context, in *GetUserByIdRequ
 	return out, nil
 }
 
+func (c *userServiceClient) UpdatePosition(ctx context.Context, in *UpdatePositionRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error) {
+	out := new(SuccessMessageResponse)
+	err := c.cc.Invoke(ctx, UserService_UpdatePosition_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations should embed UnimplementedUserServiceServer
 // for forward compatibility
@@ -117,6 +128,7 @@ type UserServiceServer interface {
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 	GetUsers(context.Context, *EmptyRequest) (*GetUsersResponse, error)
 	GetUserById(context.Context, *GetUserByIdRequest) (*GetProfileResponse, error)
+	UpdatePosition(context.Context, *UpdatePositionRequest) (*SuccessMessageResponse, error)
 }
 
 // UnimplementedUserServiceServer should be embedded to have forward compatible implementations.
@@ -140,6 +152,9 @@ func (UnimplementedUserServiceServer) GetUsers(context.Context, *EmptyRequest) (
 }
 func (UnimplementedUserServiceServer) GetUserById(context.Context, *GetUserByIdRequest) (*GetProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserById not implemented")
+}
+func (UnimplementedUserServiceServer) UpdatePosition(context.Context, *UpdatePositionRequest) (*SuccessMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePosition not implemented")
 }
 
 // UnsafeUserServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -261,6 +276,24 @@ func _UserService_GetUserById_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_UpdatePosition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePositionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdatePosition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UpdatePosition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdatePosition(ctx, req.(*UpdatePositionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -291,6 +324,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserById",
 			Handler:    _UserService_GetUserById_Handler,
+		},
+		{
+			MethodName: "UpdatePosition",
+			Handler:    _UserService_UpdatePosition_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

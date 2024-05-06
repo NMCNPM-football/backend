@@ -18,7 +18,7 @@ func TestGetAllMatchCalendars(t *testing.T) {
 
 	// Create a new MatchDao
 	m := NewMatchDao(db)
-	var matchCalendars []*models.MatchCalendar
+	var matchCalendars []*models.Matches
 	err = m.db.Find(&matchCalendars).Error
 	if err != nil {
 		t.Fatalf("Failed to fetch match calendars: %v", err)

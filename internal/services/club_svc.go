@@ -408,3 +408,37 @@ func (e *ClubService) GetListCoachProfile(ctx context.Context, request *gen.Coac
 	//TODO implement me
 	panic("implement me")
 }
+
+func (e *ClubService) CreateStadium(ctx context.Context, request *gen.StadiumProfileRequest) (*gen.SuccessMessageResponse, error) {
+	user, err := e.userFromContext(ctx, e.userDao)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user from context: %w", err)
+	}
+
+	// Get the club from the context
+	club, err := e.clubDao.GetClubByID(user.ClubID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get club by ID: %w", err)
+	}
+
+	// Create a new Stadium model
+	newStadium := &models.Stadium{
+		ClubID:         club.ID,
+		StadiumName:    request.StadiumName,
+		StadiumAddress: request.StadiumAddress,
+		Capacity:       request.Capacity,
+		Season:         club.SeaSon,
+	}
+	// Use the clubDao to insert the new Player into the database
+	err = e.clubDao.CreateStadium(newStadium)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create player: %w", err)
+	}
+
+	// If the insertion is successful, return a SuccessMessageResponse with a success message
+	return &gen.SuccessMessageResponse{
+		Data: &gen.SuccessMessageResponseSuccessMessage{
+			Message: "Stadium created successfully",
+		},
+	}, nil
+}

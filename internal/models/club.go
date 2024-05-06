@@ -62,9 +62,10 @@ type Summary struct {
 
 type Stadium struct {
 	Base
-	ClubID         string `gorm:"size:50;foreignKey"`
+	ClubID         string `gorm:"size:100;foreignKey"`
 	StadiumName    string `gorm:"size:50"`
-	StadiumAddress string `gorm:"size:50"`
-	SeasonID       string `gorm:"size:50"`
+	StadiumAddress string `gorm:"size:100"`
+	Season         string `gorm:"size:50"`
+	Capacity       string `gorm:"size:50"`
 	Club           Club   `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
 }
