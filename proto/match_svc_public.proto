@@ -8,7 +8,7 @@ import "match.proto";
 service MatchServicePublic {
     rpc GetAllMatchCalendarsWithStatus (StatusRequest) returns (MatchCalendarListResponse) {
       option (google.api.http) = {
-        get: "/match/calendar/{status}"
+        get: "/match/{status}"
       };
     }
 
@@ -20,7 +20,7 @@ service MatchServicePublic {
 
     rpc GetMatchCalendarById (MatchCalendarRequest) returns (MatchCalendarResponse) {
       option (google.api.http) = {
-        get: "/match/calendar/{id}"
+        get: "/match/{id}"
       };
     }
 

@@ -53,7 +53,7 @@ func (e *MatchServicePublic) AuthFuncOverride(ctx context.Context, fullMethodNam
 func (e *MatchServicePublic) GetAllMatchCalendar(ctx context.Context, request *gen.EmptyRequest) (*gen.MatchCalendarListResponse, error) {
 	matches, err := e.matchDao.GetAllMatchCalendars()
 	if err != nil {
-		return nil, fmt.Errorf("failed to get all players in club: %w", err)
+		return nil, fmt.Errorf("failed to get all match calendars: %w", err)
 	}
 
 	response := &gen.MatchCalendarListResponse{
@@ -74,10 +74,9 @@ func (e *MatchServicePublic) GetAllMatchCalendar(ctx context.Context, request *g
 		})
 	}
 	matchCount := len(matches)
-	response.Message = fmt.Sprintf("There are %d matches in leauge", matchCount)
+	response.Message = fmt.Sprintf("There are %d matches in league", matchCount)
 	return response, nil
 }
-
 func (e *MatchServicePublic) GetAllMatchCalendarsWithStatus(ctx context.Context, request *gen.StatusRequest) (*gen.MatchCalendarListResponse, error) {
 	matchCalendars, err := e.matchDao.GetAllMatchCalendarsWithStatus(request.Status)
 	if err != nil {
@@ -120,6 +119,7 @@ func (e *MatchServicePublic) GetMatchCalendarById(ctx context.Context, request *
 			ClubTwoName: matchCalendar.ClubTwoName,
 			IntendTime:  matchCalendar.IntendTime,
 			RealTime:    matchCalendar.RealTime,
+			MatchTurn:   matchCalendar.MatchTurn,
 			MatchRound:  matchCalendar.MatchRound,
 			MatchStatus: matchCalendar.MatchStatus,
 			Stadium:     matchCalendar.Stadium,

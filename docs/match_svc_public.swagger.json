@@ -38,7 +38,37 @@
         ]
       }
     },
-    "/match/calendar/{id}": {
+    "/match/result_score/{matchId}": {
+      "get": {
+        "operationId": "MatchServicePublic_GetMatchResultByID",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ResultScoreResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "matchId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MatchServicePublic"
+        ]
+      }
+    },
+    "/match/{id}": {
       "get": {
         "operationId": "MatchServicePublic_GetMatchCalendarById",
         "responses": {
@@ -68,7 +98,7 @@
         ]
       }
     },
-    "/match/calendar/{status}": {
+    "/match/{status}": {
       "get": {
         "operationId": "MatchServicePublic_GetAllMatchCalendarsWithStatus",
         "responses": {
@@ -88,36 +118,6 @@
         "parameters": [
           {
             "name": "status",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "MatchServicePublic"
-        ]
-      }
-    },
-    "/match/result_score/{matchId}": {
-      "get": {
-        "operationId": "MatchServicePublic_GetMatchResultByID",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/ResultScoreResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "matchId",
             "in": "path",
             "required": true,
             "type": "string"

@@ -219,7 +219,7 @@ func RegisterMatchServicePublicHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.MatchServicePublic/GetAllMatchCalendarsWithStatus", runtime.WithHTTPPathPattern("/match/calendar/{status}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.MatchServicePublic/GetAllMatchCalendarsWithStatus", runtime.WithHTTPPathPattern("/match/{status}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -269,7 +269,7 @@ func RegisterMatchServicePublicHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.MatchServicePublic/GetMatchCalendarById", runtime.WithHTTPPathPattern("/match/calendar/{id}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.MatchServicePublic/GetMatchCalendarById", runtime.WithHTTPPathPattern("/match/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -358,7 +358,7 @@ func RegisterMatchServicePublicHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.MatchServicePublic/GetAllMatchCalendarsWithStatus", runtime.WithHTTPPathPattern("/match/calendar/{status}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.MatchServicePublic/GetAllMatchCalendarsWithStatus", runtime.WithHTTPPathPattern("/match/{status}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -402,7 +402,7 @@ func RegisterMatchServicePublicHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.MatchServicePublic/GetMatchCalendarById", runtime.WithHTTPPathPattern("/match/calendar/{id}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.MatchServicePublic/GetMatchCalendarById", runtime.WithHTTPPathPattern("/match/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -444,11 +444,11 @@ func RegisterMatchServicePublicHandlerClient(ctx context.Context, mux *runtime.S
 }
 
 var (
-	pattern_MatchServicePublic_GetAllMatchCalendarsWithStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"match", "calendar", "status"}, ""))
+	pattern_MatchServicePublic_GetAllMatchCalendarsWithStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"match", "status"}, ""))
 
 	pattern_MatchServicePublic_GetAllMatchCalendar_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"match", "calendar", "all"}, ""))
 
-	pattern_MatchServicePublic_GetMatchCalendarById_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"match", "calendar", "id"}, ""))
+	pattern_MatchServicePublic_GetMatchCalendarById_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"match", "id"}, ""))
 
 	pattern_MatchServicePublic_GetMatchResultByID_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"match", "result_score", "match_id"}, ""))
 )
