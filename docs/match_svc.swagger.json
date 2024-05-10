@@ -63,7 +63,8 @@
                   "type": "string"
                 },
                 "matchRound": {
-                  "type": "string"
+                  "type": "integer",
+                  "format": "int32"
                 },
                 "matchTurn": {
                   "type": "string"
@@ -79,6 +80,140 @@
                 },
                 "matchStatus": {
                   "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "MatchService"
+        ]
+      }
+    },
+    "/match/progress_card": {
+      "post": {
+        "operationId": "MatchService_CreateProgressCard",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProgressCard"
+            }
+          }
+        ],
+        "tags": [
+          "MatchService"
+        ]
+      }
+    },
+    "/match/progress_score": {
+      "post": {
+        "operationId": "MatchService_CreateProgressScore",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProgressScore"
+            }
+          }
+        ],
+        "tags": [
+          "MatchService"
+        ]
+      }
+    },
+    "/match/result_score/{matchId}": {
+      "post": {
+        "operationId": "MatchService_CreateMatchResult",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "matchId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "homeTeamGoal": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "awayTeamGoal": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "teamWin": {
+                  "type": "string"
+                },
+                "teamLose": {
+                  "type": "string"
+                },
+                "yellowCardHome": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "yellowCardAway": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "redCardHome": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "redCardAway": {
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             }
@@ -142,7 +277,8 @@
           "type": "string"
         },
         "matchRound": {
-          "type": "string"
+          "type": "integer",
+          "format": "int32"
         },
         "matchTurn": {
           "type": "string"
@@ -199,7 +335,8 @@
           "type": "string"
         },
         "matchRound": {
-          "type": "string"
+          "type": "integer",
+          "format": "int32"
         },
         "matchTurn": {
           "type": "string"
@@ -211,6 +348,62 @@
           "type": "string"
         },
         "matchStatus": {
+          "type": "string"
+        }
+      }
+    },
+    "ProgressCard": {
+      "type": "object",
+      "properties": {
+        "matchId": {
+          "type": "string"
+        },
+        "clubName": {
+          "type": "string"
+        },
+        "playerName": {
+          "type": "string"
+        },
+        "cardType": {
+          "type": "string"
+        },
+        "timeInMatch": {
+          "type": "string"
+        }
+      }
+    },
+    "ProgressScore": {
+      "type": "object",
+      "properties": {
+        "matchId": {
+          "type": "string"
+        },
+        "clubName": {
+          "type": "string"
+        },
+        "playerName": {
+          "type": "string"
+        },
+        "goalType": {
+          "type": "string"
+        },
+        "timeInMatch": {
+          "type": "string"
+        }
+      }
+    },
+    "SuccessMessageResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/SuccessMessageResponsesuccess_message"
+        }
+      }
+    },
+    "SuccessMessageResponsesuccess_message": {
+      "type": "object",
+      "properties": {
+        "message": {
           "type": "string"
         }
       }

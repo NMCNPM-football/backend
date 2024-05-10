@@ -76,6 +76,7 @@ func (e *MatchService) CreateMatchCalendar(ctx context.Context, request *gen.Mat
 		Stadium:     clubOneInfo.Stadium,
 		RealTime:    "",
 		MatchRound:  request.MatchRound,
+		MatchTurn:   request.MatchTurn,
 	}
 
 	// Use the matchDao to insert the new Matches into the database
@@ -125,5 +126,170 @@ func (e *MatchService) UpdateMatchCalendar(ctx context.Context, request *gen.Mat
 			MatchRound:  updateMatchCalendar.MatchRound,
 		},
 		Message: "Match calendar updated successfully",
+	}, nil
+}
+
+func (e *MatchService) CreateProgressScore(ctx context.Context, request *gen.ProgressScore) (*gen.SuccessMessageResponse, error) {
+	// Extract the ProgressScore data from the request
+	user, err := e.userFromContext(ctx, e.userDao)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user from context: %w", err)
+	}
+	if user.Position != "Admin" {
+		return nil, fmt.Errorf("access denied: user is not an admin")
+	}
+
+	match, err := e.matchDao.GetMatchCalendarByID(request.MatchId)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get match: %w", err)
+	}
+
+	// Check if the ClubName from the request is one of the two club names in the match
+	if request.ClubName != match.ClubOneName && request.ClubName != match.ClubTwoName {
+		return nil, fmt.Errorf("invalid club name: %s is not a participant in match %s", request.ClubName, request.MatchId)
+	}
+
+	// Create a new ProgressScore model
+	newProgressScore := &models.ProgressScore{
+		MatchID:     request.MatchId,
+		ClubName:    request.ClubName,
+		PlayerName:  request.PlayerName,
+		GoalType:    request.GoalType,
+		TimeInMatch: request.TimeInMatch,
+	}
+
+	// Use the matchDao to insert the new ProgressScore into the database
+	err = e.matchDao.CreateProgressScore(newProgressScore)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create progress score: %w", err)
+	}
+
+	// If the insertion is successful, return a SuccessMessageResponse with a success message
+	return &gen.SuccessMessageResponse{
+		Data: &gen.SuccessMessageResponseSuccessMessage{
+			Message: "Progress score created successfully",
+		},
+	}, nil
+}
+func (e *MatchService) CreateProgressCard(ctx context.Context, request *gen.ProgressCard) (*gen.SuccessMessageResponse, error) {
+	// Extract the ProgressScore data from the request
+	user, err := e.userFromContext(ctx, e.userDao)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user from context: %w", err)
+	}
+	if user.Position != "Admin" {
+		return nil, fmt.Errorf("access denied: user is not an admin")
+	}
+
+	match, err := e.matchDao.GetMatchCalendarByID(request.MatchId)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get match: %w", err)
+	}
+
+	// Check if the ClubName from the request is one of the two club names in the match
+	if request.ClubName != match.ClubOneName && request.ClubName != match.ClubTwoName {
+		return nil, fmt.Errorf("invalid club name: %s is not a participant in match %s", request.ClubName, request.MatchId)
+	}
+
+	// Create a new ProgressScore model
+	newProgressCard := &models.ProgressCard{
+		MatchID:     request.MatchId,
+		ClubName:    request.ClubName,
+		PlayerName:  request.PlayerName,
+		CardType:    request.CardType,
+		TimeInMatch: request.TimeInMatch,
+	}
+
+	// Use the matchDao to insert the new ProgressScore into the database
+	err = e.matchDao.CreateProgressCard(newProgressCard)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create progress score: %w", err)
+	}
+
+	// If the insertion is successful, return a SuccessMessageResponse with a success message
+	return &gen.SuccessMessageResponse{
+		Data: &gen.SuccessMessageResponseSuccessMessage{
+			Message: "Progress card created successfully",
+		},
+	}, nil
+}
+
+func (e *MatchService) CreateMatchResult(ctx context.Context, request *gen.ResultScore) (*gen.SuccessMessageResponse, error) {
+	// Extract the user from the context
+	user, err := e.userFromContext(ctx, e.userDao)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user from context: %w", err)
+	}
+	if user.Position != "Admin" {
+		return nil, fmt.Errorf("access denied: user is not an admin")
+	}
+
+	_, err = e.matchDao.GetMatchResultByID(request.MatchId)
+	if err == nil {
+		return nil, fmt.Errorf("match result with MatchID %s already exists", request.MatchId)
+	}
+
+	// Fetch the match data using the MatchID from the request
+	match, err := e.matchDao.GetMatchCalendarByID(request.MatchId)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get match: %w", err)
+	}
+
+	// Fetch the ProgressScore data for both teams
+	homeTeamGoals, err := e.matchDao.CountGoals(match.ID, match.ClubOneName)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get goals for home team: %w", err)
+	}
+	awayTeamGoals, err := e.matchDao.CountGoals(match.ID, match.ClubTwoName)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get goals for away team: %w", err)
+	}
+
+	YellowCard, RedCard, err := e.matchDao.CountCard(match.ID, match.ClubOneName)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get card for home team: %w", err)
+	}
+	YellowCard2, RedCard2, err := e.matchDao.CountCard(match.ID, match.ClubTwoName)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get card for away team: %w", err)
+	}
+
+	// Determine the winning team
+	var teamWin, teamLose string
+	if homeTeamGoals > awayTeamGoals {
+		teamWin = match.ClubOneName
+		teamLose = match.ClubTwoName
+	} else if homeTeamGoals < awayTeamGoals {
+		teamWin = match.ClubTwoName
+		teamLose = match.ClubOneName
+	} else {
+		teamWin = "Draw"
+		teamLose = "Draw"
+	}
+
+	// Create a new ResultScore model
+	newResultScore := &models.Results{
+		MatchID:        request.MatchId,
+		HomeTeamGoal:   homeTeamGoals,
+		AwayTeamGoal:   awayTeamGoals,
+		TeamWin:        teamWin,
+		TeamLose:       teamLose,
+		YellowCardHome: YellowCard,
+		RedCardHome:    RedCard,
+		YellowCardAway: YellowCard2,
+		RedCardAway:    RedCard2,
+	}
+
+	// Use the matchDao to insert the new ResultScore into the database
+	err = e.matchDao.CreateResultScore(newResultScore)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create result score: %w", err)
+	}
+
+	// If the insertion is successful, return a SuccessMessageResponse with a success message
+	return &gen.SuccessMessageResponse{
+		Data: &gen.SuccessMessageResponseSuccessMessage{
+			Message: "Result score created successfully",
+		},
 	}, nil
 }

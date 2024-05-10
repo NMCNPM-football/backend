@@ -19,4 +19,22 @@ service MatchService {
       body: "*"
     };
   }
+  rpc CreateProgressScore (ProgressScore) returns (SuccessMessageResponse) {
+    option (google.api.http) = {
+      post: "/match/progress_score"
+      body: "*"
+    };
+  }
+  rpc CreateProgressCard (ProgressCard) returns (SuccessMessageResponse) {
+    option (google.api.http) = {
+      post: "/match/progress_card"
+      body: "*"
+    };
+  }
+  rpc CreateMatchResult (ResultScore) returns (SuccessMessageResponse) {
+    option (google.api.http) = {
+      post: "/match/result_score/{match_id}"
+      body: "*"
+    };
+  }
 }

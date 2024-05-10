@@ -24,4 +24,10 @@ service MatchServicePublic {
       };
     }
 
+  rpc GetMatchResultByID (ResultScoreRequest) returns (ResultScoreResponse) {
+    option (google.api.http) = {
+      get: "/match/result_score/{match_id}"
+    };
+  }
+
 }

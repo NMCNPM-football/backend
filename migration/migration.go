@@ -15,6 +15,11 @@ func Migration(db *gorm.DB) error {
 		&models.Player{},
 		&models.Matches{},
 		&models.Stadium{},
+		&models.ProgressScore{},
+		&models.GoalType{},
+		&models.Results{},
+		&models.ProgressCard{},
+		&models.CardType{},
 	); err != nil {
 		return errors.Wrap(err, "db.AutoMigrate")
 	}

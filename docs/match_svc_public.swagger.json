@@ -97,6 +97,36 @@
           "MatchServicePublic"
         ]
       }
+    },
+    "/match/result_score/{matchId}": {
+      "get": {
+        "operationId": "MatchServicePublic_GetMatchResultByID",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ResultScoreResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "matchId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MatchServicePublic"
+        ]
+      }
     }
   },
   "definitions": {
@@ -142,7 +172,8 @@
           "type": "string"
         },
         "matchRound": {
-          "type": "string"
+          "type": "integer",
+          "format": "int32"
         },
         "matchTurn": {
           "type": "string"
@@ -154,6 +185,55 @@
           "type": "string"
         },
         "matchStatus": {
+          "type": "string"
+        }
+      }
+    },
+    "ResultScore": {
+      "type": "object",
+      "properties": {
+        "matchId": {
+          "type": "string"
+        },
+        "homeTeamGoal": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "awayTeamGoal": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "teamWin": {
+          "type": "string"
+        },
+        "teamLose": {
+          "type": "string"
+        },
+        "yellowCardHome": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "yellowCardAway": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "redCardHome": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "redCardAway": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ResultScoreResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/ResultScore"
+        },
+        "message": {
           "type": "string"
         }
       }

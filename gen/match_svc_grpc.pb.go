@@ -21,6 +21,9 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	MatchService_CreateMatchCalendar_FullMethodName = "/proto.MatchService/CreateMatchCalendar"
 	MatchService_UpdateMatchCalendar_FullMethodName = "/proto.MatchService/UpdateMatchCalendar"
+	MatchService_CreateProgressScore_FullMethodName = "/proto.MatchService/CreateProgressScore"
+	MatchService_CreateProgressCard_FullMethodName  = "/proto.MatchService/CreateProgressCard"
+	MatchService_CreateMatchResult_FullMethodName   = "/proto.MatchService/CreateMatchResult"
 )
 
 // MatchServiceClient is the client API for MatchService service.
@@ -29,6 +32,9 @@ const (
 type MatchServiceClient interface {
 	CreateMatchCalendar(ctx context.Context, in *MatchCalendar, opts ...grpc.CallOption) (*MatchCalendarRequest, error)
 	UpdateMatchCalendar(ctx context.Context, in *MatchCalendar, opts ...grpc.CallOption) (*MatchCalendarResponse, error)
+	CreateProgressScore(ctx context.Context, in *ProgressScore, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
+	CreateProgressCard(ctx context.Context, in *ProgressCard, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
+	CreateMatchResult(ctx context.Context, in *ResultScore, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
 }
 
 type matchServiceClient struct {
@@ -57,12 +63,42 @@ func (c *matchServiceClient) UpdateMatchCalendar(ctx context.Context, in *MatchC
 	return out, nil
 }
 
+func (c *matchServiceClient) CreateProgressScore(ctx context.Context, in *ProgressScore, opts ...grpc.CallOption) (*SuccessMessageResponse, error) {
+	out := new(SuccessMessageResponse)
+	err := c.cc.Invoke(ctx, MatchService_CreateProgressScore_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *matchServiceClient) CreateProgressCard(ctx context.Context, in *ProgressCard, opts ...grpc.CallOption) (*SuccessMessageResponse, error) {
+	out := new(SuccessMessageResponse)
+	err := c.cc.Invoke(ctx, MatchService_CreateProgressCard_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *matchServiceClient) CreateMatchResult(ctx context.Context, in *ResultScore, opts ...grpc.CallOption) (*SuccessMessageResponse, error) {
+	out := new(SuccessMessageResponse)
+	err := c.cc.Invoke(ctx, MatchService_CreateMatchResult_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MatchServiceServer is the server API for MatchService service.
 // All implementations should embed UnimplementedMatchServiceServer
 // for forward compatibility
 type MatchServiceServer interface {
 	CreateMatchCalendar(context.Context, *MatchCalendar) (*MatchCalendarRequest, error)
 	UpdateMatchCalendar(context.Context, *MatchCalendar) (*MatchCalendarResponse, error)
+	CreateProgressScore(context.Context, *ProgressScore) (*SuccessMessageResponse, error)
+	CreateProgressCard(context.Context, *ProgressCard) (*SuccessMessageResponse, error)
+	CreateMatchResult(context.Context, *ResultScore) (*SuccessMessageResponse, error)
 }
 
 // UnimplementedMatchServiceServer should be embedded to have forward compatible implementations.
@@ -74,6 +110,15 @@ func (UnimplementedMatchServiceServer) CreateMatchCalendar(context.Context, *Mat
 }
 func (UnimplementedMatchServiceServer) UpdateMatchCalendar(context.Context, *MatchCalendar) (*MatchCalendarResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateMatchCalendar not implemented")
+}
+func (UnimplementedMatchServiceServer) CreateProgressScore(context.Context, *ProgressScore) (*SuccessMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateProgressScore not implemented")
+}
+func (UnimplementedMatchServiceServer) CreateProgressCard(context.Context, *ProgressCard) (*SuccessMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateProgressCard not implemented")
+}
+func (UnimplementedMatchServiceServer) CreateMatchResult(context.Context, *ResultScore) (*SuccessMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateMatchResult not implemented")
 }
 
 // UnsafeMatchServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -123,6 +168,60 @@ func _MatchService_UpdateMatchCalendar_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MatchService_CreateProgressScore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProgressScore)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MatchServiceServer).CreateProgressScore(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MatchService_CreateProgressScore_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MatchServiceServer).CreateProgressScore(ctx, req.(*ProgressScore))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MatchService_CreateProgressCard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProgressCard)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MatchServiceServer).CreateProgressCard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MatchService_CreateProgressCard_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MatchServiceServer).CreateProgressCard(ctx, req.(*ProgressCard))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MatchService_CreateMatchResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResultScore)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MatchServiceServer).CreateMatchResult(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MatchService_CreateMatchResult_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MatchServiceServer).CreateMatchResult(ctx, req.(*ResultScore))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MatchService_ServiceDesc is the grpc.ServiceDesc for MatchService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -137,6 +236,18 @@ var MatchService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateMatchCalendar",
 			Handler:    _MatchService_UpdateMatchCalendar_Handler,
+		},
+		{
+			MethodName: "CreateProgressScore",
+			Handler:    _MatchService_CreateProgressScore_Handler,
+		},
+		{
+			MethodName: "CreateProgressCard",
+			Handler:    _MatchService_CreateProgressCard_Handler,
+		},
+		{
+			MethodName: "CreateMatchResult",
+			Handler:    _MatchService_CreateMatchResult_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

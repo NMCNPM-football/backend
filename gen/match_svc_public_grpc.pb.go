@@ -22,6 +22,7 @@ const (
 	MatchServicePublic_GetAllMatchCalendarsWithStatus_FullMethodName = "/proto.MatchServicePublic/GetAllMatchCalendarsWithStatus"
 	MatchServicePublic_GetAllMatchCalendar_FullMethodName            = "/proto.MatchServicePublic/GetAllMatchCalendar"
 	MatchServicePublic_GetMatchCalendarById_FullMethodName           = "/proto.MatchServicePublic/GetMatchCalendarById"
+	MatchServicePublic_GetMatchResultByID_FullMethodName             = "/proto.MatchServicePublic/GetMatchResultByID"
 )
 
 // MatchServicePublicClient is the client API for MatchServicePublic service.
@@ -31,6 +32,7 @@ type MatchServicePublicClient interface {
 	GetAllMatchCalendarsWithStatus(ctx context.Context, in *StatusRequest, opts ...grpc.CallOption) (*MatchCalendarListResponse, error)
 	GetAllMatchCalendar(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*MatchCalendarListResponse, error)
 	GetMatchCalendarById(ctx context.Context, in *MatchCalendarRequest, opts ...grpc.CallOption) (*MatchCalendarResponse, error)
+	GetMatchResultByID(ctx context.Context, in *ResultScoreRequest, opts ...grpc.CallOption) (*ResultScoreResponse, error)
 }
 
 type matchServicePublicClient struct {
@@ -68,6 +70,15 @@ func (c *matchServicePublicClient) GetMatchCalendarById(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *matchServicePublicClient) GetMatchResultByID(ctx context.Context, in *ResultScoreRequest, opts ...grpc.CallOption) (*ResultScoreResponse, error) {
+	out := new(ResultScoreResponse)
+	err := c.cc.Invoke(ctx, MatchServicePublic_GetMatchResultByID_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MatchServicePublicServer is the server API for MatchServicePublic service.
 // All implementations should embed UnimplementedMatchServicePublicServer
 // for forward compatibility
@@ -75,6 +86,7 @@ type MatchServicePublicServer interface {
 	GetAllMatchCalendarsWithStatus(context.Context, *StatusRequest) (*MatchCalendarListResponse, error)
 	GetAllMatchCalendar(context.Context, *EmptyRequest) (*MatchCalendarListResponse, error)
 	GetMatchCalendarById(context.Context, *MatchCalendarRequest) (*MatchCalendarResponse, error)
+	GetMatchResultByID(context.Context, *ResultScoreRequest) (*ResultScoreResponse, error)
 }
 
 // UnimplementedMatchServicePublicServer should be embedded to have forward compatible implementations.
@@ -89,6 +101,9 @@ func (UnimplementedMatchServicePublicServer) GetAllMatchCalendar(context.Context
 }
 func (UnimplementedMatchServicePublicServer) GetMatchCalendarById(context.Context, *MatchCalendarRequest) (*MatchCalendarResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMatchCalendarById not implemented")
+}
+func (UnimplementedMatchServicePublicServer) GetMatchResultByID(context.Context, *ResultScoreRequest) (*ResultScoreResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMatchResultByID not implemented")
 }
 
 // UnsafeMatchServicePublicServer may be embedded to opt out of forward compatibility for this service.
@@ -156,6 +171,24 @@ func _MatchServicePublic_GetMatchCalendarById_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MatchServicePublic_GetMatchResultByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResultScoreRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MatchServicePublicServer).GetMatchResultByID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MatchServicePublic_GetMatchResultByID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MatchServicePublicServer).GetMatchResultByID(ctx, req.(*ResultScoreRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MatchServicePublic_ServiceDesc is the grpc.ServiceDesc for MatchServicePublic service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -174,6 +207,10 @@ var MatchServicePublic_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMatchCalendarById",
 			Handler:    _MatchServicePublic_GetMatchCalendarById_Handler,
+		},
+		{
+			MethodName: "GetMatchResultByID",
+			Handler:    _MatchServicePublic_GetMatchResultByID_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

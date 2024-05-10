@@ -6,7 +6,6 @@ import (
 	"github.com/NMCNPM-football/backend/config"
 	"github.com/NMCNPM-football/backend/gen"
 	"github.com/NMCNPM-football/backend/internal/dao"
-
 	_ "github.com/NMCNPM-football/backend/internal/models"
 	_ "github.com/NMCNPM-football/backend/internal/must"
 	_ "github.com/NMCNPM-football/backend/internal/serializers"
@@ -68,6 +67,7 @@ func (e *MatchServicePublic) GetAllMatchCalendar(ctx context.Context, request *g
 			IntendTime:  match.IntendTime,
 			RealTime:    match.RealTime,
 			MatchRound:  match.MatchRound,
+			MatchTurn:   match.MatchTurn,
 			MatchStatus: match.MatchStatus,
 			Stadium:     match.Stadium,
 			Season:      match.SeaSon,
@@ -126,6 +126,30 @@ func (e *MatchServicePublic) GetMatchCalendarById(ctx context.Context, request *
 			Season:      matchCalendar.SeaSon,
 		},
 		Message: "Match calendar fetched successfully",
+	}
+
+	return response, nil
+}
+
+func (e *MatchServicePublic) GetMatchResultByID(ctx context.Context, request *gen.ResultScoreRequest) (*gen.ResultScoreResponse, error) {
+	// Fetch the result score data using the MatchID from the request
+	resultScore, err := e.matchDao.GetMatchResultByID(request.MatchId)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get result score: %w", err)
+	}
+
+	// Create a new ResultScore
+	response := &gen.ResultScoreResponse{
+		Data: &gen.ResultScore{
+			HomeTeamGoal:   int32(resultScore.HomeTeamGoal),
+			AwayTeamGoal:   int32(resultScore.AwayTeamGoal),
+			TeamWin:        resultScore.TeamWin,
+			TeamLose:       resultScore.TeamLose,
+			YellowCardHome: int32(resultScore.YellowCardHome),
+			RedCardHome:    int32(resultScore.RedCardHome),
+			YellowCardAway: int32(resultScore.YellowCardAway),
+			RedCardAway:    int32(resultScore.RedCardAway),
+		},
 	}
 
 	return response, nil

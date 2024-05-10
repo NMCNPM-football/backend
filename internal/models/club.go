@@ -63,6 +63,7 @@ type Summary struct {
 type Stadium struct {
 	Base
 	ClubID         string `gorm:"size:100;foreignKey"`
+	PublishedYear  string `gorm:"size:50"`
 	StadiumName    string `gorm:"size:50"`
 	StadiumAddress string `gorm:"size:100"`
 	Season         string `gorm:"size:50"`
