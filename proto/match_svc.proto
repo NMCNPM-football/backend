@@ -37,4 +37,10 @@ service MatchService {
       body: "*"
     };
   }
+  rpc CreateAllMatchResults (EmptyRequest) returns (SuccessMessageResponse) {
+    option (google.api.http) = {
+      post: "/match/create_all_results"
+      body: "*"
+    };
+  }
 }

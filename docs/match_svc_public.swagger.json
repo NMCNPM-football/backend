@@ -16,66 +16,14 @@
     "application/json"
   ],
   "paths": {
-    "/match/calendar/all": {
-      "get": {
-        "operationId": "MatchServicePublic_GetAllMatchCalendar",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/MatchCalendarListResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "tags": [
-          "MatchServicePublic"
-        ]
-      }
-    },
-    "/match/result_score/{matchId}": {
-      "get": {
-        "operationId": "MatchServicePublic_GetMatchResultByID",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/ResultScoreResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "matchId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "MatchServicePublic"
-        ]
-      }
-    },
-    "/match/{id}": {
+    "/match/calendar/{id}": {
       "get": {
         "operationId": "MatchServicePublic_GetMatchCalendarById",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/MatchCalendarResponse"
+              "$ref": "#/definitions/protoMatchCalendarResponse"
             }
           },
           "default": {
@@ -98,6 +46,36 @@
         ]
       }
     },
+    "/match/result_score/{matchId}": {
+      "get": {
+        "operationId": "MatchServicePublic_GetMatchResultByID",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoResultScoreResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "matchId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MatchServicePublic"
+        ]
+      }
+    },
     "/match/{status}": {
       "get": {
         "operationId": "MatchServicePublic_GetAllMatchCalendarsWithStatus",
@@ -105,7 +83,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/MatchCalendarListResponse"
+              "$ref": "#/definitions/protoMatchCalendarListResponse"
             }
           },
           "default": {
@@ -127,17 +105,61 @@
           "MatchServicePublic"
         ]
       }
+    },
+    "/match_calendar/all": {
+      "get": {
+        "operationId": "MatchServicePublic_GetAllMatchCalendar",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoMatchCalendarListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "MatchServicePublic"
+        ]
+      }
+    },
+    "/match_result/all": {
+      "get": {
+        "operationId": "MatchServicePublic_GetAllMatchResults",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoResultScoreListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "MatchServicePublic"
+        ]
+      }
     }
   },
   "definitions": {
-    "MatchCalendarListResponse": {
+    "protoMatchCalendarListResponse": {
       "type": "object",
       "properties": {
         "data": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/MatchCalendarResponseData"
+            "$ref": "#/definitions/protoMatchCalendarResponseData"
           }
         },
         "message": {
@@ -145,18 +167,18 @@
         }
       }
     },
-    "MatchCalendarResponse": {
+    "protoMatchCalendarResponse": {
       "type": "object",
       "properties": {
         "data": {
-          "$ref": "#/definitions/MatchCalendarResponseData"
+          "$ref": "#/definitions/protoMatchCalendarResponseData"
         },
         "message": {
           "type": "string"
         }
       }
     },
-    "MatchCalendarResponseData": {
+    "protoMatchCalendarResponseData": {
       "type": "object",
       "properties": {
         "clubOneName": {
@@ -189,7 +211,7 @@
         }
       }
     },
-    "ResultScore": {
+    "protoResultScore": {
       "type": "object",
       "properties": {
         "matchId": {
@@ -203,10 +225,10 @@
           "type": "integer",
           "format": "int32"
         },
-        "teamWin": {
+        "homeTeam": {
           "type": "string"
         },
-        "teamLose": {
+        "awayTeam": {
           "type": "string"
         },
         "yellowCardHome": {
@@ -227,11 +249,26 @@
         }
       }
     },
-    "ResultScoreResponse": {
+    "protoResultScoreListResponse": {
       "type": "object",
       "properties": {
         "data": {
-          "$ref": "#/definitions/ResultScore"
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protoResultScore"
+          }
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "protoResultScoreResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/protoResultScore"
         },
         "message": {
           "type": "string"

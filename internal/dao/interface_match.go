@@ -14,4 +14,6 @@ type MatchDaoInterface interface {
 	CountCard(matchID, clubName string) (int, int, error)
 	CreateResultScore(result *models.Results) error
 	GetMatchResultByID(matchID string) (*models.Results, error)
+	GetAllMatchResults() ([]*models.Results, error)
+	GetAllMatchDone() ([]*models.ProgressScore, error)
 }

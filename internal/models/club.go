@@ -45,21 +45,6 @@ type Certificate struct {
 	Status        string `gorm:"size:50"`
 }
 
-type Summary struct {
-	Base
-	TeamName       string `gorm:"size:50"`
-	MatchesPlayed  int
-	MatchesWon     int
-	MatchesDrawn   int
-	MatchesLost    int
-	GoalsScored    int
-	GoalsConceded  int
-	YellowCards    int
-	RedCards       int
-	GoalDifference int
-	Points         int
-}
-
 type Stadium struct {
 	Base
 	ClubID         string `gorm:"size:100;foreignKey"`

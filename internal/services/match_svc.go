@@ -254,26 +254,26 @@ func (e *MatchService) CreateMatchResult(ctx context.Context, request *gen.Resul
 		return nil, fmt.Errorf("failed to get card for away team: %w", err)
 	}
 
-	// Determine the winning team
-	var teamWin, teamLose string
-	if homeTeamGoals > awayTeamGoals {
-		teamWin = match.ClubOneName
-		teamLose = match.ClubTwoName
-	} else if homeTeamGoals < awayTeamGoals {
-		teamWin = match.ClubTwoName
-		teamLose = match.ClubOneName
-	} else {
-		teamWin = "Draw"
-		teamLose = "Draw"
-	}
+	//// Determine the winning team
+	//var teamWin, teamLose string
+	//if homeTeamGoals > awayTeamGoals {
+	//	teamWin = match.ClubOneName
+	//	teamLose = match.ClubTwoName
+	//} else if homeTeamGoals < awayTeamGoals {
+	//	teamWin = match.ClubTwoName
+	//	teamLose = match.ClubOneName
+	//} else {
+	//	teamWin = "Draw"
+	//	teamLose = "Draw"
+	//}
 
 	// Create a new ResultScore model
 	newResultScore := &models.Results{
 		MatchID:        request.MatchId,
 		HomeTeamGoal:   homeTeamGoals,
 		AwayTeamGoal:   awayTeamGoals,
-		TeamWin:        teamWin,
-		TeamLose:       teamLose,
+		HomeTeam:       match.ClubOneName,
+		AwayTeam:       match.ClubTwoName,
 		YellowCardHome: YellowCard,
 		RedCardHome:    RedCard,
 		YellowCardAway: YellowCard2,
@@ -287,6 +287,47 @@ func (e *MatchService) CreateMatchResult(ctx context.Context, request *gen.Resul
 	}
 
 	// If the insertion is successful, return a SuccessMessageResponse with a success message
+	return &gen.SuccessMessageResponse{
+		Data: &gen.SuccessMessageResponseSuccessMessage{
+			Message: "Result score created successfully",
+		},
+	}, nil
+}
+
+func (e *MatchService) CreateAllMatchResults(ctx context.Context, request *gen.EmptyRequest) (*gen.SuccessMessageResponse, error) {
+	matches, err := e.matchDao.GetAllMatchDone()
+	if err != nil {
+		return nil, fmt.Errorf("failed to get all matches: %w", err)
+	}
+
+	if len(matches) == 0 {
+		return &gen.SuccessMessageResponse{
+			Data: &gen.SuccessMessageResponseSuccessMessage{
+				Message: "No matches to process",
+			},
+		}, nil
+	}
+
+	for _, match := range matches {
+		// Check if the match result already exists
+		_, err = e.matchDao.GetMatchResultByID(match.MatchID)
+		if err == nil {
+			// If the match result already exists, skip to the next match
+			continue
+		}
+
+		request := &gen.ResultScore{
+			MatchId: match.MatchID,
+		}
+
+		// Call the CreateMatchResult function
+		_, err = e.CreateMatchResult(ctx, request)
+		if err != nil {
+			return nil, fmt.Errorf("failed to create match result for match %s: %w", match.ID, err)
+		}
+	}
+
+	// Return a success message
 	return &gen.SuccessMessageResponse{
 		Data: &gen.SuccessMessageResponseSuccessMessage{
 			Message: "Result score created successfully",

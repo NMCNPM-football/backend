@@ -39,6 +39,7 @@ func main() {
 	userDao := dao.NewUserDao(db)
 	clubDao := dao.NewClubDao(db)
 	matchDao := dao.NewMatchDao(db)
+	summaryDao := dao.NewSummaryDao(db)
 
 	opt := []grpc.ServerOption{
 		//grpc
@@ -89,6 +90,14 @@ func main() {
 			userDao,
 			clubDao,
 			matchDao,
+		),
+		services.NewSummaryService(
+			logger,
+			cfg,
+			userDao,
+			clubDao,
+			matchDao,
+			summaryDao,
 		),
 	)
 

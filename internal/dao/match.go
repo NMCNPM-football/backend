@@ -115,3 +115,19 @@ func (m *MatchDao) GetMatchResultByID(matchID string) (*models.Results, error) {
 	}
 	return matchResults, nil
 }
+
+func (m *MatchDao) GetAllMatchResults() ([]*models.Results, error) {
+	var results []*models.Results
+	if err := m.db.Find(&results).Error; err != nil {
+		return nil, err
+	}
+	return results, nil
+}
+
+func (m *MatchDao) GetAllMatchDone() ([]*models.ProgressScore, error) {
+	var matchCalendars []*models.ProgressScore
+	if err := m.db.Find(&matchCalendars).Error; err != nil {
+		return nil, err
+	}
+	return matchCalendars, nil
+}

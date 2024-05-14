@@ -14,19 +14,24 @@ service MatchServicePublic {
 
     rpc GetAllMatchCalendar (EmptyRequest) returns (MatchCalendarListResponse) {
       option (google.api.http) = {
-        get: "/match/calendar/all"
+        get: "/match_calendar/all"
       };
     }
 
     rpc GetMatchCalendarById (MatchCalendarRequest) returns (MatchCalendarResponse) {
       option (google.api.http) = {
-        get: "/match/{id}"
+        get: "/match/calendar/{id}"
       };
     }
 
   rpc GetMatchResultByID (ResultScoreRequest) returns (ResultScoreResponse) {
     option (google.api.http) = {
       get: "/match/result_score/{match_id}"
+    };
+  }
+  rpc GetAllMatchResults (EmptyRequest) returns (ResultScoreListResponse) {
+    option (google.api.http) = {
+      get: "/match_result /all"
     };
   }
 

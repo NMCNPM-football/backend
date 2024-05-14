@@ -19,11 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	MatchService_CreateMatchCalendar_FullMethodName = "/proto.MatchService/CreateMatchCalendar"
-	MatchService_UpdateMatchCalendar_FullMethodName = "/proto.MatchService/UpdateMatchCalendar"
-	MatchService_CreateProgressScore_FullMethodName = "/proto.MatchService/CreateProgressScore"
-	MatchService_CreateProgressCard_FullMethodName  = "/proto.MatchService/CreateProgressCard"
-	MatchService_CreateMatchResult_FullMethodName   = "/proto.MatchService/CreateMatchResult"
+	MatchService_CreateMatchCalendar_FullMethodName   = "/proto.MatchService/CreateMatchCalendar"
+	MatchService_UpdateMatchCalendar_FullMethodName   = "/proto.MatchService/UpdateMatchCalendar"
+	MatchService_CreateProgressScore_FullMethodName   = "/proto.MatchService/CreateProgressScore"
+	MatchService_CreateProgressCard_FullMethodName    = "/proto.MatchService/CreateProgressCard"
+	MatchService_CreateMatchResult_FullMethodName     = "/proto.MatchService/CreateMatchResult"
+	MatchService_CreateAllMatchResults_FullMethodName = "/proto.MatchService/CreateAllMatchResults"
 )
 
 // MatchServiceClient is the client API for MatchService service.
@@ -35,6 +36,7 @@ type MatchServiceClient interface {
 	CreateProgressScore(ctx context.Context, in *ProgressScore, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
 	CreateProgressCard(ctx context.Context, in *ProgressCard, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
 	CreateMatchResult(ctx context.Context, in *ResultScore, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
+	CreateAllMatchResults(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
 }
 
 type matchServiceClient struct {
@@ -90,6 +92,15 @@ func (c *matchServiceClient) CreateMatchResult(ctx context.Context, in *ResultSc
 	return out, nil
 }
 
+func (c *matchServiceClient) CreateAllMatchResults(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error) {
+	out := new(SuccessMessageResponse)
+	err := c.cc.Invoke(ctx, MatchService_CreateAllMatchResults_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MatchServiceServer is the server API for MatchService service.
 // All implementations should embed UnimplementedMatchServiceServer
 // for forward compatibility
@@ -99,6 +110,7 @@ type MatchServiceServer interface {
 	CreateProgressScore(context.Context, *ProgressScore) (*SuccessMessageResponse, error)
 	CreateProgressCard(context.Context, *ProgressCard) (*SuccessMessageResponse, error)
 	CreateMatchResult(context.Context, *ResultScore) (*SuccessMessageResponse, error)
+	CreateAllMatchResults(context.Context, *EmptyRequest) (*SuccessMessageResponse, error)
 }
 
 // UnimplementedMatchServiceServer should be embedded to have forward compatible implementations.
@@ -119,6 +131,9 @@ func (UnimplementedMatchServiceServer) CreateProgressCard(context.Context, *Prog
 }
 func (UnimplementedMatchServiceServer) CreateMatchResult(context.Context, *ResultScore) (*SuccessMessageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateMatchResult not implemented")
+}
+func (UnimplementedMatchServiceServer) CreateAllMatchResults(context.Context, *EmptyRequest) (*SuccessMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAllMatchResults not implemented")
 }
 
 // UnsafeMatchServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -222,6 +237,24 @@ func _MatchService_CreateMatchResult_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MatchService_CreateAllMatchResults_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MatchServiceServer).CreateAllMatchResults(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MatchService_CreateAllMatchResults_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MatchServiceServer).CreateAllMatchResults(ctx, req.(*EmptyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MatchService_ServiceDesc is the grpc.ServiceDesc for MatchService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -248,6 +281,10 @@ var MatchService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateMatchResult",
 			Handler:    _MatchService_CreateMatchResult_Handler,
+		},
+		{
+			MethodName: "CreateAllMatchResults",
+			Handler:    _MatchService_CreateAllMatchResults_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -143,8 +143,8 @@ func (e *MatchServicePublic) GetMatchResultByID(ctx context.Context, request *ge
 		Data: &gen.ResultScore{
 			HomeTeamGoal:   int32(resultScore.HomeTeamGoal),
 			AwayTeamGoal:   int32(resultScore.AwayTeamGoal),
-			TeamWin:        resultScore.TeamWin,
-			TeamLose:       resultScore.TeamLose,
+			HomeTeam:       resultScore.HomeTeam,
+			AwayTeam:       resultScore.AwayTeam,
 			YellowCardHome: int32(resultScore.YellowCardHome),
 			RedCardHome:    int32(resultScore.RedCardHome),
 			YellowCardAway: int32(resultScore.YellowCardAway),
@@ -152,5 +152,36 @@ func (e *MatchServicePublic) GetMatchResultByID(ctx context.Context, request *ge
 		},
 	}
 
+	return response, nil
+}
+
+func (e *MatchServicePublic) GetAllMatchResults(ctx context.Context, request *gen.EmptyRequest) (*gen.ResultScoreListResponse, error) {
+	// Fetch all result scores from the database
+	resultScores, err := e.matchDao.GetAllMatchResults()
+	if err != nil {
+		return nil, fmt.Errorf("failed to get all match results: %w", err)
+	}
+
+	// Create a new ResultScoreListResponse
+	response := &gen.ResultScoreListResponse{
+		Data: make([]*gen.ResultScore, 0, len(resultScores)),
+	}
+
+	// Iterate over the result scores and add them to the response
+	for _, resultScore := range resultScores {
+		response.Data = append(response.Data, &gen.ResultScore{
+			MatchId:        resultScore.MatchID,
+			HomeTeamGoal:   int32(resultScore.HomeTeamGoal),
+			AwayTeamGoal:   int32(resultScore.AwayTeamGoal),
+			HomeTeam:       resultScore.HomeTeam,
+			AwayTeam:       resultScore.AwayTeam,
+			YellowCardHome: int32(resultScore.YellowCardHome),
+			RedCardHome:    int32(resultScore.RedCardHome),
+			YellowCardAway: int32(resultScore.YellowCardAway),
+			RedCardAway:    int32(resultScore.RedCardAway),
+		})
+	}
+
+	// Return the response
 	return response, nil
 }

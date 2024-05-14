@@ -5,12 +5,13 @@ type Results struct {
 	MatchID        string `gorm:"primary_key;size:100"`
 	HomeTeamGoal   int
 	AwayTeamGoal   int
-	TeamWin        string `gorm:"size:50"`
-	TeamLose       string `gorm:"size:50"`
+	HomeTeam       string `gorm:"size:50"`
+	AwayTeam       string `gorm:"size:50"`
 	YellowCardHome int
 	RedCardHome    int
 	YellowCardAway int
 	RedCardAway    int
+	SeaSon         string `gorm:"size:50"`
 }
 
 type Matches struct {

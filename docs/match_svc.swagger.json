@@ -23,7 +23,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/MatchCalendarRequest"
+              "$ref": "#/definitions/protoMatchCalendarRequest"
             }
           },
           "default": {
@@ -90,6 +90,38 @@
         ]
       }
     },
+    "/match/create_all_results": {
+      "post": {
+        "operationId": "MatchService_CreateAllMatchResults",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmptyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MatchService"
+        ]
+      }
+    },
     "/match/progress_card": {
       "post": {
         "operationId": "MatchService_CreateProgressCard",
@@ -113,7 +145,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProgressCard"
+              "$ref": "#/definitions/protoProgressCard"
             }
           }
         ],
@@ -145,7 +177,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProgressScore"
+              "$ref": "#/definitions/protoProgressScore"
             }
           }
         ],
@@ -193,10 +225,10 @@
                   "type": "integer",
                   "format": "int32"
                 },
-                "teamWin": {
+                "homeTeam": {
                   "type": "string"
                 },
-                "teamLose": {
+                "awayTeam": {
                   "type": "string"
                 },
                 "yellowCardHome": {
@@ -231,7 +263,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/MatchCalendarResponse"
+              "$ref": "#/definitions/protoMatchCalendarResponse"
             }
           },
           "default": {
@@ -247,7 +279,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MatchCalendar"
+              "$ref": "#/definitions/protoMatchCalendar"
             }
           }
         ],
@@ -258,7 +290,26 @@
     }
   },
   "definitions": {
-    "MatchCalendar": {
+    "EmptyRequest": {
+      "type": "object"
+    },
+    "SuccessMessageResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/SuccessMessageResponsesuccess_message"
+        }
+      }
+    },
+    "SuccessMessageResponsesuccess_message": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "protoMatchCalendar": {
       "type": "object",
       "properties": {
         "id": {
@@ -300,7 +351,7 @@
         }
       }
     },
-    "MatchCalendarRequest": {
+    "protoMatchCalendarRequest": {
       "type": "object",
       "properties": {
         "id": {
@@ -308,18 +359,18 @@
         }
       }
     },
-    "MatchCalendarResponse": {
+    "protoMatchCalendarResponse": {
       "type": "object",
       "properties": {
         "data": {
-          "$ref": "#/definitions/MatchCalendarResponseData"
+          "$ref": "#/definitions/protoMatchCalendarResponseData"
         },
         "message": {
           "type": "string"
         }
       }
     },
-    "MatchCalendarResponseData": {
+    "protoMatchCalendarResponseData": {
       "type": "object",
       "properties": {
         "clubOneName": {
@@ -352,7 +403,7 @@
         }
       }
     },
-    "ProgressCard": {
+    "protoProgressCard": {
       "type": "object",
       "properties": {
         "matchId": {
@@ -372,7 +423,7 @@
         }
       }
     },
-    "ProgressScore": {
+    "protoProgressScore": {
       "type": "object",
       "properties": {
         "matchId": {
@@ -388,22 +439,6 @@
           "type": "string"
         },
         "timeInMatch": {
-          "type": "string"
-        }
-      }
-    },
-    "SuccessMessageResponse": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "$ref": "#/definitions/SuccessMessageResponsesuccess_message"
-        }
-      }
-    },
-    "SuccessMessageResponsesuccess_message": {
-      "type": "object",
-      "properties": {
-        "message": {
           "type": "string"
         }
       }

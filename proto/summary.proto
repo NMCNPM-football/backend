@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+message Summary {
+  string id = 1;
+  string club_id = 2;
+  string club_name = 3;
+  int32 match_played = 4;
+  int32 match_won = 5;
+  int32 match_lost = 6;
+  int32 match_draw = 7;
+  int32 goal_scored = 8;
+  int32 goal_conceded = 9;
+  int32 goal_difference = 10;
+  int32 points = 11;
+  int32 yellow_card = 12;
+  int32 red_card = 13;
+  int32 rank = 14;
+}
+
+message CreateSummaryRequest{
+  repeated Summary summary = 1;
+}
+
+message CreateSummaryResponse{
+  string message = 1;
+}
