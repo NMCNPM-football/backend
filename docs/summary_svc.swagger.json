@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/summary": {
+    "/summary/{seaSon}": {
       "post": {
         "operationId": "SummaryService_CreateSummary",
         "responses": {
@@ -35,11 +35,26 @@
         },
         "parameters": [
           {
+            "name": "seaSon",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateSummaryRequest"
+              "type": "object",
+              "properties": {
+                "summary": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/definitions/Summary"
+                  }
+                }
+              }
             }
           }
         ],
@@ -50,18 +65,6 @@
     }
   },
   "definitions": {
-    "CreateSummaryRequest": {
-      "type": "object",
-      "properties": {
-        "summary": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/Summary"
-          }
-        }
-      }
-    },
     "SuccessMessageResponse": {
       "type": "object",
       "properties": {
@@ -133,6 +136,9 @@
         "rank": {
           "type": "integer",
           "format": "int32"
+        },
+        "seaSon": {
+          "type": "string"
         }
       }
     },

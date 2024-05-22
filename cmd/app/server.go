@@ -96,6 +96,7 @@ func main() {
 			userDao,
 			clubDao,
 			matchDao,
+			summaryDao,
 		),
 		services.NewSummaryService(
 			logger,

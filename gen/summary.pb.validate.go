@@ -84,6 +84,8 @@ func (m *Summary) validate(all bool) error {
 
 	// no validation rules for Rank
 
+	// no validation rules for SeaSon
+
 	if len(errors) > 0 {
 		return SummaryMultiError(errors)
 	}
@@ -216,6 +218,8 @@ func (m *CreateSummaryRequest) validate(all bool) error {
 		}
 
 	}
+
+	// no validation rules for SeaSon
 
 	if len(errors) > 0 {
 		return CreateSummaryRequestMultiError(errors)
@@ -400,3 +404,241 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = CreateSummaryResponseValidationError{}
+
+// Validate checks the field values on GetSummaryRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetSummaryRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetSummaryRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetSummaryRequestMultiError, or nil if none found.
+func (m *GetSummaryRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetSummaryRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for SeaSon
+
+	if len(errors) > 0 {
+		return GetSummaryRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetSummaryRequestMultiError is an error wrapping multiple validation errors
+// returned by GetSummaryRequest.ValidateAll() if the designated constraints
+// aren't met.
+type GetSummaryRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetSummaryRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetSummaryRequestMultiError) AllErrors() []error { return m }
+
+// GetSummaryRequestValidationError is the validation error returned by
+// GetSummaryRequest.Validate if the designated constraints aren't met.
+type GetSummaryRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetSummaryRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetSummaryRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetSummaryRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetSummaryRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetSummaryRequestValidationError) ErrorName() string {
+	return "GetSummaryRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetSummaryRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetSummaryRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetSummaryRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetSummaryRequestValidationError{}
+
+// Validate checks the field values on SummaryResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *SummaryResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SummaryResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SummaryResponseMultiError, or nil if none found.
+func (m *SummaryResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SummaryResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetData() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, SummaryResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, SummaryResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SummaryResponseValidationError{
+					field:  fmt.Sprintf("Data[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return SummaryResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SummaryResponseMultiError is an error wrapping multiple validation errors
+// returned by SummaryResponse.ValidateAll() if the designated constraints
+// aren't met.
+type SummaryResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SummaryResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SummaryResponseMultiError) AllErrors() []error { return m }
+
+// SummaryResponseValidationError is the validation error returned by
+// SummaryResponse.Validate if the designated constraints aren't met.
+type SummaryResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SummaryResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SummaryResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SummaryResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SummaryResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SummaryResponseValidationError) ErrorName() string { return "SummaryResponseValidationError" }
+
+// Error satisfies the builtin error interface
+func (e SummaryResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSummaryResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SummaryResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SummaryResponseValidationError{}

@@ -4,6 +4,7 @@ package proto;
 import "google/api/annotations.proto";
 import "message.proto";
 import "match.proto";
+import "summary.proto";
 
 service MatchServicePublic {
     rpc GetAllMatchCalendarsWithStatus (StatusRequest) returns (MatchCalendarListResponse) {
@@ -35,4 +36,9 @@ service MatchServicePublic {
     };
   }
 
+  rpc GetSummary(GetSummaryRequest) returns (SummaryResponse){
+    option (google.api.http) = {
+      get: "/summary/{sea_son}"
+    };
+  }
 }

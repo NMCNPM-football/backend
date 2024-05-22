@@ -23,15 +23,16 @@ var _ MatchServicePublicInterface = (*MatchServicePublic)(nil)
 
 type MatchServicePublic struct {
 	AbstractService
-	logger   *zap.Logger
-	cfg      *config.Config
-	userDao  dao.UserDaoInterface
-	clubDao  dao.ClubDaoInterface
-	matchDao dao.MatchDaoInterface
+	logger     *zap.Logger
+	cfg        *config.Config
+	userDao    dao.UserDaoInterface
+	clubDao    dao.ClubDaoInterface
+	matchDao   dao.MatchDaoInterface
+	summaryDao dao.SummaryDaoInterface
 }
 
-func NewMatchServicePublic(logger *zap.Logger, cfg *config.Config, userDao dao.UserDaoInterface, clubDao dao.ClubDaoInterface, matchDao dao.MatchDaoInterface) *MatchServicePublic {
-	return &MatchServicePublic{logger: logger, cfg: cfg, userDao: userDao, clubDao: clubDao, matchDao: matchDao}
+func NewMatchServicePublic(logger *zap.Logger, cfg *config.Config, userDao dao.UserDaoInterface, clubDao dao.ClubDaoInterface, matchDao dao.MatchDaoInterface, summaryDao dao.SummaryDaoInterface) *MatchServicePublic {
+	return &MatchServicePublic{logger: logger, cfg: cfg, userDao: userDao, clubDao: clubDao, matchDao: matchDao, summaryDao: summaryDao}
 }
 
 func (e *MatchServicePublic) RegisterGrpcServer(s *grpc.Server) {
@@ -184,4 +185,39 @@ func (e *MatchServicePublic) GetAllMatchResults(ctx context.Context, request *ge
 
 	// Return the response
 	return response, nil
+}
+
+func (e *MatchServicePublic) GetSummary(ctx context.Context, request *gen.GetSummaryRequest) (*gen.SummaryResponse, error) {
+	// Fetch all summaries for the given season
+	summaries, err := e.summaryDao.GetSummaryBySeaSon(request.SeaSon)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get summaries: %w", err)
+	}
+
+	// Convert the summaries to the proto model
+	protoSummaries := make([]*gen.Summary, len(summaries))
+	for i, summary := range summaries {
+		protoSummaries[i] = &gen.Summary{
+			Id:             summary.ID,
+			ClubId:         summary.ClubID,
+			ClubName:       summary.ClubName,
+			MatchPlayed:    int32(summary.MatchesPlayed),
+			MatchWon:       int32(summary.MatchesWon),
+			MatchLost:      int32(summary.MatchesLost),
+			MatchDraw:      int32(summary.MatchesDraw),
+			GoalScored:     int32(summary.GoalsScored),
+			GoalConceded:   int32(summary.GoalsConceded),
+			GoalDifference: int32(summary.GoalDifference),
+			Points:         int32(summary.Points),
+			YellowCard:     int32(summary.YellowCard),
+			RedCard:        int32(summary.RedCard),
+			Rank:           int32(summary.Rank),
+			SeaSon:         summary.SeaSon,
+		}
+	}
+
+	// Return the summaries
+	return &gen.SummaryResponse{
+		Summary: protoSummaries,
+	}, nil
 }

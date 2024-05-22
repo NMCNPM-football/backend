@@ -8,8 +8,9 @@ import "summary.proto";
 service SummaryService{
   rpc CreateSummary(CreateSummaryRequest) returns (SuccessMessageResponse){
     option (google.api.http) = {
-      post: "/summary"
+      post: "/summary/{sea_son}"
       body: "*"
     };
   }
+
 }

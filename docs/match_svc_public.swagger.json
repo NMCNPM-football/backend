@@ -149,9 +149,112 @@
           "MatchServicePublic"
         ]
       }
+    },
+    "/summary/{seaSon}": {
+      "get": {
+        "operationId": "MatchServicePublic_GetSummary",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SummaryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "seaSon",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MatchServicePublic"
+        ]
+      }
     }
   },
   "definitions": {
+    "Summary": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "clubId": {
+          "type": "string"
+        },
+        "clubName": {
+          "type": "string"
+        },
+        "matchPlayed": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "matchWon": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "matchLost": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "matchDraw": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "goalScored": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "goalConceded": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "goalDifference": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "points": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "yellowCard": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "redCard": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rank": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seaSon": {
+          "type": "string"
+        }
+      }
+    },
+    "SummaryResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/Summary"
+          }
+        }
+      }
+    },
     "protoMatchCalendarListResponse": {
       "type": "object",
       "properties": {

@@ -39,6 +39,23 @@ func request_SummaryService_CreateSummary_0(ctx context.Context, marshaler runti
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["sea_son"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "sea_son")
+	}
+
+	protoReq.SeaSon, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "sea_son", err)
+	}
+
 	msg, err := client.CreateSummary(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -50,6 +67,23 @@ func local_request_SummaryService_CreateSummary_0(ctx context.Context, marshaler
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["sea_son"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "sea_son")
+	}
+
+	protoReq.SeaSon, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "sea_son", err)
 	}
 
 	msg, err := server.CreateSummary(ctx, &protoReq)
@@ -71,7 +105,7 @@ func RegisterSummaryServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.SummaryService/CreateSummary", runtime.WithHTTPPathPattern("/summary"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.SummaryService/CreateSummary", runtime.WithHTTPPathPattern("/summary/{sea_son}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -135,7 +169,7 @@ func RegisterSummaryServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.SummaryService/CreateSummary", runtime.WithHTTPPathPattern("/summary"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.SummaryService/CreateSummary", runtime.WithHTTPPathPattern("/summary/{sea_son}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -155,7 +189,7 @@ func RegisterSummaryServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 }
 
 var (
-	pattern_SummaryService_CreateSummary_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"summary"}, ""))
+	pattern_SummaryService_CreateSummary_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"summary", "sea_son"}, ""))
 )
 
 var (

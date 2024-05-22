@@ -460,3 +460,32 @@ VALUES
     (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'QNFC' AND `sea_son` = '2023-2024'), 'Quảng Nam', '2023-2024', 'Truong Quoc Minh', '2000-11-07', 'MF', '174', '75', 'VIE', '47'),
     (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'QNFC' AND `sea_son` = '2023-2024'), 'Quảng Nam', '2023-2024', 'Eze Stephen', '1994-03-08', 'DF', '198', '102', 'NGA', '66'),
     (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'QNFC' AND `sea_son` = '2023-2024'), 'Quảng Nam', '2023-2024', 'Hoàng Thế Tài', '1998-06-23', 'MF', '170', '61', 'VIE', '98');
+
+
+INSERT INTO `players` (`id`, `club_id`, `club_name`, `sea_son`, `name`, `birth_day`, `position`, `height`, `weight`, `nationality`, `kit`)
+VALUES
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Filip Nguyen', '1992-09-14', 'GK', '192', '88', 'CZE', '1'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Huỳnh Tấn Sinh', '1998-04-06', 'DF', '182', '80', 'VIE', '3'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Hồ Tấn Tài', '1997-11-06', 'DF', '180', '77', 'VIE', '4'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Đoàn Văn Hậu', '1999-04-19', 'DF', '185', '82', 'VIE', '5'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Trương Văn Thiết', '1995-06-07', 'DF', '177', '68', 'VIE', '6'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Fialho De Aquino Junior Janio', '', 'ST', NULL, NULL, 'NULL', '8'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Jeferson Elias', '1998-01-12', 'ST', '186', '78', 'VIE', '9'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Lê Phạm Thành Long', '1996-06-05', 'MF', '165', '64', 'VIE', '11'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Hoàng Văn Toản', '2001-04-01', 'MF', '175', '70', 'VIE', '12'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Bùi Xuân Thịnh', '2001-09-15', 'DF', '169', '64', 'VIE', '15'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Bùi Tiến Dụng', '1998-11-23', 'DF', '176', '74', 'VIE', '16'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Vũ Văn Thanh', '1996-04-14', 'DF', '172', '73', 'VIE', '17'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Hồ Ngọc Thắng', '1994-02-10', 'ST', '178', '73', 'VIE', '18'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Nguyễn Quang Hải', '1997-04-12', 'MF', '166', '65', 'VIE', '19'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Phạm Văn Luân', '1999-05-26', 'MF', '169', '63', 'VIE', '21'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Trần Văn Trung', '1998-01-27', 'MF', '168', '63', 'VIE', '22'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Hà Văn Phương', '2001-07-13', 'MF', '170', '69', 'VIE', '26'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'La Nguyễn Bảo Trung', '2002-10-05', 'MF', '172', '67', 'VIE', '27'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Hồ Văn Cường', '2003-01-15', 'DF', '167', '63', 'VIE', '30'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Đỗ Sỹ Huy', '1998-04-16', 'GK', '181', '80', 'VIE', '33'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Phạm Gia Hưng', '2000-04-26', 'ST', '181', '74', 'VIE', '47'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Bùi Ngọc Long', '2001-10-06', 'MF', '165', '57', 'VIE', '66'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Bùi Hoàng Việt Anh', '1999-01-01', 'DF', '184', '82', 'VIE', '68'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Geovane Magno', '1994-04-14', 'ST', '188', '78', 'BRA', '94'),
+    (SHA1(UUID()), (SELECT clubs.`id` FROM `clubs` WHERE `shorthand` = 'CAHN' AND `sea_son` = '2022-2023'), 'Công An Hà Nội', '2023-2024', 'Giáp Tuấn Dương', '2002-09-07', 'DF', '176', '73', 'VIE', '98');

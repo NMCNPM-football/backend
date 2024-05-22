@@ -265,6 +265,7 @@ func (e *MatchService) CreateMatchResult(ctx context.Context, request *gen.Resul
 		RedCardHome:    RedCard,
 		YellowCardAway: YellowCard2,
 		RedCardAway:    RedCard2,
+		SeaSon:         match.SeaSon,
 	}
 
 	// Use the matchDao to insert the new ResultScore into the database

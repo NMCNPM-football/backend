@@ -15,12 +15,22 @@ message Summary {
   int32 yellow_card = 12;
   int32 red_card = 13;
   int32 rank = 14;
+  string sea_son = 15;
 }
 
 message CreateSummaryRequest{
   repeated Summary summary = 1;
+  string sea_son = 2;
 }
 
 message CreateSummaryResponse{
   string message = 1;
+}
+
+message GetSummaryRequest{
+  string sea_son = 1;
+}
+
+message SummaryResponse{
+  repeated Summary data = 1;
 }

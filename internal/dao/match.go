@@ -131,3 +131,42 @@ func (m *MatchDao) GetAllMatchDone() ([]*models.ProgressScore, error) {
 	}
 	return matchCalendars, nil
 }
+
+func (m *MatchDao) GetAllMatchResultsNotDone() ([]*models.Results, error) {
+	var results []*models.Results
+
+	// Query the database for match results where the status is "not done"
+	err := m.db.Where("status = ?", "not done").Find(&results).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return results, nil
+}
+
+func (m *MatchDao) GetAllMatchResultsByClubID(clubID string) ([]*models.Results, error) {
+	var results []*models.Results
+	err := m.db.Where("club_id = ? AND status = ?", clubID, "not done").Find(&results).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return results, nil
+}
+
+func (m *MatchDao) GetAllMatchResultsBySeaSon(season string) ([]*models.Results, error) {
+	var results []*models.Results
+	err := m.db.Where("status = ? AND sea_son = ?", "not done", season).Find(&results).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return results, nil
+}
+
+func (m *MatchDao) UpdateMatch(match *models.Results) error {
+	if err := m.db.Save(match).Error; err != nil {
+		return err
+	}
+	return nil
+}
