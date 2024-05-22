@@ -6,7 +6,7 @@ main
 .github
 
 config/config.json
-database
+
 .firebaserc
 firebase.json
 database-debug.log
