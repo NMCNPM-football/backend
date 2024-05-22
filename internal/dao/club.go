@@ -89,7 +89,13 @@ func (m *ClubDao) GetAllClubs() ([]*models.Club, error) {
 	}
 	return clubs, nil
 }
-
+func (m *ClubDao) GetAllClubsBySeaSon(season string) ([]*models.Club, error) {
+	var clubs []*models.Club
+	if err := m.db.Where("sea_son = ?", season).Find(&clubs).Error; err != nil {
+		return nil, err
+	}
+	return clubs, nil
+}
 func (m *ClubDao) GetAllPlayersInClub(clubID string) ([]*models.Player, error) {
 	var players []*models.Player
 	if err := m.db.Where("club_id = ?", clubID).Find(&players).Error; err != nil {

@@ -31,7 +31,7 @@ service MatchServicePublic {
   }
   rpc GetAllMatchResults (EmptyRequest) returns (ResultScoreListResponse) {
     option (google.api.http) = {
-      get: "/match_result /all"
+      get: "/match_result/all"
     };
   }
 

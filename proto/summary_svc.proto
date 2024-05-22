@@ -6,7 +6,7 @@ import "message.proto";
 import "summary.proto";
 
 service SummaryService{
-  rpc CreateSummary(CreateSummaryRequest) returns (CreateSummaryResponse){
+  rpc CreateSummary(CreateSummaryRequest) returns (SuccessMessageResponse){
     option (google.api.http) = {
       post: "/summary"
       body: "*"

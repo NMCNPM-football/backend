@@ -12,6 +12,7 @@ type Results struct {
 	YellowCardAway int
 	RedCardAway    int
 	SeaSon         string `gorm:"size:50"`
+	Status         string `gorm:"size:50;default:'not done'"`
 }
 
 type Matches struct {

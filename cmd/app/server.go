@@ -77,6 +77,12 @@ func main() {
 			userDao,
 			clubDao,
 		),
+		services.NewClubServicePublic(
+			logger,
+			cfg,
+			userDao,
+			clubDao,
+		),
 		services.NewMatchService(
 			logger,
 			cfg,

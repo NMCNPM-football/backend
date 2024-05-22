@@ -254,19 +254,6 @@ func (e *MatchService) CreateMatchResult(ctx context.Context, request *gen.Resul
 		return nil, fmt.Errorf("failed to get card for away team: %w", err)
 	}
 
-	//// Determine the winning team
-	//var teamWin, teamLose string
-	//if homeTeamGoals > awayTeamGoals {
-	//	teamWin = match.ClubOneName
-	//	teamLose = match.ClubTwoName
-	//} else if homeTeamGoals < awayTeamGoals {
-	//	teamWin = match.ClubTwoName
-	//	teamLose = match.ClubOneName
-	//} else {
-	//	teamWin = "Draw"
-	//	teamLose = "Draw"
-	//}
-
 	// Create a new ResultScore model
 	newResultScore := &models.Results{
 		MatchID:        request.MatchId,

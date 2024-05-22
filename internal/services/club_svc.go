@@ -332,7 +332,7 @@ func (e *ClubService) GetAllClubProfile(ctx context.Context, request *gen.EmptyR
 	if position == "" {
 		return nil, fmt.Errorf("failed to get user position: %w", err)
 	}
-	if position != "admin" {
+	if position != "Admin" {
 		return nil, fmt.Errorf("user is not an admin")
 	}
 

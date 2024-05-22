@@ -1,16 +1,18 @@
 syntax = "proto3";
 
-message ClubProfileResponse {
+message   ClubProfileResponse {
   message Data {
-    string name_club = 1;
-    string name_award = 2;
-    string shorthand = 3;
-    string name_stadium = 4;
-    string achievement = 5;
-    string update_by = 6;
-    string owner_by = 7;
-    string sea_son = 8;
-    string update_at = 9;
+    string id = 1;
+    string name_club = 2;
+    string name_award = 3;
+    string shorthand = 4;
+    string name_stadium = 5;
+    string achievement = 6;
+    string update_by = 7;
+    string owner_by = 8;
+    string sea_son =9;
+    string update_at = 10;
+    string logo = 11;
   }
   Data data = 1;
   string message = 2;
@@ -26,6 +28,12 @@ message ClubProfileRequest {
     string update_by = 7;
     string update_at = 8;
 }
+
+message ClubProfileIdRequest {
+    string id_club = 1;
+    string sea_son = 2;
+}
+
 
 message PLayerProfileRequest {
   string id = 1 ;

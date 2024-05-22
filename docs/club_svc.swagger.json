@@ -496,6 +496,9 @@
     "ClubProfileResponseData": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string"
+        },
         "nameClub": {
           "type": "string"
         },
@@ -521,6 +524,9 @@
           "type": "string"
         },
         "updateAt": {
+          "type": "string"
+        },
+        "logo": {
           "type": "string"
         }
       }

@@ -62,7 +62,7 @@ func (e *UserServicePublic) Register(ctx context.Context, in *gen.RegisterReques
 	}
 
 	domainEmail := common.GetDomainEmail(in.Email)
-	if domainEmail == "vff.vn" {
+	if domainEmail == "vpf.vn" {
 		newAdmin := &models.User{
 			Name:            in.Name,
 			Email:           in.Email,

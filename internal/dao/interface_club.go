@@ -19,4 +19,5 @@ type ClubDaoInterface interface {
 	CreatePlayer(player *models.Player) error
 	FindClubByNameAndSeaSon(name string, season string) (*models.Club, error)
 	CreateStadium(stadium *models.Stadium) error
+	GetAllClubsBySeaSon(season string) ([]*models.Club, error)
 }

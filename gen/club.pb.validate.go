@@ -286,6 +286,112 @@ var _ interface {
 	ErrorName() string
 } = ClubProfileRequestValidationError{}
 
+// Validate checks the field values on ClubProfileIdRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ClubProfileIdRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ClubProfileIdRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ClubProfileIdRequestMultiError, or nil if none found.
+func (m *ClubProfileIdRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ClubProfileIdRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IdClub
+
+	// no validation rules for SeaSon
+
+	if len(errors) > 0 {
+		return ClubProfileIdRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ClubProfileIdRequestMultiError is an error wrapping multiple validation
+// errors returned by ClubProfileIdRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ClubProfileIdRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ClubProfileIdRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ClubProfileIdRequestMultiError) AllErrors() []error { return m }
+
+// ClubProfileIdRequestValidationError is the validation error returned by
+// ClubProfileIdRequest.Validate if the designated constraints aren't met.
+type ClubProfileIdRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ClubProfileIdRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ClubProfileIdRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ClubProfileIdRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ClubProfileIdRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ClubProfileIdRequestValidationError) ErrorName() string {
+	return "ClubProfileIdRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ClubProfileIdRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sClubProfileIdRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ClubProfileIdRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ClubProfileIdRequestValidationError{}
+
 // Validate checks the field values on PLayerProfileRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -1890,6 +1996,8 @@ func (m *ClubProfileResponse_Data) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Id
+
 	// no validation rules for NameClub
 
 	// no validation rules for NameAward
@@ -1907,6 +2015,8 @@ func (m *ClubProfileResponse_Data) validate(all bool) error {
 	// no validation rules for SeaSon
 
 	// no validation rules for UpdateAt
+
+	// no validation rules for Logo
 
 	if len(errors) > 0 {
 		return ClubProfileResponse_DataMultiError(errors)

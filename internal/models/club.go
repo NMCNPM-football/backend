@@ -13,6 +13,7 @@ type Club struct {
 	Achievement string `gorm:"size:50"`
 	CreatedBy   string `gorm:"size:50"`
 	UpdatedBy   string `gorm:"size:50"`
+	LinkLogo    string `gorm:"size:5000"`
 	//UpdateAt    time.Time `gorm:"autoUpdateTime"`
 }
 

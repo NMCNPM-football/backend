@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SummaryServiceClient interface {
-	CreateSummary(ctx context.Context, in *CreateSummaryRequest, opts ...grpc.CallOption) (*CreateSummaryResponse, error)
+	CreateSummary(ctx context.Context, in *CreateSummaryRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
 }
 
 type summaryServiceClient struct {
@@ -37,8 +37,8 @@ func NewSummaryServiceClient(cc grpc.ClientConnInterface) SummaryServiceClient {
 	return &summaryServiceClient{cc}
 }
 
-func (c *summaryServiceClient) CreateSummary(ctx context.Context, in *CreateSummaryRequest, opts ...grpc.CallOption) (*CreateSummaryResponse, error) {
-	out := new(CreateSummaryResponse)
+func (c *summaryServiceClient) CreateSummary(ctx context.Context, in *CreateSummaryRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error) {
+	out := new(SuccessMessageResponse)
 	err := c.cc.Invoke(ctx, SummaryService_CreateSummary_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -50,14 +50,14 @@ func (c *summaryServiceClient) CreateSummary(ctx context.Context, in *CreateSumm
 // All implementations should embed UnimplementedSummaryServiceServer
 // for forward compatibility
 type SummaryServiceServer interface {
-	CreateSummary(context.Context, *CreateSummaryRequest) (*CreateSummaryResponse, error)
+	CreateSummary(context.Context, *CreateSummaryRequest) (*SuccessMessageResponse, error)
 }
 
 // UnimplementedSummaryServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedSummaryServiceServer struct {
 }
 
-func (UnimplementedSummaryServiceServer) CreateSummary(context.Context, *CreateSummaryRequest) (*CreateSummaryResponse, error) {
+func (UnimplementedSummaryServiceServer) CreateSummary(context.Context, *CreateSummaryRequest) (*SuccessMessageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateSummary not implemented")
 }
 
