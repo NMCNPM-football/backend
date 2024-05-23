@@ -31,6 +31,26 @@ message GetSummaryRequest{
   string sea_son = 1;
 }
 
-message SummaryResponse{
-  repeated Summary data = 1;
+
+message SummaryResponse {
+    string club_id = 1;
+    string club_name = 2;
+    int32 match_played = 3;
+    int32 match_won = 4;
+    int32 match_lost = 5;
+    int32 match_draw = 6;
+    int32 goal_scored = 7;
+    int32 goal_conceded = 8;
+    int32 goal_difference = 9;
+    int32 points = 10;
+    int32 yellow_card = 11;
+    int32 red_card = 12;
+    int32 rank = 13;
+    string sea_son = 14;
+    string logo_link = 15;
+  }
+
+message SummaryListResponse {
+  repeated SummaryResponse data = 1;
+  string message = 2;
 }

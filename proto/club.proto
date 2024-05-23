@@ -65,6 +65,8 @@ message PLayerProfileResponse {
     string name = 10;
     string birth_day = 11;
     string status = 12;
+    string id = 13;
+    string link_logo = 14;
   }
   Data data = 1;
   string message = 2;

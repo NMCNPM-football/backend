@@ -1076,6 +1076,127 @@ var _ interface {
 	ErrorName() string
 } = ResultScoreRequestValidationError{}
 
+// Validate checks the field values on SumScore with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *SumScore) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SumScore with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in SumScoreMultiError, or nil
+// if none found.
+func (m *SumScore) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SumScore) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for MatchId
+
+	// no validation rules for HomeTeamGoal
+
+	// no validation rules for HomeTeamName
+
+	// no validation rules for AwayTeamGoal
+
+	// no validation rules for AwayTeamName
+
+	// no validation rules for MatchRound
+
+	// no validation rules for Time
+
+	// no validation rules for Stadium
+
+	// no validation rules for Score
+
+	// no validation rules for HomeLogo
+
+	// no validation rules for AwayLogo
+
+	if len(errors) > 0 {
+		return SumScoreMultiError(errors)
+	}
+
+	return nil
+}
+
+// SumScoreMultiError is an error wrapping multiple validation errors returned
+// by SumScore.ValidateAll() if the designated constraints aren't met.
+type SumScoreMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SumScoreMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SumScoreMultiError) AllErrors() []error { return m }
+
+// SumScoreValidationError is the validation error returned by
+// SumScore.Validate if the designated constraints aren't met.
+type SumScoreValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SumScoreValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SumScoreValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SumScoreValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SumScoreValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SumScoreValidationError) ErrorName() string { return "SumScoreValidationError" }
+
+// Error satisfies the builtin error interface
+func (e SumScoreValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSumScore.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SumScoreValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SumScoreValidationError{}
+
 // Validate checks the field values on ResultScoreResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -1346,6 +1467,245 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ResultScoreListResponseValidationError{}
+
+// Validate checks the field values on ResultSumScoreListResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ResultSumScoreListResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ResultSumScoreListResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ResultSumScoreListResponseMultiError, or nil if none found.
+func (m *ResultSumScoreListResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ResultSumScoreListResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetData() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ResultSumScoreListResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ResultSumScoreListResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ResultSumScoreListResponseValidationError{
+					field:  fmt.Sprintf("Data[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Message
+
+	if len(errors) > 0 {
+		return ResultSumScoreListResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ResultSumScoreListResponseMultiError is an error wrapping multiple
+// validation errors returned by ResultSumScoreListResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ResultSumScoreListResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ResultSumScoreListResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ResultSumScoreListResponseMultiError) AllErrors() []error { return m }
+
+// ResultSumScoreListResponseValidationError is the validation error returned
+// by ResultSumScoreListResponse.Validate if the designated constraints aren't met.
+type ResultSumScoreListResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ResultSumScoreListResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ResultSumScoreListResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ResultSumScoreListResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ResultSumScoreListResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ResultSumScoreListResponseValidationError) ErrorName() string {
+	return "ResultSumScoreListResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ResultSumScoreListResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sResultSumScoreListResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ResultSumScoreListResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ResultSumScoreListResponseValidationError{}
+
+// Validate checks the field values on RoundRequest with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *RoundRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RoundRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in RoundRequestMultiError, or
+// nil if none found.
+func (m *RoundRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RoundRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Round
+
+	if len(errors) > 0 {
+		return RoundRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// RoundRequestMultiError is an error wrapping multiple validation errors
+// returned by RoundRequest.ValidateAll() if the designated constraints aren't met.
+type RoundRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RoundRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RoundRequestMultiError) AllErrors() []error { return m }
+
+// RoundRequestValidationError is the validation error returned by
+// RoundRequest.Validate if the designated constraints aren't met.
+type RoundRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RoundRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RoundRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RoundRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RoundRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RoundRequestValidationError) ErrorName() string { return "RoundRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e RoundRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRoundRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RoundRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RoundRequestValidationError{}
 
 // Validate checks the field values on MatchCalendarResponse_Data with the
 // rules defined in the proto definition for this message. If any rules are

@@ -42,11 +42,6 @@ service ClubService {
       delete: "/delete/player/{id}"
     };
   }
-  rpc GetPlayerProfile (PLayerRequest) returns (PLayerProfileResponse) {
-    option (google.api.http) = {
-      get: "/club/player/{id}"
-    };
-  }
   rpc GetAllPlayerProfile (EmptyRequest) returns (PlayerProfileListResponse) {
     option (google.api.http) = {
       get: "/club/player/all"

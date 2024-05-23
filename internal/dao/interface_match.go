@@ -20,4 +20,5 @@ type MatchDaoInterface interface {
 	GetAllMatchResultsByClubID(clubID string) ([]*models.Results, error)
 	GetAllMatchResultsBySeaSon(season string) ([]*models.Results, error)
 	UpdateMatch(match *models.Results) error
+	GetAllMatchResultsByRound(round string) ([]*models.Matches, error)
 }

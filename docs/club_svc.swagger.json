@@ -121,36 +121,6 @@
         ]
       }
     },
-    "/club/player/{id}": {
-      "get": {
-        "operationId": "ClubService_GetPlayerProfile",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/PLayerProfileResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ClubService"
-        ]
-      }
-    },
     "/club/profile/all": {
       "get": {
         "operationId": "ClubService_GetAllClubProfile",
@@ -678,6 +648,12 @@
           "type": "string"
         },
         "status": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "linkLogo": {
           "type": "string"
         }
       }

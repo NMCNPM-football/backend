@@ -25,4 +25,9 @@ service ClubServicePublic {
       get: "/club-list/{sea_son}"
     };
   }
+  rpc GetPlayerProfile (PLayerRequest) returns (PLayerProfileResponse) {
+    option (google.api.http) = {
+      get: "/club/player/{id}"
+    };
+  }
 }

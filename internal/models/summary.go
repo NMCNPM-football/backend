@@ -16,4 +16,5 @@ type Summary struct {
 	Points         int
 	Rank           int
 	SeaSon         string `gorm:"size:100"`
+	LogoLink       string `gorm:"size:5000"`
 }

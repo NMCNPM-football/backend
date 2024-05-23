@@ -76,6 +76,36 @@
         ]
       }
     },
+    "/match/result_score/{round}": {
+      "get": {
+        "operationId": "MatchServicePublic_GetAllMatchResultByRound",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoResultSumScoreListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "round",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MatchServicePublic"
+        ]
+      }
+    },
     "/match/{status}": {
       "get": {
         "operationId": "MatchServicePublic_GetAllMatchCalendarsWithStatus",
@@ -157,7 +187,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/SummaryResponse"
+              "$ref": "#/definitions/SummaryListResponse"
             }
           },
           "default": {
@@ -182,12 +212,24 @@
     }
   },
   "definitions": {
-    "Summary": {
+    "SummaryListResponse": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string"
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/SummaryResponse"
+          }
         },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "SummaryResponse": {
+      "type": "object",
+      "properties": {
         "clubId": {
           "type": "string"
         },
@@ -240,18 +282,9 @@
         },
         "seaSon": {
           "type": "string"
-        }
-      }
-    },
-    "SummaryResponse": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/Summary"
-          }
+        },
+        "logoLink": {
+          "type": "string"
         }
       }
     },
@@ -374,6 +407,61 @@
           "$ref": "#/definitions/protoResultScore"
         },
         "message": {
+          "type": "string"
+        }
+      }
+    },
+    "protoResultSumScoreListResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protoSumScore"
+          }
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "protoSumScore": {
+      "type": "object",
+      "properties": {
+        "matchId": {
+          "type": "string"
+        },
+        "homeTeamGoal": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "homeTeamName": {
+          "type": "string"
+        },
+        "awayTeamGoal": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "awayTeamName": {
+          "type": "string"
+        },
+        "matchRound": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        },
+        "stadium": {
+          "type": "string"
+        },
+        "score": {
+          "type": "string"
+        },
+        "homeLogo": {
+          "type": "string"
+        },
+        "awayLogo": {
           "type": "string"
         }
       }

@@ -77,6 +77,7 @@ func (e *SummaryService) CreateSummary(ctx context.Context, request *gen.CreateS
 					Points:         0,
 					Rank:           0,
 					SeaSon:         club.SeaSon,
+					LogoLink:       club.LinkLogo,
 				}
 			}
 			err = e.summaryDao.CreateSummary(homeSummary)
@@ -108,6 +109,7 @@ func (e *SummaryService) CreateSummary(ctx context.Context, request *gen.CreateS
 					Points:         0,
 					Rank:           0,
 					SeaSon:         club.SeaSon,
+					LogoLink:       club.LinkLogo,
 				}
 			}
 			err = e.summaryDao.CreateSummary(awaySummary)

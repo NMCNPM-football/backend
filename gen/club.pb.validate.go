@@ -2144,6 +2144,10 @@ func (m *PLayerProfileResponse_Data) validate(all bool) error {
 
 	// no validation rules for Status
 
+	// no validation rules for Id
+
+	// no validation rules for LinkLogo
+
 	if len(errors) > 0 {
 		return PLayerProfileResponse_DataMultiError(errors)
 	}

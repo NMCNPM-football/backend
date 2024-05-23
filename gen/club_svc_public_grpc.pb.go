@@ -22,6 +22,7 @@ const (
 	ClubServicePublic_GetClubProfile_FullMethodName             = "/proto.ClubServicePublic/GetClubProfile"
 	ClubServicePublic_GetPlayerProfileByClub_FullMethodName     = "/proto.ClubServicePublic/GetPlayerProfileByClub"
 	ClubServicePublic_GetClubProfileListBySeaSon_FullMethodName = "/proto.ClubServicePublic/GetClubProfileListBySeaSon"
+	ClubServicePublic_GetPlayerProfile_FullMethodName           = "/proto.ClubServicePublic/GetPlayerProfile"
 )
 
 // ClubServicePublicClient is the client API for ClubServicePublic service.
@@ -33,6 +34,7 @@ type ClubServicePublicClient interface {
 	// Get a player's information by club
 	GetPlayerProfileByClub(ctx context.Context, in *ClubProfileIdRequest, opts ...grpc.CallOption) (*PlayerProfileListResponse, error)
 	GetClubProfileListBySeaSon(ctx context.Context, in *ClubProfileIdRequest, opts ...grpc.CallOption) (*ClubProfileListResponse, error)
+	GetPlayerProfile(ctx context.Context, in *PLayerRequest, opts ...grpc.CallOption) (*PLayerProfileResponse, error)
 }
 
 type clubServicePublicClient struct {
@@ -70,6 +72,15 @@ func (c *clubServicePublicClient) GetClubProfileListBySeaSon(ctx context.Context
 	return out, nil
 }
 
+func (c *clubServicePublicClient) GetPlayerProfile(ctx context.Context, in *PLayerRequest, opts ...grpc.CallOption) (*PLayerProfileResponse, error) {
+	out := new(PLayerProfileResponse)
+	err := c.cc.Invoke(ctx, ClubServicePublic_GetPlayerProfile_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ClubServicePublicServer is the server API for ClubServicePublic service.
 // All implementations should embed UnimplementedClubServicePublicServer
 // for forward compatibility
@@ -79,6 +90,7 @@ type ClubServicePublicServer interface {
 	// Get a player's information by club
 	GetPlayerProfileByClub(context.Context, *ClubProfileIdRequest) (*PlayerProfileListResponse, error)
 	GetClubProfileListBySeaSon(context.Context, *ClubProfileIdRequest) (*ClubProfileListResponse, error)
+	GetPlayerProfile(context.Context, *PLayerRequest) (*PLayerProfileResponse, error)
 }
 
 // UnimplementedClubServicePublicServer should be embedded to have forward compatible implementations.
@@ -93,6 +105,9 @@ func (UnimplementedClubServicePublicServer) GetPlayerProfileByClub(context.Conte
 }
 func (UnimplementedClubServicePublicServer) GetClubProfileListBySeaSon(context.Context, *ClubProfileIdRequest) (*ClubProfileListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetClubProfileListBySeaSon not implemented")
+}
+func (UnimplementedClubServicePublicServer) GetPlayerProfile(context.Context, *PLayerRequest) (*PLayerProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPlayerProfile not implemented")
 }
 
 // UnsafeClubServicePublicServer may be embedded to opt out of forward compatibility for this service.
@@ -160,6 +175,24 @@ func _ClubServicePublic_GetClubProfileListBySeaSon_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClubServicePublic_GetPlayerProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PLayerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClubServicePublicServer).GetPlayerProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClubServicePublic_GetPlayerProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClubServicePublicServer).GetPlayerProfile(ctx, req.(*PLayerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ClubServicePublic_ServiceDesc is the grpc.ServiceDesc for ClubServicePublic service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -178,6 +211,10 @@ var ClubServicePublic_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetClubProfileListBySeaSon",
 			Handler:    _ClubServicePublic_GetClubProfileListBySeaSon_Handler,
+		},
+		{
+			MethodName: "GetPlayerProfile",
+			Handler:    _ClubServicePublic_GetPlayerProfile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

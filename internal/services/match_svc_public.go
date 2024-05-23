@@ -187,18 +187,20 @@ func (e *MatchServicePublic) GetAllMatchResults(ctx context.Context, request *ge
 	return response, nil
 }
 
-func (e *MatchServicePublic) GetSummary(ctx context.Context, request *gen.GetSummaryRequest) (*gen.SummaryResponse, error) {
+func (e *MatchServicePublic) GetSummary(ctx context.Context, request *gen.GetSummaryRequest) (*gen.SummaryListResponse, error) {
 	// Fetch all summaries for the given season
 	summaries, err := e.summaryDao.GetSummaryBySeaSon(request.SeaSon)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get summaries: %w", err)
 	}
 
-	// Convert the summaries to the proto model
-	protoSummaries := make([]*gen.Summary, len(summaries))
-	for i, summary := range summaries {
-		protoSummaries[i] = &gen.Summary{
-			Id:             summary.ID,
+	response := &gen.SummaryListResponse{
+		Data: make([]*gen.SummaryResponse, 0, len(summaries)),
+	}
+	response.Message = fmt.Sprintf("There are %d summaries in league", len(summaries))
+
+	for _, summary := range summaries {
+		response.Data = append(response.Data, &gen.SummaryResponse{
 			ClubId:         summary.ClubID,
 			ClubName:       summary.ClubName,
 			MatchPlayed:    int32(summary.MatchesPlayed),
@@ -213,11 +215,64 @@ func (e *MatchServicePublic) GetSummary(ctx context.Context, request *gen.GetSum
 			RedCard:        int32(summary.RedCard),
 			Rank:           int32(summary.Rank),
 			SeaSon:         summary.SeaSon,
-		}
+			LogoLink:       summary.LogoLink,
+		})
 	}
 
 	// Return the summaries
-	return &gen.SummaryResponse{
-		Summary: protoSummaries,
-	}, nil
+	// Return the response
+	return response, nil
+}
+
+func (e *MatchServicePublic) GetAllMatchResultByRound(ctx context.Context, request *gen.RoundRequest) (*gen.ResultSumScoreListResponse, error) {
+	// Fetch all match results for the given turn from the database
+	resultScores, err := e.matchDao.GetAllMatchResultsByRound(request.Round)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get match results: %w", err)
+	}
+
+	// Create a new ResultScoreListResponse
+	response := &gen.ResultSumScoreListResponse{
+		Data: make([]*gen.SumScore, 0, len(resultScores)),
+	}
+
+	// Iterate over the result scores and add them to the response
+	for _, resultScore := range resultScores {
+		detail, err := e.matchDao.GetMatchResultByID(resultScore.ID)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get match result by ID: %w", err)
+		}
+
+		detail2, err := e.matchDao.GetMatchCalendarByID(resultScore.ID)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get match calendar by ID: %w", err)
+		}
+
+		detail3, err := e.clubDao.GetClubByID(resultScore.IdClubOne)
+		if err != nil {
+			return nil, fmt.Errorf("failed to home team club by ID: %w", err)
+		}
+
+		detail4, err := e.clubDao.GetClubByID(resultScore.IdClubTwo)
+		if err != nil {
+			return nil, fmt.Errorf("failed to away team club by ID: %w", err)
+		}
+
+		response.Data = append(response.Data, &gen.SumScore{
+			MatchId:      resultScore.ID,
+			HomeTeamGoal: int32(detail.HomeTeamGoal),
+			HomeTeamName: detail3.Shorthand,
+			AwayTeamGoal: int32(detail.AwayTeamGoal),
+			AwayTeamName: detail4.Shorthand,
+			Stadium:      detail2.Stadium,
+			Time:         detail2.RealTime,
+			HomeLogo:     detail3.LinkLogo,
+			AwayLogo:     detail4.LinkLogo,
+			MatchRound:   request.Round,
+			Score:        fmt.Sprintf("%d - %d", detail.HomeTeamGoal, detail.AwayTeamGoal), // Add this line
+		})
+	}
+
+	// Return the response
+	return response, nil
 }

@@ -17,6 +17,7 @@ type Player struct {
 	CreatedBy   string `gorm:"size:50"`
 	UpdatedBy   string `gorm:"size:50"`
 	Status      string `gorm:"size:50"`
+	LogoLink    string `gorm:"size:5000"`
 }
 
 type ClubPlayer struct {

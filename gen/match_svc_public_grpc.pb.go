@@ -25,6 +25,7 @@ const (
 	MatchServicePublic_GetMatchResultByID_FullMethodName             = "/proto.MatchServicePublic/GetMatchResultByID"
 	MatchServicePublic_GetAllMatchResults_FullMethodName             = "/proto.MatchServicePublic/GetAllMatchResults"
 	MatchServicePublic_GetSummary_FullMethodName                     = "/proto.MatchServicePublic/GetSummary"
+	MatchServicePublic_GetAllMatchResultByRound_FullMethodName       = "/proto.MatchServicePublic/GetAllMatchResultByRound"
 )
 
 // MatchServicePublicClient is the client API for MatchServicePublic service.
@@ -36,7 +37,8 @@ type MatchServicePublicClient interface {
 	GetMatchCalendarById(ctx context.Context, in *MatchCalendarRequest, opts ...grpc.CallOption) (*MatchCalendarResponse, error)
 	GetMatchResultByID(ctx context.Context, in *ResultScoreRequest, opts ...grpc.CallOption) (*ResultScoreResponse, error)
 	GetAllMatchResults(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*ResultScoreListResponse, error)
-	GetSummary(ctx context.Context, in *GetSummaryRequest, opts ...grpc.CallOption) (*SummaryResponse, error)
+	GetSummary(ctx context.Context, in *GetSummaryRequest, opts ...grpc.CallOption) (*SummaryListResponse, error)
+	GetAllMatchResultByRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*ResultSumScoreListResponse, error)
 }
 
 type matchServicePublicClient struct {
@@ -92,9 +94,18 @@ func (c *matchServicePublicClient) GetAllMatchResults(ctx context.Context, in *E
 	return out, nil
 }
 
-func (c *matchServicePublicClient) GetSummary(ctx context.Context, in *GetSummaryRequest, opts ...grpc.CallOption) (*SummaryResponse, error) {
-	out := new(SummaryResponse)
+func (c *matchServicePublicClient) GetSummary(ctx context.Context, in *GetSummaryRequest, opts ...grpc.CallOption) (*SummaryListResponse, error) {
+	out := new(SummaryListResponse)
 	err := c.cc.Invoke(ctx, MatchServicePublic_GetSummary_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *matchServicePublicClient) GetAllMatchResultByRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*ResultSumScoreListResponse, error) {
+	out := new(ResultSumScoreListResponse)
+	err := c.cc.Invoke(ctx, MatchServicePublic_GetAllMatchResultByRound_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +121,8 @@ type MatchServicePublicServer interface {
 	GetMatchCalendarById(context.Context, *MatchCalendarRequest) (*MatchCalendarResponse, error)
 	GetMatchResultByID(context.Context, *ResultScoreRequest) (*ResultScoreResponse, error)
 	GetAllMatchResults(context.Context, *EmptyRequest) (*ResultScoreListResponse, error)
-	GetSummary(context.Context, *GetSummaryRequest) (*SummaryResponse, error)
+	GetSummary(context.Context, *GetSummaryRequest) (*SummaryListResponse, error)
+	GetAllMatchResultByRound(context.Context, *RoundRequest) (*ResultSumScoreListResponse, error)
 }
 
 // UnimplementedMatchServicePublicServer should be embedded to have forward compatible implementations.
@@ -132,8 +144,11 @@ func (UnimplementedMatchServicePublicServer) GetMatchResultByID(context.Context,
 func (UnimplementedMatchServicePublicServer) GetAllMatchResults(context.Context, *EmptyRequest) (*ResultScoreListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllMatchResults not implemented")
 }
-func (UnimplementedMatchServicePublicServer) GetSummary(context.Context, *GetSummaryRequest) (*SummaryResponse, error) {
+func (UnimplementedMatchServicePublicServer) GetSummary(context.Context, *GetSummaryRequest) (*SummaryListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSummary not implemented")
+}
+func (UnimplementedMatchServicePublicServer) GetAllMatchResultByRound(context.Context, *RoundRequest) (*ResultSumScoreListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllMatchResultByRound not implemented")
 }
 
 // UnsafeMatchServicePublicServer may be embedded to opt out of forward compatibility for this service.
@@ -255,6 +270,24 @@ func _MatchServicePublic_GetSummary_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MatchServicePublic_GetAllMatchResultByRound_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RoundRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MatchServicePublicServer).GetAllMatchResultByRound(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MatchServicePublic_GetAllMatchResultByRound_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MatchServicePublicServer).GetAllMatchResultByRound(ctx, req.(*RoundRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MatchServicePublic_ServiceDesc is the grpc.ServiceDesc for MatchServicePublic service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -285,6 +318,10 @@ var MatchServicePublic_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSummary",
 			Handler:    _MatchServicePublic_GetSummary_Handler,
+		},
+		{
+			MethodName: "GetAllMatchResultByRound",
+			Handler:    _MatchServicePublic_GetAllMatchResultByRound_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

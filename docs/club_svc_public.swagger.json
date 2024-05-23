@@ -89,6 +89,36 @@
         ]
       }
     },
+    "/club/player/{id}": {
+      "get": {
+        "operationId": "ClubServicePublic_GetPlayerProfile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/PLayerProfileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClubServicePublic"
+        ]
+      }
+    },
     "/player-profile/{idClub}": {
       "get": {
         "summary": "Get a player's information by club",
@@ -192,6 +222,17 @@
         }
       }
     },
+    "PLayerProfileResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/PLayerProfileResponseData"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "PLayerProfileResponseData": {
       "type": "object",
       "properties": {
@@ -229,6 +270,12 @@
           "type": "string"
         },
         "status": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "linkLogo": {
           "type": "string"
         }
       }

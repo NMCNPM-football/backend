@@ -279,47 +279,6 @@ func (e *ClubService) UpdatePlayer(ctx context.Context, request *gen.PLayerProfi
 	}, nil
 }
 
-func (e *ClubService) GetPlayerProfile(ctx context.Context, request *gen.PLayerRequest) (*gen.PLayerProfileResponse, error) {
-	// Get the user from the context
-	user, err := e.userFromContext(ctx, e.userDao)
-	if err != nil {
-		return nil, fmt.Errorf("failed to get user from context: %w", err)
-	}
-
-	// Get the club from the context
-	club, err := e.clubDao.GetClubByID(user.ClubID)
-	if err != nil {
-		return nil, fmt.Errorf("failed to get club by ID: %w", err)
-	}
-	// Check if the user is the owner of the club
-	if user.Name != club.OwnerBy {
-		return nil, fmt.Errorf("user is not the owner of the club")
-	}
-
-	player, err := e.clubDao.GetPLayerByID(request.Id)
-	if err != nil {
-		return nil, must.HandlerError(err, e.logger)
-	}
-
-	return &gen.PLayerProfileResponse{
-		Data: &gen.PLayerProfileResponse_Data{
-			ClubName:    player.ClubName,
-			SeaSon:      player.SeaSon,
-			TypePlayer:  player.TypePlayer,
-			Name:        player.Name,
-			BirthDay:    player.BirthDay,
-			Height:      player.Height,
-			Weight:      player.Weight,
-			Position:    player.Position,
-			Nationality: player.Nationality,
-			Kit:         player.Kit,
-			Achievement: player.Achievement,
-		},
-		Message: "Update club profile successfully",
-	}, nil
-
-}
-
 func (e *ClubService) GetAllClubProfile(ctx context.Context, request *gen.EmptyRequest) (*gen.ClubProfileListResponse, error) {
 	// Get the user from the context
 	user, err := e.userFromContext(ctx, e.userDao)

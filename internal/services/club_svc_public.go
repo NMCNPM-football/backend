@@ -3,6 +3,7 @@ package services
 import (
 	"context"
 	"fmt"
+	"github.com/NMCNPM-football/backend/internal/must"
 
 	"github.com/NMCNPM-football/backend/config"
 	"github.com/NMCNPM-football/backend/gen"
@@ -105,6 +106,8 @@ func (e *ClubServicePublic) GetPlayerProfileByClub(ctx context.Context, request 
 			Nationality: player.Nationality,
 			Kit:         player.Kit,
 			Achievement: player.Achievement,
+			LinkLogo:    player.LogoLink,
+			Id:          player.ID,
 		})
 
 	}
@@ -145,4 +148,31 @@ func (e *ClubServicePublic) GetClubProfileListBySeaSon(ctx context.Context, requ
 	clubCount := len(clubs)
 	response.Message = fmt.Sprintf("There are %d clubs in season 2023-2024", clubCount)
 	return response, nil
+}
+
+func (e *ClubServicePublic) GetPlayerProfile(ctx context.Context, request *gen.PLayerRequest) (*gen.PLayerProfileResponse, error) {
+
+	player, err := e.clubDao.GetPLayerByID(request.Id)
+	if err != nil {
+		return nil, must.HandlerError(err, e.logger)
+	}
+
+	return &gen.PLayerProfileResponse{
+		Data: &gen.PLayerProfileResponse_Data{
+			ClubName:    player.ClubName,
+			SeaSon:      player.SeaSon,
+			TypePlayer:  player.TypePlayer,
+			Name:        player.Name,
+			BirthDay:    player.BirthDay,
+			Height:      player.Height,
+			Weight:      player.Weight,
+			Position:    player.Position,
+			Nationality: player.Nationality,
+			Kit:         player.Kit,
+			Achievement: player.Achievement,
+			LinkLogo:    player.LogoLink,
+		},
+		Message: "Update club profile successfully",
+	}, nil
+
 }

@@ -79,6 +79,20 @@ message ResultScoreRequest{
   string match_id = 1;
 }
 
+message SumScore {
+  string match_id = 1;
+  int32 home_team_goal = 2;
+  string home_team_name = 3;
+  int32 away_team_goal = 4;
+  string away_team_name = 5;
+  string match_round = 6;
+  string time = 7;
+  string stadium = 8;
+  string score = 9;
+  string home_logo = 10;
+  string away_logo = 11;
+}
+
 message ResultScoreResponse {
   ResultScore data = 1;
   string message = 2;
@@ -87,4 +101,13 @@ message ResultScoreResponse {
 message ResultScoreListResponse {
   repeated ResultScore data = 1;
   string message = 2;
+}
+
+message ResultSumScoreListResponse {
+  repeated SumScore data = 1;
+  string message = 2;
+}
+
+message RoundRequest {
+  string round = 1;
 }

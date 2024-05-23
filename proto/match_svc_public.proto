@@ -36,9 +36,14 @@ service MatchServicePublic {
     };
   }
 
-  rpc GetSummary(GetSummaryRequest) returns (SummaryResponse){
+  rpc GetSummary(GetSummaryRequest) returns (SummaryListResponse){
     option (google.api.http) = {
       get: "/summary/{sea_son}"
+    };
+  }
+  rpc GetAllMatchResultByRound (RoundRequest) returns (ResultSumScoreListResponse) {
+    option (google.api.http) = {
+      get: "/match/result_score/{round}"
     };
   }
 }

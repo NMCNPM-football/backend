@@ -39,6 +39,8 @@ func (m *SummaryDao) CreateSummary(summary *models.Summary) error {
 
 func (m *SummaryDao) GetSummaryBySeaSon(season string) ([]*models.Summary, error) {
 	var summary []*models.Summary
-	err := m.db.Where("sea_son = ?", season).First(&summary).Error
-	return summary, err
+	if err := m.db.Where("sea_son = ?", season).Find(&summary).Error; err != nil {
+		return nil, err
+	}
+	return summary, nil
 }
