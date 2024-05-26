@@ -159,6 +159,107 @@ var _ interface {
 	ErrorName() string
 } = MatchCalendarValidationError{}
 
+// Validate checks the field values on RoundRequest with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *RoundRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RoundRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in RoundRequestMultiError, or
+// nil if none found.
+func (m *RoundRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RoundRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Round
+
+	if len(errors) > 0 {
+		return RoundRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// RoundRequestMultiError is an error wrapping multiple validation errors
+// returned by RoundRequest.ValidateAll() if the designated constraints aren't met.
+type RoundRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RoundRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RoundRequestMultiError) AllErrors() []error { return m }
+
+// RoundRequestValidationError is the validation error returned by
+// RoundRequest.Validate if the designated constraints aren't met.
+type RoundRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RoundRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RoundRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RoundRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RoundRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RoundRequestValidationError) ErrorName() string { return "RoundRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e RoundRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRoundRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RoundRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RoundRequestValidationError{}
+
 // Validate checks the field values on MatchCalendarRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -746,6 +847,144 @@ var _ interface {
 	ErrorName() string
 } = ProgressScoreValidationError{}
 
+// Validate checks the field values on ProgressScoreListResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ProgressScoreListResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ProgressScoreListResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ProgressScoreListResponseMultiError, or nil if none found.
+func (m *ProgressScoreListResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ProgressScoreListResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetData() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ProgressScoreListResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ProgressScoreListResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ProgressScoreListResponseValidationError{
+					field:  fmt.Sprintf("Data[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Message
+
+	if len(errors) > 0 {
+		return ProgressScoreListResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ProgressScoreListResponseMultiError is an error wrapping multiple validation
+// errors returned by ProgressScoreListResponse.ValidateAll() if the
+// designated constraints aren't met.
+type ProgressScoreListResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ProgressScoreListResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ProgressScoreListResponseMultiError) AllErrors() []error { return m }
+
+// ProgressScoreListResponseValidationError is the validation error returned by
+// ProgressScoreListResponse.Validate if the designated constraints aren't met.
+type ProgressScoreListResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ProgressScoreListResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ProgressScoreListResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ProgressScoreListResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ProgressScoreListResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ProgressScoreListResponseValidationError) ErrorName() string {
+	return "ProgressScoreListResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ProgressScoreListResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sProgressScoreListResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ProgressScoreListResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ProgressScoreListResponseValidationError{}
+
 // Validate checks the field values on ProgressCard with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -855,6 +1094,144 @@ var _ interface {
 	ErrorName() string
 } = ProgressCardValidationError{}
 
+// Validate checks the field values on ProgressCardListResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ProgressCardListResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ProgressCardListResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ProgressCardListResponseMultiError, or nil if none found.
+func (m *ProgressCardListResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ProgressCardListResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetData() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ProgressCardListResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ProgressCardListResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ProgressCardListResponseValidationError{
+					field:  fmt.Sprintf("Data[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Message
+
+	if len(errors) > 0 {
+		return ProgressCardListResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ProgressCardListResponseMultiError is an error wrapping multiple validation
+// errors returned by ProgressCardListResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ProgressCardListResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ProgressCardListResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ProgressCardListResponseMultiError) AllErrors() []error { return m }
+
+// ProgressCardListResponseValidationError is the validation error returned by
+// ProgressCardListResponse.Validate if the designated constraints aren't met.
+type ProgressCardListResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ProgressCardListResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ProgressCardListResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ProgressCardListResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ProgressCardListResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ProgressCardListResponseValidationError) ErrorName() string {
+	return "ProgressCardListResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ProgressCardListResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sProgressCardListResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ProgressCardListResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ProgressCardListResponseValidationError{}
+
 // Validate checks the field values on ResultScore with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -894,6 +1271,22 @@ func (m *ResultScore) validate(all bool) error {
 	// no validation rules for RedCardHome
 
 	// no validation rules for RedCardAway
+
+	// no validation rules for MatchRound
+
+	// no validation rules for Stadium
+
+	// no validation rules for Capacity
+
+	// no validation rules for Score
+
+	// no validation rules for HomeLogo
+
+	// no validation rules for AwayLogo
+
+	// no validation rules for Time
+
+	// no validation rules for SeaSon
 
 	if len(errors) > 0 {
 		return ResultScoreMultiError(errors)
@@ -1119,6 +1512,10 @@ func (m *SumScore) validate(all bool) error {
 	// no validation rules for HomeLogo
 
 	// no validation rules for AwayLogo
+
+	// no validation rules for HomeTeamFullName
+
+	// no validation rules for AwayTeamFullName
 
 	if len(errors) > 0 {
 		return SumScoreMultiError(errors)
@@ -1606,43 +2003,52 @@ var _ interface {
 	ErrorName() string
 } = ResultSumScoreListResponseValidationError{}
 
-// Validate checks the field values on RoundRequest with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
+// Validate checks the field values on Player with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *RoundRequest) Validate() error {
+func (m *Player) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on RoundRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in RoundRequestMultiError, or
-// nil if none found.
-func (m *RoundRequest) ValidateAll() error {
+// ValidateAll checks the field values on Player with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in PlayerMultiError, or nil if none found.
+func (m *Player) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *RoundRequest) validate(all bool) error {
+func (m *Player) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for Round
+	// no validation rules for PlayerNameCard
+
+	// no validation rules for CardType
+
+	// no validation rules for TimeInMatchCard
+
+	// no validation rules for PlayerNameGoal
+
+	// no validation rules for GoalType
+
+	// no validation rules for TimeInMatchGoal
 
 	if len(errors) > 0 {
-		return RoundRequestMultiError(errors)
+		return PlayerMultiError(errors)
 	}
 
 	return nil
 }
 
-// RoundRequestMultiError is an error wrapping multiple validation errors
-// returned by RoundRequest.ValidateAll() if the designated constraints aren't met.
-type RoundRequestMultiError []error
+// PlayerMultiError is an error wrapping multiple validation errors returned by
+// Player.ValidateAll() if the designated constraints aren't met.
+type PlayerMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m RoundRequestMultiError) Error() string {
+func (m PlayerMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1651,11 +2057,11 @@ func (m RoundRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m RoundRequestMultiError) AllErrors() []error { return m }
+func (m PlayerMultiError) AllErrors() []error { return m }
 
-// RoundRequestValidationError is the validation error returned by
-// RoundRequest.Validate if the designated constraints aren't met.
-type RoundRequestValidationError struct {
+// PlayerValidationError is the validation error returned by Player.Validate if
+// the designated constraints aren't met.
+type PlayerValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1663,22 +2069,22 @@ type RoundRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e RoundRequestValidationError) Field() string { return e.field }
+func (e PlayerValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e RoundRequestValidationError) Reason() string { return e.reason }
+func (e PlayerValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e RoundRequestValidationError) Cause() error { return e.cause }
+func (e PlayerValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e RoundRequestValidationError) Key() bool { return e.key }
+func (e PlayerValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e RoundRequestValidationError) ErrorName() string { return "RoundRequestValidationError" }
+func (e PlayerValidationError) ErrorName() string { return "PlayerValidationError" }
 
 // Error satisfies the builtin error interface
-func (e RoundRequestValidationError) Error() string {
+func (e PlayerValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1690,14 +2096,14 @@ func (e RoundRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sRoundRequest.%s: %s%s",
+		"invalid %sPlayer.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = RoundRequestValidationError{}
+var _ error = PlayerValidationError{}
 
 var _ interface {
 	Field() string
@@ -1705,7 +2111,310 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = RoundRequestValidationError{}
+} = PlayerValidationError{}
+
+// Validate checks the field values on Team with the rules defined in the proto
+// definition for this message. If any rules are violated, the first error
+// encountered is returned, or nil if there are no violations.
+func (m *Team) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Team with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in TeamMultiError, or nil if none found.
+func (m *Team) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Team) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Name
+
+	// no validation rules for Logo
+
+	// no validation rules for Goals
+
+	for idx, item := range m.GetPlayers() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, TeamValidationError{
+						field:  fmt.Sprintf("Players[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, TeamValidationError{
+						field:  fmt.Sprintf("Players[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return TeamValidationError{
+					field:  fmt.Sprintf("Players[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return TeamMultiError(errors)
+	}
+
+	return nil
+}
+
+// TeamMultiError is an error wrapping multiple validation errors returned by
+// Team.ValidateAll() if the designated constraints aren't met.
+type TeamMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m TeamMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m TeamMultiError) AllErrors() []error { return m }
+
+// TeamValidationError is the validation error returned by Team.Validate if the
+// designated constraints aren't met.
+type TeamValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e TeamValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e TeamValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e TeamValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e TeamValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e TeamValidationError) ErrorName() string { return "TeamValidationError" }
+
+// Error satisfies the builtin error interface
+func (e TeamValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sTeam.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = TeamValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = TeamValidationError{}
+
+// Validate checks the field values on ProgressGoal with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ProgressGoal) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ProgressGoal with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ProgressGoalMultiError, or
+// nil if none found.
+func (m *ProgressGoal) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ProgressGoal) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for MatchId
+
+	// no validation rules for Stadium
+
+	// no validation rules for Time
+
+	// no validation rules for Capacity
+
+	if all {
+		switch v := interface{}(m.GetHomeTeam()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ProgressGoalValidationError{
+					field:  "HomeTeam",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ProgressGoalValidationError{
+					field:  "HomeTeam",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetHomeTeam()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ProgressGoalValidationError{
+				field:  "HomeTeam",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetAwayTeam()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ProgressGoalValidationError{
+					field:  "AwayTeam",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ProgressGoalValidationError{
+					field:  "AwayTeam",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAwayTeam()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ProgressGoalValidationError{
+				field:  "AwayTeam",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ProgressGoalMultiError(errors)
+	}
+
+	return nil
+}
+
+// ProgressGoalMultiError is an error wrapping multiple validation errors
+// returned by ProgressGoal.ValidateAll() if the designated constraints aren't met.
+type ProgressGoalMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ProgressGoalMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ProgressGoalMultiError) AllErrors() []error { return m }
+
+// ProgressGoalValidationError is the validation error returned by
+// ProgressGoal.Validate if the designated constraints aren't met.
+type ProgressGoalValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ProgressGoalValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ProgressGoalValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ProgressGoalValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ProgressGoalValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ProgressGoalValidationError) ErrorName() string { return "ProgressGoalValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ProgressGoalValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sProgressGoal.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ProgressGoalValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ProgressGoalValidationError{}
 
 // Validate checks the field values on MatchCalendarResponse_Data with the
 // rules defined in the proto definition for this message. If any rules are

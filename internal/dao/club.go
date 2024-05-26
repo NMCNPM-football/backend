@@ -141,3 +141,19 @@ func (m *ClubDao) CreateStadium(stadium *models.Stadium) error {
 
 	return nil
 }
+
+func (m *ClubDao) GetStadiumByClubID(clubID string) (*models.Stadium, error) {
+	var stadium models.Stadium
+	if err := m.db.Where("club_id = ?", clubID).First(&stadium).Error; err != nil {
+		return nil, err
+	}
+	return &stadium, nil
+}
+
+func (m *ClubDao) GetCoachByClubID(clubID string) (*models.Coach, error) {
+	var coach models.Coach
+	if err := m.db.Where("club_id = ?", clubID).First(&coach).Error; err != nil {
+		return nil, err
+	}
+	return &coach, nil
+}

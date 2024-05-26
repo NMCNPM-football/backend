@@ -48,9 +48,15 @@ message SummaryResponse {
     int32 rank = 13;
     string sea_son = 14;
     string logo_link = 15;
+    string shorthand = 16;
   }
 
 message SummaryListResponse {
   repeated SummaryResponse data = 1;
   string message = 2;
+}
+
+message CreateSeasonRequest{
+  string sea_son = 1;
+  string name = 2;
 }

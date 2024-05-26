@@ -20,4 +20,6 @@ type ClubDaoInterface interface {
 	FindClubByNameAndSeaSon(name string, season string) (*models.Club, error)
 	CreateStadium(stadium *models.Stadium) error
 	GetAllClubsBySeaSon(season string) ([]*models.Club, error)
+	GetStadiumByClubID(clubID string) (*models.Stadium, error)
+	GetCoachByClubID(clubID string) (*models.Coach, error)
 }

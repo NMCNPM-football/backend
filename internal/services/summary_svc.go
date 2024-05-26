@@ -47,7 +47,13 @@ func (e *SummaryService) RegisterHandler(ctx context.Context, mux *runtime.Serve
 }
 
 func (e *SummaryService) CreateSummary(ctx context.Context, request *gen.CreateSummaryRequest) (*gen.SuccessMessageResponse, error) {
-
+	user, err := e.userFromContext(ctx, e.userDao)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user from context: %w", err)
+	}
+	if user.Position != "Admin" {
+		return nil, fmt.Errorf("access denied: user is not an admin")
+	}
 	// Fetch the match results for the club
 	results, err := e.matchDao.GetAllMatchResultsBySeaSon(request.SeaSon)
 	if err != nil {
@@ -181,6 +187,34 @@ func (e *SummaryService) CreateSummary(ctx context.Context, request *gen.CreateS
 	return &gen.SuccessMessageResponse{
 		Data: &gen.SuccessMessageResponseSuccessMessage{
 			Message: "Summary created successfully",
+		},
+	}, nil
+}
+
+func (e *SummaryService) CreateSeason(ctx context.Context, request *gen.CreateSeasonRequest) (*gen.SuccessMessageResponse, error) {
+	user, err := e.userFromContext(ctx, e.userDao)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user from context: %w", err)
+	}
+	if user.Position != "Admin" {
+		return nil, fmt.Errorf("access denied: user is not an admin")
+	}
+
+	// Create a new season
+	season := &models.SeaSon{
+		Name:   request.Name,
+		SeaSon: request.SeaSon,
+	}
+
+	// Save the season in the database
+	if err := e.summaryDao.CreateSeason(season); err != nil {
+		return nil, fmt.Errorf("failed to create season: %w", err)
+	}
+
+	// Return a success message
+	return &gen.SuccessMessageResponse{
+		Data: &gen.SuccessMessageResponseSuccessMessage{
+			Message: "Season created successfully",
 		},
 	}, nil
 }

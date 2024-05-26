@@ -246,6 +246,31 @@
                 "redCardAway": {
                   "type": "integer",
                   "format": "int32"
+                },
+                "matchRound": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "stadium": {
+                  "type": "string"
+                },
+                "capacity": {
+                  "type": "string"
+                },
+                "score": {
+                  "type": "string"
+                },
+                "homeLogo": {
+                  "type": "string"
+                },
+                "awayLogo": {
+                  "type": "string"
+                },
+                "time": {
+                  "type": "string"
+                },
+                "seaSon": {
+                  "type": "string"
                 }
               }
             }

@@ -8,4 +8,5 @@ type SummaryDaoInterface interface {
 	CreateSummary(summary *models.Summary) error
 	GetSummaryByClubName(clubName string) (*models.Summary, error)
 	GetSummaryBySeaSon(season string) ([]*models.Summary, error)
+	CreateSeason(season *models.SeaSon) error
 }

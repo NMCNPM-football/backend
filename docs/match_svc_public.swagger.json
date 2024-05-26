@@ -46,6 +46,66 @@
         ]
       }
     },
+    "/match/progress_card/{matchId}": {
+      "get": {
+        "operationId": "MatchServicePublic_GetProgressCardByMatchID",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoProgressCardListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "matchId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MatchServicePublic"
+        ]
+      }
+    },
+    "/match/progress_score/{matchId}": {
+      "get": {
+        "operationId": "MatchServicePublic_GetProgressScoreByMatchID",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoProgressScoreListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "matchId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MatchServicePublic"
+        ]
+      }
+    },
     "/match/result_score/{matchId}": {
       "get": {
         "operationId": "MatchServicePublic_GetMatchResultByID",
@@ -96,6 +156,36 @@
         "parameters": [
           {
             "name": "round",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MatchServicePublic"
+        ]
+      }
+    },
+    "/match/statistic/{matchId}": {
+      "get": {
+        "operationId": "MatchServicePublic_GetMatchStatisticByMatchID",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoProgressGoal"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "matchId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -285,6 +375,9 @@
         },
         "logoLink": {
           "type": "string"
+        },
+        "shorthand": {
+          "type": "string"
         }
       }
     },
@@ -347,6 +440,122 @@
         }
       }
     },
+    "protoPlayer": {
+      "type": "object",
+      "properties": {
+        "playerNameCard": {
+          "type": "string"
+        },
+        "cardType": {
+          "type": "string"
+        },
+        "timeInMatchCard": {
+          "type": "string"
+        },
+        "playerNameGoal": {
+          "type": "string"
+        },
+        "goalType": {
+          "type": "string"
+        },
+        "timeInMatchGoal": {
+          "type": "string"
+        }
+      }
+    },
+    "protoProgressCard": {
+      "type": "object",
+      "properties": {
+        "matchId": {
+          "type": "string"
+        },
+        "clubName": {
+          "type": "string"
+        },
+        "playerName": {
+          "type": "string"
+        },
+        "cardType": {
+          "type": "string"
+        },
+        "timeInMatch": {
+          "type": "string"
+        }
+      }
+    },
+    "protoProgressCardListResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protoProgressCard"
+          }
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "protoProgressGoal": {
+      "type": "object",
+      "properties": {
+        "matchId": {
+          "type": "string"
+        },
+        "stadium": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        },
+        "capacity": {
+          "type": "string"
+        },
+        "homeTeam": {
+          "$ref": "#/definitions/protoTeam"
+        },
+        "awayTeam": {
+          "$ref": "#/definitions/protoTeam"
+        }
+      }
+    },
+    "protoProgressScore": {
+      "type": "object",
+      "properties": {
+        "matchId": {
+          "type": "string"
+        },
+        "clubName": {
+          "type": "string"
+        },
+        "playerName": {
+          "type": "string"
+        },
+        "goalType": {
+          "type": "string"
+        },
+        "timeInMatch": {
+          "type": "string"
+        }
+      }
+    },
+    "protoProgressScoreListResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protoProgressScore"
+          }
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "protoResultScore": {
       "type": "object",
       "properties": {
@@ -382,6 +591,31 @@
         "redCardAway": {
           "type": "integer",
           "format": "int32"
+        },
+        "matchRound": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "stadium": {
+          "type": "string"
+        },
+        "capacity": {
+          "type": "string"
+        },
+        "score": {
+          "type": "string"
+        },
+        "homeLogo": {
+          "type": "string"
+        },
+        "awayLogo": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        },
+        "seaSon": {
+          "type": "string"
         }
       }
     },
@@ -463,6 +697,34 @@
         },
         "awayLogo": {
           "type": "string"
+        },
+        "homeTeamFullName": {
+          "type": "string"
+        },
+        "awayTeamFullName": {
+          "type": "string"
+        }
+      }
+    },
+    "protoTeam": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "logo": {
+          "type": "string"
+        },
+        "goals": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "players": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protoPlayer"
+          }
         }
       }
     },

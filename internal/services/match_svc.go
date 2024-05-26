@@ -283,6 +283,14 @@ func (e *MatchService) CreateMatchResult(ctx context.Context, request *gen.Resul
 }
 
 func (e *MatchService) CreateAllMatchResults(ctx context.Context, request *gen.EmptyRequest) (*gen.SuccessMessageResponse, error) {
+	user, err := e.userFromContext(ctx, e.userDao)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user from context: %w", err)
+	}
+	if user.Position != "Admin" {
+		return nil, fmt.Errorf("access denied: user is not an admin")
+	}
+
 	matches, err := e.matchDao.GetAllMatchDone()
 	if err != nil {
 		return nil, fmt.Errorf("failed to get all matches: %w", err)

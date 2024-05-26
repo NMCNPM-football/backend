@@ -132,6 +132,10 @@ func (e *ClubServicePublic) GetClubProfileListBySeaSon(ctx context.Context, requ
 
 	// Convert each club to the ClubProfile protobuf message and append it to the response
 	for _, club := range clubs {
+		coach, err := e.clubDao.GetCoachByClubID(club.ID)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get coach by ID: %w", err)
+		}
 		response.Data = append(response.Data, &gen.ClubProfileResponse_Data{
 			Id:          club.ID,
 			OwnerBy:     club.OwnerBy,
@@ -143,6 +147,7 @@ func (e *ClubServicePublic) GetClubProfileListBySeaSon(ctx context.Context, requ
 			Achievement: club.Achievement,
 			UpdateBy:    club.UpdatedBy,
 			Logo:        club.LinkLogo,
+			Coach:       coach.Name,
 		})
 	}
 	clubCount := len(clubs)

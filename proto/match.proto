@@ -17,6 +17,10 @@ message MatchCalendar {
   string match_status = 12;
 }
 
+message RoundRequest {
+  string round = 1;
+}
+
 
 message MatchCalendarRequest {
   string id = 1;
@@ -55,12 +59,22 @@ message ProgressScore {
   string time_in_match = 6;
 }
 
+message ProgressScoreListResponse{
+  repeated ProgressScore data = 1;
+  string message = 2;
+}
+
 message ProgressCard{
   string match_id = 2;
   string club_name = 3;
   string player_name = 4;
   string card_type = 5;
   string time_in_match = 6;
+}
+
+message ProgressCardListResponse{
+  repeated ProgressCard data = 1;
+  string message = 2;
 }
 
 message ResultScore {
@@ -73,6 +87,14 @@ message ResultScore {
   int32 yellow_card_away = 7;
   int32 red_card_home = 8;
   int32 red_card_away = 9;
+  int32 match_round = 10;
+  string stadium = 11;
+  string capacity = 12;
+  string score = 13;
+  string home_logo = 14;
+  string away_logo = 15;
+  string time = 16;
+  string sea_son = 17;
 }
 
 message ResultScoreRequest{
@@ -91,6 +113,8 @@ message SumScore {
   string score = 9;
   string home_logo = 10;
   string away_logo = 11;
+  string home_team_full_name = 12;
+  string away_team_full_name = 13;
 }
 
 message ResultScoreResponse {
@@ -108,6 +132,27 @@ message ResultSumScoreListResponse {
   string message = 2;
 }
 
-message RoundRequest {
-  string round = 1;
+message Player {
+  string player_name_card = 1;
+  string card_type = 2;
+  string time_in_match_card = 3;
+  string player_name_goal = 4;
+  string goal_type = 5;
+  string time_in_match_goal = 6;
+}
+
+message Team{
+  string name = 1;
+  string logo = 2;
+  int32 goals = 3;
+  repeated Player players = 4;
+}
+
+message ProgressGoal{
+  string match_id = 1;
+  string stadium = 2;
+  string time = 3;
+  string capacity = 4;
+  Team home_team = 5;
+  Team away_team = 6;
 }

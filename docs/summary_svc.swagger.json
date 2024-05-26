@@ -16,6 +16,38 @@
     "application/json"
   ],
   "paths": {
+    "/season": {
+      "post": {
+        "operationId": "SummaryService_CreateSeason",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateSeasonRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SummaryService"
+        ]
+      }
+    },
     "/summary/{seaSon}": {
       "post": {
         "operationId": "SummaryService_CreateSummary",
@@ -65,6 +97,17 @@
     }
   },
   "definitions": {
+    "CreateSeasonRequest": {
+      "type": "object",
+      "properties": {
+        "seaSon": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "SuccessMessageResponse": {
       "type": "object",
       "properties": {

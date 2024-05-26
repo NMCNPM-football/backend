@@ -12,4 +12,10 @@ service SummaryService{
       body: "*"
     };
   }
+  rpc CreateSeason(CreateSeasonRequest) returns (SuccessMessageResponse){
+    option (google.api.http) = {
+      post: "/season"
+      body: "*"
+    };
+  }
 }

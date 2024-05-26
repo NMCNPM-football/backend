@@ -21,6 +21,7 @@ func Migration(db *gorm.DB) error {
 		&models.ProgressCard{},
 		&models.CardType{},
 		&models.Summary{},
+		&models.Coach{},
 	); err != nil {
 		return errors.Wrap(err, "db.AutoMigrate")
 	}

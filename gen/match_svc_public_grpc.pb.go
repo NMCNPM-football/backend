@@ -26,6 +26,9 @@ const (
 	MatchServicePublic_GetAllMatchResults_FullMethodName             = "/proto.MatchServicePublic/GetAllMatchResults"
 	MatchServicePublic_GetSummary_FullMethodName                     = "/proto.MatchServicePublic/GetSummary"
 	MatchServicePublic_GetAllMatchResultByRound_FullMethodName       = "/proto.MatchServicePublic/GetAllMatchResultByRound"
+	MatchServicePublic_GetProgressScoreByMatchID_FullMethodName      = "/proto.MatchServicePublic/GetProgressScoreByMatchID"
+	MatchServicePublic_GetProgressCardByMatchID_FullMethodName       = "/proto.MatchServicePublic/GetProgressCardByMatchID"
+	MatchServicePublic_GetMatchStatisticByMatchID_FullMethodName     = "/proto.MatchServicePublic/GetMatchStatisticByMatchID"
 )
 
 // MatchServicePublicClient is the client API for MatchServicePublic service.
@@ -39,6 +42,9 @@ type MatchServicePublicClient interface {
 	GetAllMatchResults(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*ResultScoreListResponse, error)
 	GetSummary(ctx context.Context, in *GetSummaryRequest, opts ...grpc.CallOption) (*SummaryListResponse, error)
 	GetAllMatchResultByRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*ResultSumScoreListResponse, error)
+	GetProgressScoreByMatchID(ctx context.Context, in *ResultScoreRequest, opts ...grpc.CallOption) (*ProgressScoreListResponse, error)
+	GetProgressCardByMatchID(ctx context.Context, in *ResultScoreRequest, opts ...grpc.CallOption) (*ProgressCardListResponse, error)
+	GetMatchStatisticByMatchID(ctx context.Context, in *ResultScoreRequest, opts ...grpc.CallOption) (*ProgressGoal, error)
 }
 
 type matchServicePublicClient struct {
@@ -112,6 +118,33 @@ func (c *matchServicePublicClient) GetAllMatchResultByRound(ctx context.Context,
 	return out, nil
 }
 
+func (c *matchServicePublicClient) GetProgressScoreByMatchID(ctx context.Context, in *ResultScoreRequest, opts ...grpc.CallOption) (*ProgressScoreListResponse, error) {
+	out := new(ProgressScoreListResponse)
+	err := c.cc.Invoke(ctx, MatchServicePublic_GetProgressScoreByMatchID_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *matchServicePublicClient) GetProgressCardByMatchID(ctx context.Context, in *ResultScoreRequest, opts ...grpc.CallOption) (*ProgressCardListResponse, error) {
+	out := new(ProgressCardListResponse)
+	err := c.cc.Invoke(ctx, MatchServicePublic_GetProgressCardByMatchID_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *matchServicePublicClient) GetMatchStatisticByMatchID(ctx context.Context, in *ResultScoreRequest, opts ...grpc.CallOption) (*ProgressGoal, error) {
+	out := new(ProgressGoal)
+	err := c.cc.Invoke(ctx, MatchServicePublic_GetMatchStatisticByMatchID_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MatchServicePublicServer is the server API for MatchServicePublic service.
 // All implementations should embed UnimplementedMatchServicePublicServer
 // for forward compatibility
@@ -123,6 +156,9 @@ type MatchServicePublicServer interface {
 	GetAllMatchResults(context.Context, *EmptyRequest) (*ResultScoreListResponse, error)
 	GetSummary(context.Context, *GetSummaryRequest) (*SummaryListResponse, error)
 	GetAllMatchResultByRound(context.Context, *RoundRequest) (*ResultSumScoreListResponse, error)
+	GetProgressScoreByMatchID(context.Context, *ResultScoreRequest) (*ProgressScoreListResponse, error)
+	GetProgressCardByMatchID(context.Context, *ResultScoreRequest) (*ProgressCardListResponse, error)
+	GetMatchStatisticByMatchID(context.Context, *ResultScoreRequest) (*ProgressGoal, error)
 }
 
 // UnimplementedMatchServicePublicServer should be embedded to have forward compatible implementations.
@@ -149,6 +185,15 @@ func (UnimplementedMatchServicePublicServer) GetSummary(context.Context, *GetSum
 }
 func (UnimplementedMatchServicePublicServer) GetAllMatchResultByRound(context.Context, *RoundRequest) (*ResultSumScoreListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllMatchResultByRound not implemented")
+}
+func (UnimplementedMatchServicePublicServer) GetProgressScoreByMatchID(context.Context, *ResultScoreRequest) (*ProgressScoreListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProgressScoreByMatchID not implemented")
+}
+func (UnimplementedMatchServicePublicServer) GetProgressCardByMatchID(context.Context, *ResultScoreRequest) (*ProgressCardListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProgressCardByMatchID not implemented")
+}
+func (UnimplementedMatchServicePublicServer) GetMatchStatisticByMatchID(context.Context, *ResultScoreRequest) (*ProgressGoal, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMatchStatisticByMatchID not implemented")
 }
 
 // UnsafeMatchServicePublicServer may be embedded to opt out of forward compatibility for this service.
@@ -288,6 +333,60 @@ func _MatchServicePublic_GetAllMatchResultByRound_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MatchServicePublic_GetProgressScoreByMatchID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResultScoreRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MatchServicePublicServer).GetProgressScoreByMatchID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MatchServicePublic_GetProgressScoreByMatchID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MatchServicePublicServer).GetProgressScoreByMatchID(ctx, req.(*ResultScoreRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MatchServicePublic_GetProgressCardByMatchID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResultScoreRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MatchServicePublicServer).GetProgressCardByMatchID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MatchServicePublic_GetProgressCardByMatchID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MatchServicePublicServer).GetProgressCardByMatchID(ctx, req.(*ResultScoreRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MatchServicePublic_GetMatchStatisticByMatchID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResultScoreRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MatchServicePublicServer).GetMatchStatisticByMatchID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MatchServicePublic_GetMatchStatisticByMatchID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MatchServicePublicServer).GetMatchStatisticByMatchID(ctx, req.(*ResultScoreRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MatchServicePublic_ServiceDesc is the grpc.ServiceDesc for MatchServicePublic service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -322,6 +421,18 @@ var MatchServicePublic_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAllMatchResultByRound",
 			Handler:    _MatchServicePublic_GetAllMatchResultByRound_Handler,
+		},
+		{
+			MethodName: "GetProgressScoreByMatchID",
+			Handler:    _MatchServicePublic_GetProgressScoreByMatchID_Handler,
+		},
+		{
+			MethodName: "GetProgressCardByMatchID",
+			Handler:    _MatchServicePublic_GetProgressCardByMatchID_Handler,
+		},
+		{
+			MethodName: "GetMatchStatisticByMatchID",
+			Handler:    _MatchServicePublic_GetMatchStatisticByMatchID_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

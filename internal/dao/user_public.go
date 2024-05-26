@@ -151,6 +151,7 @@ func (u *UserDao) RegisterAsMember(user *models.User, club *models.Club) error {
 	user.ClubID = club.ID
 	user.Position = models.ClubMember
 	user.Club = club.NameClub
+
 	if err := tx.Create(user).Error; err != nil {
 		if strings.Contains(err.Error(), "Duplicate key") {
 			err = tx.Unscoped().Model(&models.User{}).Where("email = ?", user.Email).Update("deleted_at", nil).Error

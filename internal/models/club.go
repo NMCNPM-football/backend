@@ -2,28 +2,31 @@ package models
 
 type Club struct {
 	Base
-	OwnerBy     string `gorm:"size:50"`
-	NameClub    string `gorm:"size:50"`
-	NameAward   string `gorm:"size:50"`
-	SeaSon      string `gorm:"size:50"`
-	Shorthand   string `gorm:"size:50"`
-	NameStadium string `gorm:"size:50"`
-	Stadium     string `gorm:"size:50"`
-	DomainEmail string `gorm:"size:50;not null"`
-	Achievement string `gorm:"size:50"`
-	CreatedBy   string `gorm:"size:50"`
-	UpdatedBy   string `gorm:"size:50"`
-	LinkLogo    string `gorm:"size:5000"`
+	OwnerBy      string   `gorm:"size:50"`
+	NameClub     string   `gorm:"size:50"`
+	NameAward    string   `gorm:"size:50"`
+	SeaSon       string   `gorm:"size:50"`
+	SeaSonID     string   `gorm:"size:50"`
+	Shorthand    string   `gorm:"size:50"`
+	NameStadium  string   `gorm:"size:50"`
+	Stadium      string   `gorm:"size:50"`
+	DomainEmail  string   `gorm:"size:50;not null"`
+	Achievement  string   `gorm:"size:50"`
+	CreatedBy    string   `gorm:"size:50"`
+	UpdatedBy    string   `gorm:"size:50"`
+	LinkLogo     string   `gorm:"size:5000"`
+	Players      []Player `gorm:"foreignKey:ClubID"`
+	SeaSonStruct SeaSon   `gorm:"foreignKey:SeaSonID"` // Added this line
+
 	//UpdateAt    time.Time `gorm:"autoUpdateTime"`
 }
 
 type SeaSon struct {
-	SeaSonID string `gorm:"size:50;primaryKey"`
-	Name     string `gorm:"size:50"`
-	Country  string `gorm:"size:50"`
-	Year     string `gorm:"size:50"`
+	Base
+	Name    string `gorm:"size:50"`
+	SeaSon  string `gorm:"size:50"`
+	Country string `gorm:"size:50;default:VietNam"`
 }
-
 type Coach struct {
 	Base
 	Name          string `gorm:"size:50"`

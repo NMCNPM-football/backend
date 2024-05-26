@@ -122,8 +122,8 @@ func (e *ClubService) GetAllPlayerProfile(ctx context.Context, request *gen.Empt
 	// Convert each player to the PlayerProfile protobuf message and append it to the response
 	for _, player := range players {
 		response.Data = append(response.Data, &gen.PLayerProfileResponse_Data{
-			ClubName:    player.ClubName,
-			SeaSon:      player.SeaSon,
+			ClubName: player.ClubName,
+			//SeaSon:      player.SeaSon,
 			TypePlayer:  player.TypePlayer,
 			Name:        player.Name,
 			BirthDay:    player.BirthDay,

@@ -498,6 +498,9 @@
         },
         "logo": {
           "type": "string"
+        },
+        "coach": {
+          "type": "string"
         }
       }
     },

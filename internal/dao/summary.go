@@ -44,3 +44,10 @@ func (m *SummaryDao) GetSummaryBySeaSon(season string) ([]*models.Summary, error
 	}
 	return summary, nil
 }
+
+func (m *SummaryDao) CreateSeason(season *models.SeaSon) error {
+	if err := m.db.Create(&season).Error; err != nil {
+		return errors.Wrap(err, "c.db.Create")
+	}
+	return nil
+}

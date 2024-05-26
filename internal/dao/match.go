@@ -53,6 +53,37 @@ func (m *MatchDao) GetAllMatchCalendarsWithStatus(status string) ([]*models.Matc
 	return matchCalendars, nil
 }
 
+func (m *MatchDao) GetProgressScoresByMatchID(matchID string) ([]*models.ProgressScore, error) {
+	var progress []*models.ProgressScore
+	if err := m.db.Where("match_id = ?", matchID).Find(&progress).Error; err != nil {
+		return nil, err
+	}
+	return progress, nil
+}
+func (m *MatchDao) GetProgressScoresByMatchClubID(matchID string, clubName string) ([]*models.ProgressScore, error) {
+	var progress []*models.ProgressScore
+	if err := m.db.Where("match_id = ? AND club_name = ?", matchID, clubName).Find(&progress).Error; err != nil {
+		return nil, err
+	}
+	return progress, nil
+}
+
+func (m *MatchDao) GetProgressCardByMatchClubID(matchID string, clubName string) ([]*models.ProgressCard, error) {
+	var progress []*models.ProgressCard
+	if err := m.db.Where("match_id = ? AND club_name = ?", matchID, clubName).Find(&progress).Error; err != nil {
+		return nil, err
+	}
+	return progress, nil
+}
+
+func (m *MatchDao) GetProgressCardByMatchID(matchID string) ([]*models.ProgressCard, error) {
+	var progress []*models.ProgressCard
+	if err := m.db.Where("match_id = ?", matchID).Find(&progress).Error; err != nil {
+		return nil, err
+	}
+	return progress, nil
+}
+
 func (m *MatchDao) GetAllMatchResultsByRound(round string) ([]*models.Matches, error) {
 	var matchCalendars []*models.Matches
 	if err := m.db.Where("match_round = ?", round).Find(&matchCalendars).Error; err != nil {

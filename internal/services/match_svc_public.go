@@ -170,16 +170,43 @@ func (e *MatchServicePublic) GetAllMatchResults(ctx context.Context, request *ge
 
 	// Iterate over the result scores and add them to the response
 	for _, resultScore := range resultScores {
+		detail, err := e.matchDao.GetMatchCalendarByID(resultScore.MatchID)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get match calendar by ID: %w", err)
+		}
+		detail1, err := e.clubDao.GetStadiumByClubID(detail.IdClubOne)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get home team club by ID: %w", err)
+		}
+
+		detail3, err := e.clubDao.GetClubByID(detail.IdClubOne)
+		if err != nil {
+			return nil, fmt.Errorf("failed to home team club by ID: %w", err)
+		}
+
+		detail4, err := e.clubDao.GetClubByID(detail.IdClubTwo)
+		if err != nil {
+			return nil, fmt.Errorf("failed to away team club by ID: %w", err)
+		}
+
 		response.Data = append(response.Data, &gen.ResultScore{
 			MatchId:        resultScore.MatchID,
 			HomeTeamGoal:   int32(resultScore.HomeTeamGoal),
 			AwayTeamGoal:   int32(resultScore.AwayTeamGoal),
 			HomeTeam:       resultScore.HomeTeam,
 			AwayTeam:       resultScore.AwayTeam,
+			Time:           detail.RealTime,
 			YellowCardHome: int32(resultScore.YellowCardHome),
 			RedCardHome:    int32(resultScore.RedCardHome),
 			YellowCardAway: int32(resultScore.YellowCardAway),
 			RedCardAway:    int32(resultScore.RedCardAway),
+			Stadium:        detail1.StadiumName,
+			Capacity:       detail1.Capacity,
+			HomeLogo:       detail3.LinkLogo,
+			AwayLogo:       detail4.LinkLogo,
+			MatchRound:     detail.MatchRound,
+			SeaSon:         detail.SeaSon,
+			Score:          fmt.Sprintf("%d - %d", resultScore.HomeTeamGoal, resultScore.AwayTeamGoal), // Add this line
 		})
 	}
 
@@ -200,6 +227,10 @@ func (e *MatchServicePublic) GetSummary(ctx context.Context, request *gen.GetSum
 	response.Message = fmt.Sprintf("There are %d summaries in league", len(summaries))
 
 	for _, summary := range summaries {
+		temp, err := e.clubDao.GetClubByID(summary.ClubID)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get club by ID: %w", err)
+		}
 		response.Data = append(response.Data, &gen.SummaryResponse{
 			ClubId:         summary.ClubID,
 			ClubName:       summary.ClubName,
@@ -216,6 +247,7 @@ func (e *MatchServicePublic) GetSummary(ctx context.Context, request *gen.GetSum
 			Rank:           int32(summary.Rank),
 			SeaSon:         summary.SeaSon,
 			LogoLink:       summary.LogoLink,
+			Shorthand:      temp.Shorthand,
 		})
 	}
 
@@ -259,20 +291,181 @@ func (e *MatchServicePublic) GetAllMatchResultByRound(ctx context.Context, reque
 		}
 
 		response.Data = append(response.Data, &gen.SumScore{
-			MatchId:      resultScore.ID,
-			HomeTeamGoal: int32(detail.HomeTeamGoal),
-			HomeTeamName: detail3.Shorthand,
-			AwayTeamGoal: int32(detail.AwayTeamGoal),
-			AwayTeamName: detail4.Shorthand,
-			Stadium:      detail2.Stadium,
-			Time:         detail2.RealTime,
-			HomeLogo:     detail3.LinkLogo,
-			AwayLogo:     detail4.LinkLogo,
-			MatchRound:   request.Round,
-			Score:        fmt.Sprintf("%d - %d", detail.HomeTeamGoal, detail.AwayTeamGoal), // Add this line
+			MatchId:          resultScore.ID,
+			HomeTeamGoal:     int32(detail.HomeTeamGoal),
+			HomeTeamName:     detail3.Shorthand,
+			AwayTeamGoal:     int32(detail.AwayTeamGoal),
+			AwayTeamName:     detail4.Shorthand,
+			Stadium:          detail2.Stadium,
+			Time:             detail2.RealTime,
+			HomeLogo:         detail3.LinkLogo,
+			AwayLogo:         detail4.LinkLogo,
+			MatchRound:       request.Round,
+			HomeTeamFullName: detail3.NameClub,
+			AwayTeamFullName: detail4.NameClub,
+			Score:            fmt.Sprintf("%d - %d", detail.HomeTeamGoal, detail.AwayTeamGoal), // Add this line
 		})
 	}
 
 	// Return the response
+	return response, nil
+}
+
+func (e *MatchServicePublic) GetProgressScoreByMatchID(ctx context.Context, request *gen.ResultScoreRequest) (*gen.ProgressScoreListResponse, error) {
+	// Fetch the progress score data using the MatchID from the request
+	progressScores, err := e.matchDao.GetProgressScoresByMatchID(request.MatchId)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get progress scores: %w", err)
+	}
+
+	// Create a new ProgressScoreListResponse
+	response := &gen.ProgressScoreListResponse{
+		Data:    make([]*gen.ProgressScore, 0, len(progressScores)),
+		Message: "Progress scores fetched successfully",
+	}
+
+	// Iterate over the progress scores and add them to the response
+	for _, progressScore := range progressScores {
+		response.Data = append(response.Data, &gen.ProgressScore{
+			MatchId:     progressScore.MatchID,
+			ClubName:    progressScore.ClubName,
+			PlayerName:  progressScore.PlayerName,
+			GoalType:    progressScore.GoalType,
+			TimeInMatch: progressScore.TimeInMatch,
+		})
+	}
+
+	return response, nil
+}
+
+func (e *MatchServicePublic) GetProgressCardByMatchID(ctx context.Context, request *gen.ResultScoreRequest) (*gen.ProgressCardListResponse, error) {
+	// Fetch the progress card data using the MatchID from the request
+	progressCards, err := e.matchDao.GetProgressCardByMatchID(request.MatchId)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get progress cards: %w", err)
+	}
+
+	// Create a new ProgressCardListResponse
+	response := &gen.ProgressCardListResponse{
+		Data:    make([]*gen.ProgressCard, 0, len(progressCards)),
+		Message: "Progress cards fetched successfully",
+	}
+
+	// Iterate over the progress cards and add them to the response
+	for _, progressCard := range progressCards {
+		response.Data = append(response.Data, &gen.ProgressCard{
+			MatchId:     progressCard.MatchID,
+			ClubName:    progressCard.ClubName,
+			PlayerName:  progressCard.PlayerName,
+			CardType:    progressCard.CardType,
+			TimeInMatch: progressCard.TimeInMatch,
+		})
+	}
+
+	return response, nil
+}
+
+func (e *MatchServicePublic) GetMatchStatisticByMatchID(ctx context.Context, request *gen.ResultScoreRequest) (*gen.ProgressGoal, error) {
+	// Fetch the match details using the MatchID from the request
+	matchDetails, err := e.matchDao.GetMatchResultByID(request.MatchId)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get match details: %w", err)
+	}
+	detail1, err := e.matchDao.GetMatchCalendarByID(request.MatchId)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get match calendar by ID: %w", err)
+	}
+	// Fetch the home team details
+	homeTeamDetails, err := e.clubDao.GetClubByID(detail1.IdClubOne)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get home team details: %w", err)
+	}
+
+	// Fetch the away team details
+	awayTeamDetails, err := e.clubDao.GetClubByID(detail1.IdClubTwo)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get away team details: %w", err)
+	}
+
+	stadium, err := e.clubDao.GetStadiumByClubID(detail1.IdClubOne)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get stadium by ID: %w", err)
+
+	}
+	// Fetch progress scores and cards for the home team
+	homeProgressScores, err := e.matchDao.GetProgressScoresByMatchClubID(request.MatchId, detail1.ClubOneName)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get home team progress scores: %w", err)
+	}
+	homeProgressCards, err := e.matchDao.GetProgressCardByMatchClubID(request.MatchId, detail1.ClubOneName)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get home team progress cards: %w", err)
+	}
+
+	// Fetch progress scores and cards for the away team
+	awayProgressScores, err := e.matchDao.GetProgressScoresByMatchClubID(request.MatchId, detail1.ClubTwoName)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get away team progress scores: %w", err)
+	}
+	awayProgressCards, err := e.matchDao.GetProgressCardByMatchClubID(request.MatchId, detail1.ClubTwoName)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get away team progress cards: %w", err)
+	}
+
+	// Create a new ProgressGoal
+	response := &gen.ProgressGoal{
+		MatchId:  matchDetails.ID,
+		Stadium:  detail1.Stadium,
+		Time:     detail1.RealTime,
+		Capacity: stadium.Capacity,
+		HomeTeam: &gen.Team{
+			Name:  homeTeamDetails.NameClub,
+			Logo:  homeTeamDetails.LinkLogo,
+			Goals: int32(matchDetails.HomeTeamGoal),
+			// Add players to the home team
+			Players: make([]*gen.Player, 0, len(homeProgressScores)+len(homeProgressCards)),
+		},
+		AwayTeam: &gen.Team{
+			Name:  awayTeamDetails.NameClub,
+			Logo:  awayTeamDetails.LinkLogo,
+			Goals: int32(matchDetails.AwayTeamGoal),
+			// Add players to the away team
+			Players: make([]*gen.Player, 0, len(awayProgressScores)+len(awayProgressCards)),
+		},
+	}
+
+	// Add players to the home team
+	for _, score := range homeProgressScores {
+		response.HomeTeam.Players = append(response.HomeTeam.Players, &gen.Player{
+			PlayerNameGoal:  score.PlayerName,
+			GoalType:        score.GoalType,
+			TimeInMatchGoal: score.TimeInMatch,
+		})
+	}
+
+	for _, card := range homeProgressCards {
+		response.HomeTeam.Players = append(response.HomeTeam.Players, &gen.Player{
+			PlayerNameCard:  card.PlayerName,
+			CardType:        card.CardType,
+			TimeInMatchCard: card.TimeInMatch,
+		})
+	}
+
+	// Add progress scores and cards to the away team
+	for _, score := range awayProgressScores {
+		response.AwayTeam.Players = append(response.AwayTeam.Players, &gen.Player{
+			PlayerNameGoal:  score.PlayerName,
+			GoalType:        score.GoalType,
+			TimeInMatchGoal: score.TimeInMatch,
+		})
+	}
+	for _, card := range awayProgressCards {
+		response.AwayTeam.Players = append(response.AwayTeam.Players, &gen.Player{
+			PlayerNameCard:  card.PlayerName,
+			CardType:        card.CardType,
+			TimeInMatchCard: card.TimeInMatch,
+		})
+	}
+
 	return response, nil
 }

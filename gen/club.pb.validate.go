@@ -2018,6 +2018,8 @@ func (m *ClubProfileResponse_Data) validate(all bool) error {
 
 	// no validation rules for Logo
 
+	// no validation rules for Coach
+
 	if len(errors) > 0 {
 		return ClubProfileResponse_DataMultiError(errors)
 	}

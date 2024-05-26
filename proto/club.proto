@@ -13,6 +13,7 @@ message   ClubProfileResponse {
     string sea_son =9;
     string update_at = 10;
     string logo = 11;
+    string coach = 12;
   }
   Data data = 1;
   string message = 2;

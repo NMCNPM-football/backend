@@ -21,4 +21,8 @@ type MatchDaoInterface interface {
 	GetAllMatchResultsBySeaSon(season string) ([]*models.Results, error)
 	UpdateMatch(match *models.Results) error
 	GetAllMatchResultsByRound(round string) ([]*models.Matches, error)
+	GetProgressScoresByMatchID(matchID string) ([]*models.ProgressScore, error)
+	GetProgressCardByMatchID(matchID string) ([]*models.ProgressCard, error)
+	GetProgressScoresByMatchClubID(matchID string, clubName string) ([]*models.ProgressScore, error)
+	GetProgressCardByMatchClubID(matchID string, clubName string) ([]*models.ProgressCard, error)
 }
