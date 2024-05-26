@@ -30,4 +30,9 @@ service ClubServicePublic {
       get: "/club/player/{id}"
     };
   }
+  rpc GetCoachProfile (CoachRequest) returns (CoachProfileResponse) {
+    option (google.api.http) = {
+      get: "/club/coach/{id}"
+    };
+  }
 }

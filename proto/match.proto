@@ -156,3 +156,13 @@ message ProgressGoal{
   Team home_team = 5;
   Team away_team = 6;
 }
+
+message GoalType{
+  string goal_type = 1;
+  string goal_type_name = 2;
+}
+
+message CardType{
+  string card_type = 1;
+  string card_type_name = 2;
+}

@@ -116,7 +116,7 @@ func (m *MatchDao) CreateProgressCard(card *models.ProgressCard) error {
 func (m *MatchDao) CountGoals(matchID string, clubName string) (int, error) {
 	var count int
 	// Write the SQL query to count the goals
-	query := `SELECT COUNT(*) FROM progress_scores WHERE match_id = ? AND club_name = ?`
+	query := `SELECT COUNT(*) FROM progress_scores WHERE match_id = ? AND club_name = ? AND status = 'no'`
 
 	// Execute the query
 	err := m.db.Raw(query, matchID, clubName).Scan(&count).Error
@@ -131,14 +131,14 @@ func (m *MatchDao) CountCard(matchID, clubName string) (int, int, error) {
 	var yellowCardCount, redCardCount int
 
 	// Query to count the number of yellow cards
-	yellowCardQuery := `SELECT COUNT(*) FROM progress_cards WHERE match_id = ? AND club_name = ? AND card_type = 'LT01'`
+	yellowCardQuery := `SELECT COUNT(*) FROM progress_cards WHERE match_id = ? AND club_name = ? AND card_type = 'LT01' AND status = 'no'`
 	err := m.db.Raw(yellowCardQuery, matchID, clubName).Scan(&yellowCardCount).Error
 	if err != nil {
 		return 0, redCardCount, fmt.Errorf("failed to count yellow cards: %w", err)
 	}
 
 	// Query to count the number of red cards
-	redCardQuery := `SELECT COUNT(*) FROM progress_cards WHERE match_id = ? AND club_name = ? AND card_type = 'LT02'`
+	redCardQuery := `SELECT COUNT(*) FROM progress_cards WHERE match_id = ? AND club_name = ? AND card_type = 'LT02' AND status = 'no'`
 	err = m.db.Raw(redCardQuery, matchID, clubName).Scan(&redCardCount).Error
 	if err != nil {
 		return yellowCardCount, 0, fmt.Errorf("failed to count red cards: %w", err)
@@ -205,6 +205,29 @@ func (m *MatchDao) GetAllMatchResultsBySeaSon(season string) ([]*models.Results,
 
 func (m *MatchDao) UpdateMatch(match *models.Results) error {
 	if err := m.db.Save(match).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *MatchDao) UpdateMatchStatus(matchID string, status string) error {
+	if err := m.db.Model(&models.Matches{}).Where("id = ?", matchID).Update("match_status", status).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *MatchDao) UpdateAllProgressScoreStatus(matchID string, status string) error {
+	// This will update the 'status' field of all ProgressScore records with the given matchID
+	if err := m.db.Model(&models.ProgressScore{}).Where("match_id = ?", matchID).Update("status", status).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *MatchDao) UpdateAllProgressCardStatus(matchID string, status string) error {
+	// This will update the 'status' field of all ProgressCard records with the given matchID
+	if err := m.db.Model(&models.ProgressCard{}).Where("match_id = ?", matchID).Update("status", status).Error; err != nil {
 		return err
 	}
 	return nil

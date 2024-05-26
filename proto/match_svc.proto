@@ -43,4 +43,16 @@ service MatchService {
       body: "*"
     };
   }
+  rpc CreateGoalType (GoalType) returns (SuccessMessageResponse) {
+    option (google.api.http) = {
+      post: "/match/goal_type"
+      body: "*"
+    };
+  }
+  rpc CreateCardType (CardType) returns (SuccessMessageResponse) {
+    option (google.api.http) = {
+      post: "/match/card_type"
+      body: "*"
+    };
+  }
 }

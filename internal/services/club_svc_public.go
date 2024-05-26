@@ -55,7 +55,10 @@ func (e *ClubServicePublic) GetClubProfile(ctx context.Context, request *gen.Clu
 	if err != nil {
 		return nil, fmt.Errorf("failed to get club by ID: %w", err)
 	}
-
+	coach, err := e.clubDao.GetCoachByClubID(club.ID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get coach by ID: %w", err)
+	}
 	// Create the response
 	response := &gen.ClubProfileResponse{
 		Data: &gen.ClubProfileResponse_Data{
@@ -67,6 +70,8 @@ func (e *ClubServicePublic) GetClubProfile(ctx context.Context, request *gen.Clu
 			NameStadium: club.NameStadium,
 			Achievement: club.Achievement,
 			UpdateBy:    club.UpdatedBy,
+			Coach:       coach.Name,
+			Logo:        club.LinkLogo,
 		},
 	}
 
@@ -132,10 +137,10 @@ func (e *ClubServicePublic) GetClubProfileListBySeaSon(ctx context.Context, requ
 
 	// Convert each club to the ClubProfile protobuf message and append it to the response
 	for _, club := range clubs {
-		coach, err := e.clubDao.GetCoachByClubID(club.ID)
-		if err != nil {
-			return nil, fmt.Errorf("failed to get coach by ID: %w", err)
-		}
+		//coach, err := e.clubDao.GetCoachByClubID(club.ID)
+		//if err != nil {
+		//	return nil, fmt.Errorf("failed to get coach by ID: %w", err)
+		//}
 		response.Data = append(response.Data, &gen.ClubProfileResponse_Data{
 			Id:          club.ID,
 			OwnerBy:     club.OwnerBy,
@@ -147,7 +152,6 @@ func (e *ClubServicePublic) GetClubProfileListBySeaSon(ctx context.Context, requ
 			Achievement: club.Achievement,
 			UpdateBy:    club.UpdatedBy,
 			Logo:        club.LinkLogo,
-			Coach:       coach.Name,
 		})
 	}
 	clubCount := len(clubs)
@@ -180,4 +184,27 @@ func (e *ClubServicePublic) GetPlayerProfile(ctx context.Context, request *gen.P
 		Message: "Update club profile successfully",
 	}, nil
 
+}
+
+func (e *ClubServicePublic) GetCoachProfile(ctx context.Context, request *gen.CoachRequest) (*gen.CoachProfileResponse, error) {
+	// Fetch the coach data from the database using the CoachID from the request
+	coach, err := e.clubDao.GetCoachByClubID(request.Id)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get coach by ID: %w", err)
+	}
+
+	// Create a CoachProfileResponse with the fetched data
+	response := &gen.CoachProfileResponse{
+		Data: &gen.CoachProfileResponse_Data{
+			Id:      coach.ID,
+			Name:    coach.Name,
+			Country: coach.Country,
+			Award:   coach.Award,
+			Role:    coach.Role,
+			ClubId:  coach.ClubID,
+		},
+		Message: "Coach profile fetched successfully",
+	}
+
+	return response, nil
 }

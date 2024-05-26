@@ -2416,6 +2416,212 @@ var _ interface {
 	ErrorName() string
 } = ProgressGoalValidationError{}
 
+// Validate checks the field values on GoalType with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GoalType) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GoalType with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in GoalTypeMultiError, or nil
+// if none found.
+func (m *GoalType) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GoalType) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for GoalType
+
+	// no validation rules for GoalTypeName
+
+	if len(errors) > 0 {
+		return GoalTypeMultiError(errors)
+	}
+
+	return nil
+}
+
+// GoalTypeMultiError is an error wrapping multiple validation errors returned
+// by GoalType.ValidateAll() if the designated constraints aren't met.
+type GoalTypeMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GoalTypeMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GoalTypeMultiError) AllErrors() []error { return m }
+
+// GoalTypeValidationError is the validation error returned by
+// GoalType.Validate if the designated constraints aren't met.
+type GoalTypeValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GoalTypeValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GoalTypeValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GoalTypeValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GoalTypeValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GoalTypeValidationError) ErrorName() string { return "GoalTypeValidationError" }
+
+// Error satisfies the builtin error interface
+func (e GoalTypeValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGoalType.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GoalTypeValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GoalTypeValidationError{}
+
+// Validate checks the field values on CardType with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *CardType) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CardType with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in CardTypeMultiError, or nil
+// if none found.
+func (m *CardType) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CardType) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CardType
+
+	// no validation rules for CardTypeName
+
+	if len(errors) > 0 {
+		return CardTypeMultiError(errors)
+	}
+
+	return nil
+}
+
+// CardTypeMultiError is an error wrapping multiple validation errors returned
+// by CardType.ValidateAll() if the designated constraints aren't met.
+type CardTypeMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CardTypeMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CardTypeMultiError) AllErrors() []error { return m }
+
+// CardTypeValidationError is the validation error returned by
+// CardType.Validate if the designated constraints aren't met.
+type CardTypeValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CardTypeValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CardTypeValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CardTypeValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CardTypeValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CardTypeValidationError) ErrorName() string { return "CardTypeValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CardTypeValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCardType.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CardTypeValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CardTypeValidationError{}
+
 // Validate checks the field values on MatchCalendarResponse_Data with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

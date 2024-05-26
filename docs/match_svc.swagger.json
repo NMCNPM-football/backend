@@ -90,6 +90,38 @@
         ]
       }
     },
+    "/match/card_type": {
+      "post": {
+        "operationId": "MatchService_CreateCardType",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoCardType"
+            }
+          }
+        ],
+        "tags": [
+          "MatchService"
+        ]
+      }
+    },
     "/match/create_all_results": {
       "post": {
         "operationId": "MatchService_CreateAllMatchResults",
@@ -114,6 +146,38 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/EmptyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MatchService"
+        ]
+      }
+    },
+    "/match/goal_type": {
+      "post": {
+        "operationId": "MatchService_CreateGoalType",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoGoalType"
             }
           }
         ],
@@ -330,6 +394,28 @@
       "type": "object",
       "properties": {
         "message": {
+          "type": "string"
+        }
+      }
+    },
+    "protoCardType": {
+      "type": "object",
+      "properties": {
+        "cardType": {
+          "type": "string"
+        },
+        "cardTypeName": {
+          "type": "string"
+        }
+      }
+    },
+    "protoGoalType": {
+      "type": "object",
+      "properties": {
+        "goalType": {
+          "type": "string"
+        },
+        "goalTypeName": {
           "type": "string"
         }
       }

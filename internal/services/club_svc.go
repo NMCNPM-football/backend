@@ -45,6 +45,54 @@ func (e *ClubService) RegisterHandler(ctx context.Context, mux *runtime.ServeMux
 	return nil
 }
 
+func (e *ClubService) CreateClub(ctx context.Context, request *gen.ClubProfileRequest) (*gen.ClubProfileResponse, error) {
+	// Get the user from the context
+	user, err := e.userFromContext(ctx, e.userDao)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user from context: %w", err)
+	}
+
+	// Check if the user is an admin
+	if user.Position != "Admin" {
+		return nil, fmt.Errorf("access denied: user is not an admin")
+	}
+
+	// Create a new Club model
+	newClub := &models.Club{
+		NameClub:    request.NameClub,
+		Shorthand:   request.ShortHand,
+		NameAward:   request.NameAward,
+		SeaSon:      request.SeaSon,
+		Achievement: request.Achievement,
+		OwnerBy:     request.OwnerBy,
+		CreatedBy:   user.Name,
+		LinkLogo:    request.Logo,
+		DomainEmail: request.ShortHand + ".vn", // Concatenate Shorthand and "vn"
+	}
+
+	// Use the clubDao to insert the new Club into the database
+	err = e.clubDao.CreateClub(newClub)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create club: %w", err)
+	}
+
+	// If the insertion is successful, return a ClubProfileResponse with the new club's details
+	return &gen.ClubProfileResponse{
+		Data: &gen.ClubProfileResponse_Data{
+			Id:          newClub.ID,
+			NameClub:    newClub.NameClub,
+			NameAward:   newClub.NameAward,
+			NameStadium: newClub.NameStadium,
+			SeaSon:      newClub.SeaSon,
+			Achievement: newClub.Achievement,
+			OwnerBy:     newClub.OwnerBy,
+			CreateBy:    newClub.CreatedBy,
+			Logo:        newClub.LinkLogo,
+		},
+		Message: "Club created successfully",
+	}, nil
+}
+
 func (e *ClubService) CreatePlayer(ctx context.Context, request *gen.PLayerProfileRequest) (*gen.SuccessMessageResponse, error) {
 	// Extract the Player data from the request
 	user, err := e.userFromContext(ctx, e.userDao)

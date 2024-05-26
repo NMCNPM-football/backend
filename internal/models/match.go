@@ -47,6 +47,7 @@ type ProgressScore struct {
 	PlayerName  string `gorm:"size:50"`
 	GoalType    string `gorm:"size:50"`
 	TimeInMatch string `gorm:"size:50"`
+	Status      string `gorm:"size:50;default:'no'"`
 }
 
 type ProgressCard struct {
@@ -56,4 +57,5 @@ type ProgressCard struct {
 	PlayerName  string `gorm:"size:50"`
 	CardType    string `gorm:"size:50"`
 	TimeInMatch string `gorm:"size:50"`
+	Status      string `gorm:"size:50;default:'no'"`
 }

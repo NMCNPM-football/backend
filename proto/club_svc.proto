@@ -13,6 +13,12 @@ service ClubService {
       get: "/club-profile"
     };
   }
+  rpc CreateClub (ClubProfileRequest) returns (ClubProfileResponse) {
+    option (google.api.http) = {
+      post: "/club"
+      body: "*"
+    };
+  }
 
   rpc UpdateClub (ClubProfileRequest) returns (ClubProfileResponse) {
     option (google.api.http) = {

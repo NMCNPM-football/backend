@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	ClubService_GetClubProfile_FullMethodName      = "/proto.ClubService/GetClubProfile"
+	ClubService_CreateClub_FullMethodName          = "/proto.ClubService/CreateClub"
 	ClubService_UpdateClub_FullMethodName          = "/proto.ClubService/UpdateClub"
 	ClubService_GetAllClubProfile_FullMethodName   = "/proto.ClubService/GetAllClubProfile"
 	ClubService_CreatePlayer_FullMethodName        = "/proto.ClubService/CreatePlayer"
@@ -38,6 +39,7 @@ const (
 type ClubServiceClient interface {
 	// Get a club's information
 	GetClubProfile(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*ClubProfileResponse, error)
+	CreateClub(ctx context.Context, in *ClubProfileRequest, opts ...grpc.CallOption) (*ClubProfileResponse, error)
 	UpdateClub(ctx context.Context, in *ClubProfileRequest, opts ...grpc.CallOption) (*ClubProfileResponse, error)
 	GetAllClubProfile(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*ClubProfileListResponse, error)
 	CreatePlayer(ctx context.Context, in *PLayerProfileRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
@@ -61,6 +63,15 @@ func NewClubServiceClient(cc grpc.ClientConnInterface) ClubServiceClient {
 func (c *clubServiceClient) GetClubProfile(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*ClubProfileResponse, error) {
 	out := new(ClubProfileResponse)
 	err := c.cc.Invoke(ctx, ClubService_GetClubProfile_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clubServiceClient) CreateClub(ctx context.Context, in *ClubProfileRequest, opts ...grpc.CallOption) (*ClubProfileResponse, error) {
+	out := new(ClubProfileResponse)
+	err := c.cc.Invoke(ctx, ClubService_CreateClub_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -163,6 +174,7 @@ func (c *clubServiceClient) CreateStadium(ctx context.Context, in *StadiumProfil
 type ClubServiceServer interface {
 	// Get a club's information
 	GetClubProfile(context.Context, *EmptyRequest) (*ClubProfileResponse, error)
+	CreateClub(context.Context, *ClubProfileRequest) (*ClubProfileResponse, error)
 	UpdateClub(context.Context, *ClubProfileRequest) (*ClubProfileResponse, error)
 	GetAllClubProfile(context.Context, *EmptyRequest) (*ClubProfileListResponse, error)
 	CreatePlayer(context.Context, *PLayerProfileRequest) (*SuccessMessageResponse, error)
@@ -181,6 +193,9 @@ type UnimplementedClubServiceServer struct {
 
 func (UnimplementedClubServiceServer) GetClubProfile(context.Context, *EmptyRequest) (*ClubProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetClubProfile not implemented")
+}
+func (UnimplementedClubServiceServer) CreateClub(context.Context, *ClubProfileRequest) (*ClubProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateClub not implemented")
 }
 func (UnimplementedClubServiceServer) UpdateClub(context.Context, *ClubProfileRequest) (*ClubProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateClub not implemented")
@@ -238,6 +253,24 @@ func _ClubService_GetClubProfile_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ClubServiceServer).GetClubProfile(ctx, req.(*EmptyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClubService_CreateClub_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClubProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClubServiceServer).CreateClub(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClubService_CreateClub_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClubServiceServer).CreateClub(ctx, req.(*ClubProfileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -432,6 +465,10 @@ var ClubService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetClubProfile",
 			Handler:    _ClubService_GetClubProfile_Handler,
+		},
+		{
+			MethodName: "CreateClub",
+			Handler:    _ClubService_CreateClub_Handler,
 		},
 		{
 			MethodName: "UpdateClub",

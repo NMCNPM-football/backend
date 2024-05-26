@@ -194,7 +194,7 @@ func (m *ClubProfileRequest) validate(all bool) error {
 
 	// no validation rules for NameAward
 
-	// no validation rules for NameStadium
+	// no validation rules for Logo
 
 	// no validation rules for SeaSon
 
@@ -202,9 +202,13 @@ func (m *ClubProfileRequest) validate(all bool) error {
 
 	// no validation rules for OwnerBy
 
-	// no validation rules for UpdateBy
+	// no validation rules for CreateBy
 
-	// no validation rules for UpdateAt
+	// no validation rules for CreateAt
+
+	// no validation rules for NameStadium
+
+	// no validation rules for ShortHand
 
 	if len(errors) > 0 {
 		return ClubProfileRequestMultiError(errors)
@@ -2019,6 +2023,8 @@ func (m *ClubProfileResponse_Data) validate(all bool) error {
 	// no validation rules for Logo
 
 	// no validation rules for Coach
+
+	// no validation rules for CreateBy
 
 	if len(errors) > 0 {
 		return ClubProfileResponse_DataMultiError(errors)

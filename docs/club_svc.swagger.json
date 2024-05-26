@@ -16,6 +16,38 @@
     "application/json"
   ],
   "paths": {
+    "/club": {
+      "post": {
+        "operationId": "ClubService_CreateClub",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ClubProfileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClubProfileRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClubService"
+        ]
+      }
+    },
     "/club-profile": {
       "get": {
         "summary": "Get a club's information",
@@ -432,7 +464,7 @@
         "nameAward": {
           "type": "string"
         },
-        "nameStadium": {
+        "logo": {
           "type": "string"
         },
         "seaSon": {
@@ -444,10 +476,16 @@
         "ownerBy": {
           "type": "string"
         },
-        "updateBy": {
+        "createBy": {
           "type": "string"
         },
-        "updateAt": {
+        "createAt": {
+          "type": "string"
+        },
+        "nameStadium": {
+          "type": "string"
+        },
+        "shortHand": {
           "type": "string"
         }
       }
@@ -500,6 +538,9 @@
           "type": "string"
         },
         "coach": {
+          "type": "string"
+        },
+        "createBy": {
           "type": "string"
         }
       }

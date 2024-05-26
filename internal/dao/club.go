@@ -157,3 +157,24 @@ func (m *ClubDao) GetCoachByClubID(clubID string) (*models.Coach, error) {
 	}
 	return &coach, nil
 }
+
+func (m *ClubDao) CreateClub(club *models.Club) error {
+	// Find the season with the given name
+	var season models.SeaSon
+	if err := m.db.Where("sea_son = ?", club.SeaSon).First(&season).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return errors.New("season not found")
+		}
+		return errors.Wrap(err, "m.db.Where.First")
+	}
+
+	// Set the SeaSonID of the club to the ID of the found season
+	club.SeaSonID = season.ID
+
+	// Create the club
+	if err := m.db.Create(&club).Error; err != nil {
+		return errors.Wrap(err, "m.db.Create")
+	}
+
+	return nil
+}

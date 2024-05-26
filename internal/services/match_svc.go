@@ -311,7 +311,13 @@ func (e *MatchService) CreateAllMatchResults(ctx context.Context, request *gen.E
 			// If the match result already exists, skip to the next match
 			continue
 		}
-
+		status, err := e.matchDao.GetMatchCalendarByID(match.MatchID)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get match: %w", err)
+		}
+		if status.MatchStatus == "yes" {
+			continue
+		}
 		request := &gen.ResultScore{
 			MatchId: match.MatchID,
 		}
@@ -321,6 +327,18 @@ func (e *MatchService) CreateAllMatchResults(ctx context.Context, request *gen.E
 		if err != nil {
 			return nil, fmt.Errorf("failed to create match result for match %s: %w", match.ID, err)
 		}
+		err = e.matchDao.UpdateMatchStatus(match.MatchID, "yes")
+		if err != nil {
+			return nil, fmt.Errorf("failed to update match status for match %s: %w", match.ID, err)
+		}
+		err = e.matchDao.UpdateAllProgressScoreStatus(match.MatchID, "yes")
+		if err != nil {
+			return nil, fmt.Errorf("failed to update progress score status for match %s: %w", match.ID, err)
+		}
+		err = e.matchDao.UpdateAllProgressCardStatus(match.MatchID, "yes")
+		if err != nil {
+			return nil, fmt.Errorf("failed to update progress card status for match %s: %w", match.ID, err)
+		}
 	}
 
 	// Return a success message
@@ -329,4 +347,14 @@ func (e *MatchService) CreateAllMatchResults(ctx context.Context, request *gen.E
 			Message: "Result score created successfully",
 		},
 	}, nil
+}
+
+func (e *MatchService) CreateGoalType(ctx context.Context, goalType *gen.GoalType) (*gen.SuccessMessageResponse, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (e *MatchService) CreateCardType(ctx context.Context, cardType *gen.CardType) (*gen.SuccessMessageResponse, error) {
+	//TODO implement me
+	panic("implement me")
 }

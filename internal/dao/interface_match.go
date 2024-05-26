@@ -25,4 +25,7 @@ type MatchDaoInterface interface {
 	GetProgressCardByMatchID(matchID string) ([]*models.ProgressCard, error)
 	GetProgressScoresByMatchClubID(matchID string, clubName string) ([]*models.ProgressScore, error)
 	GetProgressCardByMatchClubID(matchID string, clubName string) ([]*models.ProgressCard, error)
+	UpdateMatchStatus(matchID string, status string) error
+	UpdateAllProgressScoreStatus(matchID string, status string) error
+	UpdateAllProgressCardStatus(matchID string, status string) error
 }
