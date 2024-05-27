@@ -350,11 +350,90 @@ func (e *MatchService) CreateAllMatchResults(ctx context.Context, request *gen.E
 }
 
 func (e *MatchService) CreateGoalType(ctx context.Context, goalType *gen.GoalType) (*gen.SuccessMessageResponse, error) {
-	//TODO implement me
-	panic("implement me")
+	// Create a new GoalType model
+	newGoalType := &models.GoalType{
+		GoalTypeName: goalType.GoalTypeName,
+		GoalTypeID:   goalType.GoalTypeId,
+	}
+
+	// Use the matchDao to insert the new GoalType into the database
+	err := e.matchDao.CreateGoalType(newGoalType)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create goal type: %w", err)
+	}
+
+	// If the insertion is successful, return a SuccessMessageResponse with a success message
+	return &gen.SuccessMessageResponse{
+		Data: &gen.SuccessMessageResponseSuccessMessage{
+			Message: "Goal type created successfully",
+		},
+	}, nil
 }
 
 func (e *MatchService) CreateCardType(ctx context.Context, cardType *gen.CardType) (*gen.SuccessMessageResponse, error) {
-	//TODO implement me
-	panic("implement me")
+	// Create a new CardType model
+	newCardType := &models.CardType{
+		CardTypeID:   cardType.CardTypeId,
+		CardTypeName: cardType.CardTypeName,
+	}
+
+	// Use the matchDao to insert the new CardType into the database
+	err := e.matchDao.CreateCardType(newCardType)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create card type: %w", err)
+	}
+
+	// If the insertion is successful, return a SuccessMessageResponse with a success message
+	return &gen.SuccessMessageResponse{
+		Data: &gen.SuccessMessageResponseSuccessMessage{
+			Message: "Card type created successfully",
+		},
+	}, nil
+}
+func (e *MatchService) GetAllGoalType(ctx context.Context, request *gen.EmptyRequest) (*gen.GoalTypeResponse, error) {
+	// Use the matchDao to get all GoalTypes from the database
+	goalTypes, err := e.matchDao.GetAllGoalType()
+	if err != nil {
+		return nil, fmt.Errorf("failed to get all goal types: %w", err)
+	}
+
+	// Convert the GoalTypes to the protobuf GoalType
+	var pbGoalTypes []*gen.GoalType
+	for _, goalType := range goalTypes {
+		pbGoalType := &gen.GoalType{
+			GoalTypeId:   goalType.GoalTypeID,
+			GoalTypeName: goalType.GoalTypeName,
+		}
+		pbGoalTypes = append(pbGoalTypes, pbGoalType)
+	}
+
+	// Return a GoalTypeResponse with the GoalTypes
+	return &gen.GoalTypeResponse{
+		Data:    pbGoalTypes,
+		Message: "Successfully retrieved all goal types",
+	}, nil
+}
+
+func (e *MatchService) GetAllCardType(ctx context.Context, request *gen.EmptyRequest) (*gen.CardTypeResponse, error) {
+	// Use the matchDao to get all CardTypes from the database
+	cardTypes, err := e.matchDao.GetAllCardType()
+	if err != nil {
+		return nil, fmt.Errorf("failed to get all card types: %w", err)
+	}
+
+	// Convert the CardTypes to the protobuf CardType
+	var pbCardTypes []*gen.CardType
+	for _, cardType := range cardTypes {
+		pbCardType := &gen.CardType{
+			CardTypeId:   cardType.CardTypeID,
+			CardTypeName: cardType.CardTypeName,
+		}
+		pbCardTypes = append(pbCardTypes, pbCardType)
+	}
+
+	// Return a CardTypeResponse with the CardTypes
+	return &gen.CardTypeResponse{
+		Data:    pbCardTypes,
+		Message: "Successfully retrieved all card types",
+	}, nil
 }

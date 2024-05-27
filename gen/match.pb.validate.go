@@ -2438,7 +2438,7 @@ func (m *GoalType) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for GoalType
+	// no validation rules for GoalTypeId
 
 	// no validation rules for GoalTypeName
 
@@ -2541,7 +2541,7 @@ func (m *CardType) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for CardType
+	// no validation rules for CardTypeId
 
 	// no validation rules for CardTypeName
 
@@ -2621,6 +2621,278 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = CardTypeValidationError{}
+
+// Validate checks the field values on GoalTypeResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GoalTypeResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GoalTypeResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GoalTypeResponseMultiError, or nil if none found.
+func (m *GoalTypeResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GoalTypeResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetData() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GoalTypeResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GoalTypeResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GoalTypeResponseValidationError{
+					field:  fmt.Sprintf("Data[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Message
+
+	if len(errors) > 0 {
+		return GoalTypeResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GoalTypeResponseMultiError is an error wrapping multiple validation errors
+// returned by GoalTypeResponse.ValidateAll() if the designated constraints
+// aren't met.
+type GoalTypeResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GoalTypeResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GoalTypeResponseMultiError) AllErrors() []error { return m }
+
+// GoalTypeResponseValidationError is the validation error returned by
+// GoalTypeResponse.Validate if the designated constraints aren't met.
+type GoalTypeResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GoalTypeResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GoalTypeResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GoalTypeResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GoalTypeResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GoalTypeResponseValidationError) ErrorName() string { return "GoalTypeResponseValidationError" }
+
+// Error satisfies the builtin error interface
+func (e GoalTypeResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGoalTypeResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GoalTypeResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GoalTypeResponseValidationError{}
+
+// Validate checks the field values on CardTypeResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *CardTypeResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CardTypeResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CardTypeResponseMultiError, or nil if none found.
+func (m *CardTypeResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CardTypeResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetData() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CardTypeResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CardTypeResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CardTypeResponseValidationError{
+					field:  fmt.Sprintf("Data[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Message
+
+	if len(errors) > 0 {
+		return CardTypeResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CardTypeResponseMultiError is an error wrapping multiple validation errors
+// returned by CardTypeResponse.ValidateAll() if the designated constraints
+// aren't met.
+type CardTypeResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CardTypeResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CardTypeResponseMultiError) AllErrors() []error { return m }
+
+// CardTypeResponseValidationError is the validation error returned by
+// CardTypeResponse.Validate if the designated constraints aren't met.
+type CardTypeResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CardTypeResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CardTypeResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CardTypeResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CardTypeResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CardTypeResponseValidationError) ErrorName() string { return "CardTypeResponseValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CardTypeResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCardTypeResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CardTypeResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CardTypeResponseValidationError{}
 
 // Validate checks the field values on MatchCalendarResponse_Data with the
 // rules defined in the proto definition for this message. If any rules are

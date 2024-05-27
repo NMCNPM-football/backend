@@ -55,4 +55,14 @@ service MatchService {
       body: "*"
     };
   }
+  rpc GetAllGoalType (EmptyRequest) returns (GoalTypeResponse) {
+    option (google.api.http) = {
+      get: "/match/goal_type"
+    };
+  }
+  rpc GetAllCardType (EmptyRequest) returns (CardTypeResponse) {
+    option (google.api.http) = {
+      get: "/match/card_type"
+    };
+  }
 }

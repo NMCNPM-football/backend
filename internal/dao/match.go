@@ -232,3 +232,41 @@ func (m *MatchDao) UpdateAllProgressCardStatus(matchID string, status string) er
 	}
 	return nil
 }
+
+func (m *MatchDao) CreateGoalType(goalType *models.GoalType) error {
+	if err := m.db.Create(&goalType).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *MatchDao) GetGoalTypeByID(id string) (*models.GoalType, error) {
+	var goalType *models.GoalType
+	if err := m.db.Where("id = ?", id).First(&goalType).Error; err != nil {
+		return nil, err
+	}
+	return goalType, nil
+}
+
+func (m *MatchDao) GetAllGoalType() ([]*models.GoalType, error) {
+	var goalTypes []*models.GoalType
+	if err := m.db.Find(&goalTypes).Error; err != nil {
+		return nil, err
+	}
+	return goalTypes, nil
+}
+
+func (m *MatchDao) CreateCardType(cardType *models.CardType) error {
+	if err := m.db.Create(&cardType).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *MatchDao) GetAllCardType() ([]*models.CardType, error) {
+	var cardTypes []*models.CardType
+	if err := m.db.Find(&cardTypes).Error; err != nil {
+		return nil, err
+	}
+	return cardTypes, nil
+}

@@ -28,4 +28,8 @@ type MatchDaoInterface interface {
 	UpdateMatchStatus(matchID string, status string) error
 	UpdateAllProgressScoreStatus(matchID string, status string) error
 	UpdateAllProgressCardStatus(matchID string, status string) error
+	CreateGoalType(goalType *models.GoalType) error
+	GetAllGoalType() ([]*models.GoalType, error)
+	CreateCardType(cardType *models.CardType) error
+	GetAllCardType() ([]*models.CardType, error)
 }

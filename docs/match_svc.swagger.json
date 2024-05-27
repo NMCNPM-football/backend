@@ -91,6 +91,26 @@
       }
     },
     "/match/card_type": {
+      "get": {
+        "operationId": "MatchService_GetAllCardType",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoCardTypeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "MatchService"
+        ]
+      },
       "post": {
         "operationId": "MatchService_CreateCardType",
         "responses": {
@@ -155,6 +175,26 @@
       }
     },
     "/match/goal_type": {
+      "get": {
+        "operationId": "MatchService_GetAllGoalType",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoGoalTypeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "MatchService"
+        ]
+      },
       "post": {
         "operationId": "MatchService_CreateGoalType",
         "responses": {
@@ -401,7 +441,7 @@
     "protoCardType": {
       "type": "object",
       "properties": {
-        "cardType": {
+        "cardTypeId": {
           "type": "string"
         },
         "cardTypeName": {
@@ -409,13 +449,43 @@
         }
       }
     },
+    "protoCardTypeResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protoCardType"
+          }
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "protoGoalType": {
       "type": "object",
       "properties": {
-        "goalType": {
+        "goalTypeId": {
           "type": "string"
         },
         "goalTypeName": {
+          "type": "string"
+        }
+      }
+    },
+    "protoGoalTypeResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protoGoalType"
+          }
+        },
+        "message": {
           "type": "string"
         }
       }

@@ -1455,7 +1455,7 @@ type GoalType struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GoalType     string `protobuf:"bytes,1,opt,name=goal_type,json=goalType,proto3" json:"goal_type,omitempty"`
+	GoalTypeId   string `protobuf:"bytes,1,opt,name=goal_type_id,json=goalTypeId,proto3" json:"goal_type_id,omitempty"`
 	GoalTypeName string `protobuf:"bytes,2,opt,name=goal_type_name,json=goalTypeName,proto3" json:"goal_type_name,omitempty"`
 }
 
@@ -1491,9 +1491,9 @@ func (*GoalType) Descriptor() ([]byte, []int) {
 	return file_match_proto_rawDescGZIP(), []int{19}
 }
 
-func (x *GoalType) GetGoalType() string {
+func (x *GoalType) GetGoalTypeId() string {
 	if x != nil {
-		return x.GoalType
+		return x.GoalTypeId
 	}
 	return ""
 }
@@ -1510,7 +1510,7 @@ type CardType struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	CardType     string `protobuf:"bytes,1,opt,name=card_type,json=cardType,proto3" json:"card_type,omitempty"`
+	CardTypeId   string `protobuf:"bytes,1,opt,name=card_type_id,json=cardTypeId,proto3" json:"card_type_id,omitempty"`
 	CardTypeName string `protobuf:"bytes,2,opt,name=card_type_name,json=cardTypeName,proto3" json:"card_type_name,omitempty"`
 }
 
@@ -1546,9 +1546,9 @@ func (*CardType) Descriptor() ([]byte, []int) {
 	return file_match_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *CardType) GetCardType() string {
+func (x *CardType) GetCardTypeId() string {
 	if x != nil {
-		return x.CardType
+		return x.CardTypeId
 	}
 	return ""
 }
@@ -1556,6 +1556,116 @@ func (x *CardType) GetCardType() string {
 func (x *CardType) GetCardTypeName() string {
 	if x != nil {
 		return x.CardTypeName
+	}
+	return ""
+}
+
+type GoalTypeResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Data    []*GoalType `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Message string      `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+}
+
+func (x *GoalTypeResponse) Reset() {
+	*x = GoalTypeResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_match_proto_msgTypes[21]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GoalTypeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GoalTypeResponse) ProtoMessage() {}
+
+func (x *GoalTypeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_match_proto_msgTypes[21]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GoalTypeResponse.ProtoReflect.Descriptor instead.
+func (*GoalTypeResponse) Descriptor() ([]byte, []int) {
+	return file_match_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *GoalTypeResponse) GetData() []*GoalType {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *GoalTypeResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+type CardTypeResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Data    []*CardType `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Message string      `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+}
+
+func (x *CardTypeResponse) Reset() {
+	*x = CardTypeResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_match_proto_msgTypes[22]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CardTypeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CardTypeResponse) ProtoMessage() {}
+
+func (x *CardTypeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_match_proto_msgTypes[22]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CardTypeResponse.ProtoReflect.Descriptor instead.
+func (*CardTypeResponse) Descriptor() ([]byte, []int) {
+	return file_match_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *CardTypeResponse) GetData() []*CardType {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *CardTypeResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
 	}
 	return ""
 }
@@ -1579,7 +1689,7 @@ type MatchCalendarResponse_Data struct {
 func (x *MatchCalendarResponse_Data) Reset() {
 	*x = MatchCalendarResponse_Data{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_match_proto_msgTypes[21]
+		mi := &file_match_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1592,7 +1702,7 @@ func (x *MatchCalendarResponse_Data) String() string {
 func (*MatchCalendarResponse_Data) ProtoMessage() {}
 
 func (x *MatchCalendarResponse_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_match_proto_msgTypes[21]
+	mi := &file_match_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1890,17 +2000,28 @@ var file_match_proto_rawDesc = []byte{
 	0x65, 0x61, 0x6d, 0x52, 0x08, 0x68, 0x6f, 0x6d, 0x65, 0x54, 0x65, 0x61, 0x6d, 0x12, 0x28, 0x0a,
 	0x09, 0x61, 0x77, 0x61, 0x79, 0x5f, 0x74, 0x65, 0x61, 0x6d, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b,
 	0x32, 0x0b, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x08, 0x61,
-	0x77, 0x61, 0x79, 0x54, 0x65, 0x61, 0x6d, 0x22, 0x4d, 0x0a, 0x08, 0x47, 0x6f, 0x61, 0x6c, 0x54,
-	0x79, 0x70, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x67, 0x6f, 0x61, 0x6c, 0x5f, 0x74, 0x79, 0x70, 0x65,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x67, 0x6f, 0x61, 0x6c, 0x54, 0x79, 0x70, 0x65,
-	0x12, 0x24, 0x0a, 0x0e, 0x67, 0x6f, 0x61, 0x6c, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x6e, 0x61,
-	0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x67, 0x6f, 0x61, 0x6c, 0x54, 0x79,
-	0x70, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x4d, 0x0a, 0x08, 0x43, 0x61, 0x72, 0x64, 0x54, 0x79,
-	0x70, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x63, 0x61, 0x72, 0x64, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x63, 0x61, 0x72, 0x64, 0x54, 0x79, 0x70, 0x65, 0x12,
-	0x24, 0x0a, 0x0e, 0x63, 0x61, 0x72, 0x64, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x6e, 0x61, 0x6d,
-	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x63, 0x61, 0x72, 0x64, 0x54, 0x79, 0x70,
-	0x65, 0x4e, 0x61, 0x6d, 0x65, 0x42, 0x73, 0x0a, 0x09, 0x63, 0x6f, 0x6d, 0x2e, 0x70, 0x72, 0x6f,
+	0x77, 0x61, 0x79, 0x54, 0x65, 0x61, 0x6d, 0x22, 0x52, 0x0a, 0x08, 0x47, 0x6f, 0x61, 0x6c, 0x54,
+	0x79, 0x70, 0x65, 0x12, 0x20, 0x0a, 0x0c, 0x67, 0x6f, 0x61, 0x6c, 0x5f, 0x74, 0x79, 0x70, 0x65,
+	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x67, 0x6f, 0x61, 0x6c, 0x54,
+	0x79, 0x70, 0x65, 0x49, 0x64, 0x12, 0x24, 0x0a, 0x0e, 0x67, 0x6f, 0x61, 0x6c, 0x5f, 0x74, 0x79,
+	0x70, 0x65, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x67,
+	0x6f, 0x61, 0x6c, 0x54, 0x79, 0x70, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x52, 0x0a, 0x08, 0x43,
+	0x61, 0x72, 0x64, 0x54, 0x79, 0x70, 0x65, 0x12, 0x20, 0x0a, 0x0c, 0x63, 0x61, 0x72, 0x64, 0x5f,
+	0x74, 0x79, 0x70, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x63,
+	0x61, 0x72, 0x64, 0x54, 0x79, 0x70, 0x65, 0x49, 0x64, 0x12, 0x24, 0x0a, 0x0e, 0x63, 0x61, 0x72,
+	0x64, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x0c, 0x63, 0x61, 0x72, 0x64, 0x54, 0x79, 0x70, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x22,
+	0x51, 0x0a, 0x10, 0x47, 0x6f, 0x61, 0x6c, 0x54, 0x79, 0x70, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x23, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x0f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x47, 0x6f, 0x61, 0x6c, 0x54, 0x79,
+	0x70, 0x65, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61,
+	0x67, 0x65, 0x22, 0x51, 0x0a, 0x10, 0x43, 0x61, 0x72, 0x64, 0x54, 0x79, 0x70, 0x65, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x23, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x43, 0x61, 0x72,
+	0x64, 0x54, 0x79, 0x70, 0x65, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x12, 0x18, 0x0a, 0x07, 0x6d,
+	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x42, 0x73, 0x0a, 0x09, 0x63, 0x6f, 0x6d, 0x2e, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x42, 0x0a, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01,
 	0x5a, 0x26, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x4e, 0x4d, 0x43,
 	0x4e, 0x50, 0x4d, 0x2d, 0x66, 0x6f, 0x6f, 0x74, 0x62, 0x61, 0x6c, 0x6c, 0x2f, 0x62, 0x61, 0x63,
@@ -1923,7 +2044,7 @@ func file_match_proto_rawDescGZIP() []byte {
 	return file_match_proto_rawDescData
 }
 
-var file_match_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_match_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_match_proto_goTypes = []interface{}{
 	(*MatchCalendar)(nil),              // 0: proto.MatchCalendar
 	(*RoundRequest)(nil),               // 1: proto.RoundRequest
@@ -1946,11 +2067,13 @@ var file_match_proto_goTypes = []interface{}{
 	(*ProgressGoal)(nil),               // 18: proto.ProgressGoal
 	(*GoalType)(nil),                   // 19: proto.GoalType
 	(*CardType)(nil),                   // 20: proto.CardType
-	(*MatchCalendarResponse_Data)(nil), // 21: proto.MatchCalendarResponse.Data
+	(*GoalTypeResponse)(nil),           // 21: proto.GoalTypeResponse
+	(*CardTypeResponse)(nil),           // 22: proto.CardTypeResponse
+	(*MatchCalendarResponse_Data)(nil), // 23: proto.MatchCalendarResponse.Data
 }
 var file_match_proto_depIdxs = []int32{
-	21, // 0: proto.MatchCalendarResponse.data:type_name -> proto.MatchCalendarResponse.Data
-	21, // 1: proto.MatchCalendarListResponse.data:type_name -> proto.MatchCalendarResponse.Data
+	23, // 0: proto.MatchCalendarResponse.data:type_name -> proto.MatchCalendarResponse.Data
+	23, // 1: proto.MatchCalendarListResponse.data:type_name -> proto.MatchCalendarResponse.Data
 	6,  // 2: proto.ProgressScoreListResponse.data:type_name -> proto.ProgressScore
 	8,  // 3: proto.ProgressCardListResponse.data:type_name -> proto.ProgressCard
 	10, // 4: proto.ResultScoreResponse.data:type_name -> proto.ResultScore
@@ -1959,11 +2082,13 @@ var file_match_proto_depIdxs = []int32{
 	16, // 7: proto.Team.players:type_name -> proto.Player
 	17, // 8: proto.ProgressGoal.home_team:type_name -> proto.Team
 	17, // 9: proto.ProgressGoal.away_team:type_name -> proto.Team
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	19, // 10: proto.GoalTypeResponse.data:type_name -> proto.GoalType
+	20, // 11: proto.CardTypeResponse.data:type_name -> proto.CardType
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_match_proto_init() }
@@ -2225,6 +2350,30 @@ func file_match_proto_init() {
 			}
 		}
 		file_match_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GoalTypeResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_match_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CardTypeResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_match_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MatchCalendarResponse_Data); i {
 			case 0:
 				return &v.state
@@ -2243,7 +2392,7 @@ func file_match_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_match_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   22,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
