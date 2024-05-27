@@ -747,7 +747,7 @@ func RegisterMatchServiceHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.MatchService/DeleteGoalType", runtime.WithHTTPPathPattern("/delete/card_type/{goal_type_id}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.MatchService/DeleteGoalType", runtime.WithHTTPPathPattern("/delete/goal_type/{goal_type_id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -772,7 +772,7 @@ func RegisterMatchServiceHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.MatchService/DeleteCardType", runtime.WithHTTPPathPattern("/delete/goal_type/{card_type_id}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.MatchService/DeleteCardType", runtime.WithHTTPPathPattern("/delete/card_type/{card_type_id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1056,7 +1056,7 @@ func RegisterMatchServiceHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.MatchService/DeleteGoalType", runtime.WithHTTPPathPattern("/delete/card_type/{goal_type_id}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.MatchService/DeleteGoalType", runtime.WithHTTPPathPattern("/delete/goal_type/{goal_type_id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1078,7 +1078,7 @@ func RegisterMatchServiceHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.MatchService/DeleteCardType", runtime.WithHTTPPathPattern("/delete/goal_type/{card_type_id}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.MatchService/DeleteCardType", runtime.WithHTTPPathPattern("/delete/card_type/{card_type_id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1118,9 +1118,9 @@ var (
 
 	pattern_MatchService_GetAllCardType_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"match_event", "card_type"}, ""))
 
-	pattern_MatchService_DeleteGoalType_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"delete", "card_type", "goal_type_id"}, ""))
+	pattern_MatchService_DeleteGoalType_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"delete", "goal_type", "goal_type_id"}, ""))
 
-	pattern_MatchService_DeleteCardType_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"delete", "goal_type", "card_type_id"}, ""))
+	pattern_MatchService_DeleteCardType_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"delete", "card_type", "card_type_id"}, ""))
 )
 
 var (

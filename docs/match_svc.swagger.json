@@ -16,43 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/delete/card_type/{goalTypeId}": {
-      "delete": {
-        "operationId": "MatchService_DeleteGoalType",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/SuccessMessageResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "goalTypeId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "goalTypeName",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "MatchService"
-        ]
-      }
-    },
-    "/delete/goal_type/{cardTypeId}": {
+    "/delete/card_type/{cardTypeId}": {
       "delete": {
         "operationId": "MatchService_DeleteCardType",
         "responses": {
@@ -78,6 +42,42 @@
           },
           {
             "name": "cardTypeName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MatchService"
+        ]
+      }
+    },
+    "/delete/goal_type/{goalTypeId}": {
+      "delete": {
+        "operationId": "MatchService_DeleteGoalType",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "goalTypeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "goalTypeName",
             "in": "query",
             "required": false,
             "type": "string"
