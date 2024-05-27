@@ -32,4 +32,6 @@ type MatchDaoInterface interface {
 	GetAllGoalType() ([]*models.GoalType, error)
 	CreateCardType(cardType *models.CardType) error
 	GetAllCardType() ([]*models.CardType, error)
+	DeleteGoalTypeByID(id string) error
+	DeleteCardTypeByID(id string) error
 }

@@ -437,3 +437,33 @@ func (e *MatchService) GetAllCardType(ctx context.Context, request *gen.EmptyReq
 		Message: "Successfully retrieved all card types",
 	}, nil
 }
+
+func (e *MatchService) DeleteGoalType(ctx context.Context, goalType *gen.GoalType) (*gen.SuccessMessageResponse, error) {
+	// Use the matchDao to delete the GoalType from the database
+	err := e.matchDao.DeleteGoalTypeByID(goalType.GoalTypeId)
+	if err != nil {
+		return nil, fmt.Errorf("failed to delete goal type: %w", err)
+	}
+
+	// If the deletion is successful, return a SuccessMessageResponse with a success message
+	return &gen.SuccessMessageResponse{
+		Data: &gen.SuccessMessageResponseSuccessMessage{
+			Message: "Goal type deleted successfully",
+		},
+	}, nil
+}
+
+func (e *MatchService) DeleteCardType(ctx context.Context, cardType *gen.CardType) (*gen.SuccessMessageResponse, error) {
+	// Use the matchDao to delete the CardType from the database
+	err := e.matchDao.DeleteCardTypeByID(cardType.CardTypeId)
+	if err != nil {
+		return nil, fmt.Errorf("failed to delete card type: %w", err)
+	}
+
+	// If the deletion is successful, return a SuccessMessageResponse with a success message
+	return &gen.SuccessMessageResponse{
+		Data: &gen.SuccessMessageResponseSuccessMessage{
+			Message: "Card type deleted successfully",
+		},
+	}, nil
+}

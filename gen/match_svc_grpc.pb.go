@@ -29,6 +29,8 @@ const (
 	MatchService_CreateCardType_FullMethodName        = "/proto.MatchService/CreateCardType"
 	MatchService_GetAllGoalType_FullMethodName        = "/proto.MatchService/GetAllGoalType"
 	MatchService_GetAllCardType_FullMethodName        = "/proto.MatchService/GetAllCardType"
+	MatchService_DeleteGoalType_FullMethodName        = "/proto.MatchService/DeleteGoalType"
+	MatchService_DeleteCardType_FullMethodName        = "/proto.MatchService/DeleteCardType"
 )
 
 // MatchServiceClient is the client API for MatchService service.
@@ -45,6 +47,8 @@ type MatchServiceClient interface {
 	CreateCardType(ctx context.Context, in *CardType, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
 	GetAllGoalType(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*GoalTypeResponse, error)
 	GetAllCardType(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*CardTypeResponse, error)
+	DeleteGoalType(ctx context.Context, in *GoalType, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
+	DeleteCardType(ctx context.Context, in *CardType, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
 }
 
 type matchServiceClient struct {
@@ -145,6 +149,24 @@ func (c *matchServiceClient) GetAllCardType(ctx context.Context, in *EmptyReques
 	return out, nil
 }
 
+func (c *matchServiceClient) DeleteGoalType(ctx context.Context, in *GoalType, opts ...grpc.CallOption) (*SuccessMessageResponse, error) {
+	out := new(SuccessMessageResponse)
+	err := c.cc.Invoke(ctx, MatchService_DeleteGoalType_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *matchServiceClient) DeleteCardType(ctx context.Context, in *CardType, opts ...grpc.CallOption) (*SuccessMessageResponse, error) {
+	out := new(SuccessMessageResponse)
+	err := c.cc.Invoke(ctx, MatchService_DeleteCardType_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MatchServiceServer is the server API for MatchService service.
 // All implementations should embed UnimplementedMatchServiceServer
 // for forward compatibility
@@ -159,6 +181,8 @@ type MatchServiceServer interface {
 	CreateCardType(context.Context, *CardType) (*SuccessMessageResponse, error)
 	GetAllGoalType(context.Context, *EmptyRequest) (*GoalTypeResponse, error)
 	GetAllCardType(context.Context, *EmptyRequest) (*CardTypeResponse, error)
+	DeleteGoalType(context.Context, *GoalType) (*SuccessMessageResponse, error)
+	DeleteCardType(context.Context, *CardType) (*SuccessMessageResponse, error)
 }
 
 // UnimplementedMatchServiceServer should be embedded to have forward compatible implementations.
@@ -194,6 +218,12 @@ func (UnimplementedMatchServiceServer) GetAllGoalType(context.Context, *EmptyReq
 }
 func (UnimplementedMatchServiceServer) GetAllCardType(context.Context, *EmptyRequest) (*CardTypeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllCardType not implemented")
+}
+func (UnimplementedMatchServiceServer) DeleteGoalType(context.Context, *GoalType) (*SuccessMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteGoalType not implemented")
+}
+func (UnimplementedMatchServiceServer) DeleteCardType(context.Context, *CardType) (*SuccessMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCardType not implemented")
 }
 
 // UnsafeMatchServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -387,6 +417,42 @@ func _MatchService_GetAllCardType_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MatchService_DeleteGoalType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GoalType)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MatchServiceServer).DeleteGoalType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MatchService_DeleteGoalType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MatchServiceServer).DeleteGoalType(ctx, req.(*GoalType))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MatchService_DeleteCardType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CardType)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MatchServiceServer).DeleteCardType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MatchService_DeleteCardType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MatchServiceServer).DeleteCardType(ctx, req.(*CardType))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MatchService_ServiceDesc is the grpc.ServiceDesc for MatchService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -433,6 +499,14 @@ var MatchService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAllCardType",
 			Handler:    _MatchService_GetAllCardType_Handler,
+		},
+		{
+			MethodName: "DeleteGoalType",
+			Handler:    _MatchService_DeleteGoalType_Handler,
+		},
+		{
+			MethodName: "DeleteCardType",
+			Handler:    _MatchService_DeleteCardType_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
