@@ -31,6 +31,36 @@ type MatchServicePublic struct {
 	summaryDao dao.SummaryDaoInterface
 }
 
+func (e *MatchServicePublic) GetAllMatchCalendarByRound(ctx context.Context, request *gen.RoundRequest) (*gen.MatchCalendarListResponse, error) {
+	// Use the matchDao to get all MatchCalendars for the specific round from the database
+	matchCalendars, err := e.matchDao.GetAllMatchCalendarsByRound(request.Round)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get all match calendars for round %d: %w", request.Round, err)
+	}
+
+	// Convert the MatchCalendars to the protobuf MatchCalendar
+	var pbMatchCalendars []*gen.MatchCalendarResponse_Data
+	for _, matchCalendar := range matchCalendars {
+		pbMatchCalendar := &gen.MatchCalendarResponse_Data{
+			ClubOneName: matchCalendar.ClubOneName,
+			ClubTwoName: matchCalendar.ClubTwoName,
+			IntendTime:  matchCalendar.IntendTime,
+			RealTime:    matchCalendar.RealTime,
+			MatchRound:  matchCalendar.MatchRound,
+			MatchTurn:   matchCalendar.MatchTurn,
+			MatchStatus: matchCalendar.MatchStatus,
+			Stadium:     matchCalendar.Stadium,
+			Season:      matchCalendar.SeaSon,
+		}
+		pbMatchCalendars = append(pbMatchCalendars, pbMatchCalendar)
+	}
+
+	// Return a MatchCalendarListResponse with the MatchCalendars
+	return &gen.MatchCalendarListResponse{
+		Data:    pbMatchCalendars,
+		Message: fmt.Sprintf("Successfully retrieved all match calendars for round %d", request.Round),
+	}, nil
+}
 func NewMatchServicePublic(logger *zap.Logger, cfg *config.Config, userDao dao.UserDaoInterface, clubDao dao.ClubDaoInterface, matchDao dao.MatchDaoInterface, summaryDao dao.SummaryDaoInterface) *MatchServicePublic {
 	return &MatchServicePublic{logger: logger, cfg: cfg, userDao: userDao, clubDao: clubDao, matchDao: matchDao, summaryDao: summaryDao}
 }

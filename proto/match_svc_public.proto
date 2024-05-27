@@ -19,6 +19,12 @@ service MatchServicePublic {
       };
     }
 
+    rpc GetAllMatchCalendarByRound (RoundRequest) returns (MatchCalendarListResponse) {
+      option (google.api.http) = {
+        get: "/match_calendar/all/{round}"
+      };
+    }
+
     rpc GetMatchCalendarById (MatchCalendarRequest) returns (MatchCalendarResponse) {
       option (google.api.http) = {
         get: "/match/calendar/{id}"

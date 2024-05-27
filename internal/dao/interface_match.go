@@ -34,4 +34,5 @@ type MatchDaoInterface interface {
 	GetAllCardType() ([]*models.CardType, error)
 	DeleteGoalTypeByID(id string) error
 	DeleteCardTypeByID(id string) error
+	GetAllMatchCalendarsByRound(round string) ([]*models.Matches, error)
 }

@@ -92,6 +92,14 @@ func (m *MatchDao) GetAllMatchResultsByRound(round string) ([]*models.Matches, e
 	return matchCalendars, nil
 }
 
+func (m *MatchDao) GetAllMatchCalendarsByRound(round string) ([]*models.Matches, error) {
+	var matchCalendars []*models.Matches
+	if err := m.db.Where("match_round = ?", round).Find(&matchCalendars).Error; err != nil {
+		return nil, err
+	}
+	return matchCalendars, nil
+}
+
 func (m *MatchDao) CreateProgressScore(score *models.ProgressScore) error {
 	if err := m.db.Create(&score).Error; err != nil {
 		return errors.Wrap(err, "c.db.Create")

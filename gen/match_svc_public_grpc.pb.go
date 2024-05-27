@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	MatchServicePublic_GetAllMatchCalendarsWithStatus_FullMethodName = "/proto.MatchServicePublic/GetAllMatchCalendarsWithStatus"
 	MatchServicePublic_GetAllMatchCalendar_FullMethodName            = "/proto.MatchServicePublic/GetAllMatchCalendar"
+	MatchServicePublic_GetAllMatchCalendarByRound_FullMethodName     = "/proto.MatchServicePublic/GetAllMatchCalendarByRound"
 	MatchServicePublic_GetMatchCalendarById_FullMethodName           = "/proto.MatchServicePublic/GetMatchCalendarById"
 	MatchServicePublic_GetMatchResultByID_FullMethodName             = "/proto.MatchServicePublic/GetMatchResultByID"
 	MatchServicePublic_GetAllMatchResults_FullMethodName             = "/proto.MatchServicePublic/GetAllMatchResults"
@@ -39,6 +40,7 @@ const (
 type MatchServicePublicClient interface {
 	GetAllMatchCalendarsWithStatus(ctx context.Context, in *StatusRequest, opts ...grpc.CallOption) (*MatchCalendarListResponse, error)
 	GetAllMatchCalendar(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*MatchCalendarListResponse, error)
+	GetAllMatchCalendarByRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*MatchCalendarListResponse, error)
 	GetMatchCalendarById(ctx context.Context, in *MatchCalendarRequest, opts ...grpc.CallOption) (*MatchCalendarResponse, error)
 	GetMatchResultByID(ctx context.Context, in *ResultScoreRequest, opts ...grpc.CallOption) (*ResultScoreResponse, error)
 	GetAllMatchResults(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*ResultScoreListResponse, error)
@@ -71,6 +73,15 @@ func (c *matchServicePublicClient) GetAllMatchCalendarsWithStatus(ctx context.Co
 func (c *matchServicePublicClient) GetAllMatchCalendar(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*MatchCalendarListResponse, error) {
 	out := new(MatchCalendarListResponse)
 	err := c.cc.Invoke(ctx, MatchServicePublic_GetAllMatchCalendar_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *matchServicePublicClient) GetAllMatchCalendarByRound(ctx context.Context, in *RoundRequest, opts ...grpc.CallOption) (*MatchCalendarListResponse, error) {
+	out := new(MatchCalendarListResponse)
+	err := c.cc.Invoke(ctx, MatchServicePublic_GetAllMatchCalendarByRound_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -173,6 +184,7 @@ func (c *matchServicePublicClient) GetAllCardType(ctx context.Context, in *Empty
 type MatchServicePublicServer interface {
 	GetAllMatchCalendarsWithStatus(context.Context, *StatusRequest) (*MatchCalendarListResponse, error)
 	GetAllMatchCalendar(context.Context, *EmptyRequest) (*MatchCalendarListResponse, error)
+	GetAllMatchCalendarByRound(context.Context, *RoundRequest) (*MatchCalendarListResponse, error)
 	GetMatchCalendarById(context.Context, *MatchCalendarRequest) (*MatchCalendarResponse, error)
 	GetMatchResultByID(context.Context, *ResultScoreRequest) (*ResultScoreResponse, error)
 	GetAllMatchResults(context.Context, *EmptyRequest) (*ResultScoreListResponse, error)
@@ -194,6 +206,9 @@ func (UnimplementedMatchServicePublicServer) GetAllMatchCalendarsWithStatus(cont
 }
 func (UnimplementedMatchServicePublicServer) GetAllMatchCalendar(context.Context, *EmptyRequest) (*MatchCalendarListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllMatchCalendar not implemented")
+}
+func (UnimplementedMatchServicePublicServer) GetAllMatchCalendarByRound(context.Context, *RoundRequest) (*MatchCalendarListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllMatchCalendarByRound not implemented")
 }
 func (UnimplementedMatchServicePublicServer) GetMatchCalendarById(context.Context, *MatchCalendarRequest) (*MatchCalendarResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMatchCalendarById not implemented")
@@ -269,6 +284,24 @@ func _MatchServicePublic_GetAllMatchCalendar_Handler(srv interface{}, ctx contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MatchServicePublicServer).GetAllMatchCalendar(ctx, req.(*EmptyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MatchServicePublic_GetAllMatchCalendarByRound_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RoundRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MatchServicePublicServer).GetAllMatchCalendarByRound(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MatchServicePublic_GetAllMatchCalendarByRound_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MatchServicePublicServer).GetAllMatchCalendarByRound(ctx, req.(*RoundRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -467,6 +500,10 @@ var MatchServicePublic_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAllMatchCalendar",
 			Handler:    _MatchServicePublic_GetAllMatchCalendar_Handler,
+		},
+		{
+			MethodName: "GetAllMatchCalendarByRound",
+			Handler:    _MatchServicePublic_GetAllMatchCalendarByRound_Handler,
 		},
 		{
 			MethodName: "GetMatchCalendarById",

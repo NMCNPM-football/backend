@@ -248,6 +248,36 @@
         ]
       }
     },
+    "/match_calendar/all/{round}": {
+      "get": {
+        "operationId": "MatchServicePublic_GetAllMatchCalendarByRound",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoMatchCalendarListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "round",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MatchServicePublic"
+        ]
+      }
+    },
     "/match_event/card_type": {
       "get": {
         "operationId": "MatchServicePublic_GetAllCardType",
