@@ -61,4 +61,14 @@ service MatchServicePublic {
       get: "/match/statistic/{match_id}"
     };
   }
+  rpc GetAllGoalType (EmptyRequest) returns (GoalTypeResponse) {
+    option (google.api.http) = {
+      get: "/match_event/goal_type"
+    };
+  }
+  rpc GetAllCardType (EmptyRequest) returns (CardTypeResponse) {
+    option (google.api.http) = {
+      get: "/match_event/card_type"
+    };
+  }
 }

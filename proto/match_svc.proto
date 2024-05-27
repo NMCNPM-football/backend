@@ -55,16 +55,7 @@ service MatchService {
       body: "*"
     };
   }
-  rpc GetAllGoalType (EmptyRequest) returns (GoalTypeResponse) {
-    option (google.api.http) = {
-      get: "/match_event/goal_type"
-    };
-  }
-  rpc GetAllCardType (EmptyRequest) returns (CardTypeResponse) {
-    option (google.api.http) = {
-      get: "/match_event/card_type"
-    };
-  }
+
   rpc DeleteGoalType (GoalType) returns (SuccessMessageResponse) {
     option (google.api.http) = {
       delete: "/delete/goal_type/{goal_type_id}"

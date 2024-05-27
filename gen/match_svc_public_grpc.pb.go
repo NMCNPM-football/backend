@@ -29,6 +29,8 @@ const (
 	MatchServicePublic_GetProgressScoreByMatchID_FullMethodName      = "/proto.MatchServicePublic/GetProgressScoreByMatchID"
 	MatchServicePublic_GetProgressCardByMatchID_FullMethodName       = "/proto.MatchServicePublic/GetProgressCardByMatchID"
 	MatchServicePublic_GetMatchStatisticByMatchID_FullMethodName     = "/proto.MatchServicePublic/GetMatchStatisticByMatchID"
+	MatchServicePublic_GetAllGoalType_FullMethodName                 = "/proto.MatchServicePublic/GetAllGoalType"
+	MatchServicePublic_GetAllCardType_FullMethodName                 = "/proto.MatchServicePublic/GetAllCardType"
 )
 
 // MatchServicePublicClient is the client API for MatchServicePublic service.
@@ -45,6 +47,8 @@ type MatchServicePublicClient interface {
 	GetProgressScoreByMatchID(ctx context.Context, in *ResultScoreRequest, opts ...grpc.CallOption) (*ProgressScoreListResponse, error)
 	GetProgressCardByMatchID(ctx context.Context, in *ResultScoreRequest, opts ...grpc.CallOption) (*ProgressCardListResponse, error)
 	GetMatchStatisticByMatchID(ctx context.Context, in *ResultScoreRequest, opts ...grpc.CallOption) (*ProgressGoal, error)
+	GetAllGoalType(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*GoalTypeResponse, error)
+	GetAllCardType(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*CardTypeResponse, error)
 }
 
 type matchServicePublicClient struct {
@@ -145,6 +149,24 @@ func (c *matchServicePublicClient) GetMatchStatisticByMatchID(ctx context.Contex
 	return out, nil
 }
 
+func (c *matchServicePublicClient) GetAllGoalType(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*GoalTypeResponse, error) {
+	out := new(GoalTypeResponse)
+	err := c.cc.Invoke(ctx, MatchServicePublic_GetAllGoalType_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *matchServicePublicClient) GetAllCardType(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*CardTypeResponse, error) {
+	out := new(CardTypeResponse)
+	err := c.cc.Invoke(ctx, MatchServicePublic_GetAllCardType_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MatchServicePublicServer is the server API for MatchServicePublic service.
 // All implementations should embed UnimplementedMatchServicePublicServer
 // for forward compatibility
@@ -159,6 +181,8 @@ type MatchServicePublicServer interface {
 	GetProgressScoreByMatchID(context.Context, *ResultScoreRequest) (*ProgressScoreListResponse, error)
 	GetProgressCardByMatchID(context.Context, *ResultScoreRequest) (*ProgressCardListResponse, error)
 	GetMatchStatisticByMatchID(context.Context, *ResultScoreRequest) (*ProgressGoal, error)
+	GetAllGoalType(context.Context, *EmptyRequest) (*GoalTypeResponse, error)
+	GetAllCardType(context.Context, *EmptyRequest) (*CardTypeResponse, error)
 }
 
 // UnimplementedMatchServicePublicServer should be embedded to have forward compatible implementations.
@@ -194,6 +218,12 @@ func (UnimplementedMatchServicePublicServer) GetProgressCardByMatchID(context.Co
 }
 func (UnimplementedMatchServicePublicServer) GetMatchStatisticByMatchID(context.Context, *ResultScoreRequest) (*ProgressGoal, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMatchStatisticByMatchID not implemented")
+}
+func (UnimplementedMatchServicePublicServer) GetAllGoalType(context.Context, *EmptyRequest) (*GoalTypeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllGoalType not implemented")
+}
+func (UnimplementedMatchServicePublicServer) GetAllCardType(context.Context, *EmptyRequest) (*CardTypeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllCardType not implemented")
 }
 
 // UnsafeMatchServicePublicServer may be embedded to opt out of forward compatibility for this service.
@@ -387,6 +417,42 @@ func _MatchServicePublic_GetMatchStatisticByMatchID_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MatchServicePublic_GetAllGoalType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MatchServicePublicServer).GetAllGoalType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MatchServicePublic_GetAllGoalType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MatchServicePublicServer).GetAllGoalType(ctx, req.(*EmptyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MatchServicePublic_GetAllCardType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MatchServicePublicServer).GetAllCardType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MatchServicePublic_GetAllCardType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MatchServicePublicServer).GetAllCardType(ctx, req.(*EmptyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MatchServicePublic_ServiceDesc is the grpc.ServiceDesc for MatchServicePublic service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -433,6 +499,14 @@ var MatchServicePublic_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMatchStatisticByMatchID",
 			Handler:    _MatchServicePublic_GetMatchStatisticByMatchID_Handler,
+		},
+		{
+			MethodName: "GetAllGoalType",
+			Handler:    _MatchServicePublic_GetAllGoalType_Handler,
+		},
+		{
+			MethodName: "GetAllCardType",
+			Handler:    _MatchServicePublic_GetAllCardType_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

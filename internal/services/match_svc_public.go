@@ -469,3 +469,51 @@ func (e *MatchServicePublic) GetMatchStatisticByMatchID(ctx context.Context, req
 
 	return response, nil
 }
+
+func (e *MatchServicePublic) GetAllGoalType(ctx context.Context, request *gen.EmptyRequest) (*gen.GoalTypeResponse, error) {
+	// Use the matchDao to get all GoalTypes from the database
+	goalTypes, err := e.matchDao.GetAllGoalType()
+	if err != nil {
+		return nil, fmt.Errorf("failed to get all goal types: %w", err)
+	}
+
+	// Convert the GoalTypes to the protobuf GoalType
+	var pbGoalTypes []*gen.GoalType
+	for _, goalType := range goalTypes {
+		pbGoalType := &gen.GoalType{
+			GoalTypeId:   goalType.GoalTypeID,
+			GoalTypeName: goalType.GoalTypeName,
+		}
+		pbGoalTypes = append(pbGoalTypes, pbGoalType)
+	}
+
+	// Return a GoalTypeResponse with the GoalTypes
+	return &gen.GoalTypeResponse{
+		Data:    pbGoalTypes,
+		Message: "Successfully retrieved all goal types",
+	}, nil
+}
+
+func (e *MatchServicePublic) GetAllCardType(ctx context.Context, request *gen.EmptyRequest) (*gen.CardTypeResponse, error) {
+	// Use the matchDao to get all CardTypes from the database
+	cardTypes, err := e.matchDao.GetAllCardType()
+	if err != nil {
+		return nil, fmt.Errorf("failed to get all card types: %w", err)
+	}
+
+	// Convert the CardTypes to the protobuf CardType
+	var pbCardTypes []*gen.CardType
+	for _, cardType := range cardTypes {
+		pbCardType := &gen.CardType{
+			CardTypeId:   cardType.CardTypeID,
+			CardTypeName: cardType.CardTypeName,
+		}
+		pbCardTypes = append(pbCardTypes, pbCardType)
+	}
+
+	// Return a CardTypeResponse with the CardTypes
+	return &gen.CardTypeResponse{
+		Data:    pbCardTypes,
+		Message: "Successfully retrieved all card types",
+	}, nil
+}
