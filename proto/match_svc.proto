@@ -45,24 +45,24 @@ service MatchService {
   }
   rpc CreateGoalType (GoalType) returns (SuccessMessageResponse) {
     option (google.api.http) = {
-      post: "/match/goal_type"
+      post: "/match_event/goal_type"
       body: "*"
     };
   }
   rpc CreateCardType (CardType) returns (SuccessMessageResponse) {
     option (google.api.http) = {
-      post: "/match/card_type"
+      post: "/match_event/card_type"
       body: "*"
     };
   }
   rpc GetAllGoalType (EmptyRequest) returns (GoalTypeResponse) {
     option (google.api.http) = {
-      get: "/match/goal_type"
+      get: "/match_event/goal_type"
     };
   }
   rpc GetAllCardType (EmptyRequest) returns (CardTypeResponse) {
     option (google.api.http) = {
-      get: "/match/card_type"
+      get: "/match_event/card_type"
     };
   }
 }

@@ -507,7 +507,7 @@ func RegisterMatchServiceHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.MatchService/CreateGoalType", runtime.WithHTTPPathPattern("/match/goal_type"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.MatchService/CreateGoalType", runtime.WithHTTPPathPattern("/match_event/goal_type"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -532,7 +532,7 @@ func RegisterMatchServiceHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.MatchService/CreateCardType", runtime.WithHTTPPathPattern("/match/card_type"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.MatchService/CreateCardType", runtime.WithHTTPPathPattern("/match_event/card_type"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -557,7 +557,7 @@ func RegisterMatchServiceHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.MatchService/GetAllGoalType", runtime.WithHTTPPathPattern("/match/goal_type"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.MatchService/GetAllGoalType", runtime.WithHTTPPathPattern("/match_event/goal_type"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -582,7 +582,7 @@ func RegisterMatchServiceHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.MatchService/GetAllCardType", runtime.WithHTTPPathPattern("/match/card_type"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.MatchService/GetAllCardType", runtime.WithHTTPPathPattern("/match_event/card_type"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -778,7 +778,7 @@ func RegisterMatchServiceHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.MatchService/CreateGoalType", runtime.WithHTTPPathPattern("/match/goal_type"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.MatchService/CreateGoalType", runtime.WithHTTPPathPattern("/match_event/goal_type"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -800,7 +800,7 @@ func RegisterMatchServiceHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.MatchService/CreateCardType", runtime.WithHTTPPathPattern("/match/card_type"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.MatchService/CreateCardType", runtime.WithHTTPPathPattern("/match_event/card_type"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -822,7 +822,7 @@ func RegisterMatchServiceHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.MatchService/GetAllGoalType", runtime.WithHTTPPathPattern("/match/goal_type"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.MatchService/GetAllGoalType", runtime.WithHTTPPathPattern("/match_event/goal_type"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -844,7 +844,7 @@ func RegisterMatchServiceHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.MatchService/GetAllCardType", runtime.WithHTTPPathPattern("/match/card_type"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.MatchService/GetAllCardType", runtime.WithHTTPPathPattern("/match_event/card_type"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -876,13 +876,13 @@ var (
 
 	pattern_MatchService_CreateAllMatchResults_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"match", "create_all_results"}, ""))
 
-	pattern_MatchService_CreateGoalType_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"match", "goal_type"}, ""))
+	pattern_MatchService_CreateGoalType_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"match_event", "goal_type"}, ""))
 
-	pattern_MatchService_CreateCardType_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"match", "card_type"}, ""))
+	pattern_MatchService_CreateCardType_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"match_event", "card_type"}, ""))
 
-	pattern_MatchService_GetAllGoalType_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"match", "goal_type"}, ""))
+	pattern_MatchService_GetAllGoalType_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"match_event", "goal_type"}, ""))
 
-	pattern_MatchService_GetAllCardType_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"match", "card_type"}, ""))
+	pattern_MatchService_GetAllCardType_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"match_event", "card_type"}, ""))
 )
 
 var (

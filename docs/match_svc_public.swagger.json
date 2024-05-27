@@ -196,7 +196,7 @@
         ]
       }
     },
-    "/match/{status}": {
+    "/match/status/{status}": {
       "get": {
         "operationId": "MatchServicePublic_GetAllMatchCalendarsWithStatus",
         "responses": {

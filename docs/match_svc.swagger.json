@@ -90,58 +90,6 @@
         ]
       }
     },
-    "/match/card_type": {
-      "get": {
-        "operationId": "MatchService_GetAllCardType",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/protoCardTypeResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "tags": [
-          "MatchService"
-        ]
-      },
-      "post": {
-        "operationId": "MatchService_CreateCardType",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/SuccessMessageResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/protoCardType"
-            }
-          }
-        ],
-        "tags": [
-          "MatchService"
-        ]
-      }
-    },
     "/match/create_all_results": {
       "post": {
         "operationId": "MatchService_CreateAllMatchResults",
@@ -166,58 +114,6 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/EmptyRequest"
-            }
-          }
-        ],
-        "tags": [
-          "MatchService"
-        ]
-      }
-    },
-    "/match/goal_type": {
-      "get": {
-        "operationId": "MatchService_GetAllGoalType",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/protoGoalTypeResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "tags": [
-          "MatchService"
-        ]
-      },
-      "post": {
-        "operationId": "MatchService_CreateGoalType",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/SuccessMessageResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/protoGoalType"
             }
           }
         ],
@@ -409,6 +305,110 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/protoMatchCalendar"
+            }
+          }
+        ],
+        "tags": [
+          "MatchService"
+        ]
+      }
+    },
+    "/match_event/card_type": {
+      "get": {
+        "operationId": "MatchService_GetAllCardType",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoCardTypeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "MatchService"
+        ]
+      },
+      "post": {
+        "operationId": "MatchService_CreateCardType",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoCardType"
+            }
+          }
+        ],
+        "tags": [
+          "MatchService"
+        ]
+      }
+    },
+    "/match_event/goal_type": {
+      "get": {
+        "operationId": "MatchService_GetAllGoalType",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoGoalTypeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "MatchService"
+        ]
+      },
+      "post": {
+        "operationId": "MatchService_CreateGoalType",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoGoalType"
             }
           }
         ],
