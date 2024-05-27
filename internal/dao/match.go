@@ -272,13 +272,13 @@ func (m *MatchDao) GetAllCardType() ([]*models.CardType, error) {
 }
 
 func (m *MatchDao) DeleteGoalTypeByID(id string) error {
-	if err := m.db.Where("id = ?", id).Delete(&models.GoalType{}).Error; err != nil {
+	if err := m.db.Where("goal_type_id = ?", id).Delete(&models.GoalType{}).Error; err != nil {
 		return err
 	}
 	return nil
 }
 func (m *MatchDao) DeleteCardTypeByID(id string) error {
-	if err := m.db.Where("id = ?", id).Delete(&models.CardType{}).Error; err != nil {
+	if err := m.db.Where("card_type_id = ?", id).Delete(&models.CardType{}).Error; err != nil {
 		return err
 	}
 	return nil
