@@ -2934,6 +2934,8 @@ func (m *MatchCalendarResponse_Data) validate(all bool) error {
 
 	// no validation rules for MatchStatus
 
+	// no validation rules for MatchId
+
 	if len(errors) > 0 {
 		return MatchCalendarResponse_DataMultiError(errors)
 	}

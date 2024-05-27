@@ -51,6 +51,7 @@ func (e *MatchServicePublic) GetAllMatchCalendarByRound(ctx context.Context, req
 			MatchStatus: matchCalendar.MatchStatus,
 			Stadium:     matchCalendar.Stadium,
 			Season:      matchCalendar.SeaSon,
+			MatchId:     matchCalendar.ID,
 		}
 		pbMatchCalendars = append(pbMatchCalendars, pbMatchCalendar)
 	}

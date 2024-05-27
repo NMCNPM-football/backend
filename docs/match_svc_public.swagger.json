@@ -563,6 +563,9 @@
         },
         "matchStatus": {
           "type": "string"
+        },
+        "matchId": {
+          "type": "string"
         }
       }
     },

@@ -41,6 +41,7 @@ message MatchCalendarResponse {
     string stadium = 7;
     string season = 8;
     string match_status = 9;
+    string match_id = 10;
   }
   Data data = 1;
   string message = 2;
