@@ -9,7 +9,7 @@ import "summary.proto";
 service MatchServicePublic {
     rpc GetAllMatchCalendarsWithStatus (StatusRequest) returns (MatchCalendarListResponse) {
       option (google.api.http) = {
-        get: "/match/{status}"
+        get: "/match/status/{status}"
       };
     }
 

@@ -253,7 +253,7 @@
         "coach": {
           "type": "string"
         },
-        "createBy": {
+        "clubId": {
           "type": "string"
         }
       }

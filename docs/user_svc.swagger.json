@@ -248,6 +248,9 @@
         },
         "clubName": {
           "type": "string"
+        },
+        "clubId": {
+          "type": "string"
         }
       }
     },

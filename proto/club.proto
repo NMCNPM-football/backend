@@ -14,7 +14,7 @@ message   ClubProfileResponse {
     string update_at = 10;
     string logo = 11;
     string coach = 12;
-    string create_by = 13;
+    string club_id = 13;
   }
   Data data = 1;
   string message = 2;

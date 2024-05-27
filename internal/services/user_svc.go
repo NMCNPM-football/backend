@@ -164,6 +164,7 @@ func (e *UserService) GetProfile(ctx context.Context, in *gen.EmptyRequest) (*ge
 			Address:  user.Address,
 			ClubName: user.Club,
 			Position: user.Position,
+			ClubId:   user.ClubID,
 		},
 	}, nil
 }

@@ -2028,7 +2028,7 @@ func (m *ClubProfileResponse_Data) validate(all bool) error {
 
 	// no validation rules for Coach
 
-	// no validation rules for CreateBy
+	// no validation rules for ClubId
 
 	if len(errors) > 0 {
 		return ClubProfileResponse_DataMultiError(errors)

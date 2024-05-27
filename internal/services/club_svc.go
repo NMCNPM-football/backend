@@ -87,7 +87,6 @@ func (e *ClubService) CreateClub(ctx context.Context, request *gen.ClubProfileRe
 			SeaSon:      newClub.SeaSon,
 			Achievement: newClub.Achievement,
 			OwnerBy:     newClub.OwnerBy,
-			CreateBy:    newClub.CreatedBy,
 			Logo:        newClub.LinkLogo,
 		},
 		Message: "Club created successfully",
@@ -225,6 +224,8 @@ func (e *ClubService) GetClubProfile(ctx context.Context, request *gen.EmptyRequ
 			NameStadium: club.NameStadium,
 			Achievement: club.Achievement,
 			UpdateBy:    club.UpdatedBy,
+			Logo:        club.LinkLogo,
+			ClubId:      club.ID,
 		},
 	}
 
@@ -383,13 +384,13 @@ func (e *ClubService) DeletePlayer(ctx context.Context, request *gen.PLayerReque
 	}
 
 	// Get the club from the context
-	club, err := e.clubDao.GetClubByID(user.ClubID)
+	_, err = e.clubDao.GetClubByID(user.ClubID)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get club by ID: %w", err)
 	}
 
 	// Check if the user is the owner of the club
-	if user.Name != club.OwnerBy {
+	if user.Position != "Owner" && user.Position != "Member" {
 		return nil, fmt.Errorf("user is not the owner of the club")
 	}
 
