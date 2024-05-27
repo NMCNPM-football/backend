@@ -20,12 +20,6 @@ type Player struct {
 	LogoLink    string `gorm:"size:5000"`
 }
 
-type ClubPlayer struct {
-	ClubID   string `gorm:"size:50"`
-	PlayerID string `gorm:"size:50"`
-	Role     string `gorm:"size:50"`
-}
-
 type PLayerStats struct {
 	ID          string `gorm:"primary_key;size:100"`
 	PlayerID    string `gorm:"size:50"`

@@ -638,7 +638,7 @@ func RegisterClubServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.ClubService/GetAllPlayerProfile", runtime.WithHTTPPathPattern("/club/player/all"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.ClubService/GetAllPlayerProfile", runtime.WithHTTPPathPattern("/club/player-all"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -956,7 +956,7 @@ func RegisterClubServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.ClubService/GetAllPlayerProfile", runtime.WithHTTPPathPattern("/club/player/all"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/proto.ClubService/GetAllPlayerProfile", runtime.WithHTTPPathPattern("/club/player-all"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1078,7 +1078,7 @@ var (
 
 	pattern_ClubService_DeletePlayer_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"delete", "player", "id"}, ""))
 
-	pattern_ClubService_GetAllPlayerProfile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"club", "player", "all"}, ""))
+	pattern_ClubService_GetAllPlayerProfile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"club", "player-all"}, ""))
 
 	pattern_ClubService_UpdateCoach_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"coach", "update", "id"}, ""))
 

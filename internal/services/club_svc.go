@@ -12,6 +12,7 @@ import (
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
+	"strconv"
 )
 
 type ClubServiceInterface interface {
@@ -109,6 +110,7 @@ func (e *ClubService) CreatePlayer(ctx context.Context, request *gen.PLayerProfi
 	// Create a new Player model
 	newPlayer := &models.Player{
 		ID:          uuid.New().String(),
+		ClubID:      club.ID, // Set the ClubID field
 		ClubName:    club.NameClub,
 		SeaSon:      club.SeaSon,
 		TypePlayer:  request.TypePlayer,
@@ -152,7 +154,7 @@ func (e *ClubService) GetAllPlayerProfile(ctx context.Context, request *gen.Empt
 	}
 
 	// Check if the user is the owner of the club
-	if user.Name != club.OwnerBy {
+	if user.Position != "Owner" && user.Position != "Member" {
 		return nil, fmt.Errorf("user is not the owner of the club")
 	}
 
@@ -166,7 +168,7 @@ func (e *ClubService) GetAllPlayerProfile(ctx context.Context, request *gen.Empt
 	response := &gen.PlayerProfileListResponse{
 		Data: make([]*gen.PLayerProfileResponse_Data, 0, len(players)),
 	}
-
+	naturalizationPlayerCount := 0
 	// Convert each player to the PlayerProfile protobuf message and append it to the response
 	for _, player := range players {
 		response.Data = append(response.Data, &gen.PLayerProfileResponse_Data{
@@ -182,12 +184,15 @@ func (e *ClubService) GetAllPlayerProfile(ctx context.Context, request *gen.Empt
 			Kit:         player.Kit,
 			Achievement: player.Achievement,
 		})
-
+		if player.TypePlayer == "Naturalization Player" {
+			naturalizationPlayerCount++
+		}
 	}
 	// Count the number of players in the club
 	playerCount := len(players)
 	response.Message = fmt.Sprintf("There are %d players in %s club", playerCount, club.NameClub)
-
+	response.ForeignPlayer = strconv.Itoa(naturalizationPlayerCount)
+	response.Player = strconv.Itoa(playerCount)
 	return response, nil
 
 }
@@ -205,9 +210,9 @@ func (e *ClubService) GetClubProfile(ctx context.Context, request *gen.EmptyRequ
 		return nil, fmt.Errorf("failed to get club by ID: %w", err)
 	}
 	// Check if the user is the owner of the club
-	if user.Name != club.OwnerBy {
-		return nil, fmt.Errorf("user is not the owner of the club")
-	}
+	//if user.Name != club.OwnerBy {
+	//	return nil, fmt.Errorf("user is not the owner of the club")
+	//}
 
 	// Create the response
 	response := &gen.ClubProfileResponse{
@@ -238,9 +243,9 @@ func (e *ClubService) UpdateClub(ctx context.Context, request *gen.ClubProfileRe
 		return nil, fmt.Errorf("failed to get club by ID: %w", err)
 	}
 	// Check if the user is the owner of the club
-	if user.Name != club.OwnerBy {
-		return nil, fmt.Errorf("user is not the owner of the club")
-	}
+	//if user.Name != club.OwnerBy {
+	//	return nil, fmt.Errorf("user is not the owner of the club")
+	//}
 	updateClub := &models.Club{
 		NameClub:    request.NameClub,
 		NameAward:   request.NameAward,
@@ -278,14 +283,14 @@ func (e *ClubService) UpdatePlayer(ctx context.Context, request *gen.PLayerProfi
 	}
 
 	// Get the club from the context
-	club, err := e.clubDao.GetClubByID(user.ClubID)
+	_, err = e.clubDao.GetClubByID(user.ClubID)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get club by ID: %w", err)
 	}
 	// Check if the user is the owner of the club
-	if user.Name != club.OwnerBy {
-		return nil, fmt.Errorf("user is not the owner of the club")
-	}
+	//if user.Name != club.OwnerBy {
+	//	return nil, fmt.Errorf("user is not the owner of the club")
+	//}
 
 	player, err := e.clubDao.GetPLayerByID(request.Id)
 	if err != nil {

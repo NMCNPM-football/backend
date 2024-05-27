@@ -846,6 +846,10 @@ func (m *PlayerProfileListResponse) validate(all bool) error {
 
 	// no validation rules for Message
 
+	// no validation rules for ForeignPlayer
+
+	// no validation rules for Player
+
 	if len(errors) > 0 {
 		return PlayerProfileListResponseMultiError(errors)
 	}

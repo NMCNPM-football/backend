@@ -18,4 +18,22 @@ service SummaryService{
       body: "*"
     };
   }
+  rpc CreateLeagueRule(CreateLeagueRuleRequest) returns (SuccessMessageResponse){
+    option (google.api.http) = {
+      post: "/league-rule"
+      body: "*"
+    };
+  }
+  rpc GetLeagueRule (EmptyRequest) returns (CreateLeagueRuleResponse) {
+    option (google.api.http) = {
+      get: "/league-rule"
+    };
+  }
+  rpc UpdateLeagueRule (UpdateLeagueRuleRequest) returns (SuccessMessageResponse) {
+    option (google.api.http) = {
+      put: "/league-rule/update"
+      body: "*"
+    };
+  }
+
 }

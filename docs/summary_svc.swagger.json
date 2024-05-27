@@ -16,6 +16,90 @@
     "application/json"
   ],
   "paths": {
+    "/league-rule": {
+      "get": {
+        "operationId": "SummaryService_GetLeagueRule",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/CreateLeagueRuleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "SummaryService"
+        ]
+      },
+      "post": {
+        "operationId": "SummaryService_CreateLeagueRule",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateLeagueRuleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SummaryService"
+        ]
+      }
+    },
+    "/league-rule/update": {
+      "put": {
+        "operationId": "SummaryService_UpdateLeagueRule",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateLeagueRuleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SummaryService"
+        ]
+      }
+    },
     "/season": {
       "post": {
         "operationId": "SummaryService_CreateSeason",
@@ -97,6 +181,29 @@
     }
   },
   "definitions": {
+    "CreateLeagueRuleRequest": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateLeagueRuleResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/LeagueRuleResponse"
+          }
+        }
+      }
+    },
     "CreateSeasonRequest": {
       "type": "object",
       "properties": {
@@ -104,6 +211,17 @@
           "type": "string"
         },
         "name": {
+          "type": "string"
+        }
+      }
+    },
+    "LeagueRuleResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
           "type": "string"
         }
       }
@@ -181,6 +299,17 @@
           "format": "int32"
         },
         "seaSon": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateLeagueRuleRequest": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "key": {
           "type": "string"
         }
       }

@@ -884,3 +884,457 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = CreateSeasonRequestValidationError{}
+
+// Validate checks the field values on CreateLeagueRuleRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateLeagueRuleRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateLeagueRuleRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateLeagueRuleRequestMultiError, or nil if none found.
+func (m *CreateLeagueRuleRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateLeagueRuleRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Key
+
+	// no validation rules for Value
+
+	if len(errors) > 0 {
+		return CreateLeagueRuleRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateLeagueRuleRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateLeagueRuleRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CreateLeagueRuleRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateLeagueRuleRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateLeagueRuleRequestMultiError) AllErrors() []error { return m }
+
+// CreateLeagueRuleRequestValidationError is the validation error returned by
+// CreateLeagueRuleRequest.Validate if the designated constraints aren't met.
+type CreateLeagueRuleRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateLeagueRuleRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateLeagueRuleRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateLeagueRuleRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateLeagueRuleRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateLeagueRuleRequestValidationError) ErrorName() string {
+	return "CreateLeagueRuleRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateLeagueRuleRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateLeagueRuleRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateLeagueRuleRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateLeagueRuleRequestValidationError{}
+
+// Validate checks the field values on CreateLeagueRuleResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateLeagueRuleResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateLeagueRuleResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateLeagueRuleResponseMultiError, or nil if none found.
+func (m *CreateLeagueRuleResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateLeagueRuleResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetData() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CreateLeagueRuleResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CreateLeagueRuleResponseValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CreateLeagueRuleResponseValidationError{
+					field:  fmt.Sprintf("Data[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return CreateLeagueRuleResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateLeagueRuleResponseMultiError is an error wrapping multiple validation
+// errors returned by CreateLeagueRuleResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CreateLeagueRuleResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateLeagueRuleResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateLeagueRuleResponseMultiError) AllErrors() []error { return m }
+
+// CreateLeagueRuleResponseValidationError is the validation error returned by
+// CreateLeagueRuleResponse.Validate if the designated constraints aren't met.
+type CreateLeagueRuleResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateLeagueRuleResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateLeagueRuleResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateLeagueRuleResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateLeagueRuleResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateLeagueRuleResponseValidationError) ErrorName() string {
+	return "CreateLeagueRuleResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateLeagueRuleResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateLeagueRuleResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateLeagueRuleResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateLeagueRuleResponseValidationError{}
+
+// Validate checks the field values on LeagueRuleResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *LeagueRuleResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on LeagueRuleResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// LeagueRuleResponseMultiError, or nil if none found.
+func (m *LeagueRuleResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *LeagueRuleResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Key
+
+	// no validation rules for Value
+
+	if len(errors) > 0 {
+		return LeagueRuleResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// LeagueRuleResponseMultiError is an error wrapping multiple validation errors
+// returned by LeagueRuleResponse.ValidateAll() if the designated constraints
+// aren't met.
+type LeagueRuleResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m LeagueRuleResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m LeagueRuleResponseMultiError) AllErrors() []error { return m }
+
+// LeagueRuleResponseValidationError is the validation error returned by
+// LeagueRuleResponse.Validate if the designated constraints aren't met.
+type LeagueRuleResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LeagueRuleResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LeagueRuleResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LeagueRuleResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LeagueRuleResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LeagueRuleResponseValidationError) ErrorName() string {
+	return "LeagueRuleResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e LeagueRuleResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLeagueRuleResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LeagueRuleResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LeagueRuleResponseValidationError{}
+
+// Validate checks the field values on UpdateLeagueRuleRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateLeagueRuleRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateLeagueRuleRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateLeagueRuleRequestMultiError, or nil if none found.
+func (m *UpdateLeagueRuleRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateLeagueRuleRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Value
+
+	// no validation rules for Key
+
+	if len(errors) > 0 {
+		return UpdateLeagueRuleRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateLeagueRuleRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateLeagueRuleRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateLeagueRuleRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateLeagueRuleRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateLeagueRuleRequestMultiError) AllErrors() []error { return m }
+
+// UpdateLeagueRuleRequestValidationError is the validation error returned by
+// UpdateLeagueRuleRequest.Validate if the designated constraints aren't met.
+type UpdateLeagueRuleRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateLeagueRuleRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateLeagueRuleRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateLeagueRuleRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateLeagueRuleRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateLeagueRuleRequestValidationError) ErrorName() string {
+	return "UpdateLeagueRuleRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateLeagueRuleRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateLeagueRuleRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateLeagueRuleRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateLeagueRuleRequestValidationError{}

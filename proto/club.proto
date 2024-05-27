@@ -84,6 +84,8 @@ message CreatePlayerRequest {
 message PlayerProfileListResponse {
   repeated PLayerProfileResponse.Data data = 1;
   string message = 2;
+  string foreign_player = 3;
+  string player = 4;
 }
 
 message ClubProfileListRequest {

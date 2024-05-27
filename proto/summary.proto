@@ -60,3 +60,22 @@ message CreateSeasonRequest{
   string sea_son = 1;
   string name = 2;
 }
+
+message CreateLeagueRuleRequest{
+  string key = 1;
+  string value = 2;
+}
+
+message CreateLeagueRuleResponse{
+  repeated LeagueRuleResponse data = 1;
+}
+
+message LeagueRuleResponse {
+  string key = 1;
+  string value = 2;
+}
+
+message UpdateLeagueRuleRequest{
+  string value = 1;
+  string key = 2;
+}

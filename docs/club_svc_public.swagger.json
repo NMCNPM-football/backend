@@ -368,6 +368,12 @@
         },
         "message": {
           "type": "string"
+        },
+        "foreignPlayer": {
+          "type": "string"
+        },
+        "player": {
+          "type": "string"
         }
       }
     },

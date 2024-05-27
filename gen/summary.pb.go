@@ -605,6 +605,218 @@ func (x *CreateSeasonRequest) GetName() string {
 	return ""
 }
 
+type CreateLeagueRuleRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Key   string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Value string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+}
+
+func (x *CreateLeagueRuleRequest) Reset() {
+	*x = CreateLeagueRuleRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_summary_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateLeagueRuleRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateLeagueRuleRequest) ProtoMessage() {}
+
+func (x *CreateLeagueRuleRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_summary_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateLeagueRuleRequest.ProtoReflect.Descriptor instead.
+func (*CreateLeagueRuleRequest) Descriptor() ([]byte, []int) {
+	return file_summary_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *CreateLeagueRuleRequest) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *CreateLeagueRuleRequest) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+type CreateLeagueRuleResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Data []*LeagueRuleResponse `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+}
+
+func (x *CreateLeagueRuleResponse) Reset() {
+	*x = CreateLeagueRuleResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_summary_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateLeagueRuleResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateLeagueRuleResponse) ProtoMessage() {}
+
+func (x *CreateLeagueRuleResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_summary_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateLeagueRuleResponse.ProtoReflect.Descriptor instead.
+func (*CreateLeagueRuleResponse) Descriptor() ([]byte, []int) {
+	return file_summary_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *CreateLeagueRuleResponse) GetData() []*LeagueRuleResponse {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type LeagueRuleResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Key   string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Value string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+}
+
+func (x *LeagueRuleResponse) Reset() {
+	*x = LeagueRuleResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_summary_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *LeagueRuleResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LeagueRuleResponse) ProtoMessage() {}
+
+func (x *LeagueRuleResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_summary_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LeagueRuleResponse.ProtoReflect.Descriptor instead.
+func (*LeagueRuleResponse) Descriptor() ([]byte, []int) {
+	return file_summary_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *LeagueRuleResponse) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *LeagueRuleResponse) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+type UpdateLeagueRuleRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+	Key   string `protobuf:"bytes,2,opt,name=key,proto3" json:"key,omitempty"`
+}
+
+func (x *UpdateLeagueRuleRequest) Reset() {
+	*x = UpdateLeagueRuleRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_summary_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateLeagueRuleRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateLeagueRuleRequest) ProtoMessage() {}
+
+func (x *UpdateLeagueRuleRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_summary_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateLeagueRuleRequest.ProtoReflect.Descriptor instead.
+func (*UpdateLeagueRuleRequest) Descriptor() ([]byte, []int) {
+	return file_summary_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *UpdateLeagueRuleRequest) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+func (x *UpdateLeagueRuleRequest) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
 var File_summary_proto protoreflect.FileDescriptor
 
 var file_summary_proto_rawDesc = []byte{
@@ -689,11 +901,27 @@ var file_summary_proto_rawDesc = []byte{
 	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x17, 0x0a, 0x07, 0x73, 0x65, 0x61, 0x5f, 0x73, 0x6f,
 	0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x65, 0x61, 0x53, 0x6f, 0x6e, 0x12,
 	0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e,
-	0x61, 0x6d, 0x65, 0x42, 0x38, 0x42, 0x0c, 0x53, 0x75, 0x6d, 0x6d, 0x61, 0x72, 0x79, 0x50, 0x72,
-	0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x26, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
-	0x6d, 0x2f, 0x4e, 0x4d, 0x43, 0x4e, 0x50, 0x4d, 0x2d, 0x66, 0x6f, 0x6f, 0x74, 0x62, 0x61, 0x6c,
-	0x6c, 0x2f, 0x62, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x2f, 0x67, 0x65, 0x6e, 0x62, 0x06, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x61, 0x6d, 0x65, 0x22, 0x41, 0x0a, 0x17, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4c, 0x65, 0x61,
+	0x67, 0x75, 0x65, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10,
+	0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79,
+	0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x43, 0x0a, 0x18, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x4c, 0x65, 0x61, 0x67, 0x75, 0x65, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x27, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x13, 0x2e, 0x4c, 0x65, 0x61, 0x67, 0x75, 0x65, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x3c, 0x0a, 0x12, 0x4c,
+	0x65, 0x61, 0x67, 0x75, 0x65, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03,
+	0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x41, 0x0a, 0x17, 0x55, 0x70, 0x64,
+	0x61, 0x74, 0x65, 0x4c, 0x65, 0x61, 0x67, 0x75, 0x65, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65,
+	0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x42, 0x38, 0x42, 0x0c,
+	0x53, 0x75, 0x6d, 0x6d, 0x61, 0x72, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x26,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x4e, 0x4d, 0x43, 0x4e, 0x50,
+	0x4d, 0x2d, 0x66, 0x6f, 0x6f, 0x74, 0x62, 0x61, 0x6c, 0x6c, 0x2f, 0x62, 0x61, 0x63, 0x6b, 0x65,
+	0x6e, 0x64, 0x2f, 0x67, 0x65, 0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -708,24 +936,29 @@ func file_summary_proto_rawDescGZIP() []byte {
 	return file_summary_proto_rawDescData
 }
 
-var file_summary_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_summary_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_summary_proto_goTypes = []interface{}{
-	(*Summary)(nil),               // 0: Summary
-	(*CreateSummaryRequest)(nil),  // 1: CreateSummaryRequest
-	(*CreateSummaryResponse)(nil), // 2: CreateSummaryResponse
-	(*GetSummaryRequest)(nil),     // 3: GetSummaryRequest
-	(*SummaryResponse)(nil),       // 4: SummaryResponse
-	(*SummaryListResponse)(nil),   // 5: SummaryListResponse
-	(*CreateSeasonRequest)(nil),   // 6: CreateSeasonRequest
+	(*Summary)(nil),                  // 0: Summary
+	(*CreateSummaryRequest)(nil),     // 1: CreateSummaryRequest
+	(*CreateSummaryResponse)(nil),    // 2: CreateSummaryResponse
+	(*GetSummaryRequest)(nil),        // 3: GetSummaryRequest
+	(*SummaryResponse)(nil),          // 4: SummaryResponse
+	(*SummaryListResponse)(nil),      // 5: SummaryListResponse
+	(*CreateSeasonRequest)(nil),      // 6: CreateSeasonRequest
+	(*CreateLeagueRuleRequest)(nil),  // 7: CreateLeagueRuleRequest
+	(*CreateLeagueRuleResponse)(nil), // 8: CreateLeagueRuleResponse
+	(*LeagueRuleResponse)(nil),       // 9: LeagueRuleResponse
+	(*UpdateLeagueRuleRequest)(nil),  // 10: UpdateLeagueRuleRequest
 }
 var file_summary_proto_depIdxs = []int32{
 	0, // 0: CreateSummaryRequest.summary:type_name -> Summary
 	4, // 1: SummaryListResponse.data:type_name -> SummaryResponse
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	9, // 2: CreateLeagueRuleResponse.data:type_name -> LeagueRuleResponse
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_summary_proto_init() }
@@ -818,6 +1051,54 @@ func file_summary_proto_init() {
 				return nil
 			}
 		}
+		file_summary_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateLeagueRuleRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_summary_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateLeagueRuleResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_summary_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*LeagueRuleResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_summary_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateLeagueRuleRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -825,7 +1106,7 @@ func file_summary_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_summary_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

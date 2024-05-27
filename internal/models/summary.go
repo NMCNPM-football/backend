@@ -18,3 +18,9 @@ type Summary struct {
 	SeaSon         string `gorm:"size:100"`
 	LogoLink       string `gorm:"size:5000"`
 }
+
+type LeagueRule struct {
+	Base
+	Value string `gorm:"size:50"`
+	Key   string `gorm:"size:50"`
+}

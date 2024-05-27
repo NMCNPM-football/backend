@@ -9,4 +9,8 @@ type SummaryDaoInterface interface {
 	GetSummaryByClubName(clubName string) (*models.Summary, error)
 	GetSummaryBySeaSon(season string) ([]*models.Summary, error)
 	CreateSeason(season *models.SeaSon) error
+	GetAllRule() ([]*models.LeagueRule, error)
+	CreateLeagueRule(leagueRule *models.LeagueRule) error
+	GetLeagueRuleByKey(key string) (*models.LeagueRule, error)
+	UpdateLeagueRule(leagueRule *models.LeagueRule, key string) error
 }

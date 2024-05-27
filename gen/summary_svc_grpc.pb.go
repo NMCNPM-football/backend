@@ -19,8 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	SummaryService_CreateSummary_FullMethodName = "/proto.SummaryService/CreateSummary"
-	SummaryService_CreateSeason_FullMethodName  = "/proto.SummaryService/CreateSeason"
+	SummaryService_CreateSummary_FullMethodName    = "/proto.SummaryService/CreateSummary"
+	SummaryService_CreateSeason_FullMethodName     = "/proto.SummaryService/CreateSeason"
+	SummaryService_CreateLeagueRule_FullMethodName = "/proto.SummaryService/CreateLeagueRule"
+	SummaryService_GetLeagueRule_FullMethodName    = "/proto.SummaryService/GetLeagueRule"
+	SummaryService_UpdateLeagueRule_FullMethodName = "/proto.SummaryService/UpdateLeagueRule"
 )
 
 // SummaryServiceClient is the client API for SummaryService service.
@@ -29,6 +32,9 @@ const (
 type SummaryServiceClient interface {
 	CreateSummary(ctx context.Context, in *CreateSummaryRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
 	CreateSeason(ctx context.Context, in *CreateSeasonRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
+	CreateLeagueRule(ctx context.Context, in *CreateLeagueRuleRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
+	GetLeagueRule(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*CreateLeagueRuleResponse, error)
+	UpdateLeagueRule(ctx context.Context, in *UpdateLeagueRuleRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error)
 }
 
 type summaryServiceClient struct {
@@ -57,12 +63,42 @@ func (c *summaryServiceClient) CreateSeason(ctx context.Context, in *CreateSeaso
 	return out, nil
 }
 
+func (c *summaryServiceClient) CreateLeagueRule(ctx context.Context, in *CreateLeagueRuleRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error) {
+	out := new(SuccessMessageResponse)
+	err := c.cc.Invoke(ctx, SummaryService_CreateLeagueRule_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *summaryServiceClient) GetLeagueRule(ctx context.Context, in *EmptyRequest, opts ...grpc.CallOption) (*CreateLeagueRuleResponse, error) {
+	out := new(CreateLeagueRuleResponse)
+	err := c.cc.Invoke(ctx, SummaryService_GetLeagueRule_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *summaryServiceClient) UpdateLeagueRule(ctx context.Context, in *UpdateLeagueRuleRequest, opts ...grpc.CallOption) (*SuccessMessageResponse, error) {
+	out := new(SuccessMessageResponse)
+	err := c.cc.Invoke(ctx, SummaryService_UpdateLeagueRule_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SummaryServiceServer is the server API for SummaryService service.
 // All implementations should embed UnimplementedSummaryServiceServer
 // for forward compatibility
 type SummaryServiceServer interface {
 	CreateSummary(context.Context, *CreateSummaryRequest) (*SuccessMessageResponse, error)
 	CreateSeason(context.Context, *CreateSeasonRequest) (*SuccessMessageResponse, error)
+	CreateLeagueRule(context.Context, *CreateLeagueRuleRequest) (*SuccessMessageResponse, error)
+	GetLeagueRule(context.Context, *EmptyRequest) (*CreateLeagueRuleResponse, error)
+	UpdateLeagueRule(context.Context, *UpdateLeagueRuleRequest) (*SuccessMessageResponse, error)
 }
 
 // UnimplementedSummaryServiceServer should be embedded to have forward compatible implementations.
@@ -74,6 +110,15 @@ func (UnimplementedSummaryServiceServer) CreateSummary(context.Context, *CreateS
 }
 func (UnimplementedSummaryServiceServer) CreateSeason(context.Context, *CreateSeasonRequest) (*SuccessMessageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateSeason not implemented")
+}
+func (UnimplementedSummaryServiceServer) CreateLeagueRule(context.Context, *CreateLeagueRuleRequest) (*SuccessMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateLeagueRule not implemented")
+}
+func (UnimplementedSummaryServiceServer) GetLeagueRule(context.Context, *EmptyRequest) (*CreateLeagueRuleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLeagueRule not implemented")
+}
+func (UnimplementedSummaryServiceServer) UpdateLeagueRule(context.Context, *UpdateLeagueRuleRequest) (*SuccessMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateLeagueRule not implemented")
 }
 
 // UnsafeSummaryServiceServer may be embedded to opt out of forward compatibility for this service.
@@ -123,6 +168,60 @@ func _SummaryService_CreateSeason_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SummaryService_CreateLeagueRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateLeagueRuleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SummaryServiceServer).CreateLeagueRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SummaryService_CreateLeagueRule_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SummaryServiceServer).CreateLeagueRule(ctx, req.(*CreateLeagueRuleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SummaryService_GetLeagueRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SummaryServiceServer).GetLeagueRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SummaryService_GetLeagueRule_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SummaryServiceServer).GetLeagueRule(ctx, req.(*EmptyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SummaryService_UpdateLeagueRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateLeagueRuleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SummaryServiceServer).UpdateLeagueRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SummaryService_UpdateLeagueRule_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SummaryServiceServer).UpdateLeagueRule(ctx, req.(*UpdateLeagueRuleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SummaryService_ServiceDesc is the grpc.ServiceDesc for SummaryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -137,6 +236,18 @@ var SummaryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateSeason",
 			Handler:    _SummaryService_CreateSeason_Handler,
+		},
+		{
+			MethodName: "CreateLeagueRule",
+			Handler:    _SummaryService_CreateLeagueRule_Handler,
+		},
+		{
+			MethodName: "GetLeagueRule",
+			Handler:    _SummaryService_GetLeagueRule_Handler,
+		},
+		{
+			MethodName: "UpdateLeagueRule",
+			Handler:    _SummaryService_UpdateLeagueRule_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
