@@ -166,7 +166,7 @@
         ]
       }
     },
-    "/users/all": {
+    "/user_all": {
       "get": {
         "operationId": "UserService_GetUsers",
         "responses": {
@@ -250,6 +250,9 @@
           "type": "string"
         },
         "clubId": {
+          "type": "string"
+        },
+        "seaSon": {
           "type": "string"
         }
       }

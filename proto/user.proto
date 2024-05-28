@@ -49,6 +49,7 @@ message GetProfileResponse {
     string position = 5;
     string club_name = 6;
     string club_id  = 7;
+    string sea_son = 8;
   }
   Data data = 1;
 }

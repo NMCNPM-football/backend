@@ -1826,6 +1826,8 @@ func (m *GetProfileResponse_Data) validate(all bool) error {
 
 	// no validation rules for ClubId
 
+	// no validation rules for SeaSon
+
 	if len(errors) > 0 {
 		return GetProfileResponse_DataMultiError(errors)
 	}

@@ -37,7 +37,7 @@ service UserService {
 
   rpc GetUsers (EmptyRequest) returns (GetUsersResponse) {
     option (google.api.http) = {
-      get: "/users/all"
+      get: "/user_all"
     };
   }
 
