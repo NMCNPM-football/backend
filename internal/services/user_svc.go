@@ -83,6 +83,7 @@ func (e *UserService) GetUsers(ctx context.Context, request *gen.EmptyRequest) (
 			Address:  user.Address,
 			ClubName: user.Club,
 			Position: user.Position,
+			Id:       user.ID,
 		})
 	}
 

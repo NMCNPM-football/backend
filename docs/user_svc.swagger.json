@@ -289,6 +289,9 @@
         },
         "clubName": {
           "type": "string"
+        },
+        "id": {
+          "type": "string"
         }
       }
     },

@@ -1942,6 +1942,8 @@ func (m *GetUsersResponse_Data) validate(all bool) error {
 
 	// no validation rules for ClubName
 
+	// no validation rules for Id
+
 	if len(errors) > 0 {
 		return GetUsersResponse_DataMultiError(errors)
 	}

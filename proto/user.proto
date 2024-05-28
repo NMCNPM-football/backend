@@ -86,6 +86,7 @@ message GetUsersResponse{
     string address = 4;
     string position = 5;
     string club_name = 6;
+    string id = 7;
   }
   repeated Data data = 1;
 }
