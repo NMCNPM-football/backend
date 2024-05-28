@@ -109,3 +109,10 @@ func (u *UserDao) UpdatePosition(position *models.User, ID string) error {
 
 	return nil
 }
+
+func (u *UserDao) DeleteUser(id string) error {
+	if err := u.db.Where("id = ?", id).Delete(&models.User{}).Error; err != nil {
+		return errors.Wrap(err, "u.db.Where.Delete")
+	}
+	return nil
+}

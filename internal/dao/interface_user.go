@@ -19,4 +19,5 @@ type UserDaoInterface interface {
 	RegisterAsAdmin(user *models.User) error
 	GetAllUsers() ([]*models.User, error)
 	UpdatePosition(position *models.User, ID string) error
+	DeleteUser(id string) error
 }

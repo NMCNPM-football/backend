@@ -224,3 +224,17 @@ func (e *UserService) UpdatePosition(ctx context.Context, in *gen.UpdatePosition
 		},
 	}, nil
 }
+func (e *UserService) DeleteUser(ctx context.Context, request *gen.DeleteUserRequest) (*gen.SuccessMessageResponse, error) {
+	// Use the userDao to delete the User from the database
+	err := e.userDao.DeleteUser(request.Id)
+	if err != nil {
+		return nil, fmt.Errorf("failed to delete user: %w", err)
+	}
+
+	// If the deletion is successful, return a SuccessMessageResponse with a success message
+	return &gen.SuccessMessageResponse{
+		Data: &gen.SuccessMessageResponseSuccessMessage{
+			Message: "User deleted successfully",
+		},
+	}, nil
+}

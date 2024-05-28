@@ -52,4 +52,9 @@ service UserService {
       body: "*"
     };
   }
+  rpc DeleteUser (DeleteUserRequest) returns (SuccessMessageResponse) {
+    option (google.api.http) = {
+      delete: "/users/{id}"
+    };
+  }
 }
