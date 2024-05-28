@@ -53,6 +53,17 @@ service ClubService {
       get: "/club/player-all"
     };
   }
+  rpc CreateCoach (CoachProfileRequest) returns (SuccessMessageResponse) {
+    option (google.api.http) = {
+      post: "/coach"
+      body: "*"
+    };
+  }
+  rpc DeleteCoach (CoachRequest) returns (SuccessMessageResponse) {
+    option (google.api.http) = {
+      delete: "/delete/coach/{id}"
+    };
+  }
   rpc UpdateCoach (CoachProfileRequest) returns (SuccessMessageResponse) {
     option (google.api.http) = {
       put: "/coach/update/{id}"

@@ -333,6 +333,21 @@ func (e *ClubService) UpdatePlayer(ctx context.Context, request *gen.PLayerProfi
 	}, nil
 }
 
+func (e *ClubService) DeleteCoach(ctx context.Context, request *gen.CoachRequest) (*gen.SuccessMessageResponse, error) {
+	// Use the clubDao to delete the Coach from the database
+	err := e.clubDao.DeleteCoach(request.Id)
+	if err != nil {
+		return nil, fmt.Errorf("failed to delete coach: %w", err)
+	}
+
+	// If the deletion is successful, return a SuccessMessageResponse with a success message
+	return &gen.SuccessMessageResponse{
+		Data: &gen.SuccessMessageResponseSuccessMessage{
+			Message: "Coach deleted successfully",
+		},
+	}, nil
+}
+
 func (e *ClubService) GetAllClubProfile(ctx context.Context, request *gen.EmptyRequest) (*gen.ClubProfileListResponse, error) {
 	// Get the user from the context
 	user, err := e.userFromContext(ctx, e.userDao)
@@ -407,19 +422,113 @@ func (e *ClubService) DeletePlayer(ctx context.Context, request *gen.PLayerReque
 	}, nil
 }
 
+func (e *ClubService) CreateCoach(ctx context.Context, request *gen.CoachProfileRequest) (*gen.SuccessMessageResponse, error) {
+	// Create a new Coach model
+	user, err := e.userFromContext(ctx, e.userDao)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get user from context: %w", err)
+	}
+	if user.Position != "Owner" && user.Position != "Member" {
+		return nil, fmt.Errorf("user is not the owner of the club")
+	}
+	newCoach := &models.Coach{
+		Name:     request.Name,
+		Country:  request.Country,
+		Award:    request.Award,
+		Role:     request.Role,
+		ClubID:   user.ClubID,
+		NameClub: user.Club,
+		BirthDay: request.Birthday,
+	}
+
+	// Use the clubDao to insert the new Coach into the database
+	err = e.clubDao.CreateCoach(newCoach)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create coach: %w", err)
+	}
+
+	// If the insertion is successful, return a SuccessMessageResponse with a success message
+	return &gen.SuccessMessageResponse{
+		Data: &gen.SuccessMessageResponseSuccessMessage{
+			Message: "Coach created successfully",
+		},
+	}, nil
+}
+
 func (e *ClubService) UpdateCoach(ctx context.Context, request *gen.CoachProfileRequest) (*gen.SuccessMessageResponse, error) {
-	//TODO implement me
-	panic("implement me")
+	// Create a new Coach model
+	updatedCoach := &models.Coach{
+		Name:     request.Name,
+		Country:  request.Country,
+		Award:    request.Award,
+		Role:     request.Role,
+		ClubID:   request.ClubId,
+		BirthDay: request.Birthday,
+	}
+
+	// Use the clubDao to update the Coach in the database
+	err := e.clubDao.UpdateCoach(updatedCoach, request.Id)
+	if err != nil {
+		return nil, fmt.Errorf("failed to update coach: %w", err)
+	}
+
+	// If the update is successful, return a SuccessMessageResponse with a success message
+	return &gen.SuccessMessageResponse{
+		Data: &gen.SuccessMessageResponseSuccessMessage{
+			Message: "Coach updated successfully",
+		},
+	}, nil
 }
 
 func (e *ClubService) GetCoachProfile(ctx context.Context, request *gen.CoachRequest) (*gen.CoachProfileResponse, error) {
-	//TODO implement me
-	panic("implement me")
+	// Use the clubDao to get the Coach from the database
+	coach, err := e.clubDao.GetCoachByID(request.Id)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get coach: %w", err)
+	}
+
+	// Return a CoachProfileResponse with the Coach's details
+	return &gen.CoachProfileResponse{
+		Data: &gen.CoachProfileResponse_Data{
+			Id:       coach.ID,
+			Name:     coach.Name,
+			ClubName: coach.NameClub,
+			Country:  coach.Country,
+			Award:    coach.Award,
+			Role:     coach.Role,
+			ClubId:   coach.ClubID,
+		},
+		Message: "Successfully retrieved coach profile",
+	}, nil
 }
 
 func (e *ClubService) GetListCoachProfile(ctx context.Context, request *gen.CoachProfileListRequest) (*gen.CoachProfileListResponse, error) {
-	//TODO implement me
-	panic("implement me")
+	// Use the clubDao to get all Coaches from the database
+	coaches, err := e.clubDao.GetAllCoaches()
+	if err != nil {
+		return nil, fmt.Errorf("failed to get all coaches: %w", err)
+	}
+
+	// Initialize the response
+	response := &gen.CoachProfileListResponse{
+		Data: make([]*gen.CoachProfileResponse_Data, 0, len(coaches)),
+	}
+
+	// Convert each coach to the CoachProfile protobuf message and append it to the response
+	for _, coach := range coaches {
+		response.Data = append(response.Data, &gen.CoachProfileResponse_Data{
+			Id:       coach.ID,
+			Name:     coach.Name,
+			ClubName: coach.NameClub,
+			Country:  coach.Country,
+			Award:    coach.Award,
+			Role:     coach.Role,
+			ClubId:   coach.ClubID,
+		})
+	}
+
+	// Return the response
+	return response, nil
 }
 
 func (e *ClubService) CreateStadium(ctx context.Context, request *gen.StadiumProfileRequest) (*gen.SuccessMessageResponse, error) {

@@ -6,7 +6,6 @@ import (
 
 type ClubDaoInterface interface {
 	FindClubByID(id string) (*models.Club, error)
-	//  FindAllClub(id string) (*models.ClubPlayer, error)
 	FindByDomain(domain string) (*models.Club, error)
 	FindByDomainAndSeason(domain string, season string) (*models.Club, error)
 	GetClubByID(clubID string) (*models.Club, error)
@@ -23,4 +22,10 @@ type ClubDaoInterface interface {
 	GetStadiumByClubID(clubID string) (*models.Stadium, error)
 	GetCoachByClubID(clubID string) (*models.Coach, error)
 	CreateClub(club *models.Club) error
+	CreateCoach(coach *models.Coach) error
+	UpdateCoach(coach *models.Coach, coachID string) error
+	GetCoachByID(coachID string) (*models.Coach, error)
+	GetAllCoaches() ([]*models.Coach, error)
+	GetAllCoachesByClubID(clubID string) ([]*models.Coach, error)
+	DeleteCoach(coachID string) error
 }

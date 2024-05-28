@@ -1525,6 +1525,144 @@ var _ interface {
 	ErrorName() string
 } = CoachProfileResponseValidationError{}
 
+// Validate checks the field values on CoachProfileResponseList with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CoachProfileResponseList) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CoachProfileResponseList with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CoachProfileResponseListMultiError, or nil if none found.
+func (m *CoachProfileResponseList) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CoachProfileResponseList) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetData() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CoachProfileResponseListValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CoachProfileResponseListValidationError{
+						field:  fmt.Sprintf("Data[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CoachProfileResponseListValidationError{
+					field:  fmt.Sprintf("Data[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Message
+
+	if len(errors) > 0 {
+		return CoachProfileResponseListMultiError(errors)
+	}
+
+	return nil
+}
+
+// CoachProfileResponseListMultiError is an error wrapping multiple validation
+// errors returned by CoachProfileResponseList.ValidateAll() if the designated
+// constraints aren't met.
+type CoachProfileResponseListMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CoachProfileResponseListMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CoachProfileResponseListMultiError) AllErrors() []error { return m }
+
+// CoachProfileResponseListValidationError is the validation error returned by
+// CoachProfileResponseList.Validate if the designated constraints aren't met.
+type CoachProfileResponseListValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CoachProfileResponseListValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CoachProfileResponseListValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CoachProfileResponseListValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CoachProfileResponseListValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CoachProfileResponseListValidationError) ErrorName() string {
+	return "CoachProfileResponseListValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CoachProfileResponseListValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCoachProfileResponseList.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CoachProfileResponseListValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CoachProfileResponseListValidationError{}
+
 // Validate checks the field values on CoachProfileListRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -1867,6 +2005,108 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = CoachRequestValidationError{}
+
+// Validate checks the field values on CoachClubRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *CoachClubRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CoachClubRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CoachClubRequestMultiError, or nil if none found.
+func (m *CoachClubRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CoachClubRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ClubId
+
+	if len(errors) > 0 {
+		return CoachClubRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CoachClubRequestMultiError is an error wrapping multiple validation errors
+// returned by CoachClubRequest.ValidateAll() if the designated constraints
+// aren't met.
+type CoachClubRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CoachClubRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CoachClubRequestMultiError) AllErrors() []error { return m }
+
+// CoachClubRequestValidationError is the validation error returned by
+// CoachClubRequest.Validate if the designated constraints aren't met.
+type CoachClubRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CoachClubRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CoachClubRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CoachClubRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CoachClubRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CoachClubRequestValidationError) ErrorName() string { return "CoachClubRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CoachClubRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCoachClubRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CoachClubRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CoachClubRequestValidationError{}
 
 // Validate checks the field values on StadiumProfileRequest with the rules
 // defined in the proto definition for this message. If any rules are

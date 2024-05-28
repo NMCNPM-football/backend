@@ -178,3 +178,50 @@ func (m *ClubDao) CreateClub(club *models.Club) error {
 
 	return nil
 }
+
+func (m *ClubDao) CreateCoach(coach *models.Coach) error {
+	if err := m.db.Create(&coach).Error; err != nil {
+		return errors.Wrap(err, "c.db.Create")
+	}
+
+	return nil
+}
+
+func (m *ClubDao) UpdateCoach(coach *models.Coach, coachID string) error {
+	if err := m.db.Where("id = ?", coachID).Updates(&coach).Error; err != nil {
+		return errors.Wrap(err, "c.db.Model.Where.Updates")
+	}
+
+	return nil
+}
+
+func (m *ClubDao) GetCoachByID(coachID string) (*models.Coach, error) {
+	var coach models.Coach
+	if err := m.db.Where("id = ?", coachID).First(&coach).Error; err != nil {
+		return nil, err
+	}
+	return &coach, nil
+}
+func (m *ClubDao) GetAllCoaches() ([]*models.Coach, error) {
+	var coaches []*models.Coach
+	if err := m.db.Find(&coaches).Error; err != nil {
+		return nil, err
+	}
+	return coaches, nil
+}
+
+func (m *ClubDao) GetAllCoachesByClubID(clubID string) ([]*models.Coach, error) {
+	var coaches []*models.Coach
+	if err := m.db.Where("club_id = ?", clubID).Find(&coaches).Error; err != nil {
+		return nil, err
+	}
+	return coaches, nil
+}
+
+func (m *ClubDao) DeleteCoach(coachID string) error {
+	if err := m.db.Where("id = ?", coachID).Delete(&models.Coach{}).Error; err != nil {
+		return errors.Wrap(err, "c.db.Model.Where.Delete")
+	}
+
+	return nil
+}

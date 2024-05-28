@@ -23,7 +23,7 @@ const (
 	ClubServicePublic_GetPlayerProfileByClub_FullMethodName     = "/proto.ClubServicePublic/GetPlayerProfileByClub"
 	ClubServicePublic_GetClubProfileListBySeaSon_FullMethodName = "/proto.ClubServicePublic/GetClubProfileListBySeaSon"
 	ClubServicePublic_GetPlayerProfile_FullMethodName           = "/proto.ClubServicePublic/GetPlayerProfile"
-	ClubServicePublic_GetCoachProfile_FullMethodName            = "/proto.ClubServicePublic/GetCoachProfile"
+	ClubServicePublic_GetAllCoachProfile_FullMethodName         = "/proto.ClubServicePublic/GetAllCoachProfile"
 )
 
 // ClubServicePublicClient is the client API for ClubServicePublic service.
@@ -36,7 +36,7 @@ type ClubServicePublicClient interface {
 	GetPlayerProfileByClub(ctx context.Context, in *ClubProfileIdRequest, opts ...grpc.CallOption) (*PlayerProfileListResponse, error)
 	GetClubProfileListBySeaSon(ctx context.Context, in *ClubProfileIdRequest, opts ...grpc.CallOption) (*ClubProfileListResponse, error)
 	GetPlayerProfile(ctx context.Context, in *PLayerRequest, opts ...grpc.CallOption) (*PLayerProfileResponse, error)
-	GetCoachProfile(ctx context.Context, in *CoachRequest, opts ...grpc.CallOption) (*CoachProfileResponse, error)
+	GetAllCoachProfile(ctx context.Context, in *CoachClubRequest, opts ...grpc.CallOption) (*CoachProfileResponseList, error)
 }
 
 type clubServicePublicClient struct {
@@ -83,9 +83,9 @@ func (c *clubServicePublicClient) GetPlayerProfile(ctx context.Context, in *PLay
 	return out, nil
 }
 
-func (c *clubServicePublicClient) GetCoachProfile(ctx context.Context, in *CoachRequest, opts ...grpc.CallOption) (*CoachProfileResponse, error) {
-	out := new(CoachProfileResponse)
-	err := c.cc.Invoke(ctx, ClubServicePublic_GetCoachProfile_FullMethodName, in, out, opts...)
+func (c *clubServicePublicClient) GetAllCoachProfile(ctx context.Context, in *CoachClubRequest, opts ...grpc.CallOption) (*CoachProfileResponseList, error) {
+	out := new(CoachProfileResponseList)
+	err := c.cc.Invoke(ctx, ClubServicePublic_GetAllCoachProfile_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ type ClubServicePublicServer interface {
 	GetPlayerProfileByClub(context.Context, *ClubProfileIdRequest) (*PlayerProfileListResponse, error)
 	GetClubProfileListBySeaSon(context.Context, *ClubProfileIdRequest) (*ClubProfileListResponse, error)
 	GetPlayerProfile(context.Context, *PLayerRequest) (*PLayerProfileResponse, error)
-	GetCoachProfile(context.Context, *CoachRequest) (*CoachProfileResponse, error)
+	GetAllCoachProfile(context.Context, *CoachClubRequest) (*CoachProfileResponseList, error)
 }
 
 // UnimplementedClubServicePublicServer should be embedded to have forward compatible implementations.
@@ -121,8 +121,8 @@ func (UnimplementedClubServicePublicServer) GetClubProfileListBySeaSon(context.C
 func (UnimplementedClubServicePublicServer) GetPlayerProfile(context.Context, *PLayerRequest) (*PLayerProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPlayerProfile not implemented")
 }
-func (UnimplementedClubServicePublicServer) GetCoachProfile(context.Context, *CoachRequest) (*CoachProfileResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCoachProfile not implemented")
+func (UnimplementedClubServicePublicServer) GetAllCoachProfile(context.Context, *CoachClubRequest) (*CoachProfileResponseList, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllCoachProfile not implemented")
 }
 
 // UnsafeClubServicePublicServer may be embedded to opt out of forward compatibility for this service.
@@ -208,20 +208,20 @@ func _ClubServicePublic_GetPlayerProfile_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ClubServicePublic_GetCoachProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CoachRequest)
+func _ClubServicePublic_GetAllCoachProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CoachClubRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ClubServicePublicServer).GetCoachProfile(ctx, in)
+		return srv.(ClubServicePublicServer).GetAllCoachProfile(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ClubServicePublic_GetCoachProfile_FullMethodName,
+		FullMethod: ClubServicePublic_GetAllCoachProfile_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClubServicePublicServer).GetCoachProfile(ctx, req.(*CoachRequest))
+		return srv.(ClubServicePublicServer).GetAllCoachProfile(ctx, req.(*CoachClubRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -250,8 +250,8 @@ var ClubServicePublic_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ClubServicePublic_GetPlayerProfile_Handler,
 		},
 		{
-			MethodName: "GetCoachProfile",
-			Handler:    _ClubServicePublic_GetCoachProfile_Handler,
+			MethodName: "GetAllCoachProfile",
+			Handler:    _ClubServicePublic_GetAllCoachProfile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

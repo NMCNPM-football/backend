@@ -36,6 +36,7 @@ type Coach struct {
 	ClubID        string `gorm:"size:50"`
 	Role          string `gorm:"size:50"`
 	CertificateID string `gorm:"size:50"`
+	BirthDay      string `gorm:"size:50"`
 }
 
 type Certificate struct {

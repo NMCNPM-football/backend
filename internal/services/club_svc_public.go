@@ -185,26 +185,32 @@ func (e *ClubServicePublic) GetPlayerProfile(ctx context.Context, request *gen.P
 	}, nil
 
 }
-
-func (e *ClubServicePublic) GetCoachProfile(ctx context.Context, request *gen.CoachRequest) (*gen.CoachProfileResponse, error) {
-	// Fetch the coach data from the database using the CoachID from the request
-	coach, err := e.clubDao.GetCoachByClubID(request.Id)
+func (e *ClubServicePublic) GetAllCoachProfile(ctx context.Context, request *gen.CoachClubRequest) (*gen.CoachProfileResponseList, error) {
+	// Use the clubDao to get all Coaches for the specific club from the database
+	coaches, err := e.clubDao.GetAllCoachesByClubID(request.ClubId)
 	if err != nil {
-		return nil, fmt.Errorf("failed to get coach by ID: %w", err)
+		return nil, fmt.Errorf("failed to get all coach profiles for club %s: %w", request.ClubId, err)
 	}
 
-	// Create a CoachProfileResponse with the fetched data
-	response := &gen.CoachProfileResponse{
-		Data: &gen.CoachProfileResponse_Data{
-			Id:      coach.ID,
-			Name:    coach.Name,
-			Country: coach.Country,
-			Award:   coach.Award,
-			Role:    coach.Role,
-			ClubId:  coach.ClubID,
-		},
-		Message: "Coach profile fetched successfully",
+	// Convert the Coaches to the protobuf CoachProfile
+	var pbCoaches []*gen.CoachProfileResponse_Data
+	for _, coach := range coaches {
+		pbCoach := &gen.CoachProfileResponse_Data{
+			Id:       coach.ID,
+			Name:     coach.Name,
+			Country:  coach.Country,
+			Award:    coach.Award,
+			Role:     coach.Role,
+			ClubId:   coach.ClubID,
+			Birthday: coach.BirthDay,
+			ClubName: coach.NameClub,
+		}
+		pbCoaches = append(pbCoaches, pbCoach)
 	}
 
-	return response, nil
+	// Return a CoachProfileResponseList with the Coaches
+	return &gen.CoachProfileResponseList{
+		Data:    pbCoaches,
+		Message: fmt.Sprintf("Successfully retrieved all coach profiles for club %s", request.ClubId),
+	}, nil
 }

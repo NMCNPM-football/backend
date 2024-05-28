@@ -89,14 +89,14 @@
         ]
       }
     },
-    "/club/coach/{id}": {
+    "/club/coach/{clubId}": {
       "get": {
-        "operationId": "ClubServicePublic_GetCoachProfile",
+        "operationId": "ClubServicePublic_GetAllCoachProfile",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/CoachProfileResponse"
+              "$ref": "#/definitions/CoachProfileResponseList"
             }
           },
           "default": {
@@ -108,7 +108,7 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "clubId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -258,17 +258,6 @@
         }
       }
     },
-    "CoachProfileResponse": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "$ref": "#/definitions/CoachProfileResponseData"
-        },
-        "message": {
-          "type": "string"
-        }
-      }
-    },
     "CoachProfileResponseData": {
       "type": "object",
       "properties": {
@@ -294,6 +283,21 @@
           "type": "string"
         },
         "clubId": {
+          "type": "string"
+        }
+      }
+    },
+    "CoachProfileResponseList": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/CoachProfileResponseData"
+          }
+        },
+        "message": {
           "type": "string"
         }
       }
